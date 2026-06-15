@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联系我们 | 佰洛生物</title>
+<style>
+  :root {
+    --primary: #0a5c8a;
+    --primary-light: #0d7ab5;
+    --primary-dark: #064368;
+    --accent: #00a896;
+    --accent-light: #00c4a7;
+    --bg: #f7f9fc;
+    --bg-card: #ffffff;
+    --text: #1a1a2e;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --border: #e2e8f0;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-hover: 0 6px 24px rgba(0,0,0,0.10);
+    --radius: 10px;
+    --radius-sm: 6px;
+    --max-width: 1200px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--max-width); margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 64px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo .icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px; font-weight: 700;
+  }
+  .nav-logo .name { font-size: 20px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; }
+  .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+  .nav-links > li > a {
+    display: flex; align-items: center; gap: 5px;
+    padding: 8px 14px; border-radius: var(--radius-sm);
+    font-size: 15px; color: var(--text-secondary); font-weight: 500;
+    transition: color 0.2s, background 0.2s; white-space: nowrap;
+  }
+  .nav-links > li > a:hover { color: var(--primary); background: #f0f4f8; }
+  .nav-links > li > a.active { color: var(--primary); font-weight: 700; }
+  .nav-cta {
+    background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
+    padding: 9px 22px; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s; letter-spacing: 0.5px; margin-left: 8px;
+  }
+  .nav-cta:hover { background: var(--primary-light); }
+
+  /* PAGE HEADER */
+  .page-header {
+    background: linear-gradient(160deg, #eef5fb, #e8f4f8);
+    text-align: center; padding: 52px 24px 44px;
+  }
+  .page-header .ph-tag {
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 8px;
+  }
+  .page-header h1 { font-size: 34px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; margin-bottom: 10px; }
+  .page-header .ph-desc { font-size: 16px; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+  /* CONTACT GRID */
+  .contact-section { max-width: var(--max-width); margin: 0 auto; padding: 56px 24px 72px; }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+  }
+
+  /* Left Info */
+  .contact-info h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+  .contact-info .ci-sub { font-size: 15px; color: var(--text-muted); margin-bottom: 36px; line-height: 1.7; }
+  .ci-item {
+    display: flex; align-items: flex-start; gap: 14px; margin-bottom: 24px;
+    font-size: 14px; color: var(--text-secondary);
+  }
+  .ci-item .ci-icon {
+    width: 40px; height: 40px; border-radius: 8px; background: #e8f4f9;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .ci-item strong { display: block; color: var(--text); margin-top: 2px; }
+
+  /* Right Form */
+  .contact-form {
+    background: var(--bg-card); border-radius: var(--radius);
+    padding: 36px; box-shadow: var(--shadow); border: 1px solid var(--border);
+  }
+  .contact-form .form-group { margin-bottom: 20px; }
+  .contact-form label {
+    display: block; font-size: 13px; font-weight: 600; color: var(--text-secondary);
+    margin-bottom: 6px; letter-spacing: 0.3px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); font-size: 14px; color: var(--text);
+    background: var(--bg); transition: border 0.2s, box-shadow 0.2s;
+    font-family: inherit; outline: none;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,168,150,0.10);
+  }
+  .contact-form textarea { resize: vertical; min-height: 130px; }
+  .contact-form .btn-submit {
+    width: 100%; padding: 14px; font-size: 15px; font-weight: 600;
+    background: var(--primary); color: #fff; border: none;
+    border-radius: var(--radius-sm); cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .contact-form .btn-submit:hover { background: var(--primary-light); transform: translateY(-1px); }
+
+  /* Success message */
+  .form-success {
+    display: none; text-align: center; padding: 40px 20px;
+  }
+  .form-success .fs-icon {
+    width: 56px; height: 56px; border-radius: 50%; background: #e6f7f1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; margin: 0 auto 16px;
+  }
+  .form-success h3 { font-size: 20px; margin-bottom: 8px; color: var(--text); }
+  .form-success p { font-size: 14px; color: var(--text-muted); }
+
+  /* FOOTER */
+  .footer {
+    background: #0f1a2e; color: rgba(255,255,255,0.65); padding: 48px 24px 28px;
+    font-size: 14px; margin-top: 8px;
+  }
+  .footer-inner { max-width: var(--max-width); margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+  .footer-col h4 { font-size: 15px; margin-bottom: 14px; color: #fff; letter-spacing: 0.5px; }
+  .footer-col p, .footer-col a { display: block; margin-bottom: 6px; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom {
+    text-align: center; padding-top: 28px; margin-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    max-width: var(--max-width); margin-left: auto; margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    .contact-form { padding: 24px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="icon">佰</div>
+      <div class="name">佰洛生物</div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="products.html">产品中心</a></li>
+      <li><a href="index.html#services">技术服务</a></li>
+      <li><a href="index.html#about">关于佰洛</a></li>
+      <li><a href="contact.html" class="active">联系我们</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">获取报价</a>
+  </div>
+</nav>
+
+<!-- ═══════════ PAGE HEADER ═══════════ -->
+<div class="page-header">
+  <div class="ph-tag">CONTACT US</div>
+  <h1>联系我们</h1>
+  <p class="ph-desc">无论您是需要产品咨询、技术方案定制还是项目合作，我们的技术团队随时为您提供专业支持</p>
+</div>
+
+<!-- ═══════════ CONTACT GRID ═══════════ -->
+<div class="contact-section">
+  <div class="contact-grid">
+    <!-- 左侧：联系信息 -->
+    <div class="contact-info">
+      <h2>联系方式</h2>
+      <p class="ci-sub">请填写右侧表单，或通过以下方式直接联系我们。我们会在 1~2 个工作日内回复。</p>
+      <div class="ci-item">
+        <div class="ci-icon">✉</div>
+        <div>电子邮箱<strong>service@biologia.cn</strong></div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon">☏</div>
+        <div>联系电话<strong>18768439420</strong></div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon">⌂</div>
+        <div>公司地址<strong>中国·杭州</strong></div>
+      </div>
+    </div>
+
+    <!-- 右侧：留言表单 -->
+    <div class="contact-form" id="contactFormWrap">
+      <form id="contactForm" onsubmit="handleContactSubmit(event)">
+        <div class="form-group">
+          <label for="cfName">姓名 *</label>
+          <input type="text" id="cfName" name="name" placeholder="您的姓名" required>
+        </div>
+        <div class="form-group">
+          <label for="cfEmail">邮箱 *</label>
+          <input type="email" id="cfEmail" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="cfOrg">机构 / 公司</label>
+          <input type="text" id="cfOrg" name="org" placeholder="您所在的机构或公司名称">
+        </div>
+        <div class="form-group">
+          <label for="cfMsg">留言内容 *</label>
+          <textarea id="cfMsg" name="message" placeholder="请描述您的需求、感兴趣的产品或技术问题…" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="cfSubmitBtn">提交留言</button>
+      </form>
+      <!-- 提交成功提示 -->
+      <div class="form-success" id="formSuccess">
+        <div class="fs-icon">✓</div>
+        <h3>留言已提交</h3>
+        <p>感谢您的留言！我们会在 1~2 个工作日内通过邮件回复您。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>佰洛生物</h4>
+      <p>细胞与基因治疗全流程解决方案</p>
+      <p>&copy; 2026 Bailuo Biotech</p>
+    </div>
+    <div class="footer-col">
+      <h4>产品</h4>
+      <a href="index.html#hot-products">热门产品</a>
+      <a href="products.html#reagents">试剂与耗材</a>
+      <a href="products.html#instruments">实验仪器</a>
+    </div>
+    <div class="footer-col">
+      <h4>链接</h4>
+      <a href="index.html#services">技术服务</a>
+      <a href="index.html#about">关于佰洛</a>
+      <a href="contact.html">联系我们</a>
+    </div>
+    <div class="footer-col">
+      <h4>联系方式</h4>
+      <p>邮箱：service@biologia.cn</p>
+      <p>电话：18768439420</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    佰洛生物科技 &copy; 2026 &nbsp;|&nbsp; 致力于推动中国细胞与基因治疗基础研究
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════
+   联系我们 — 留言表单提交
+═══════════════════════════════════════ */
+function handleContactSubmit(e) {
+  e.preventDefault();
+  var btn = document.getElementById('cfSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = '提交中…';
+
+  /* 模拟提交（接入 Formspree 等后端替换此处） */
+  setTimeout(function() {
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }, 600);
+}
+</script>
+
+</body>
+</html>

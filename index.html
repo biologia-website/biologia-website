@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佰洛生物 | 高品质生物试剂与技术服务供应商</title>
+<meta name="description" content="佰洛生物专注为生命科学工作者提供高品质生物试剂与专业技术服务，覆盖细胞培养、iPSC重编程、蛋白纯化、分子检测全流程。">
+<meta name="keywords" content="佰洛生物,生物试剂,iPSC,胎牛血清,细胞培养基,BLI检测,层析填料,抗体定制,CRISPR">
+<meta property="og:title" content="佰洛生物 — 高品质生物试剂与专业技术服务">
+<meta property="og:description" content="精选优质品牌产品，提供从靶点到功能验证的全流程技术服务。">
+<meta property="og:image" content="/logo.png">
+<style>
+  :root {
+    --primary: #0a5c8a;
+    --primary-light: #0d7ab5;
+    --primary-dark: #064368;
+    --accent: #00a896;
+    --accent-light: #00c4a7;
+    --bg: #f7f9fc;
+    --bg-card: #ffffff;
+    --text: #1a1a2e;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --border: #e2e8f0;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-hover: 0 6px 24px rgba(0,0,0,0.10);
+    --radius: 10px;
+    --radius-sm: 6px;
+    --max-width: 1200px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ═══════════ NAV ═══════════ */
+  .nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--max-width); margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 64px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo .icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px; font-weight: 700;
+  }
+  .nav-logo .name { font-size: 20px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; }
+  .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+  .nav-links > li { position: relative; }
+  .nav-links > li > a {
+    display: flex; align-items: center; gap: 5px;
+    padding: 8px 14px; border-radius: var(--radius-sm);
+    font-size: 15px; color: var(--text-secondary); font-weight: 500;
+    transition: color 0.2s, background 0.2s; white-space: nowrap;
+  }
+  .nav-links > li > a:hover { color: var(--primary); background: #f0f4f8; }
+  .nav-links .dd-arrow { font-size: 10px; transition: transform 0.2s; color: var(--text-muted); }
+  .nav-links > li:hover > a .dd-arrow { transform: rotate(180deg); }
+
+  /* Dropdown */
+  .nav-links .dropdown {
+    position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(4px);
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.10); min-width: 180px; padding: 8px 0;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s;
+    z-index: 120;
+  }
+  .nav-links > li:hover .dropdown { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .nav-links .dropdown a {
+    display: block; padding: 9px 20px; font-size: 14px; color: var(--text-secondary);
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-links .dropdown a:hover { background: #f0f4f8; color: var(--primary); }
+  .nav-links .dropdown .dd-divider { height: 1px; background: var(--border); margin: 4px 12px; }
+  .nav-cta {
+    background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
+    padding: 9px 22px; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s; letter-spacing: 0.5px; margin-left: 8px;
+  }
+  .nav-cta:hover { background: var(--primary-light); }
+
+  /* ═══════════ HERO CAROUSEL ═══════════ */
+  .hero-carousel {
+    position: relative; width: 100%; height: 460px; overflow: hidden;
+    background: linear-gradient(160deg, #eef5fb 0%, #e8f4f8 40%, #f0f7f4 100%);
+  }
+  .hero-carousel .hc-track {
+    display: flex; width: 200%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .hero-carousel .hc-slide {
+    width: 50%; height: 100%; flex-shrink: 0; position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 40px 24px;
+  }
+  /* 每张 slide 的默认渐变背景（无图片时显示） */
+  .hero-carousel .hc-slide-0 {
+    background: linear-gradient(160deg, #0a4a6e 0%, #0d3b5c 45%, #0b2d47 100%);
+  }
+  .hero-carousel .hc-slide-1 {
+    background: linear-gradient(160deg, #006d5b 0%, #008872 35%, #005a4a 70%, #003d33 100%);
+  }
+  .hero-carousel .hc-slide .hc-bg {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .hero-carousel .hc-slide .hc-bg img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .hero-carousel .hc-slide .hc-bg::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(160deg, rgba(10,92,138,0.55), rgba(0,0,0,0.35));
+  }
+  .hero-carousel .hc-slide .hc-content {
+    position: relative; z-index: 1; max-width: 700px;
+  }
+  .hero-carousel .hc-slide .hero-tag {
+    display: inline-block; background: rgba(255,255,255,0.18); color: #fff; padding: 5px 18px;
+    border-radius: 20px; font-size: 13px; font-weight: 600; letter-spacing: 1px; margin-bottom: 20px;
+    backdrop-filter: blur(6px);
+  }
+  .hero-carousel .hc-slide h1 {
+    font-size: 42px; font-weight: 700; color: #fff; letter-spacing: 2px; margin-bottom: 14px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  .hero-carousel .hc-slide .sub {
+    font-size: 18px; color: rgba(255,255,255,0.9); max-width: 620px; margin: 0 auto 36px;
+  }
+  .hero-carousel .hero-btns { display: flex; justify-content: center; flex-wrap: wrap; }
+  .hero-carousel .hero-btns .btn-primary { background: #fff; color: var(--primary-dark); }
+  .hero-carousel .hero-btns .btn-primary:hover { background: #f0f4f8; }
+
+  .hc-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+    background: rgba(255,255,255,0.18); border: none; color: #fff;
+    width: 44px; height: 44px; border-radius: 50%; font-size: 20px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.25s; backdrop-filter: blur(4px);
+    opacity: 0; pointer-events: none;
+  }
+  .hero-carousel:hover .hc-arrow { opacity: 1; pointer-events: auto; }
+  .hc-arrow:hover { background: rgba(255,255,255,0.35); }
+  .hc-arrow.prev { left: 20px; }
+  .hc-arrow.next { right: 20px; }
+  .hc-dots {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; z-index: 10;
+  }
+  .hc-dots .dot-ind {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(255,255,255,0.4); border: none; cursor: pointer;
+    transition: background 0.25s, transform 0.2s; padding: 0;
+  }
+  .hc-dots .dot-ind.active { background: #fff; transform: scale(1.25); }
+
+  /* ═══════════ BUTTONS ═══════════ */
+  .btn-primary {
+    background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
+    padding: 12px 32px; font-size: 15px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s, transform 0.15s; letter-spacing: 0.5px;
+  }
+  .btn-primary:hover { background: var(--primary-light); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--primary); border: 2px solid var(--primary);
+    border-radius: var(--radius-sm); padding: 10px 30px; font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--primary); color: #fff; }
+
+  /* ═══════════ SECTIONS ═══════════ */
+  .section { max-width: var(--max-width); margin: 0 auto; padding: 72px 24px; }
+  .section-header { text-align: center; margin-bottom: 48px; }
+  .section-tag { display: inline-block; color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .section h2 { font-size: 32px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; margin-bottom: 10px; }
+  .section .desc { font-size: 16px; color: var(--text-muted); max-width: 580px; margin: 0 auto; }
+
+  /* ═══════════ HOT PRODUCTS ═══════════ */
+  .hot-section {
+    background: linear-gradient(180deg, #f0f6fb 0%, var(--bg) 100%);
+    padding: 56px 24px;
+  }
+  .hot-section .section { padding-top: 0; padding-bottom: 0; }
+  .hot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .hot-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px 24px;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.18s, border-color 0.25s;
+    box-shadow: var(--shadow);
+  }
+  .hot-card:hover {
+    box-shadow: var(--shadow-hover); transform: translateY(-3px);
+    border-color: var(--primary-light);
+  }
+  .hot-card .hot-badge {
+    position: absolute; top: 0; right: 0;
+    background: linear-gradient(135deg, #e53e3e, #c53030);
+    color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    padding: 4px 14px 4px 18px; border-radius: 0 var(--radius) 0 var(--radius-sm);
+  }
+  .hot-card .hc-icon { font-size: 36px; margin-bottom: 14px; display: block; }
+  .hot-card .hc-cat {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 6px;
+  }
+  .hot-card h3 { font-size: 18px; font-weight: 700; color: var(--primary-dark); margin-bottom: 8px; }
+  .hot-card .hc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .hot-card .hc-cta { display: none; }
+  .hot-card .hc-cta .arr { font-size: 14px; }
+
+  /* ── 醒目「查看详情」按钮 ── */
+  .hc-btn {
+    display: inline-block; margin-top: 16px;
+    background: var(--primary); color: #fff; border: none;
+    padding: 8px 20px; border-radius: var(--radius-sm);
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .hc-btn:hover { background: var(--primary-light); transform: scale(1.03); }
+  .pi-btn {
+    display: inline-block; margin-top: 10px;
+    background: var(--primary); color: #fff; border: none;
+    padding: 6px 16px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .pi-btn:hover { background: var(--primary-light); }
+  .ii-btn {
+    background: var(--primary); color: #fff; border: none;
+    padding: 4px 12px; border-radius: 4px;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .ii-btn:hover { background: var(--primary-light); }
+  .svc-btn {
+    display: inline-block; margin-top: 16px;
+    background: var(--primary); color: #fff; border: none;
+    padding: 7px 18px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .svc-btn:hover { background: var(--primary-light); }
+
+  /* ═══════════ PRODUCTS ═══════════ */
+  .product-cat { margin-bottom: 48px; }
+  .product-cat:last-child { margin-bottom: 0; }
+  .product-cat-title {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+    padding-bottom: 14px; border-bottom: 2px solid var(--border);
+  }
+  .product-cat-title .dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .product-cat-title .dot.reagent { background: var(--primary); }
+  .product-cat-title .dot.instrument { background: var(--accent); }
+  .product-cat-title h3 { font-size: 22px; font-weight: 700; color: var(--primary-dark); letter-spacing: 0.5px; }
+  .product-cat-title span { font-size: 14px; color: var(--text-muted); margin-left: 4px; }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .product-item {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 20px; cursor: pointer; transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+    position: relative;
+  }
+  .product-item:hover { box-shadow: var(--shadow); border-color: var(--primary-light); transform: translateY(-2px); }
+  .product-item .pi-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+  .product-item h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; padding-right: 24px; }
+  .product-item p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .product-item .pi-badge {
+    display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 600;
+    background: #fed7d7; color: #c53030; padding: 2px 8px; border-radius: 4px;
+  }
+  .product-item .pi-arrow {
+    position: absolute; top: 20px; right: 20px; font-size: 16px; color: var(--primary);
+    opacity: 0; transform: translateX(-6px); transition: opacity 0.2s, transform 0.2s;
+  }
+  .product-item:hover .pi-arrow { opacity: 1; transform: translateX(0); }
+
+  /* ═══════════ PRODUCT DETAIL OVERLAY ═══════════ */
+  .pd-overlay {
+    position: fixed; top: 64px; left: 0; right: 0; bottom: 0; z-index: 300; background: var(--bg);
+    overflow-y: auto; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .pd-overlay.show { opacity: 1; pointer-events: auto; }
+  .pd-topbar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; gap: 16px;
+    padding: 14px 24px; background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+  }
+  .pd-topbar .pd-back {
+    display: flex; align-items: center; gap: 6px;
+    background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 6px 14px; font-size: 14px; cursor: pointer; color: var(--text-secondary);
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .pd-topbar .pd-back:hover { background: #f0f4f8; }
+  .pd-topbar .pd-title { font-size: 18px; font-weight: 700; color: var(--primary-dark); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pd-topbar .pd-cta {
+    background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
+    padding: 8px 20px; font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .pd-topbar .pd-cta:hover { background: var(--primary-light); }
+
+  .pd-hero {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: 48px 24px 36px;
+    background: linear-gradient(160deg, #eef5fb, #e8f4f8);
+  }
+  .pd-hero .pdh-icon { font-size: 64px; margin-bottom: 16px; }
+  .pd-hero .pdh-cat {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .pd-hero h1 { font-size: 34px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; margin-bottom: 10px; }
+  .pd-hero .pdh-tagline { font-size: 16px; color: var(--text-secondary); max-width: 560px; }
+
+  .pd-body { max-width: 860px; margin: 0 auto; padding: 32px 24px 64px; }
+  .pd-section { margin-bottom: 36px; }
+  .pd-section:last-child { margin-bottom: 0; }
+  .pd-section .pds-label {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--accent); margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 2px solid #e0f7f3;
+  }
+  .pd-section .pds-text { font-size: 15px; color: var(--text-secondary); line-height: 1.85; }
+  .pd-section .pds-text.placeholder { color: var(--text-muted); font-style: italic; }
+
+  .pd-features { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+  .pd-features li {
+    display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px;
+    background: var(--bg); border-radius: var(--radius-sm); border: 1px solid var(--border);
+    font-size: 14px; color: var(--text-secondary);
+  }
+  .pd-features li .pf-check { color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .pd-specs { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+  .pd-specs .ps-row { display: flex; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .pd-specs .ps-row:last-child { border-bottom: none; }
+  .pd-specs .ps-row .psk {
+    width: 180px; flex-shrink: 0; padding: 12px 16px;
+    background: #f7f9fc; color: var(--text-muted); font-weight: 500;
+  }
+  .pd-specs .ps-row .psv { flex: 1; padding: 12px 16px; color: var(--text); font-weight: 600; }
+
+  .pd-placeholder-hint {
+    margin-top: 36px; padding: 16px 20px; border: 2px dashed var(--border);
+    border-radius: var(--radius-sm); text-align: center; font-size: 13px; color: var(--text-muted);
+    background: #fafbfc;
+  }
+  .pd-placeholder-hint strong { color: var(--primary); }
+
+  /* 服务详情 Hero 颜色（每个服务一种） */
+  .pd-hero.svc-1 { background: linear-gradient(160deg, #e3f0fa, #eef5fb); border-bottom: 3px solid var(--primary); }
+  .pd-hero.svc-2 { background: linear-gradient(160deg, #e3ecfe, #eef3fb); border-bottom: 3px solid #2563eb; }
+  .pd-hero.svc-3 { background: linear-gradient(160deg, #ede3fe, #f4eefb); border-bottom: 3px solid #7c3aed; }
+  .pd-hero.svc-4 { background: linear-gradient(160deg, #fee3eb, #fbeef3); border-bottom: 3px solid #db2777; }
+  .pd-hero.svc-5 { background: linear-gradient(160deg, #e0f7f3, #eefaf7); border-bottom: 3px solid var(--accent); }
+  .pd-hero.svc-6 { background: linear-gradient(160deg, #fef6e3, #fbf3ee); border-bottom: 3px solid #d97706; }
+  .pd-hero .pdh-svc-cat {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .pd-hero.svc-1 .pdh-svc-cat { color: var(--primary); }
+  .pd-hero.svc-2 .pdh-svc-cat { color: #2563eb; }
+  .pd-hero.svc-3 .pdh-svc-cat { color: #7c3aed; }
+  .pd-hero.svc-4 .pdh-svc-cat { color: #db2777; }
+  .pd-hero.svc-5 .pdh-svc-cat { color: var(--accent); }
+  .pd-hero.svc-6 .pdh-svc-cat { color: #d97706; }
+
+  /* ═══════════ SERVICE CARDS ═══════════ */
+  .cards { display: grid; gap: 24px; }
+  .cards-2 { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+  .cards-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card {
+    background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 32px 28px; box-shadow: var(--shadow); transition: box-shadow 0.25s, transform 0.15s;
+  }
+  .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .card-icon {
+    width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-size: 22px; margin-bottom: 18px;
+  }
+  .card-icon.blue { background: #e3f0fa; color: var(--primary); }
+  .card-icon.green { background: #e0f7f3; color: var(--accent); }
+  .card h3 { font-size: 18px; font-weight: 700; color: var(--primary-dark); margin-bottom: 8px; }
+  .card .card-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 14px; }
+  .card .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    display: inline-block; background: #f0f4f8; color: var(--text-secondary);
+    padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500;
+  }
+  .tag.accent { background: #e0f7f3; color: var(--accent); font-weight: 600; }
+
+  .service-card {
+    background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 32px 28px; box-shadow: var(--shadow); cursor: pointer;
+    border-left: 4px solid transparent; position: relative; overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.15s, border-color 0.25s;
+  }
+  .service-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .service-card .svc-hint {
+    position: absolute; bottom: 12px; right: 18px; font-size: 12px; color: var(--primary);
+    opacity: 0.7; font-weight: 500; transition: opacity 0.25s; pointer-events: none;
+  }
+  .service-card:hover .svc-hint { opacity: 1; }
+  .service-card.s1 { border-left-color: var(--primary); }
+  .service-card.s2 { border-left-color: #2563eb; }
+  .service-card.s3 { border-left-color: #7c3aed; }
+  .service-card.s4 { border-left-color: #db2777; }
+  .service-card.s5 { border-left-color: var(--accent); }
+  .service-card.s6 { border-left-color: #d97706; }
+  .service-card .num {
+    position: absolute; top: 16px; right: 20px; font-size: 48px; font-weight: 800;
+    color: rgba(0,0,0,0.03); font-family: "SF Mono","Consolas",monospace;
+  }
+  .service-card h3 { font-size: 18px; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+  .service-card .svc-tag { font-size: 12px; font-weight: 600; letter-spacing: 1px; margin-bottom: 10px; }
+  .service-card.s1 .svc-tag { color: var(--primary); }
+  .service-card.s2 .svc-tag { color: #2563eb; }
+  .service-card.s3 .svc-tag { color: #7c3aed; }
+  .service-card.s4 .svc-tag { color: #db2777; }
+  .service-card.s5 .svc-tag { color: var(--accent); }
+  .service-card.s6 .svc-tag { color: #d97706; }
+  .service-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+
+  /* ═══════════ ABOUT ═══════════ */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: start; }
+  .about-text p { font-size: 15px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.8; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-highlights { display: flex; flex-direction: column; gap: 20px; }
+  .highlight-item {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 22px 24px; box-shadow: var(--shadow);
+  }
+  .highlight-item .h-num { font-size: 28px; font-weight: 800; color: var(--primary); }
+  .highlight-item .h-label { font-size: 14px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ═══════════ CTA ═══════════ */
+  .cta-band {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: #fff; text-align: center; padding: 56px 24px; margin-top: 8px;
+  }
+  .cta-band h2 { font-size: 30px; font-weight: 700; margin-bottom: 12px; letter-spacing: 1px; }
+  .cta-band p { font-size: 16px; opacity: 0.85; margin-bottom: 28px; }
+  .cta-band .btn-primary {
+    background: #fff; color: var(--primary); padding: 14px 40px; font-size: 16px;
+  }
+  .cta-band .btn-primary:hover { background: #eef5fb; transform: translateY(-1px); }
+
+  /* ═══════════ FOOTER ═══════════ */
+  .footer {
+    background: #0f1a2e; color: rgba(255,255,255,0.65); padding: 48px 24px 28px;
+    font-size: 14px;
+  }
+  .footer-inner { max-width: var(--max-width); margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+  .footer-col h4 { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 14px; letter-spacing: 0.5px; }
+  .footer-col p, .footer-col a { display: block; margin-bottom: 6px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+  .footer-col a:hover { color: var(--accent-light); }
+  .footer-bottom {
+    max-width: var(--max-width); margin: 36px auto 0; padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08); text-align: center; font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ═══════════ RESPONSIVE ═══════════ */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-carousel { height: 420px; }
+    .hero-carousel .hc-slide h1 { font-size: 28px; }
+    .hero-carousel .hc-slide .sub { font-size: 15px; }
+    .section h2 { font-size: 26px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .cards-2, .cards-3 { grid-template-columns: 1fr; }
+    .pd-hero h1 { font-size: 24px; }
+    .pd-specs .ps-row .psk { width: 120px; }
+    .pd-features { grid-template-columns: 1fr; }
+    .hot-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════ ANIMATIONS ═══════════ */
+  .fade-section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-section.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="icon">佰</div>
+      <span class="name">佰洛生物</span>
+    </a>
+    <ul class="nav-links">
+      <!-- 产品中心 下拉 -->
+      <li>
+        <a href="products.html">产品中心 <span class="dd-arrow">▼</span></a>
+        <div class="dropdown">
+          <a href="#hot-products">🔥 热门产品</a>
+          <div class="dd-divider"></div>
+          <a href="products.html#reagents">试剂与耗材</a>
+          <a href="products.html#instruments">实验仪器</a>
+          <div class="dd-divider"></div>
+          <a href="products.html">查看全部产品</a>
+        </div>
+      </li>
+      <!-- 技术服务 下拉 -->
+      <li>
+        <a href="#services">技术服务 <span class="dd-arrow">▼</span></a>
+        <div class="dropdown">
+          <a href="#" onclick="openDetail('svc-ipsc');return false">iPSC 重编程外包</a>
+          <a href="#" onclick="openDetail('svc-bli');return false">BLI 亲和力测定</a>
+          <a href="#" onclick="openDetail('svc-virus');return false">慢病毒 / 腺病毒包装</a>
+          <a href="#" onclick="openDetail('svc-antibody');return false">抗体定制</a>
+          <a href="#" onclick="openDetail('svc-crispr');return false">CRISPR 基因编辑</a>
+          <a href="#" onclick="openDetail('svc-cart');return false">CAR-T 载体构建</a>
+        </div>
+      </li>
+      <li><a href="#about">关于佰洛</a></li>
+      <li><a href="contact.html">联系我们</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">获取报价</a>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO CAROUSEL ═══════════ -->
+<header class="hero-carousel" id="heroCarousel">
+  <div class="hc-track" id="hcTrack"></div>
+  <button class="hc-arrow prev" onclick="slideHero(-1)" aria-label="上一张">&#8249;</button>
+  <button class="hc-arrow next" onclick="slideHero(1)"  aria-label="下一张">&#8250;</button>
+  <div class="hc-dots" id="hcDots"></div>
+</header>
+
+<!-- ═══════════ HOT PRODUCTS ═══════════ -->
+<section class="hot-section" id="hot-products">
+  <div class="section fade-section">
+    <div class="section-header">
+      <div class="section-tag">Hot Products</div>
+      <h2>热门产品</h2>
+      <p class="desc">精选佰洛生物最受科研用户信赖的核心产品，覆盖细胞培养、蛋白纯化、分子检测全流程</p>
+    </div>
+    <div class="hot-grid" id="hotGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section class="section fade-section" id="services">
+  <div class="section-header">
+    <div class="section-tag">Services</div>
+    <h2>技术服务</h2>
+    <p class="desc">依托成熟的实验平台与资深科研团队，提供从靶点发现到功能验证的全流程 CRO 技术服务</p>
+  </div>
+  <div class="cards cards-3" id="servicesGrid"></div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="section fade-section" id="about">
+  <div class="section-header">
+    <div class="section-tag">About</div>
+    <h2>关于佰洛生物</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        佰洛生物（Bailuo Biotech）是一家专注为生命科学工作者提供<strong>高品质生物试剂与专业技术服务</strong>的供应商。我们深入对接高校课题组、医院科研平台及生物制药企业的实验需求，精选并代理国内外优质品牌产品，致力于让每一位科研人员都能用上<strong>可靠、稳定、高性价比</strong>的实验试剂与耗材。
+      </p>
+      <p>
+        目前，佰洛生物已与多家行业领先的上游厂商建立深度合作关系——细胞培养系列产品（胎牛血清、基础培养基、辅助试剂等）、iPSC 重编程试剂盒（基于 mRNA-LNP 技术的非整合型重编程方案）以及层析填料与蛋白纯化微球产品，覆盖亲和、离子交换、疏水及分子筛全系列纯化需求。
+      </p>
+      <p>
+        佰洛生物秉持<strong>"以科研之心，筑服务之基"</strong>的理念。我们不生产产品，但我们比生产者更懂科研用户——每一款代理产品均经过严格的供应商资质审核与实验室验证，确保性能与参数经得起科研检验。从产品选型咨询到实验方案推荐，再到售后技术支持，我们提供全流程的贴心服务，让科研工作者专注于实验本身。
+      </p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-item">
+        <div class="h-num">10+</div>
+        <div class="h-label">战略合作供应商</div>
+      </div>
+      <div class="highlight-item">
+        <div class="h-num">50+</div>
+        <div class="h-label">代理产品品类</div>
+      </div>
+      <div class="highlight-item">
+        <div class="h-num">全流程</div>
+        <div class="h-label">技术咨询与售后支持</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-band fade-section" id="contact">
+  <h2>开启您的科研项目</h2>
+  <p>无论您是需要标准试剂耗材，还是定制化 CRO 技术服务，我们的技术团队随时为您提供专业支持</p>
+  <a href="contact.html" class="btn-primary">联系我们 →</a>
+</section>
+
+<!-- ═══════════ PRODUCT DETAIL OVERLAY ═══════════ -->
+<div class="pd-overlay" id="pdOverlay">
+  <div class="pd-topbar">
+    <button class="pd-back" onclick="closeProductDetail()">← 返回首页</button>
+    <div class="pd-title" id="pdTitle"></div>
+    <a href="contact.html" class="pd-cta" onclick="closeProductDetail()">获取报价</a>
+  </div>
+  <div id="pdContent"></div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>佰洛生物</h4>
+      <p>高品质生物试剂与技术服务</p>
+      <p>&copy; 2026 Bailuo Biotech</p>
+    </div>
+    <div class="footer-col">
+      <h4>产品</h4>
+      <a href="#hot-products">热门产品</a>
+      <a href="products.html#reagents">试剂与耗材</a>
+      <a href="products.html#instruments">实验仪器</a>
+    </div>
+    <div class="footer-col">
+      <h4>服务</h4>
+      <a href="#services">iPSC 重编程</a>
+      <a href="#services">BLI 亲和力测定</a>
+      <a href="#services">病毒包装</a>
+      <a href="#services">抗体定制</a>
+      <a href="#services">CRISPR 基因编辑</a>
+      <a href="#services">CAR-T 载体构建</a>
+    </div>
+    <div class="footer-col">
+      <h4>联系方式</h4>
+      <p>邮箱：service@biologia.cn</p>
+      <p>电话：18768439420</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    佰洛生物科技 &copy; 2026 &nbsp;|&nbsp; 为生命科学工作者提供高品质试剂与专业服务
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════
+   ESCAPE UTILITY
+═══════════════════════════════════════ */
+function esc(s) {
+  var d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+/* ═══════════════════════════════════════
+   数据加载 — 从 data/*.json 异步加载
+═══════════════════════════════════════ */
+var allProducts = [];
+var allServices = [];
+var heroSlides = [];
+var siteConfig = {};
+
+async function loadData() {
+  try {
+    var [productsRes, servicesRes, configRes] = await Promise.all([
+      fetch('data/products.json'),
+      fetch('data/services.json'),
+      fetch('data/site-config.json')
+    ]);
+    window.allProducts = await productsRes.json();
+    window.allServices = await servicesRes.json();
+    window.siteConfig = await configRes.json();
+
+    /* 从 siteConfig 读取轮播数据 */
+    window.heroSlides = window.siteConfig.heroSlides || [];
+
+    /* 更新 SEO meta tags */
+    updateSEO(window.siteConfig);
+
+    /* 渲染页面 */
+    renderHeroSlides();
+    renderHotProducts();
+    renderServices();
+    initObservers();
+
+    /* 启动轮播 */
+    heroTimer = setInterval(function() { goHero((heroCurrent + 1) % heroSlides.length); }, HERO_INTERVAL);
+
+    /* 检查 hash 打开详情 */
+    checkHashOnLoad();
+  } catch (e) {
+    console.error('数据加载失败:', e);
+  }
+}
+
+function updateSEO(cfg) {
+  if (cfg.siteTitle || (cfg.seo && cfg.seo.title)) {
+    document.title = cfg.siteTitle || cfg.seo.title;
+  }
+  /* 更新 meta description */
+  var metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && cfg.seo && cfg.seo.description) {
+    metaDesc.setAttribute('content', cfg.seo.description);
+  }
+  /* 更新 meta keywords */
+  var metaKw = document.querySelector('meta[name="keywords"]');
+  if (metaKw && cfg.seo && cfg.seo.keywords) {
+    metaKw.setAttribute('content', cfg.seo.keywords);
+  }
+  /* 更新 og tags */
+  if (cfg.og) {
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle && cfg.og.title) ogTitle.setAttribute('content', cfg.og.title);
+    var ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc && cfg.og.description) ogDesc.setAttribute('content', cfg.og.description);
+    var ogImg = document.querySelector('meta[property="og:image"]');
+    if (ogImg && cfg.og.image) ogImg.setAttribute('content', cfg.og.image);
+  }
+}
+
+
+
+
+
+
+
+/* ═══════════════════════════════════════
+   CAROUSEL — 轮播逻辑
+═══════════════════════════════════════ */
+var heroCurrent = 0;
+var heroTimer = null;
+var HERO_INTERVAL = 5000;
+
+function renderHeroSlides() {
+  var track = document.getElementById('hcTrack');
+  var dots  = document.getElementById('hcDots');
+  if (!track) return;
+
+  track.innerHTML = heroSlides.map(function(s, i) {
+    var hasImg = s.img && s.img.trim() !== '';
+    return '<div class="hc-slide hc-slide-' + i + '">' +
+      (hasImg ? '<div class="hc-bg"><img src="' + esc(s.img) + '" alt=""></div>' : '') +
+      '<div class="hc-content">' +
+        (s.tag   ? '<div class="hero-tag">' + esc(s.tag) + '</div>' : '') +
+        (s.title ? '<h1>' + esc(s.title) + '</h1>' : '') +
+        (s.sub   ? '<p class="sub">' + esc(s.sub) + '</p>' : '') +
+        (s.btn1Text ? '<div class="hero-btns"><a href="' + esc(s.btn1Href) + '" class="btn-primary">' + esc(s.btn1Text) + '</a></div>' : '') +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  if (dots) {
+    dots.innerHTML = heroSlides.map(function(_, i) {
+      return '<button class="dot-ind' + (i === heroCurrent ? ' active' : '') + '" onclick="goHero(' + i + ')" aria-label="切换到第' + (i+1) + '张"></button>';
+    }).join('');
+  }
+}
+
+function goHero(idx) {
+  var track = document.getElementById('hcTrack');
+  if (!track) return;
+  heroCurrent = idx;
+  track.style.transform = 'translateX(-' + (heroCurrent * 50) + '%)';
+  var allDots = document.querySelectorAll('#hcDots .dot-ind');
+  allDots.forEach(function(d, i) { d.classList.toggle('active', i === heroCurrent); });
+  clearInterval(heroTimer);
+  heroTimer = setInterval(function() { goHero((heroCurrent + 1) % heroSlides.length); }, HERO_INTERVAL);
+}
+
+function slideHero(dir) {
+  var next = heroCurrent + dir;
+  if (next < 0) next = heroSlides.length - 1;
+  if (next >= heroSlides.length) next = 0;
+  goHero(next);
+}
+
+/* ═══════════════════════════════════════
+   HELPERS — 按分类筛选 & 统一查找
+═══════════════════════════════════════ */
+function getItemById(id) {
+  return allProducts.find(function(p) { return p.id === id; }) ||
+         allServices.find(function(s) { return s.id === id; });
+}
+function getProductsByCat(cat) {
+  return allProducts.filter(function(p) { return p.cat === cat; });
+}
+function getHotProducts() {
+  return allProducts.filter(function(p) { return p.hot; });
+}
+function getProductById(id) {
+  return allProducts.find(function(p) { return p.id === id; });
+}
+
+/* ═══════════════════════════════════════
+   RENDER — 技术服务卡片
+═══════════════════════════════════════ */
+function renderServices() {
+  var el = document.getElementById('servicesGrid');
+  if (!el) return;
+  el.innerHTML = allServices.map(function(s) {
+    return '<div class="service-card ' + s.sc + '" data-sid="' + esc(s.id) + '" onclick="openDetail(\'' + esc(s.id) + '\')">' +
+      '<div class="num">' + esc(s.num) + '</div>' +
+      '<div class="svc-tag">' + esc(s.tag) + '</div>' +
+      '<h3>' + esc(s.name) + '</h3>' +
+      '<p>' + s.summary + '</p>' +
+      '<div class="svc-hint">点击查看详情 →</div>' +
+      '<button class="svc-btn" onclick="event.stopPropagation();openDetail(\'' + esc(s.id) + '\')">查看详情 →</button>' +
+    '</div>';
+  }).join('');
+}
+
+/* ═══════════════════════════════════════
+   RENDER — 热门产品
+═══════════════════════════════════════ */
+function renderHotProducts() {
+  var el = document.getElementById('hotGrid');
+  if (!el) return;
+  var hots = getHotProducts();
+  if (hots.length === 0) { el.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:32px;">暂无热门产品</p>'; return; }
+  el.innerHTML = hots.map(function(p) {
+    var catLabel = p.cat === 'reagents' ? '试剂与耗材' : '实验仪器';
+    return '<div class="hot-card" data-pid="' + esc(p.id) + '" onclick="openProductDetail(\'' + esc(p.id) + '\')">' +
+      '<div class="hot-badge">热门</div>' +
+      '<span class="hc-icon">' + esc(p.icon) + '</span>' +
+      '<div class="hc-cat">' + esc(catLabel) + '</div>' +
+      '<h3>' + esc(p.name) + '</h3>' +
+      '<div class="hc-desc">' + esc(p.summary) + '</div>' +
+      '<button class="hc-btn" onclick="event.stopPropagation();openProductDetail(\'' + esc(p.id) + '\')">查看详情 →</button>' +
+    '</div>';
+  }).join('');
+}
+
+/* ═══════════════════════════════════════
+   DETAIL OVERLAY — 产品 & 服务详情页（统一入口）
+   产品详情见 allProducts[].detail，服务详情见 allServices[].detail
+   点击任意产品卡片或服务卡片均打开此 overlay
+═══════════════════════════════════════ */
+function openDetail(id) {
+  var item = getItemById(id);
+  if (!item) return;
+
+  var detail = item.detail || {};
+  var isService = allServices.some(function(s) { return s.id === id; });
+
+  /* 顶栏 */
+  document.getElementById('pdTitle').textContent = item.name;
+
+  var html = '';
+
+  /* Hero — 产品 Hero */
+  if (!isService) {
+    html += '<div class="pd-hero">';
+    html += '<div class="pdh-icon">' + esc(item.icon) + '</div>';
+    html += '<div class="pdh-cat">' + esc(item.cat === 'reagents' ? '试剂与耗材' : '实验仪器') + '</div>';
+    html += '<h1>' + esc(item.name) + '</h1>';
+    html += '<div class="pdh-tagline">' + esc(item.summary) + '</div>';
+    html += '</div>';
+  } else {
+    /* Hero — 服务 Hero（使用服务专属颜色） */
+    html += '<div class="pd-hero ' + esc(item.sc) + '">';
+    html += '<div class="pdh-icon">' + esc(item.icon) + '</div>';
+    html += '<div class="pdh-svc-cat">' + esc(item.tag) + ' · 技术服务</div>';
+    html += '<h1>' + esc(item.name) + '</h1>';
+    html += '<div class="pdh-tagline">' + esc(item.summary) + '</div>';
+    if (item.flow) {
+      html += '<div style="margin-top:20px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.7);padding:8px 20px;border-radius:20px;font-size:13px;color:var(--text-secondary);backdrop-filter:blur(4px);flex-wrap:wrap;justify-content:center;">' +
+        '<span style="font-weight:700;color:var(--primary);flex-shrink:0;">服务流程</span> ' + esc(item.flow) + '</div>';
+    }
+    html += '</div>';
+  }
+
+  /* Body */
+  html += '<div class="pd-body">';
+
+  /* 概述 */
+  html += '<div class="pd-section">';
+  html += '<div class="pds-label">' + (isService ? '服务概述' : '产品概述') + '</div>';
+  if (detail.intro) {
+    html += '<div class="pds-text">' + esc(detail.intro) + '</div>';
+  } else {
+    html += '<div class="pds-text placeholder">（请在 ' + (isService ? 'allServices' : 'allProducts') + ' 数组中该项目的 detail.intro 字段编辑内容）</div>';
+  }
+  html += '</div>';
+
+  /* 亮点/特点 */
+  html += '<div class="pd-section">';
+  html += '<div class="pds-label">' + (isService ? '服务亮点' : '产品特点') + '</div>';
+  if (detail.features && detail.features.length > 0) {
+    html += '<ul class="pd-features">';
+    detail.features.forEach(function(f) {
+      html += '<li><span class="pf-check">✓</span><span>' + esc(f) + '</span></li>';
+    });
+    html += '</ul>';
+  } else {
+    html += '<div class="pds-text placeholder">（请在 detail.features 数组中添加内容）</div>';
+  }
+  html += '</div>';
+
+  /* 交付标准 / 技术规格 */
+  html += '<div class="pd-section">';
+  html += '<div class="pds-label">' + (isService ? '交付标准' : '技术规格') + '</div>';
+  if (detail.specs && detail.specs.length > 0) {
+    html += '<div class="pd-specs">';
+    detail.specs.forEach(function(s) {
+      html += '<div class="ps-row"><div class="psk">' + esc(s.key) + '</div><div class="psv">' + esc(s.val) + '</div></div>';
+    });
+    html += '</div>';
+  } else {
+    html += '<div class="pds-text placeholder">（请在 detail.specs 数组中添加参数，格式：[{key:"参数名", val:"参数值"}]）</div>';
+  }
+  html += '</div>';
+
+  /* 应用领域 / 适用场景 */
+  html += '<div class="pd-section">';
+  html += '<div class="pds-label">' + (isService ? '适用场景' : '应用领域') + '</div>';
+  if (detail.applications) {
+    html += '<div class="pds-text">' + esc(detail.applications) + '</div>';
+  } else {
+    html += '<div class="pds-text placeholder">（请在 detail.applications 字段中编辑内容）</div>';
+  }
+  html += '</div>';
+
+  /* 交付物说明（仅服务）/ 订购信息（产品） */
+  if (isService) {
+    html += '<div class="pd-section">';
+    html += '<div class="pds-label">交付内容</div>';
+    if (detail.deliverables) {
+      html += '<div class="pds-text">' + esc(detail.deliverables) + '</div>';
+    } else {
+      html += '<div class="pds-text placeholder">（请在 detail.deliverables 字段中编辑交付内容）</div>';
+    }
+    html += '</div>';
+  } else {
+    html += '<div class="pd-section">';
+    html += '<div class="pds-label">订购信息</div>';
+    if (detail.ordering) {
+      html += '<div class="pds-text">' + esc(detail.ordering) + '</div>';
+    } else {
+      html += '<div class="pds-text placeholder">（请在 detail.ordering 字段中编辑订购信息）</div>';
+    }
+    html += '</div>';
+  }
+
+  /* 编辑提示 */
+  html += '<div class="pd-placeholder-hint">';
+  html += '💡 <strong>编辑此页面：</strong>在 <code>' + (isService ? 'allServices' : 'allProducts') + '</code> 数组中找到 <code>id: "' + esc(id) + '"</code> 的对象，修改 <code>detail</code> 字段即可更新所有内容。';
+  if (isService) {
+    html += '<br>服务详情额外字段：<code>flow</code>（服务流程）、<code>detail.deliverables</code>（交付内容）。';
+  }
+  html += '</div>';
+
+  html += '</div>'; /* .pd-body */
+
+  document.getElementById('pdContent').innerHTML = html;
+  document.getElementById('pdOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+
+  /* 更新 URL hash */
+  if (history.pushState) {
+    history.pushState({ detailId: id }, '', '#' + id);
+  }
+}
+
+/* 向后兼容 */
+function openProductDetail(id) { openDetail(id); }
+
+function closeProductDetail() {
+  document.getElementById('pdOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+  if (history.pushState) {
+    history.pushState(null, '', window.location.pathname + window.location.search);
+  }
+}
+
+/* 浏览器后退按钮支持 */
+window.addEventListener('popstate', function(e) {
+  if (e.state && e.state.detailId) {
+    openDetail(e.state.detailId);
+  } else {
+    closeProductDetail();
+  }
+});
+
+/* ═══════════════════════════════════════
+   EVENT DELEGATION — 兜底保障（按钮已用内联 onclick）
+   如果某些场景下内联 onclick 失效，此委托仍可捕获 data-pid/data-sid
+═══════════════════════════════════════ */
+document.addEventListener('click', function(e) {
+  var target = e.target;
+  /* 只处理有 data-* 属性但没有 onclick 的元素（兜底） */
+  while (target && target !== document.body) {
+    if (target.hasAttribute && target.hasAttribute('onclick')) return; /* 已有 onclick，不重复 */
+    var pid = target.getAttribute && target.getAttribute('data-pid');
+    var sid = target.getAttribute && target.getAttribute('data-sid');
+    if (pid) { openProductDetail(pid); return; }
+    if (sid) { openDetail(sid); return; }
+    target = target.parentNode;
+  }
+});
+
+/* ═══════════════════════════════════════
+   INIT — 页面加载
+═══════════════════════════════════════ */
+/* JS 运行确认 — 页面底部显示绿色小标签 */
+(function(){
+  var badge = document.createElement('div');
+  badge.textContent = '✓ JS 已加载 · 产品/服务均可点击查看详情';
+  badge.style.cssText = 'position:fixed;bottom:12px;right:12px;z-index:1000;background:#10b981;color:#fff;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600;opacity:0.85;pointer-events:none;';
+  document.body.appendChild(badge);
+  setTimeout(function(){ badge.style.opacity = '0'; badge.style.transition = 'opacity 0.8s'; }, 4000);
+  setTimeout(function(){ badge.remove(); }, 5000);
+})();
+
+/* 初始化 IntersectionObserver（滚动动画） */
+function initObservers() {
+  var els = document.querySelectorAll('.fade-section');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  },{threshold:0.12});
+  els.forEach(function(el){ observer.observe(el); });
+}
+
+/* 页面加载时检查 hash，直接打开对应产品/服务详情 */
+function checkHashOnLoad() {
+  var hash = window.location.hash;
+  if (hash) {
+    var pid = hash.replace('#', '');
+    var item = getItemById(pid);
+    if (item) {
+      setTimeout(function() { openDetail(pid); }, 200);
+    }
+  }
+}
+
+/* 启动数据加载 */
+loadData();
+
+/* ESC 关闭详情页 */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('pdOverlay').classList.contains('show')) {
+    closeProductDetail();
+  }
+});
+</script>
+
+</body>
+</html>

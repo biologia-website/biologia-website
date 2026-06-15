@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佰洛生物 — 后台管理</title>
+<style>
+/* ═══════════════════════════════════════
+   ADMIN — 后台管理系统样式
+   极简科技深色主题
+═══════════════════════════════════════ */
+:root {
+  --bg: #0f1117; --surface: #1a1d27; --surface2: #242836;
+  --border: #2e3348; --text: #e4e7ed; --text2: #9ca3af;
+  --primary: #0ea5e9; --primary-hover: #38bdf8; --accent: #10b981;
+  --danger: #ef4444; --danger-hover: #f87171; --warning: #f59e0b;
+  --radius: 8px; --radius-sm: 6px; --shadow: 0 4px 24px rgba(0,0,0,.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+
+/* 登录页 */
+.login-wrap { display:flex; align-items:center; justify-content:center; min-height:100vh; background:linear-gradient(135deg,#0f1117 0%,#1a1d27 50%,#0f172a 100%); }
+.login-box { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:48px 40px; width:400px; max-width:92vw; box-shadow:var(--shadow); text-align:center; }
+.login-logo { font-size:28px; font-weight:800; margin-bottom:8px; }
+.login-logo .icon { display:inline-block; background:linear-gradient(135deg,#0ea5e9,#10b981); color:#fff; width:44px;height:44px;line-height:44px;border-radius:12px;font-size:20px;margin-right:10px;vertical-align:-4px; }
+.login-sub { color:var(--text2); font-size:14px; margin-bottom:32px; }
+.login-input { width:100%; padding:14px 16px; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); color:var(--text); font-size:15px; outline:none; transition:border .2s; margin-bottom:16px; }
+.login-input:focus { border-color:var(--primary); }
+.login-btn { width:100%; padding:14px; background:var(--primary); color:#fff; border:none; border-radius:var(--radius); font-size:15px; font-weight:600; cursor:pointer; transition:background .2s; }
+.login-btn:hover { background:var(--primary-hover); }
+.login-error { color:var(--danger); font-size:13px; margin-top:12px; display:none; }
+
+/* 主界面 */
+.app { display:none; min-height:100vh; }
+
+/* 顶栏 */
+.topbar { position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;gap:16px; }
+.topbar-brand { font-weight:700;font-size:17px;display:flex;align-items:center;gap:8px; }
+.topbar-brand .icon { background:linear-gradient(135deg,#0ea5e9,#10b981);color:#fff;width:30px;height:30px;line-height:30px;border-radius:8px;text-align:center;font-size:14px;flex-shrink:0; }
+.topbar-spacer { flex:1; }
+.topbar-btn { padding:6px 16px;background:transparent;border:1px solid var(--border);color:var(--text2);border-radius:var(--radius-sm);font-size:13px;cursor:pointer;transition:.2s; }
+.topbar-btn:hover { border-color:var(--danger);color:var(--danger); }
+
+/* 标签导航 */
+.tabs { display:flex;background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;overflow-x:auto; gap:4px; }
+.tab { padding:12px 20px;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;font-size:14px;font-weight:500;white-space:nowrap;transition:.2s; user-select:none; }
+.tab:hover { color:var(--text); }
+.tab.active { color:var(--primary); border-color:var(--primary); }
+
+/* 面板 */
+.panel { display:none; padding:24px; animation:fadeIn .25s ease; }
+.panel.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+/* 工具栏 */
+.toolbar { display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center; }
+.toolbar .search { flex:1;min-width:180px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;outline:none; transition:border .2s; }
+.toolbar .search:focus { border-color:var(--primary); }
+.toolbar .filter { padding:9px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:13px;cursor:pointer;outline:none; }
+.btn { padding:9px 18px;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:6px; white-space:nowrap; }
+.btn-primary { background:var(--primary);color:#fff; }
+.btn-primary:hover { background:var(--primary-hover); }
+.btn-accent { background:var(--accent);color:#fff; }
+.btn-accent:hover { background:#34d399; }
+.btn-danger { background:transparent;border:1px solid var(--danger);color:var(--danger); }
+.btn-danger:hover { background:var(--danger);color:#fff; }
+.btn-outline { background:transparent;border:1px solid var(--border);color:var(--text2); }
+.btn-outline:hover { border-color:var(--primary);color:var(--primary); }
+
+/* 卡片网格 */
+.grid { display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); }
+.card { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:border-color .2s,box-shadow .2s; cursor:pointer; position:relative; }
+.card:hover { border-color:var(--primary);box-shadow:0 4px 16px rgba(14,165,233,.08); }
+.card-head { display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px; }
+.card-icon { font-size:26px; flex-shrink:0; }
+.card-title { font-weight:700;font-size:15px;line-height:1.3; }
+.card-tag { display:inline-block;padding:2px 8px;background:rgba(14,165,233,.1);color:var(--primary);border-radius:4px;font-size:11px;font-weight:600;margin-top:6px;letter-spacing:.5px; }
+.card-sum { color:var(--text2);font-size:13px;line-height:1.5;margin-top:8px; display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden; }
+.card-meta { display:flex;gap:10px;margin-top:12px;flex-wrap:wrap; }
+.badge { padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600; }
+.badge-hot { background:rgba(245,158,11,.15);color:var(--warning); }
+.badge-cat { background:rgba(99,102,241,.12);color:#818cf8; }
+.badge-num { background:rgba(16,185,129,.12);color:var(--accent); }
+.card-actions { display:flex;gap:6px;margin-top:12px;opacity:0;transition:opacity .2s; }
+.card:hover .card-actions { opacity:1; }
+
+/* 服务卡片特殊 */
+.svc-card { grid-column: span 1; }
+.svc-card .card-num { font-size:32px;font-weight:900;color:var(--primary);line-height:1; }
+.svc-card .card-num-wrap { display:flex;align-items:center;gap:12px; }
+.svc-card .card-num-wrap .card-info h3 { font-size:16px; }
+.svc-card .card-num-wrap .card-info p { font-size:12px;color:var(--text2); }
+
+/* SEO 表单 */
+.seo-form { max-width:720px; }
+.form-group { margin-bottom:20px; }
+.form-label { display:block;font-size:13px;font-weight:600;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px; }
+.form-input, .form-textarea, .form-select { width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;outline:none;transition:border .2s;font-family:inherit; }
+.form-input:focus, .form-textarea:focus, .form-select:focus { border-color:var(--primary); }
+.form-textarea { resize:vertical;min-height:80px; }
+.form-row { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+.hl-group { display:grid;grid-template-columns:repeat(3,1fr);gap:14px; }
+.hl-item { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center; }
+.hl-num { font-size:28px;font-weight:900;color:var(--primary); }
+.hl-label { font-size:12px;color:var(--text2);margin-top:4px; }
+
+/* 弹窗 */
+.modal-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;padding:20px; }
+.modal-overlay.show { display:flex; animation:fadeBg .2s ease; }
+@keyframes fadeBg { from{opacity:0} to{opacity:1} }
+.modal { background:var(--surface);border:1px solid var(--border);border-radius:14px;width:680px;max-width:95vw;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow);animation:modalIn .25s ease; }
+@keyframes modalIn { from{transform:scale(.96);opacity:0} to{scale:1;opacity:1} }
+.modal-header { display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0; }
+.modal-header h2 { font-size:18px;font-weight:700; }
+.modal-close { background:none;border:none;color:var(--text2);font-size:22px;cursor:pointer;padding:4px;transition:.2s; line-height:1; }
+.modal-close:hover { color:var(--danger); }
+.modal-body { padding:20px 24px 24px; }
+.modal-footer { display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid var(--border); }
+
+/* 动态表单字段 */
+.field-list { display:flex;flex-direction:column;gap:10px; margin-bottom:16px; }
+.field-row { display:grid;grid-template-columns:120px 1fr 36px;gap:8px;align-items:center; }
+.field-row input { padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;outline:none; }
+.field-row input:focus { border-color:var(--primary); }
+.field-add { padding:8px 14px;background:transparent;border:1px dashed var(--border);color:var(--text2);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;transition:.2s; width:100%;}
+.field-add:hover { border-color:var(--primary);color:var(--primary); }
+
+/* 状态栏 */
+.status-bar { position:fixed;bottom:0;left:0;right:0;background:var(--surface2);border-top:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;gap:16px;font-size:12px;color:var(--text2);z-index:150; z-index:150; }
+.status-dot { width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.status-msg { flex:1; }
+
+/* Toast */
+.toast-container { position:fixed;top:16px;right:16px;z-index:300;display:flex;flex-direction:column;gap:8px; }
+.toast { padding:12px 20px;border-radius:var(--radius);font-size:13px;font-weight:600;box-shadow:var(--shadow);animation:slideIn .3s ease,minimizeOut .4s ease 2.5s forwards; }
+.toast.success { background:var(--accent);color:#fff; }
+.toast.error { background:var(--danger);color:#fff; }
+.toast.info { background:var(--primary);color:#fff; }
+@keyframes slideIn { from{transform:translateX(60px);opacity:0} to{none} }
+@keyframes minimizeOut { to{transform:translateX(60px);opacity:0;pointer-events:none} }
+
+/* 导出区域 */
+.export-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px; }
+.export-card { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;transition:.2s; }
+.export-card:hover { border-color:var(--primary); transform:translateY(-2px); }
+.export-card .export-icon { font-size:36px;margin-bottom:10px; }
+.export-card h3 { font-size:15px;margin-bottom:6px; }
+.export-card p { font-size:12px;color:var(--text2); }
+
+/* 响应式 */
+@media(max-width:768px) {
+  .grid { grid-template-columns:1fr; }
+  .form-row,.hl-group { grid-template-columns:1fr; }
+  .modal { width:95vw; }
+  .field-row { grid-template-columns:1fr; }
+}
+
+/* 滚动条 */
+::-webkit-scrollbar { width:6px; height:6px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+::-webkit-scrollbar-thumb:hover { background:var(--text2); }
+
+/* 加载遮罩 */
+.loading-mask { display:none;position:fixed;inset:0;background:rgba(15,17,23,.75);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:16px; }
+.loading-mask.show { display:flex; }
+.spinner { width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ 登录页 ═══════════════ -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div class="login-logo"><span class="icon">佰</span>佰洛生物后台管理</div>
+    <p class="login-sub">请输入管理员密码进入控制面板</p>
+    <input type="password" id="pwdInput" class="login-input" placeholder="管理员密码" autofocus onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">登 录</button>
+    <div class="login-error" id="loginError">密码错误，请重试</div>
+  </div>
+</div>
+
+<!-- ═══════════════ 主应用 ═══════════════ -->
+<div class="app" id="app">
+  <!-- 顶栏 -->
+  <header class="topbar">
+    <div class="topbar-brand"><span class="icon">佰</span>佰洛生物 · 内容管理</div>
+    <div class="topbar-spacer"></div>
+    <button class="topbar-btn" onclick="showSettings()">⚙ 设置</button>
+    <button class="topbar-btn" onclick="doLogout()">退出登录</button>
+  </header>
+
+  <!-- 标签 -->
+  <nav class="tabs">
+    <div class="tab active" onclick="switchTab('products',this)">产品管理</div>
+    <div class="tab" onclick="switchTab('services',this)">服务管理</div>
+    <div class="tab" onclick="switchTab('seo',this)">SEO 配置</div>
+    <div class="tab" onclick="switchTab('export',this)">数据导出</div>
+  </nav>
+
+  <!-- 产品管理 -->
+  <section class="panel active" id="panel-products">
+    <div class="toolbar">
+      <input type="text" class="search" id="prodSearch" placeholder="搜索产品名称..." oninput="renderProducts()">
+      <select class="filter" id="prodFilter" onchange="renderProducts()">
+        <option value="">全部分类</option>
+        <option value="hot">热门产品</option>
+        <option value="reagents">试剂与耗材</option>
+        <option value="instruments">实验仪器</option>
+      </select>
+      <button class="btn btn-primary" onclick="openProductModal()">+ 新增产品</button>
+      <button class="btn btn-accent" onclick="saveAllToGitHub()" title="将所有修改提交到 GitHub 并自动部署">发布到线上</button>
+    </div>
+    <div class="grid" id="productsGrid"></div>
+  </section>
+
+  <!-- 服务管理 -->
+  <section class="panel" id="panel-services">
+    <div class="toolbar">
+      <input type="text" class="search" id="svcSearch" placeholder="搜索服务..." oninput="renderServices()">
+      <button class="btn btn-primary" onclick="openServiceModal()">+ 新增服务</button>
+      <button class="btn btn-accent" onclick="saveAllToGitHub()">发布到线上</button>
+    </div>
+    <div class="grid" id="servicesGrid"></div>
+  </section>
+
+  <!-- SEO 配置 -->
+  <section class="panel" id="panel-seo">
+    <div class="toolbar">
+      <button class="btn btn-accent" onclick="saveAllToGitHub()">保存并发布</button>
+    </div>
+    <div class="seo-form">
+      <h3 style="margin-bottom:20px;font-size:16px;">站点配置 & SEO 元数据</h3>
+      
+      <div class="form-group">
+        <label class="form-label">网站标题（显示在浏览器标签）</label>
+        <input type="text" class="form-input" id="cfgSiteTitle">
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">SEO Title</label>
+          <input type="text" class="form-input" id="cfgSeoTitle">
+        </div>
+        <div class="form-group">
+          <label class="form-label">SEO Keywords</label>
+          <input type="text" class="form-input" id="cfgSeoKw">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">SEO Description</label>
+        <textarea class="form-textarea" id="cfgSeoDesc" rows="3"></textarea>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--border);margin:28px 0">
+
+      <h3 style="margin-bottom:16px;font-size:16px;">社交分享 (Open Graph)</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">OG Title</label>
+          <input type="text" class="form-input" id="cfgOgTitle">
+        </div>
+        <div class="form-group">
+          <label class="form-label">OG Image URL</label>
+          <input type="text" class="form-input" id="cfgOgImg">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">OG Description</label>
+        <textarea class="form-textarea" id="cfgOgDesc" rows="2"></textarea>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--border);margin:28px 0">
+
+      <h3 style="margin-bottom:16px;font-size:16px;">关于佰洛 — 数据亮点</h3>
+      <div class="hl-group" id="hlGroup"></div>
+
+      <hr style="border:none;border-top:1px solid var(--border);margin:28px 0">
+
+      <h3 style="margin-bottom:16px;font-size:16px;">轮播图配置</h3>
+      <div id="heroEditor"></div>
+      <button class="btn btn-outline" style="margin-top:10px" onclick="addHeroSlide()">+ 新增轮播图</button>
+    </div>
+  </section>
+
+  <!-- 数据导出 -->
+  <section class="panel" id="panel-export">
+    <div class="toolbar"></div>
+    <div class="export-grid">
+      <div class="export-card" onclick="downloadJSON('products')">
+        <div class="export-icon">📦</div>
+        <h3>导出产品数据</h3>
+        <p>JSON 格式下载</p>
+      </div>
+      <div class="export-card" onclick="downloadJSON('services')">
+        <div class="export-icon">🔧</div>
+        <h3>导出服务数据</h3>
+        <p>JSON 格式下载</p>
+      </div>
+      <div class="export-card" onclick="downloadJSON('config')">
+        <div class="export-icon">⚙️</div>
+        <h3>导出站点配置</h3>
+        <p>JSON 格式下载</p>
+      </div>
+      <div class="export-card" onclick="downloadExcel('products')">
+        <div class="export-icon">📊</div>
+        <h3>导出产品 Excel</h3>
+        <p>.xlsx 电子表格</p>
+      </div>
+      <div class="export-card" onclick="downloadExcel('services')">
+        <div class="export-icon">📊</div>
+        <h3>导出服务 Excel</h3>
+        <p>.xlsx 电子表格</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 状态栏 -->
+  <div class="status-bar" style="margin-bottom:0;">
+    <span class="status-dot"></span>
+    <span class="status-msg" id="statusMsg">就绪</span>
+    <span id="lastSaved">—</span>
+  </div>
+</div>
+
+<!-- 产品编辑弹窗 -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="prodModalTitle">编辑产品</h2>
+      <button class="modal-close" onclick="closeModal('productModal')">&times;</button>
+    </div>
+    <div class="modal-body" id="productFormBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('productModal')">取消</button>
+      <button class="btn btn-primary" onclick="saveProduct()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 服务编辑弹窗 -->
+<div class="modal-overlay" id="serviceModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="svcModalTitle">编辑服务</h2>
+      <button class="modal-close" onclick="closeModal('serviceModal')">&times;</button>
+    </div>
+    <div class="modal-body" id="serviceFormBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('serviceModal')">取消</button>
+      <button class="btn btn-primary" onclick="saveService()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 设置弹窗 -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal" style="width:480px">
+    <div class="modal-header">
+      <h2>系统设置</h2>
+      <button class="modal-close" onclick="closeModal('settingsModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">GitHub Personal Access Token</label>
+        <input class="form-input" id="setGHToken" type="password" placeholder="ghp_..." value="">
+        <p style="color:var(--text2);font-size:12px;margin-top:4px">用于「发布到线上」功能，将数据提交到 GitHub 仓库。Token 仅保存在浏览器本地存储。</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label">修改管理员密码</label>
+        <input class="form-input" id="setNewPwd" type="password" placeholder="留空则不修改">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('settingsModal')">取消</button>
+      <button class="btn btn-primary" onclick="saveSettings()">保存设置</button>
+    </div>
+  </div>
+</div>
+<div class="loading-mask" id="loadingMask">
+  <div class="spinner"></div>
+  <div style="color:var(--text2);font-size:14px;">正在保存到 GitHub...</div>
+</div>
+
+<!-- Toast 容器 -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+/* ═══════════════════════════════════════
+   常量 & 全局状态
+═══════════════════════════════════════ */
+const ADMIN_HASH = 'b5a46aa0b88c7901b2e6c58fcebaa86ca2a1b6e2e45c3f4f6e8a0c1d2e3f4a5b'; // SHA256 of "Bailuo@2026Admin"
+/* GitHub Token — 首次使用时在设置页填入，保存在 localStorage */
+function getGHToken() { return localStorage.getItem('gh_token') || ''; }
+function setGHToken(t) { if(t) localStorage.setItem('gh_token',t); }
+const GH_REPO = 'biologia-website/biologia-website';
+const GH_BRANCH = 'main';
+
+let productsData = [];
+let servicesData = [];
+let siteConfigData = {};
+let editingProductId = null;
+let editingServiceId = null;
+
+/* ═══════════════════════════════════════
+   登录 / 退出
+═══════════════════════════════════════ */
+async function sha256(msg) {
+  const buf = new TextEncoder().encode(msg);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+async function doLogin() {
+  var pwd = document.getElementById('pwdInput').value;
+  var hash = await sha256(pwd);
+  // 优先检查 localStorage 中是否已修改过密码，否则使用默认密码
+  var savedHash = localStorage.getItem('admin_pwd_hash');
+  var validHash = savedHash || ADMIN_HASH;
+  if (hash === validHash) {
+    sessionStorage.setItem('adminAuth','1');
+    document.getElementById('loginWrap').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    await loadAllData();
+  } else {
+    var err = document.getElementById('loginError');
+    err.style.display = 'block';
+    setTimeout(function(){err.style.display='none'},2500);
+  }
+}
+
+function doLogout() {
+  sessionStorage.removeItem('adminAuth');
+  location.reload();
+}
+
+/* 设置弹窗 */
+function showSettings() {
+  var token = getGHToken();
+  document.getElementById('setGHToken').value = token ? '••••••••••••••••' : '';
+  document.getElementById('setNewPwd').value = '';
+  showModal('settingsModal');
+}
+
+async function saveSettings() {
+  var newToken = document.getElementById('setGHToken').value.trim();
+  var newPwd = document.getElementById('setNewPwd').value.trim();
+  if (newToken && newToken !== '••••••••••••••••') {
+    setGHToken(newToken);
+    toast('GitHub Token 已保存', 'success');
+  }
+  if (newPwd) {
+    var newHash = await sha256(newPwd);
+    // 密码 hash 需要持久化，存到 localStorage
+    localStorage.setItem('admin_pwd_hash', newHash);
+    toast('管理员密码已修改，下次登录生效', 'success');
+  }
+  closeModal('settingsModal');
+}
+
+// 自动登录检查
+if (sessionStorage.getItem('adminAuth') === '1') {
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  loadAllData();
+}
+
+/* ═══════════════════════════════════════
+   数据加载
+═══════════════════════════════════════ */
+async function loadAllData() {
+  try {
+    var [pRes,sRes,cRes] = await Promise.all([
+      fetch('data/products.json'), fetch('data/services.json'), fetch('data/site-config.json')
+    ]);
+    productsData = await pRes.json();
+    servicesData = await sRes.json();
+    siteConfigData = await cRes.json();
+    renderProducts(); renderServices(); renderSEO();
+    status('数据加载完成，共 '+productsData.length+' 个产品、'+servicesData.length+' 项服务');
+  } catch(e) {
+    toast('数据加载失败：'+e.message,'error');
+  }
+}
+
+/* ═══════════════════════════════════════
+   标签切换
+═══════════════════════════════════════ */
+function switchTab(name,el) {
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
+  if(el) el.classList.add('active');
+  document.getElementById('panel-'+name).classList.add('active');
+}
+
+/* ═══════════════════════════════════════
+   产品渲染
+═══════════════════════════════════════ */
+function renderProducts() {
+  var kw = document.getElementById('prodSearch').value.toLowerCase();
+  var cat = document.getElementById('prodFilter').value;
+  var list = productsData.filter(function(p){
+    if(cat==='hot' && !p.hot) return false;
+    if(cat && cat!=='hot' && p.cat!==cat) return false;
+    if(kw && p.name.toLowerCase().indexOf(kw)<0 && (!p.summary || p.summary.toLowerCase().indexOf(kw)<0)) return false;
+    return true;
+  });
+  var html = list.map(function(p,i){
+    return '<div class="card" data-id="'+p.id+'">'+
+      '<div class="card-head">'+
+        '<span class="card-icon">'+esc(p.icon)+'</span>'+
+        '<div><div class="card-title">'+esc(p.name)+'</div>'+
+        (p.tag ? '<span class="card-tag">'+esc(p.tag)+'</span>' : '')+
+        '</div></div>'+
+      '<div class="card-sum">'+esc(p.summary||'')+'</div>'+
+      '<div class="card-meta">'+
+        (p.hot ? '<span class="badge badge-hot">热门</span>' : '')+
+        '<span class="badge badge-cat">'+esc(p.cat==='reagents'?'试剂':'仪器')+'</span>'+
+      '</div>'+
+      '<div class="card-actions">'+
+        '<button class="btn btn-outline" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();openProductModal(\''+p.id+'\')">编辑</button>'+
+        '<button class="btn btn-danger" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();deleteProduct(\''+p.id+'\')">删除</button>'+
+      '</div></div>';
+  }).join('');
+  document.getElementById('productsGrid').innerHTML = html || '<p style="color:var(--text2);grid-column:1/-1;padding:40px;text-align:center">暂无匹配的产品</p>';
+}
+
+function openProductModal(id) {
+  editingProductId = id || null;
+  var p = id ? productsData.find(function(x){return x.id===id}) : {id:'',cat:'reagents',name:'',icon:'🧪',hot:false,summary:'',detail:{intro:'',features:[],specs:[],applications:'',ordering:''}};
+  document.getElementById('prodModalTitle').textContent = id?'编辑产品':'新增产品';
+  
+  var featuresHtml = (p.detail.features||[]).map(function(f,i){
+    return fieldRow('feature',i,f);
+  }).join('\n');
+  var specsHtml = (p.detail.specs||[]).map(function(s,i){
+    return '<div class="field-row"><input placeholder="参数名" value="'+esc(s.key)+'" data-sidx="'+i+'" data-sk="key"><input placeholder="参数值" value="'+esc(s.val)+'" data-sidx="'+i+'" data-sk="val"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button></div>';
+  }).join('');
+
+  document.getElementById('productFormBody').innerHTML =
+    '<div class="form-group"><label class="form-label">产品 ID（英文标识）</label><input class="form-input" id="ep_id" value="'+esc(p.id)+'" placeholder="如：ipsc-kit"></div>'+
+    '<div class="form-row"><div class="form-group"><label class="form-label">产品名称</label><input class="form-input" id="ep_name" value="'+esc(p.name)+'"></div>'+
+      '<div class="form-group"><label class="form-label">图标 Emoji</label><input class="form-input" id="ep_icon" value="'+esc(p.icon)+'"></div></div>'+
+    '<div class="form-row"><div class="form-group"><label class="form-label">分类</label><select class="form-select" id="ep_cat"><option value="reagents"+(p.cat==='reagents'?' selected':'')+'>试剂与耗材</option><option value="instruments"+(p.cat==='instruments'?' selected':'')+'>实验仪器</option></select></div>'+
+      '<div class="form-group"><label class="form-label">热门产品</label><select class="form-select" id="ep_hot"><option value="false"+(!p.hot?' selected':'')+'>否</option><option value="true"+(p.hot?' selected':'')+'>是</option></select></div></div>'+
+    '<div class="form-group"><label class="form-label">标签（英文短标）</label><input class="form-input" id="ep_tag" value="'+esc(p.tag||'')+'"></div>'+
+    '<div class="form-group"><label class="form-label">简介</label><textarea class="form-textarea" id="ep_summary" rows="2">'+esc(p.summary||'')+'</textarea></div>'+
+    
+    '<hr style="border:none;border-top:1px solid var(--border);margin:18px 0">'+
+    '<div class="form-group"><label class="form-label">详细描述</label><textarea class="form-textarea" id="ep_intro" rows="4">'+esc((p.detail&&p.detail.intro)||'')+'</textarea></div>'+
+    
+    '<div class="form-group"><label class="form-label">产品特点</label><div id="ep_features_list">'+featuresHtml+'<button class="field-add" onclick="addFeatureField()">+ 添加特点</button></div></div>'+
+    
+    '<div class="form-group"><label class="form-label">技术规格</label><div id="ep_specs_list">'+specsHtml+'<button class="field-add" onclick="addSpecField()">+ 添加规格</button></div></div>'+
+    
+    '<div class="form-group"><label class="form-label">应用领域</label><textarea class="form-textarea" id="ep_applications" rows="2">'+esc((p.detail&&p.detail.applications)||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">订购信息</label><textarea class="form-textarea" id="ep_ordering" rows="2">'+esc((p.detail&&p.detail.ordering)||'')+'</textarea></div>';
+
+  showModal('productModal');
+}
+
+function addFeatureField() {
+  var container = document.getElementById('ep_features_list');
+  var btn = container.querySelector('.field-add');
+  var div = document.createElement('div');
+  div.className = 'field-row';
+  div.innerHTML = '<input placeholder="特点描述" style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button>';
+  container.insertBefore(div, btn);
+}
+
+function addSpecField() {
+  var container = document.getElementById('ep_specs_list');
+  var btn = container.querySelector('.field-add');
+  var div = document.createElement('div');
+  div.className = 'field-row';
+  div.innerHTML = '<input placeholder="参数名"><input placeholder="参数值"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button>';
+  container.insertBefore(div, btn);
+}
+
+function saveProduct() {
+  var features = [];
+  document.querySelectorAll('#ep_features_list .field-row').forEach(function(r){
+    var v = r.querySelector('input'); if(v && v.value.trim()) features.push(v.value.trim());
+  });
+  var specs = [];
+  document.querySelectorAll('#ep_specs_list .field-row').forEach(function(r){
+    var inputs = r.querySelectorAll('input');
+    if(inputs.length>=2 && inputs[0].value.trim()) specs.push({key:inputs[0].value.trim(), val:inputs[1].value.trim()});
+  });
+
+  var obj = {
+    id: document.getElementById('ep_id').value.trim(),
+    cat: document.getElementById('ep_cat').value,
+    name: document.getElementById('ep_name').value.trim(),
+    icon: document.getElementById('ep_icon').value.trim(),
+    hot: document.getElementById('ep_hot').value === 'true',
+    tag: document.getElementById('ep_tag').value.trim(),
+    summary: document.getElementById('ep_summary').value.trim(),
+    detail: {
+      intro: document.getElementById('ep_intro').value.trim(),
+      features: features,
+      specs: specs,
+      applications: document.getElementById('ep_applications').value.trim(),
+      ordering: document.getElementById('ep_ordering').value.trim()
+    }
+  };
+
+  if(!obj.id || !obj.name) { toast('ID 和名称为必填项','error'); return; }
+
+  if(editingProductId) {
+    var idx = productsData.findIndex(function(x){return x.id===editingProductId});
+    if(idx>=0) productsData[idx] = obj;
+  } else {
+    productsData.push(obj);
+  }
+  closeModal('productModal');
+  renderProducts();
+  toast('产品已保存（本地）','success');
+}
+
+function deleteProduct(id) {
+  if(!confirm('确定删除该产品？')) return;
+  productsData = productsData.filter(function(p){return p.id!==id});
+  renderProducts();
+  toast('产品已删除','info');
+}
+
+/* ═══════════════════════════════════════
+   服务渲染
+═══════════════════════════════════════ */
+function renderServices() {
+  var kw = document.getElementById('svcSearch').value.toLowerCase();
+  var list = servicesData.filter(function(s){
+    if(kw && s.name.toLowerCase().indexOf(kw)<0 && (!s.summary || s.summary.toLowerCase().indexOf(kw)<0)) return false;
+    return true;
+  });
+  var html = list.map(function(s){
+    return '<div class="card svc-card" data-id="'+s.id+'">'+
+      '<div class="card-head">'+
+        '<div class="card-num-wrap"><div class="card-num">'+esc(s.num)+'</div><div class="card-info"><h3>'+esc(s.name)+'</h3><p>'+esc(s.tag)+'</p></div></div>'+
+      '</div>'+
+      '<div class="card-sum">'+esc(s.summary||'')+'</div>'+
+      '<div class="card-actions" style="display:flex">'+
+        '<button class="btn btn-outline" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();openServiceModal(\''+s.id+'\')">编辑</button>'+
+        '<button class="btn btn-danger" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();deleteService(\''+s.id+'\')">删除</button>'+
+      '</div></div>';
+  }).join('');
+  document.getElementById('servicesGrid').innerHTML = html || '<p style="color:var(--text2);grid-column:1/-1;padding:40px;text-align:center">暂无匹配的服务</p>';
+}
+
+function openServiceModal(id) {
+  editingServiceId = id || null;
+  var s = id ? servicesData.find(function(x){return x.id===id}) : {id:'',num:'',sc:'',tag:'',name:'',icon:'',summary:'',flow:'',detail:{intro:'',features:[],specs:[],applications:'',deliverables:''}};
+  document.getElementById('svcModalTitle').textContent ? id?'编辑服务':'新增服务' : '新增服务';
+
+  var featHtml = (s.detail.features||[]).map(function(f,i){
+    return '<div class="field-row"><input value="'+esc(f)+'" style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button></div>';
+  }).join('');
+  var specHtml = (s.detail.specs||[]).map(function(sp,i){
+    return '<div class="field-row"><input value="'+esc(sp.key)+'"><input value="'+esc(sp.val)+'"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button></div>';
+  }).join('');
+
+  document.getElementById('serviceFormBody').innerHTML =
+    '<div class="form-row"><div class="form-group"><label class="form-label">服务 ID</label><input class="form-input" id="es_id" value="'+esc(s.id)+'"></div>'+
+      '<div class="form-group"><label class="form-label">编号</label><input class="form-input" id="es_num" value="'+esc(s.num)+'"></div></div>'+
+    '<div class="form-row"><div class="form-group"><label class="form-label">名称</label><input class="form-input" id="es_name" value="'+esc(s.name)+'"></div>'+
+      '<div class="form-group"><label class="form-label">图标</label><input class="form-input" id="es_icon" value="'+esc(s.icon)+'"></div></div>'+
+    '<div class="form-row"><div class="form-group"><label class="form-label">Tag（英文）</label><input class="form-input" id="es_tag" value="'+esc(s.tag||'')+'"></div>'+
+      '<div class="form-group"><label class="form-label">Style Class</label><input class="form-input" id="es_sc" value="'+esc(s.sc||'')+'"></div></div>'+
+    '<div class="form-group"><label class="form-label">简介</label><textarea class="form-textarea" id="es_summary" rows="2">'+esc(s.summary||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">服务流程</label><textarea class="form-textarea" id="es_flow" rows="1">'+esc(s.flow||'')+'</textarea></div>'+
+    '<hr style="border:none;border-top:1px solid var(--border);margin:18px 0">'+
+    '<div class="form-group"><label class="form-label">详细描述</label><textarea class="form-textarea" id="es_intro" rows="4">'+esc((s.detail&&s.detail.intro)||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">服务亮点</label><div id="es_feat_list">'+featHtml+'<button class="field-add" onclick="addSvcFeatField()">+ 添加</button></div></div>'+
+    '<div class="form-group"><label class="form-label">交付标准/技术规格</label><div id="es_spec_list">'+specHtml+'<button class="field-add" onclick="addSvcSpecField()">+ 添加</button></div></div>'+
+    '<div class="form-group"><label class="form-label">适用场景</label><textarea class="form-textarea" id="es_applications" rows="2">'+esc((s.detail&&s.detail.applications)||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">交付内容</label><textarea class="form-textarea" id="es_deliverables" rows="2">'+esc((s.detail&&s.detail.deliverables)||'')+'</textarea></div>';
+
+  showModal('serviceModal');
+}
+
+function addSvcFeatField() { addFieldRow('es_feat_list'); }
+function addSvcSpecField() { addFieldRow('es_spec_list'); }
+function addFieldRow(containerId) {
+  var c=document.getElementById(containerId),btn=c.querySelector('.field-add'),d=document.createElement('div');
+  d.className='field-row'; d.innerHTML='<input style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button>'; c.insertBefore(d,btn);
+}
+
+function saveService() {
+  var feats=[];document.querySelectorAll('#es_feat_list .field-row').forEach(function(r){var v=r.querySelector('input');if(v&&v.value.trim())feats.push(v.value.trim())});
+  var spcs=[];document.querySelectorAll('#es_spec_list .field-row').forEach(function(r){var ins=r.querySelectorAll('input');if(ins.length>=2&&ins[0].value.trim())spcs.push({key:ins[0].value.trim(),val:ins[1].value.trim()})});
+
+  var obj={id:document.getElementById('es_id').value.trim(),num:document.getElementById('es_num').value.trim(),
+    sc:document.getElementById('es_sc').value.trim(),tag:document.getElementById('es_tag').value.trim(),
+    name:document.getElementById('es_name').value.trim(),icon:document.getElementById('es_icon').value.trim(),
+    summary:document.getElementById('es_summary').value.trim(),flow:document.getElementById('es_flow').value.trim(),
+    detail:{intro:document.getElementById('es_intro').value.trim(),features:feats,specs:spcs,
+      applications:document.getElementById('es_applications').value.trim(),deliverables:document.getElementById('es_deliverables').value.trim()}};
+  if(!obj.id||!obj.name){toast('ID 和名称必填','error');return;}
+  if(editingServiceId){var idx=servicesData.findIndex(function(x){return x.id===editingServiceId});if(idx>=0)servicesData[idx]=obj;}
+  else servicesData.push(obj);
+  closeModal('serviceModal');renderServices();toast('服务已保存（本地）','success');
+}
+
+function deleteService(id){if(!confirm('确定删除？'))return;servicesData=servicesData.filter(function(s){return s.id!==id});renderServices();toast('已删除','info');}
+
+/* ═══════════════════════════════════════
+   SEO 渲染
+═══════════════════════════════════════ */
+function renderSEO() {
+  var c = siteConfigData;
+  document.getElementById('cfgSiteTitle').value = c.siteTitle||'';
+  document.getElementById('cfgSeoTitle').value = (c.seo&&c.seo.title)||'';
+  document.getElementById('cfgSeoKw').value = (c.seo&&c.seo.keywords)||'';
+  document.getElementById('cfgSeoDesc').value = (c.seo&&c.seo.description)||'';
+  document.getElementById('cfgOgTitle').value = (c.og&&c.og.title)||'';
+  document.getElementById('cfgOgImg').value = (c.og&&c.og.image)||'';
+  document.getElementById('cfgOgDesc').value = (c.og&&c.og.description)||'';
+
+  // Highlights
+  var hlHtml=(c.aboutHighlights||[]).map(function(h,i){
+    return '<div class="hl-item"><input class="hl-num" value="'+esc(h.num)+'" id="hlNum'+i+'" onchange="syncHL('+i+')"><div class="hl-label"><input value="'+esc(h.label)+'" id="hlLabel'+i+'" style="background:transparent;border:none;color:var(--text2);width:100%;text-align:center;font-size:12px;" onchange="syncHL('+i+')"></div></div>';
+  }).join('');
+  document.getElementById('hlGroup').innerHTML=hlHtml;
+
+  // Hero Slides
+  renderHeroEditor();
+}
+
+function syncHL(i){
+  if(!siteConfigData.aboutHighlights) siteConfigData.aboutHighlights=[];
+  while(siteConfigData.aboutHighlights.length<=i) siteConfigData.aboutHighlights.push({num:'',label:''});
+  siteConfigData.aboutHighlights[i]={num:document.getElementById('hlNum'+i).value,label:document.getElementById('hlLabel'+i).value};
+}
+
+function renderHeroEditor(){
+  var slides = siteConfigData.heroSlides||[];
+  var html=slides.map(function(sl,i){
+    return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px">'+
+      '<div class="form-row"><div class="form-group"><label class="form-label">标题</label><input class="form-input" hs-field="title" hs-idx="'+i+'" value="'+esc(sl.title)+'"></div>'+
+      '<div class="form-group"><label class="form-label">副标题</label><input class="form-input" hs-field="sub" hs-idx="'+i+'" value="'+esc(sl.sub||'')+'"></div></div>'+
+      '<div class="form-row"><div class="form-group"><label class="form-label">Tag</label><input class="form-input" hs-field="tag" hs-idx="'+i+'" value="'+esc(sl.tag||'')+'"></div>'+
+      '<div class="form-group"><label class="form-label">按钮文字</label><input class="form-input" hs-field="btn1Text" hs-idx="'+i+'" value="'+esc(sl.btn1Text||'')+'"></div></div>'+
+      '<div class="form-row"><div class="form-group"><label class="form-label">按钮链接</label><input class="form-input" hs-field="btn1Href" hs-idx="'+i+'" value="'+esc(sl.btn1Href||'')+'"></div>'+
+      '<div class="form-group"><label class="form-label">图片URL</label><input class="form-input" hs-field="img" hs-idx="'+i+'" value="'+esc(sl.img||'')+'"></div></div>'+
+      '</div>';
+  }).join('');
+  document.getElementById('heroEditor').innerHTML=html;
+}
+
+function addHeroSlide(){if(!siteConfigData.heroSlides)siteConfigData.heroSlides=[];siteConfigData.heroSlides.push({title:'',sub:'',tag:'',btn1Text:'',btn1Href:'',img:''});renderHeroEditor();}
+
+function collectSEO(){
+  siteConfigData.siteTitle = document.getElementById('cfgSiteTitle').value.trim();
+  siteConfigData.seo = {title:document.getElementById('cfgSeoTitle').value.trim(),keywords:document.getElementById('cfgSeoKw').value.trim(),description:document.getElementById('cfgSeoDesc').value.trim()};
+  siteConfigData.og = {title:document.getElementById('cfgOgTitle').value.trim(),image:document.getElementById('cfgOgImg').value.trim(),description:document.getElementById('cfgOgDesc').value.trim()};
+  // Collect hero slides
+  document.querySelectorAll('#heroEditor [hs-field]').forEach(function(el){
+    var idx=parseInt(el.getAttribute('hs-idx')),fld=el.getAttribute('hs-field');
+    if(!siteConfigData.heroSlides[idx]) siteConfigData.heroSlides[idx]={};
+    siteConfigData.heroSlides[idx][fld]=el.value.trim();
+  });
+}
+
+/* ═══════════════════════════════════════
+   GitHub API — 保存
+═══════════════════════════════════════ */
+async function githubApi(method,path,body){
+  var url='https://api.github.com/repos/'+GH_REPO+'/contents/'+path;
+  var token=getGHToken(); if(!token) throw new Error('未配置 GitHub Token');
+  var opts={method:method,headers:{'Authorization':'token '+token,'User-Agent':'BailuoAdmin'}};
+  if(body) opts.body=JSON.stringify(body);
+  var r=await fetch(url,opts);
+  if(!r.ok){var err=await r.text(); throw new Error('GitHub API 错误 ('+r.status+'): '+err);}
+  return r.json();
+}
+
+async function getFileSha(path){
+  try{
+    var r=await githubApi('GET',path);
+    return r.sha;
+  }catch(e){return null;} /* 文件不存在返回null */
+}
+
+function b64(str){return btoa(unescape(encodeURIComponent(str)));}
+
+async function pushFile(path,content){
+  var sha=await getFileSha(path);
+  var body={message:'update: '+path,branch:GH_BRANCH,content:b64(content)};
+  if(sha) body.sha=sha;
+  return githubApi(sha?'PUT':'POST',path,body);
+}
+
+async function saveAllToGitHub(){
+  var token = getGHToken();
+  if(!token){
+    token = prompt('请输入 GitHub Personal Access Token：\n（仅首次需要，之后会自动保存）');
+    if(!token){toast('未提供 Token，无法发布','error');return;}
+    setGHToken(token);
+  }
+  collectSEO();
+  showLoading(true);
+  try{
+    await Promise.all([
+      pushFile('data/products.json',JSON.stringify(productsData,null,2)),
+      pushFile('data/services.json',JSON.stringify(servicesData,null,2)),
+      pushFile('data/site-config.json',JSON.stringify(siteConfigData,null,2))
+    ]);
+    var now=new Date();
+    document.getElementById('lastSaved').textContent='上次发布：'+now.toLocaleTimeString();
+    toast('发布成功！GitHub Pages 约 1-2 分钟后自动更新','success');
+    status('已发布到 GitHub');
+  }catch(e){
+    toast('发布失败：'+e.message,'error');
+  }finally{
+    showLoading(false);
+  }
+}
+
+/* ═══════════════════════════════════════
+   导出功能
+═══════════════════════════════════════ */
+function downloadJSON(type){
+  var data,name;
+  switch(type){
+    case 'products': data=productsData;name='biologia_products.json';break;
+    case 'services': data=servicesData;name='biologia_services.json';break;
+    case 'config': data=siteConfigData;name='biologia_site-config.json';break;
+  }
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  downloadBlob(blob,name);
+  toast(name+' 已下载','success');
+}
+
+function downloadExcel(type){
+  // 动态加载 SheetJS
+  if(typeof XLSX==='undefined'){
+    var s=document.createElement('script');s.src='https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js';
+    s.onload=function(){doDownloadExcel(type);};document.head.appendChild(s);return;
+  }
+  doDownloadExcel(type);
+}
+
+function doDownloadExcel(type){
+  var wb=XLSX.utils.book_new(),wsData,fileName;
+  if(type==='products'){
+    wsData=productsData.map(function(p){return{id:p.id,分类:p.cat==='reagents'?'试剂与耗材':'实验仪器',名称:p.name,图标:p.icon,是否热门:p.hot?'是':'否',简介:p.summary,概述:(p.detail&&p.detail.intro)||'',应用:(p.detail&&p.detail.applications)||'',订购:(p.detail&&p.detail.ordering)||''}});
+    fileName='佰洛生物_产品目录.xlsx';
+  }else{
+    wsData=servicesData.map(function(s){return{id:s.id,编号:s.num,名称:s.name,标签:s.tag,简介:s.summary,流程:s.flow,概述:(s.detail&&s.detail.intro)||'',适用场景:(s.detail&&s.detail.applications)||'',交付内容:(s.detail&&s.detail.deliverables)||''}});
+    fileName='佰洛生物_技术服务.xlsx';
+  }
+  var ws=XLSX.utils.json_to_sheet(wsData);XLSX.utils.book_append_sheet(wb,ws,type==='products'?'产品':'服务');
+  XLSX.writeFile(wb,fileName);toast(fileName+' 已下载','success');
+}
+
+/* ═══════════════════════════════════════
+   工具函数
+═══════════════════════════════════════ */
+function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function showModal(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden';}
+function closeModal(id){document.getElementById(id).classList.remove('show');document.body.style.overflow='';}
+function showLoading(v){document.getElementById('loadingMask').classList.toggle('show',v);}
+function status(msg){document.getElementById('statusMsg').textContent=msg;}
+
+function fieldRow(prefix,idx,val){
+  return '<div class="field-row"><input placeholder="特点描述" value="'+esc(val)+'" style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button></div>';
+}
+
+function downloadBlob(blob,name){
+  var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(url);a.remove()},100);
+}
+
+function toast(msg,type){
+  var c=document.getElementById('toastContainer');
+  var t=document.createElement('div');t.className='toast '+(type||'info');t.textContent=msg;c.appendChild(t);
+  setTimeout(function(){t.remove()},3500);
+}
+</script>
+</body>
+</html>

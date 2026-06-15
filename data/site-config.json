@@ -1,0 +1,36 @@
+{
+  "siteTitle": "佰洛生物 | 高品质生物试剂与技术服务供应商",
+  "seo": {
+    "title": "佰洛生物 | 高品质生物试剂与技术服务供应商",
+    "description": "佰洛生物专注为生命科学工作者提供高品质生物试剂与专业技术服务，覆盖细胞培养、iPSC重编程、蛋白纯化、分子检测全流程。",
+    "keywords": "佰洛生物,生物试剂,iPSC,胎牛血清,细胞培养基,BLI检测,层析填料,抗体定制,CRISPR"
+  },
+  "og": {
+    "title": "佰洛生物 — 高品质生物试剂与专业技术服务",
+    "description": "精选优质品牌产品，提供从靶点到功能验证的全流程技术服务。",
+    "image": "/logo.png"
+  },
+  "aboutHighlights": [
+    { "num": "10+", "label": "战略合作供应商" },
+    { "num": "50+", "label": "代理产品品类" },
+    { "num": "全流程", "label": "技术咨询与售后支持" }
+  ],
+  "heroSlides": [
+    {
+      "img": "",
+      "tag": "HIGH-QUALITY BIOLOGICAL REAGENTS",
+      "title": "高品质生物试剂与耗材",
+      "sub": "代理 KEL Biotech 血清/培养基、宜明生物 iPSC 重编程试剂盒、为度生物层析填料等核心原料，覆盖干细胞研究、蛋白纯化、细胞培养全场景",
+      "btn1Text": "浏览产品",
+      "btn1Href": "products.html"
+    },
+    {
+      "img": "",
+      "tag": "BIO-LAYER INTERFEROMETRY",
+      "title": "BLI 生物膜干涉检测",
+      "sub": "实时、无标记检测生物分子间相互作用，KD / ka / kd 精准测定，覆盖抗体筛选、蛋白互作、小分子化合物亲和力分析",
+      "btn1Text": "了解 BLI 服务",
+      "btn1Href": "#services"
+    }
+  ]
+}

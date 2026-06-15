@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佰洛生物 · 客户管理系统</title>
+<style>
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #1a56db;
+  --primary-h: #1648c0;
+  --primary-lt: #e8effe;
+  --accent:  #0f9e8e;
+  --accent-lt: #e0f5f3;
+  --danger:  #e53e3e;
+  --danger-lt: #fff5f5;
+  --warning: #d97706;
+  --warning-lt: #fffbeb;
+  --success: #16a34a;
+  --success-lt: #f0fdf4;
+  --gray-50:  #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --sidebar-w: 280px;
+  --detail-w: 340px;
+  --radius: 8px;
+  --radius-sm: 5px;
+  --shadow: 0 1px 6px rgba(0,0,0,.07);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+}
+html, body { height: 100%; font-family: "PingFang SC","Microsoft YaHei",sans-serif; font-size: 14px; color: var(--gray-800); background: var(--gray-100); }
+
+/* ── Layout ── */
+.app { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+/* Top Bar */
+.topbar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 20px; height: 52px; background: #fff;
+  border-bottom: 1px solid var(--gray-200); flex-shrink: 0;
+  box-shadow: var(--shadow);
+}
+.topbar-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; color: var(--primary); letter-spacing: .5px; }
+.topbar-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.topbar-title { color: var(--gray-500); font-size: 13px; margin-left: 4px; }
+.topbar-stat { margin-left: auto; font-size: 13px; color: var(--gray-500); }
+.topbar-stat span { color: var(--primary); font-weight: 700; }
+
+/* Main Area */
+.main { display: flex; flex: 1; overflow: hidden; }
+
+/* ── Sidebar (Customer List) ── */
+.sidebar {
+  width: var(--sidebar-w); min-width: var(--sidebar-w);
+  background: #fff; border-right: 1px solid var(--gray-200);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.sidebar-head { padding: 12px 14px 10px; border-bottom: 1px solid var(--gray-200); flex-shrink: 0; }
+.sidebar-head h3 { font-size: 13px; font-weight: 700; color: var(--gray-600); letter-spacing: .5px; margin-bottom: 8px; text-transform: uppercase; }
+.search-box { position: relative; }
+.search-box input {
+  width: 100%; padding: 7px 10px 7px 30px; border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm); font-size: 13px; color: var(--gray-800);
+  background: var(--gray-50); outline: none; transition: border-color .2s;
+}
+.search-box input:focus { border-color: var(--primary); background: #fff; }
+.search-box .ico { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--gray-400); font-size: 13px; }
+.btn-add-customer {
+  width: 100%; margin-top: 8px; padding: 7px; background: var(--primary); color: #fff;
+  border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px;
+  transition: background .2s;
+}
+.btn-add-customer:hover { background: var(--primary-h); }
+
+/* Customer List Items */
+.customer-list { flex: 1; overflow-y: auto; padding: 6px 0; }
+.customer-list::-webkit-scrollbar { width: 4px; }
+.customer-list::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
+.cust-item {
+  padding: 10px 14px; cursor: pointer; border-left: 3px solid transparent;
+  transition: background .15s, border-color .15s;
+}
+.cust-item:hover { background: var(--gray-50); }
+.cust-item.active { background: var(--primary-lt); border-left-color: var(--primary); }
+.cust-item .ci-name { font-weight: 700; font-size: 14px; color: var(--gray-800); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cust-item .ci-unit { font-size: 12px; color: var(--gray-500); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cust-item .ci-badges { display: flex; gap: 4px; margin-top: 4px; }
+.badge { display: inline-block; padding: 1px 7px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.badge-blue  { background: var(--primary-lt); color: var(--primary); }
+.badge-green { background: var(--accent-lt);  color: var(--accent); }
+.badge-warn  { background: var(--warning-lt); color: var(--warning); }
+.empty-list { text-align: center; color: var(--gray-400); padding: 40px 14px; font-size: 13px; }
+
+/* ── Detail Panel ── */
+.detail-panel {
+  flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--gray-50);
+}
+.detail-welcome {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: var(--gray-400); gap: 10px;
+}
+.detail-welcome .w-icon { font-size: 48px; }
+.detail-welcome p { font-size: 15px; }
+
+/* Detail Head */
+.detail-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 20px; background: #fff; border-bottom: 1px solid var(--gray-200);
+  flex-shrink: 0; box-shadow: var(--shadow);
+}
+.detail-head h2 { font-size: 18px; font-weight: 700; color: var(--gray-900); }
+.detail-head .dh-unit { font-size: 13px; color: var(--gray-500); }
+.detail-head .btn-del {
+  margin-left: auto; background: none; border: 1px solid var(--danger); color: var(--danger);
+  border-radius: var(--radius-sm); padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: background .2s;
+}
+.detail-head .btn-del:hover { background: var(--danger); color: #fff; }
+
+/* Tabs */
+.tabs { display: flex; gap: 0; background: #fff; border-bottom: 1px solid var(--gray-200); flex-shrink: 0; }
+.tab-btn {
+  padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--gray-500);
+  border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent;
+  transition: color .2s, border-color .2s; white-space: nowrap;
+}
+.tab-btn:hover { color: var(--primary); }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+/* Tab Content */
+.tab-content { flex: 1; overflow-y: auto; padding: 20px; }
+.tab-content::-webkit-scrollbar { width: 5px; }
+.tab-content::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* Form */
+.form-section { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.form-section h4 { font-size: 13px; font-weight: 700; color: var(--gray-600); letter-spacing: .5px; text-transform: uppercase; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-100); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-grid .full { grid-column: 1/-1; }
+.form-group { display: flex; flex-direction: column; gap: 4px; }
+.form-group label { font-size: 12px; font-weight: 600; color: var(--gray-600); }
+.form-group input, .form-group textarea, .form-group select {
+  padding: 7px 10px; border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+  font-size: 13px; color: var(--gray-800); outline: none; transition: border-color .2s;
+  font-family: inherit; background: var(--gray-50);
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: var(--primary); background: #fff;
+}
+.form-group textarea { resize: vertical; min-height: 60px; }
+.btn-save {
+  background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
+  padding: 9px 24px; font-size: 14px; font-weight: 700; cursor: pointer;
+  transition: background .2s; margin-top: 4px;
+}
+.btn-save:hover { background: var(--primary-h); }
+.save-tip { font-size: 12px; color: var(--success); margin-left: 10px; display: none; }
+
+/* Record List */
+.record-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.record-head h4 { font-size: 15px; font-weight: 700; color: var(--gray-800); }
+.btn-add-record {
+  background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
+  padding: 6px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; gap: 4px; transition: background .2s;
+}
+.btn-add-record:hover { background: var(--primary-h); }
+.record-empty { text-align: center; color: var(--gray-400); padding: 40px 0; font-size: 13px; }
+.record-card {
+  background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius);
+  padding: 14px 16px; margin-bottom: 10px; box-shadow: var(--shadow); position: relative;
+}
+.record-card:hover { box-shadow: var(--shadow-md); }
+.record-card .rc-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px; }
+.record-card .rc-date { font-size: 12px; font-weight: 700; color: var(--primary); }
+.record-card .rc-actions { display: flex; gap: 6px; }
+.rc-btn { border: none; background: none; cursor: pointer; font-size: 12px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+.rc-btn.edit { color: var(--primary); background: var(--primary-lt); }
+.rc-btn.del  { color: var(--danger);  background: var(--danger-lt); }
+.rc-btn:hover { opacity: .8; }
+.record-card .rc-field { margin-bottom: 4px; font-size: 13px; color: var(--gray-700); }
+.record-card .rc-field span { color: var(--gray-500); font-size: 12px; margin-right: 4px; }
+
+/* Contact cards */
+.contacts-section { margin-top: 2px; }
+.contacts-section label { display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px; }
+.contact-card {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+  padding: 8px 12px; margin-bottom: 6px; font-size: 13px;
+}
+.contact-card .cc-info { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.contact-card .cc-name { font-weight: 700; color: var(--gray-800); }
+.contact-card .cc-phone { color: var(--gray-600); }
+.contact-card .cc-role { font-size: 11px; background: var(--primary-lt); color: var(--primary); padding: 2px 6px; border-radius: 4px; }
+.contact-card .cc-actions { display: flex; gap: 4px; }
+.contact-card .cc-actions button { border: none; background: none; cursor: pointer; font-size: 12px; padding: 2px 6px; border-radius: 3px; color: var(--gray-500); }
+.contact-card .cc-actions button:hover { background: var(--gray-200); color: var(--gray-800); }
+.contact-card .cc-actions .cc-edit:hover { color: var(--primary); }
+.contact-card .cc-actions .cc-del:hover { color: var(--danger); }
+.record-card .rc-row2 {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px 16px; margin-bottom: 4px;
+}
+.record-card .rc-tag { display: inline-block; padding: 1px 8px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+
+/* ── Modal ── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45);
+  display: flex; align-items: center; justify-content: center; z-index: 1000;
+  opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: #fff; border-radius: var(--radius); width: 480px; max-width: 95vw;
+  max-height: 90vh; display: flex; flex-direction: column; box-shadow: var(--shadow-md);
+  transform: scale(.95); transition: transform .2s;
+}
+.modal-overlay.open .modal { transform: scale(1); }
+.modal-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--gray-200); }
+.modal-head h3 { font-size: 16px; font-weight: 700; color: var(--gray-900); }
+.modal-close { background: none; border: none; font-size: 18px; color: var(--gray-400); cursor: pointer; line-height: 1; padding: 2px 6px; border-radius: 4px; }
+.modal-close:hover { background: var(--gray-100); color: var(--gray-700); }
+.modal-body { flex: 1; overflow-y: auto; padding: 20px; }
+.modal-body::-webkit-scrollbar { width: 4px; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
+.modal-foot { padding: 14px 20px; border-top: 1px solid var(--gray-200); display: flex; justify-content: flex-end; gap: 10px; }
+.btn-cancel { background: #fff; color: var(--gray-600); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 8px 20px; font-size: 14px; cursor: pointer; font-weight: 600; transition: background .2s; }
+.btn-cancel:hover { background: var(--gray-100); }
+.btn-confirm { background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm); padding: 8px 24px; font-size: 14px; font-weight: 700; cursor: pointer; transition: background .2s; }
+.btn-confirm:hover { background: var(--primary-h); }
+
+/* ── Toast ── */
+.toast {
+  position: fixed; bottom: 28px; right: 28px; z-index: 2000;
+  background: var(--gray-800); color: #fff; padding: 10px 20px; border-radius: var(--radius);
+  font-size: 14px; box-shadow: var(--shadow-md);
+  opacity: 0; transform: translateY(8px); transition: opacity .25s, transform .25s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+.toast.success { background: var(--success); }
+.toast.danger  { background: var(--danger); }
+
+/* ── Confirm Dialog ── */
+.confirm-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.4);
+  display: flex; align-items: center; justify-content: center; z-index: 1100;
+  opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.confirm-overlay.open { opacity: 1; pointer-events: all; }
+.confirm-box {
+  background: #fff; border-radius: var(--radius); padding: 24px 28px; width: 320px;
+  box-shadow: var(--shadow-md); text-align: center;
+}
+.confirm-box .cfm-icon { font-size: 32px; margin-bottom: 10px; }
+.confirm-box h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--gray-900); }
+.confirm-box p  { font-size: 13px; color: var(--gray-500); margin-bottom: 20px; }
+.confirm-btns { display: flex; gap: 10px; justify-content: center; }
+
+/* Scrollbar global */
+* { scrollbar-width: thin; scrollbar-color: var(--gray-200) transparent; }
+
+/* ── Topbar Buttons ── */
+.tb-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 6px 13px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600;
+  cursor: pointer; border: 1px solid var(--gray-200); background: #fff; color: var(--gray-700);
+  white-space: nowrap; transition: background .15s, border-color .15s; font-family: inherit;
+}
+.tb-btn:hover { background: var(--gray-50); border-color: var(--gray-300); }
+.tb-export-json { color: var(--primary); border-color: var(--primary-lt); background: var(--primary-lt); }
+.tb-export-json:hover { background: #d4e4fa; }
+.tb-export-csv  { color: var(--accent);  border-color: var(--accent-lt);  background: var(--accent-lt); }
+.tb-export-csv:hover  { background: #c2ede8; }
+.tb-import      { color: var(--warning); border-color: var(--warning-lt); background: var(--warning-lt); cursor: pointer; }
+.tb-import:hover      { background: #fef3c7; }
+
+/* ── Dashboard ── */
+.dashboard { padding: 20px; flex: 1; overflow-y: auto; display: none; }
+.dashboard.active { display: block; }
+.dboard-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px; }
+.ds-card { background: #fff; border:1px solid var(--gray-200); border-radius:var(--radius); padding:18px; display:flex; align-items:center; gap:14px; box-shadow:var(--shadow); }
+.ds-card .ds-icon { font-size:32px; width:48px; height:48px; display:flex; align-items:center; justify-content:center; border-radius:10px; }
+.ds-card .ds-icon.blue  { background:var(--primary-lt); }
+.ds-card .ds-icon.green { background:var(--accent-lt); }
+.ds-card .ds-icon.warn  { background:var(--warning-lt); }
+.ds-card .ds-icon.red   { background:var(--danger-lt); }
+.ds-card .ds-num { font-size:26px; font-weight:800; color:var(--gray-900); line-height:1.1; }
+.ds-card .ds-label { font-size:12px; color:var(--gray-500); }
+.dboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dboard-section { background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow); }
+.dboard-section.full { grid-column:1/-1; }
+.dboard-section h4 { font-size:14px; font-weight:700; color:var(--gray-700); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--gray-100); }
+.dboard-row { display:flex; align-items:center; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--gray-50); font-size:13px; }
+.dboard-row:last-child { border-bottom:none; }
+.dboard-row .dr-left { display:flex; flex-direction:column; gap:2px; }
+.dboard-row .dr-name { font-weight:600; color:var(--gray-800); }
+.dboard-row .dr-sub  { font-size:11px; color:var(--gray-400); }
+.dboard-row .dr-right { text-align:right; }
+.dboard-row .dr-amount { font-weight:700; color:var(--primary); }
+.dboard-row .dr-date { font-size:11px; color:var(--gray-400); }
+.dboard-empty { text-align:center; color:var(--gray-400); padding:20px 0; font-size:13px; }
+
+/* ── Order Items Table (inside modal/card) ── */
+.oi-table { width:100%; border-collapse:collapse; font-size:12px; margin:8px 0; }
+.oi-table th { background:var(--gray-50); padding:6px 8px; text-align:left; font-weight:600; color:var(--gray-600); border-bottom:2px solid var(--gray-200); white-space:nowrap; }
+.oi-table td { padding:5px 8px; border-bottom:1px solid var(--gray-100); vertical-align:middle; }
+.oi-table input, .oi-table select { width:100%; padding:4px 6px; border:1px solid var(--gray-200); border-radius:3px; font-size:12px; font-family:inherit; color:var(--gray-800); }
+.oi-table input:focus { border-color:var(--primary); outline:none; background:#fff; }
+.oi-table .oi-subtotal { font-weight:700; color:var(--primary); text-align:right; }
+.oi-table .oi-del { color:var(--danger); cursor:pointer; font-size:16px; text-align:center; padding:4px; }
+.oi-table .oi-del:hover { background:var(--danger-lt); border-radius:4px; }
+.oi-add-row { margin-top:8px; }
+.oi-add-row button { background:none; border:1px dashed var(--gray-300); color:var(--primary); padding:6px 16px; border-radius:4px; font-size:13px; cursor:pointer; font-weight:600; width:100%; transition:background .15s; }
+.oi-add-row button:hover { background:var(--primary-lt); border-color:var(--primary); }
+.oi-total-bar { display:flex; align-items:center; justify-content:flex-end; gap:8px; margin-top:10px; padding-top:10px; border-top:2px solid var(--gray-200); font-size:16px; font-weight:700; }
+.oi-total-bar span { color:var(--primary); font-size:20px; }
+.oi-summary { display:flex; flex-wrap:wrap; gap:4px 12px; margin:6px 0; font-size:12px; color:var(--gray-500); }
+.oi-summary b { color:var(--gray-700); }
+
+/* wider order modal */
+.modal-wide { width: 720px !important; }
+
+/* ── Dashboard Filter ── */
+.dboard-filter { display:flex; align-items:center; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
+.dboard-filter .df-label { font-size:13px; font-weight:600; color:var(--gray-600); white-space:nowrap; }
+.dboard-filter .df-btn { padding:5px 14px; border:1px solid var(--gray-200); border-radius:20px; background:#fff; font-size:12px; font-weight:600; color:var(--gray-600); cursor:pointer; transition:all .15s; font-family:inherit; white-space:nowrap; }
+.dboard-filter .df-btn:hover { border-color:var(--primary); color:var(--primary); background:var(--primary-lt); }
+.dboard-filter .df-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+.dboard-filter .df-range { display:flex; align-items:center; gap:4px; }
+.dboard-filter .df-range input { padding:4px 8px; border:1px solid var(--gray-200); border-radius:6px; font-size:12px; font-family:inherit; color:var(--gray-800); width:130px; }
+.dboard-filter .df-range input:focus { border-color:var(--primary); outline:none; }
+.dboard-filter .df-range span { font-size:12px; color:var(--gray-400); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="topbar-logo">
+      <div class="dot"></div>
+      佰洛生物
+    </div>
+    <span class="topbar-title">客户管理系统 CRM</span>
+    <div class="topbar-stat">共 <span id="totalCount">0</span> 位客户</div>
+    <div style="display:flex;gap:8px;margin-left:16px;">
+      <button class="tb-btn tb-export-json" onclick="exportJSON()" title="导出全量备份（JSON）">⬇ 备份数据</button>
+      <button class="tb-btn tb-export-csv"  onclick="exportCSV()"  title="导出客户列表（CSV，可用Excel打开）">📊 导出CSV</button>
+      <label  class="tb-btn tb-import"      title="从JSON备份文件恢复数据">⬆ 导入备份
+        <input type="file" id="importFileInput" accept=".json" style="display:none;" onchange="importJSON(event)">
+      </label>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <h3>客户列表</h3>
+        <div class="search-box">
+          <span class="ico">🔍</span>
+          <input type="text" id="searchInput" placeholder="搜索客户名称 / 单位 / 联系人…">
+        </div>
+        <button class="btn-add-customer" onclick="openAddCustomerModal()">＋ 新增客户</button>
+      </div>
+      <div class="customer-list" id="customerList"></div>
+    </aside>
+
+    <!-- Detail -->
+    <section class="detail-panel" id="detailPanel">
+      <!-- Dashboard (shown when no customer selected) -->
+      <div class="dashboard active" id="dashboardGlobal"></div>
+      <div id="detailContent" style="display:none;flex-direction:column;flex:1;overflow:hidden;">
+        <div class="detail-head">
+          <div>
+            <div id="dhName" class="detail-head h2" style="font-size:18px;font-weight:700;color:var(--gray-900);"></div>
+            <div id="dhUnit" class="dh-unit"></div>
+          </div>
+          <button class="btn-del" onclick="deleteCurrentCustomer()">🗑 删除客户</button>
+          <button class="btn-back" onclick="backToDashboard()" style="margin-right:8px;background:none;border:1px solid var(--gray-200);color:var(--gray-600);border-radius:var(--radius-sm);padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;">← 返回面板</button>
+        </div>
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="info">基础信息</button>
+          <button class="tab-btn" data-tab="dashboard">📊 数据面板</button>
+          <button class="tab-btn" data-tab="orders">订单记录</button>
+          <button class="tab-btn" data-tab="samples">试用装记录</button>
+          <button class="tab-btn" data-tab="visits">拜访记录</button>
+        </div>
+        <div class="tab-content">
+          <!-- ── Tab: 基础信息 ── -->
+          <div class="tab-pane active" id="pane-info">
+            <div class="form-section">
+              <h4>基础信息</h4>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>客户名称 *</label>
+                  <input type="text" id="f-name" placeholder="请输入客户名称">
+                </div>
+                <div class="form-group">
+                  <label>所属单位</label>
+                  <input type="text" id="f-unit" placeholder="所在高校/机构/公司">
+                </div>
+                <div class="form-group full contacts-section" id="contactsArea">
+                  <label>联系人</label>
+                  <div id="contactList"></div>
+                  <button class="btn-add-record" style="margin-top:6px;font-size:12px;padding:4px 12px;background:var(--accent);" onclick="openContactModal()">＋ 添加联系人</button>
+                </div>
+                <div class="form-group">
+                  <label>开票抬头</label>
+                  <input type="text" id="f-invoice" placeholder="发票开具名称">
+                </div>
+                <div class="form-group">
+                  <label>联系地址</label>
+                  <input type="text" id="f-address" placeholder="邮寄 / 收货地址">
+                </div>
+                <div class="form-group full">
+                  <label>研究方向</label>
+                  <input type="text" id="f-research" placeholder="如：iPSC 疾病建模、CAR-T 细胞治疗…">
+                </div>
+                <div class="form-group full">
+                  <label>可推荐产品</label>
+                  <textarea id="f-products" placeholder="根据研究方向，列出可推荐的产品或服务…"></textarea>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;margin-top:14px;">
+                <button class="btn-save" onclick="saveCustomerInfo()">💾 保存信息</button>
+                <span class="save-tip" id="saveTip">✓ 已保存</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Tab: 数据面板（当前客户） ── -->
+          <div class="tab-pane" id="pane-dashboard">
+            <div id="dashboardCust"></div>
+          </div>
+
+          <!-- ── Tab: 订单记录 ── -->
+          <div class="tab-pane" id="pane-orders">
+            <div class="record-head">
+              <h4>订单记录</h4>
+              <div style="display:flex;gap:8px;">
+                <button class="btn-add-record" onclick="openRecordModal('order')">＋ 新增订单</button>
+                <button class="btn-add-record" style="background:var(--accent-lt);color:var(--accent);border-color:var(--accent-lt);" onclick="exportOrdersCSV()">📊 导出明细</button>
+              </div>
+            </div>
+            <div id="orderList"></div>
+          </div>
+
+          <!-- ── Tab: 试用装记录 ── -->
+          <div class="tab-pane" id="pane-samples">
+            <div class="record-head">
+              <h4>试用装记录</h4>
+              <button class="btn-add-record" onclick="openRecordModal('sample')">＋ 新增试用装</button>
+            </div>
+            <div id="sampleList"></div>
+          </div>
+
+          <!-- ── Tab: 拜访记录 ── -->
+          <div class="tab-pane" id="pane-visits">
+            <div class="record-head">
+              <h4>拜访记录</h4>
+              <button class="btn-add-record" onclick="openRecordModal('visit')">＋ 新增拜访</button>
+            </div>
+            <div id="visitList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ── Modal: 新增客户 ── -->
+<div class="modal-overlay" id="modalAddCust" onclick="handleOverlayClick(event,'modalAddCust')">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>新增客户</h3>
+      <button class="modal-close" onclick="closeModal('modalAddCust')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="form-group">
+          <label>客户名称 *</label>
+          <input type="text" id="nc-name" placeholder="姓名 / 昵称">
+        </div>
+        <div class="form-group">
+          <label>所属单位</label>
+          <input type="text" id="nc-unit" placeholder="高校 / 机构 / 公司">
+        </div>
+        <div class="form-group">
+          <label>联系人</label>
+          <input type="text" id="nc-contact" placeholder="联系人姓名">
+        </div>
+        <div class="form-group">
+          <label>联系电话</label>
+          <input type="tel" id="nc-phone" placeholder="手机号">
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal('modalAddCust')">取消</button>
+      <button class="btn-confirm" onclick="addCustomer()">确认新增</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: 编辑联系人 ── -->
+<div class="modal-overlay" id="modalContact" onclick="handleOverlayClick(event,'modalContact')">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalContactTitle">添加联系人</h3>
+      <button class="modal-close" onclick="closeModal('modalContact')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="mc-id">
+      <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="form-group">
+          <label>姓名 *</label>
+          <input type="text" id="mc-name" placeholder="联系人姓名">
+        </div>
+        <div class="form-group">
+          <label>联系电话</label>
+          <input type="tel" id="mc-phone" placeholder="手机号 / 座机">
+        </div>
+        <div class="form-group">
+          <label>角色</label>
+          <input type="text" id="mc-role" placeholder="如：PI / 采购 / 学生">
+        </div>
+        <div class="form-group">
+          <label>邮箱</label>
+          <input type="email" id="mc-email" placeholder="电子邮箱">
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal('modalContact')">取消</button>
+      <button class="btn-confirm" onclick="saveContact()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: 记录通用（订单/试用装/拜访） ── -->
+<div class="modal-overlay" id="modalRecord" onclick="handleOverlayClick(event,'modalRecord')">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalRecordTitle">新增记录</h3>
+      <button class="modal-close" onclick="closeModal('modalRecord')">✕</button>
+    </div>
+    <div class="modal-body" id="modalRecordBody"></div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeModal('modalRecord')">取消</button>
+      <button class="btn-confirm" onclick="saveRecord()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Confirm Dialog ── -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="cfm-icon" id="cfmIcon">⚠️</div>
+    <h4 id="cfmTitle">确认删除？</h4>
+    <p id="cfmMsg">此操作不可撤销，数据将永久删除。</p>
+    <div class="confirm-btns">
+      <button class="btn-cancel" onclick="confirmCancel()">取消</button>
+      <button class="btn-confirm" style="background:var(--danger);" onclick="confirmOk()">确认删除</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════
+   DATA LAYER — LocalStorage
+═══════════════════════════════════════ */
+const STORE_KEY = 'bailuo_crm_v1';
+
+function loadData() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || { customers: [] }; }
+  catch { return { customers: [] }; }
+}
+function saveData(data) {
+  localStorage.setItem(STORE_KEY, JSON.stringify(data));
+}
+
+let db = loadData();
+let currentCustId = null;
+let currentRecordType = null;  // 'order' | 'sample' | 'visit'
+let currentRecordId   = null;  // null = new, else id to edit
+
+/* ═══════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════ */
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+function today() { return new Date().toISOString().slice(0, 10); }
+function fmt(d) { return d ? d.replace(/-/g, '/') : '—'; }
+function esc(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function toast(msg, type='success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = 'toast show ' + type;
+  setTimeout(() => { el.className = 'toast'; }, 2200);
+}
+
+/* ═══════════════════════════════════════
+   CONFIRM DIALOG
+═══════════════════════════════════════ */
+let _confirmCb = null;
+function confirm(title, msg, cb) {
+  document.getElementById('cfmTitle').textContent = title;
+  document.getElementById('cfmMsg').textContent   = msg;
+  _confirmCb = cb;
+  document.getElementById('confirmOverlay').classList.add('open');
+}
+function confirmOk()     { document.getElementById('confirmOverlay').classList.remove('open'); if (_confirmCb) _confirmCb(); _confirmCb = null; }
+function confirmCancel() { document.getElementById('confirmOverlay').classList.remove('open'); _confirmCb = null; }
+
+/* ═══════════════════════════════════════
+   MODAL HELPERS
+═══════════════════════════════════════ */
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function handleOverlayClick(e, id) { if (e.target === document.getElementById(id)) closeModal(id); }
+
+/* ═══════════════════════════════════════
+   CUSTOMER LIST
+═══════════════════════════════════════ */
+function renderCustomerList(filter='') {
+  const list = document.getElementById('customerList');
+  const q = filter.toLowerCase();
+  const items = db.customers.filter(c =>
+    (c.name||'').toLowerCase().includes(q) ||
+    (c.unit||'').toLowerCase().includes(q) ||
+    (c.contacts||[]).some(ct => (ct.name||'').toLowerCase().includes(q) || (ct.phone||'').toLowerCase().includes(q))
+  );
+
+  document.getElementById('totalCount').textContent = db.customers.length;
+
+  if (!items.length) {
+    list.innerHTML = `<div class="empty-list">${filter ? '未找到匹配的客户' : '暂无客户，点击上方按钮新增'}</div>`;
+    return;
+  }
+
+  list.innerHTML = items.map(c => {
+    const orders  = (c.orders  || []).length;
+    const samples = (c.samples || []).length;
+    const visits  = (c.visits  || []).length;
+    return `<div class="cust-item${c.id === currentCustId ? ' active' : ''}" onclick="selectCustomer('${c.id}')">
+      <div class="ci-name">${esc(c.name) || '（未命名）'}</div>
+      <div class="ci-unit">${esc(c.unit) || '—'}</div>
+      <div class="ci-badges">
+        ${orders  ? `<span class="badge badge-blue">${orders}条订单</span>` : ''}
+        ${samples ? `<span class="badge badge-green">${samples}条试用</span>` : ''}
+        ${visits  ? `<span class="badge badge-warn">${visits}次拜访</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ═══════════════════════════════════════
+   ADD CUSTOMER
+═══════════════════════════════════════ */
+function openAddCustomerModal() {
+  ['nc-name','nc-unit','nc-contact','nc-phone'].forEach(id => document.getElementById(id).value = '');
+  openModal('modalAddCust');
+  setTimeout(() => document.getElementById('nc-name').focus(), 200);
+}
+function addCustomer() {
+  const name = document.getElementById('nc-name').value.trim();
+  if (!name) { toast('客户名称不能为空', 'danger'); return; }
+  const contacts = [];
+  const cName = document.getElementById('nc-contact').value.trim();
+  const cPhone = document.getElementById('nc-phone').value.trim();
+  if (cName || cPhone) {
+    contacts.push({ id: uid(), name: cName, phone: cPhone, role: '', email: '' });
+  }
+  const c = {
+    id: uid(), name, unit: document.getElementById('nc-unit').value.trim(),
+    contacts: contacts,
+    invoice:'', address:'', research:'', products:'',
+    orders:[], samples:[], visits:[],
+    createdAt: today()
+  };
+  db.customers.unshift(c);
+  saveData(db);
+  closeModal('modalAddCust');
+  renderCustomerList(document.getElementById('searchInput').value);
+  selectCustomer(c.id);
+  toast('✓ 客户已新增');
+}
+
+/* ═══════════════════════════════════════
+   SELECT / DISPLAY CUSTOMER
+═══════════════════════════════════════ */
+function selectCustomer(id) {
+  currentCustId = id;
+  const c = db.customers.find(x => x.id === id);
+  if (!c) return;
+
+  // Migrate old contact/phone to contacts array if needed
+  if (!c.contacts) {
+    c.contacts = [];
+    if (c.contact || c.phone) {
+      c.contacts.push({ id: uid(), name: c.contact || '', phone: c.phone || '', role: '', email: '' });
+    }
+    delete c.contact;
+    delete c.phone;
+    saveData(db);
+  }
+
+  // Hide dashboard, show detail
+  document.getElementById('dashboardGlobal').classList.remove('active');
+  document.getElementById('detailContent').style.display  = 'flex';
+  document.getElementById('dhName').textContent  = c.name || '（未命名）';
+  document.getElementById('dhUnit').textContent  = c.unit || '';
+
+  // Fill form
+  document.getElementById('f-name').value     = c.name     || '';
+  document.getElementById('f-unit').value     = c.unit     || '';
+  document.getElementById('f-invoice').value  = c.invoice  || '';
+  document.getElementById('f-address').value  = c.address  || '';
+  document.getElementById('f-research').value = c.research || '';
+  document.getElementById('f-products').value = c.products || '';
+  document.getElementById('saveTip').style.display = 'none';
+
+  // Render contacts
+  renderContactList();
+
+  // Switch to info tab
+  switchTab('info');
+  renderOrderList(); renderSampleList(); renderVisitList(); renderCustDashboard();
+  renderCustomerList(document.getElementById('searchInput').value);
+}
+
+/* ═══════════════════════════════════════
+   SAVE CUSTOMER INFO
+═══════════════════════════════════════ */
+function saveCustomerInfo() {
+  const c = db.customers.find(x => x.id === currentCustId);
+  if (!c) return;
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { toast('客户名称不能为空', 'danger'); return; }
+  c.name     = name;
+  c.unit     = document.getElementById('f-unit').value.trim();
+  c.invoice  = document.getElementById('f-invoice').value.trim();
+  c.address  = document.getElementById('f-address').value.trim();
+  c.research = document.getElementById('f-research').value.trim();
+  c.products = document.getElementById('f-products').value.trim();
+
+  document.getElementById('dhName').textContent = name;
+  document.getElementById('dhUnit').textContent = c.unit;
+  saveData(db);
+  renderCustomerList(document.getElementById('searchInput').value);
+  const tip = document.getElementById('saveTip');
+  tip.style.display = 'inline'; setTimeout(() => tip.style.display='none', 2000);
+  toast('✓ 信息已保存');
+}
+
+/* ═══════════════════════════════════════
+   DELETE CUSTOMER
+═══════════════════════════════════════ */
+function deleteCurrentCustomer() {
+  const c = db.customers.find(x => x.id === currentCustId);
+  if (!c) return;
+  confirm(`删除客户「${c.name}」？`, '该客户的所有订单、试用装、拜访记录将一并删除，操作不可撤销。', () => {
+    db.customers = db.customers.filter(x => x.id !== currentCustId);
+    saveData(db);
+    backToDashboard();
+    toast('客户已删除', 'danger');
+  });
+}
+
+function backToDashboard() {
+  currentCustId = null;
+  document.getElementById('detailContent').style.display = 'none';
+  document.getElementById('dashboardGlobal').classList.add('active');
+  renderCustomerList(document.getElementById('searchInput').value);
+  renderDashboard();
+}
+
+/* ═══════════════════════════════════════
+   CONTACTS — 多联系人管理
+═══════════════════════════════════════ */
+
+/** Get current customer object */
+function _cust() { return db.customers.find(x => x.id === currentCustId); }
+
+/** Render the contact list in the customer info tab */
+function renderContactList() {
+  const c = _cust();
+  const el = document.getElementById('contactList');
+  if (!c || !el) return;
+  if (!c.contacts || c.contacts.length === 0) {
+    el.innerHTML = '<div style="font-size:12px;color:var(--gray-400);padding:4px 0;">暂无联系人</div>';
+    return;
+  }
+  el.innerHTML = c.contacts.map(ct => {
+    const info = [];
+    if (ct.name) info.push('<span class="cc-name">' + esc(ct.name) + '</span>');
+    if (ct.phone) info.push('<span class="cc-phone">📞 ' + esc(ct.phone) + '</span>');
+    if (ct.role) info.push('<span class="cc-role">' + esc(ct.role) + '</span>');
+    if (ct.email) info.push('<span style="font-size:11px;color:var(--gray-500);">📧 ' + esc(ct.email) + '</span>');
+    return '<div class="contact-card">' +
+      '<div class="cc-info">' + info.join('') + '</div>' +
+      '<div class="cc-actions">' +
+        '<button class="cc-edit" onclick="editContact(\'' + ct.id + '\')" title="编辑">✏️</button>' +
+        '<button class="cc-del" onclick="deleteContact(\'' + ct.id + '\')" title="删除">🗑</button>' +
+      '</div></div>';
+  }).join('');
+}
+
+/** Open contact modal (id null = add new, id = edit existing) */
+function openContactModal(editId) {
+  const c = _cust();
+  if (!c) return;
+  if (!c.contacts) c.contacts = [];
+
+  document.getElementById('modalContactTitle').textContent = editId ? '编辑联系人' : '添加联系人';
+  document.getElementById('mc-id').value = editId || '';
+  document.getElementById('mc-name').value = '';
+  document.getElementById('mc-phone').value = '';
+  document.getElementById('mc-role').value = '';
+  document.getElementById('mc-email').value = '';
+
+  if (editId) {
+    const ct = c.contacts.find(x => x.id === editId);
+    if (ct) {
+      document.getElementById('mc-name').value = ct.name || '';
+      document.getElementById('mc-phone').value = ct.phone || '';
+      document.getElementById('mc-role').value = ct.role || '';
+      document.getElementById('mc-email').value = ct.email || '';
+    }
+  }
+  openModal('modalContact');
+  setTimeout(() => document.getElementById('mc-name').focus(), 200);
+}
+
+/** Shortcut for editing a specific contact */
+function editContact(id) { openContactModal(id); }
+
+/** Save contact (add or update) */
+function saveContact() {
+  const c = _cust();
+  if (!c) return;
+  const name = document.getElementById('mc-name').value.trim();
+  if (!name) { toast('联系人姓名不能为空', 'danger'); return; }
+  const editId = document.getElementById('mc-id').value;
+  const entry = {
+    id: editId || uid(),
+    name: name,
+    phone: document.getElementById('mc-phone').value.trim(),
+    role: document.getElementById('mc-role').value.trim(),
+    email: document.getElementById('mc-email').value.trim()
+  };
+
+  if (!c.contacts) c.contacts = [];
+
+  if (editId) {
+    const idx = c.contacts.findIndex(x => x.id === editId);
+    if (idx >= 0) c.contacts[idx] = entry;
+  } else {
+    c.contacts.push(entry);
+  }
+
+  saveData(db);
+  closeModal('modalContact');
+  renderContactList();
+  renderCustomerList(document.getElementById('searchInput').value);
+  toast('✓ 联系人已' + (editId ? '更新' : '添加'));
+}
+
+/** Delete a contact */
+function deleteContact(id) {
+  const c = _cust();
+  if (!c || !c.contacts) return;
+  confirm('确认删除该联系人？', '此操作不可撤销。', () => {
+    c.contacts = c.contacts.filter(x => x.id !== id);
+    saveData(db);
+    renderContactList();
+    renderCustomerList(document.getElementById('searchInput').value);
+    toast('✓ 联系人已删除');
+  });
+}
+
+/* ═══════════════════════════════════════
+   TABS
+═══════════════════════════════════════ */
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.toggle('active', p.id === 'pane-' + tab));
+  if (tab === 'dashboard') renderCustDashboard();
+}document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => {
+  switchTab(b.dataset.tab);
+}));
+
+/* ═══════════════════════════════════════
+   RECORD MODAL — config per type
+═══════════════════════════════════════ */
+const recordDef = {
+  order: {
+    title: '订单记录',
+    // Order-level fields (not line items)
+    commonFields: [
+      { id:'r-date',       label:'订单日期',  type:'date',     required:true },
+      { id:'r-invoice',    label:'开票抬头',  type:'text',     placeholder:'发票开具名称' },
+      { id:'r-payment',    label:'到账情况',  type:'select',
+        options:['未到账','已部分到账','已全额到账','已开票未到账'] },
+      { id:'r-status',     label:'订单状态',  type:'select',
+        options:['待确认','已报价','已成交','已发货','已完成','已取消'] },
+      { id:'r-invoiced',   label:'是否开票',  type:'select',
+        options:['未开票','已开票'] },
+      { id:'r-invoiceNo',  label:'发票号码',  type:'text',     placeholder:'发票编号' },
+      { id:'r-invoiceDate',label:'开票日期',  type:'date' },
+      { id:'r-remark',     label:'备注',      type:'textarea', placeholder:'合同编号 / 特殊说明…', full:true },
+    ],
+    // Line-item fields
+    itemFields: [
+      { id:'r-catalog', label:'货号',    type:'text',   placeholder:'产品货号' },
+      { id:'r-product', label:'产品名称',type:'text',   placeholder:'产品名称', required:true },
+      { id:'r-brand',   label:'品牌',    type:'text',   placeholder:'品牌' },
+      { id:'r-spec',    label:'规格',    type:'text',   placeholder:'如 500mL' },
+      { id:'r-qty',     label:'数量',    type:'number', placeholder:'0', cls:'oi-qty',    onchange:'calcOrderTotals()' },
+      { id:'r-unitprice',label:'单价(元)',type:'number',placeholder:'0.00', cls:'oi-price', onchange:'calcOrderTotals()' },
+    ]
+  },
+  sample: {
+    title: '试用装记录',
+    fields: [
+      { id:'r-date',    label:'发放日期',  type:'date',     full:false, required:true },
+      { id:'r-product', label:'试用产品',  type:'text',     full:false, required:true, placeholder:'产品名称' },
+      { id:'r-brand',   label:'品牌',      type:'text',     full:false, placeholder:'品牌名称' },
+      { id:'r-spec',    label:'规格',      type:'text',     full:false, placeholder:'如：100μL / 10T' },
+      { id:'r-qty',     label:'数量',      type:'text',     full:false, placeholder:'如：1盒/5mL' },
+      { id:'r-result',  label:'试用结果',  type:'select',   full:false,
+        options:['待反馈','反馈良好','已下单','暂不采购','其他'] },
+      { id:'r-remark',  label:'备注',      type:'textarea', full:true,  placeholder:'客户反馈 / 跟进计划…' },
+    ]
+  },
+  visit: {
+    title: '拜访记录',
+    fields: [
+      { id:'r-date',    label:'拜访日期',  type:'date',     full:false, required:true },
+      { id:'r-method',  label:'拜访方式',  type:'select',   full:false,
+        options:['线下拜访','电话沟通','微信沟通','邮件往来','视频会议'] },
+      { id:'r-content', label:'拜访内容',  type:'textarea', full:true,  required:true, placeholder:'本次沟通要点…' },
+      { id:'r-followup',label:'跟进情况',  type:'textarea', full:true,  placeholder:'后续跟进计划 / 待办事项…' },
+    ]
+  }
+};
+
+let _editingRecord = null; // { type, index } or null
+let _orderItems = [];      // working array of line items for the order modal
+
+function openRecordModal(type, idx) {
+  currentRecordType = type;
+
+  // ── Orders use a custom multi-product modal ──
+  if (type === 'order') {
+    openOrderModal(idx);
+    return;
+  }
+
+  const def = recordDef[type];
+  document.getElementById('modalRecordTitle').textContent = (idx !== undefined ? '编辑' : '新增') + def.title;
+
+  const c = db.customers.find(x => x.id === currentCustId);
+  const existing = (idx !== undefined && c) ? c[type + 's'][idx] : null;
+  _editingRecord = idx !== undefined ? idx : null;
+
+  const grid = def.fields.map(f => {
+    const val = existing ? (existing[f.id.replace('r-','')]||'') : (f.type==='date'?today():'');
+    let input = '';
+    if (f.type === 'select') {
+      const opts = f.options.map(o => `<option${val===o?' selected':''}>${o}</option>`).join('');
+      input = `<select id="${f.id}">${opts}</select>`;
+    } else if (f.type === 'textarea') {
+      input = `<textarea id="${f.id}" placeholder="${f.placeholder||''}">${esc(val)}</textarea>`;
+    } else {
+      input = `<input type="${f.type}" id="${f.id}" value="${esc(val)}" placeholder="${f.placeholder||''}">`;
+    }
+    return `<div class="form-group${f.full?' full':''}"><label>${f.label}${f.required?'<span style="color:var(--danger)"> *</span>':''}</label>${input}</div>`;
+  }).join('');
+
+  document.getElementById('modalRecordBody').innerHTML =
+    `<div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">${grid}</div>`;
+  document.getElementById('modalRecord').querySelector('.modal').classList.remove('modal-wide');
+  openModal('modalRecord');
+}
+
+/* ═══════════════════════════════════════
+   ORDER MODAL — multi-product line items
+═══════════════════════════════════════ */
+function openOrderModal(idx) {
+  if (!currentCustId) { toast('请先选择客户，再新建订单', 'danger'); return; }
+  const def = recordDef['order'];
+  const c = db.customers.find(x => x.id === currentCustId);
+  const existing = (idx !== undefined && c && c.orders) ? c.orders[idx] : null;
+  _editingRecord = idx !== undefined ? idx : null;
+
+  // Init line items
+  if (existing && existing.items && existing.items.length) {
+    _orderItems = existing.items.map(it => ({...it})); // clone
+  } else {
+    _orderItems = [blankOrderItem()];
+  }
+
+  document.getElementById('modalRecordTitle').textContent = (idx !== undefined ? '编辑' : '新增') + def.title;
+
+  // Build common fields HTML
+  const cf = def.commonFields.map(f => {
+    const val = existing ? (existing[f.id.replace('r-','')]||'') : (f.type==='date'?today():'');
+    let input = '';
+    if (f.type === 'select') {
+      const opts = f.options.map(o => `<option${val===o?' selected':''}>${o}</option>`).join('');
+      input = `<select id="${f.id}">${opts}</select>`;
+    } else if (f.type === 'textarea') {
+      input = `<textarea id="${f.id}" rows="2" placeholder="${f.placeholder||''}">${esc(val)}</textarea>`;
+    } else {
+      input = `<input type="${f.type}" id="${f.id}" value="${esc(val)}" placeholder="${f.placeholder||''}">`;
+    }
+    return `<div class="form-group${f.full?' full':''}"><label>${f.label}${f.required?'<span style="color:var(--danger)"> *</span>':''}</label>${input}</div>`;
+  }).join('');
+
+  document.getElementById('modalRecordBody').innerHTML = `
+    <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:12px;">${cf}</div>
+    <div style="margin-top:18px;border-top:1px solid var(--gray-200);padding-top:14px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <h5 style="font-size:14px;font-weight:700;color:var(--gray-700);">📋 产品明细</h5>
+        <span style="font-size:12px;color:var(--gray-400);">小计 = 数量 × 单价</span>
+      </div>
+      <div style="overflow-x:auto;margin-bottom:4px;">
+        <table class="oi-table" id="orderItemsTable">
+          <thead><tr>
+            ${def.itemFields.map(f => `<th>${f.label}${f.required?'<span style="color:var(--danger)">*</span>':''}</th>`).join('')}
+            <th style="width:70px;">小计</th><th style="width:36px;"></th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="oi-add-row"><button onclick="addOrderItem()">＋ 添加产品</button></div>
+      <div class="oi-total-bar">订单总金额：<span id="oiGrandTotal">¥ 0.00</span></div>
+    </div>`;
+
+  document.getElementById('modalRecord').querySelector('.modal').classList.add('modal-wide');
+  openModal('modalRecord');
+  renderOrderItemsTable();
+}
+
+function blankOrderItem() {
+  return { catalog:'', product:'', brand:'', spec:'', qty:'', unitprice:'', subtotal:'0' };
+}
+
+function addOrderItem() {
+  _orderItems.push(blankOrderItem());
+  renderOrderItemsTable();
+}
+
+function removeOrderItem(i) {
+  if (_orderItems.length <= 1) { toast('至少保留一个产品行', 'danger'); return; }
+  _orderItems.splice(i, 1);
+  renderOrderItemsTable();
+}
+
+function calcOrderTotals() {
+  // Read from DOM inputs back into _orderItems, then recalc subtotals and grand total
+  const tbody = document.querySelector('#orderItemsTable tbody');
+  if (!tbody) return;
+  const rows = tbody.querySelectorAll('tr');
+  let grandTotal = 0;
+  rows.forEach((row, i) => {
+    const qtyEl       = row.querySelector('.oi-qty');
+    const priceEl     = row.querySelector('.oi-price');
+    const subtotalEl  = row.querySelector('.oi-subtotal');
+    const qty    = Math.max(0, parseFloat(qtyEl ? qtyEl.value : _orderItems[i].qty) || 0);
+    const price  = Math.max(0, parseFloat(priceEl ? priceEl.value : _orderItems[i].unitprice) || 0);
+    const subtotal = qty * price;
+    if (subtotalEl) subtotalEl.textContent = '¥ ' + subtotal.toFixed(2);
+    grandTotal += subtotal;
+    _orderItems[i].qty = String(qty);
+    _orderItems[i].unitprice = String(price);
+    _orderItems[i].subtotal = subtotal.toFixed(2);
+  });
+  const gtEl = document.getElementById('oiGrandTotal');
+  if (gtEl) gtEl.textContent = '¥ ' + grandTotal.toFixed(2);
+}
+
+function renderOrderItemsTable() {
+  const def = recordDef['order'];
+  const tbody = document.querySelector('#orderItemsTable tbody');
+  if (!tbody) return;
+  tbody.innerHTML = _orderItems.map((it, i) => `
+    <tr>
+      ${def.itemFields.map(f => {
+        const val = it[f.id.replace('r-','')] || '';
+        const fieldName = f.id.replace('r-','');
+        const isNumber = f.type === 'number';
+        return `<td><input type="${f.type}" data-field="${fieldName}" class="${f.cls||''}" value="${esc(val)}" placeholder="${f.placeholder||''}" ${isNumber ? 'min="0" step="any"' : ''} oninput="calcOrderTotals()"></td>`;
+      }).join('')}
+      <td class="oi-subtotal">¥ ${(parseFloat(it.subtotal)||0).toFixed(2)}</td>
+      <td class="oi-del" onclick="removeOrderItem(${i})" title="删除此行">✕</td>
+    </tr>`).join('');
+  calcOrderTotals();
+}
+
+function collectOrderItems() {
+  const def = recordDef['order'];
+  const tbody = document.querySelector('#orderItemsTable tbody');
+  if (!tbody) return [];
+  const rows = tbody.querySelectorAll('tr');
+  const items = [];
+  rows.forEach(row => {
+    const item = {};
+    def.itemFields.forEach(f => {
+      const fieldName = f.id.replace('r-','');
+      const el = row.querySelector('[data-field="' + fieldName + '"]');
+      item[fieldName] = el ? el.value : '';
+    });
+    const subtotalEl = row.querySelector('.oi-subtotal');
+    item.subtotal = subtotalEl ? subtotalEl.textContent.replace('¥ ','').trim() : '0.00';
+    items.push(item);
+  });
+  return items;
+}
+
+function collectOrderCommon() {
+  const def = recordDef['order'];
+  const rec = {};
+  def.commonFields.forEach(f => {
+    const el = document.getElementById(f.id);
+    rec[f.id.replace('r-','')] = el ? el.value.trim() : '';
+  });
+  return rec;
+}
+
+function saveRecord() {
+  const type = currentRecordType;
+
+  // ── Orders: custom save logic ──
+  if (type === 'order') {
+    saveOrder();
+    return;
+  }
+
+  const def  = recordDef[type];
+  const c    = db.customers.find(x => x.id === currentCustId);
+  if (!c) return;
+
+  // Validate required
+  for (const f of def.fields) {
+    if (f.required) {
+      const el = document.getElementById(f.id);
+      if (!el || !el.value.trim()) { toast(f.label + ' 不能为空', 'danger'); el && el.focus(); return; }
+    }
+  }
+
+  // Build record object
+  const rec = { id: uid() };
+  def.fields.forEach(f => {
+    const el = document.getElementById(f.id);
+    rec[f.id.replace('r-','')] = el ? el.value.trim() : '';
+  });
+
+  const arrKey = type + 's';
+  if (!c[arrKey]) c[arrKey] = [];
+
+  if (_editingRecord !== null) {
+    rec.id = c[arrKey][_editingRecord].id;
+    c[arrKey][_editingRecord] = rec;
+    toast('✓ 记录已更新');
+  } else {
+    c[arrKey].unshift(rec);
+    toast('✓ 记录已保存');
+  }
+
+  saveData(db);
+  closeModal('modalRecord');
+  renderCustomerList(document.getElementById('searchInput').value);
+  if (type === 'sample')  renderSampleList();
+  if (type === 'visit')   renderVisitList();
+}
+
+function saveOrder() {
+  const c = db.customers.find(x => x.id === currentCustId);
+  if (!c) { toast('无法保存：未选中客户，请先选择客户', 'danger'); return; }
+
+  // Validate: at least one product with a name
+  calcOrderTotals();
+  const items = collectOrderItems();
+  const hasProduct = items.some(it => (it.product||'').trim());
+  if (!hasProduct) { toast('至少填写一个产品名称', 'danger'); return; }
+
+  // Validate date
+  const dateEl = document.getElementById('r-date');
+  if (!dateEl || !dateEl.value.trim()) { toast('订单日期不能为空', 'danger'); dateEl && dateEl.focus(); return; }
+
+  // Build order
+  const common = collectOrderCommon();
+  const order = {
+    id: uid(),
+    date: common.date,
+    items: items,
+    total: items.reduce((sum, it) => sum + (parseFloat(it.subtotal)||0), 0).toFixed(2),
+    invoice: common.invoice,
+    payment: common.payment,
+    status: common.status,
+    invoiced: common.invoiced,
+    invoiceNo: common.invoiceNo,
+    invoiceDate: common.invoiceDate,
+    remark: common.remark
+  };
+
+  if (!c.orders) c.orders = [];
+
+  if (_editingRecord !== null) {
+    order.id = c.orders[_editingRecord].id;
+    c.orders[_editingRecord] = order;
+    toast('✓ 订单已更新');
+  } else {
+    c.orders.unshift(order);
+    toast('✓ 订单已保存');
+  }
+
+  saveData(db);
+  closeModal('modalRecord');
+  renderCustomerList(document.getElementById('searchInput').value);
+  renderOrderList();
+  renderDashboard();
+}
+
+function deleteRecord(type, idx) {
+  const c = db.customers.find(x => x.id === currentCustId);
+  if (!c) return;
+  const arrKey = type === 'order' ? 'orders' : type + 's';
+  confirm('确认删除这条记录？', '此操作不可撤销。', () => {
+    c[arrKey].splice(idx, 1);
+    saveData(db);
+    renderCustomerList(document.getElementById('searchInput').value);
+    if (type === 'order')   renderOrderList();
+    if (type === 'sample')  renderSampleList();
+    if (type === 'visit')   renderVisitList();
+    toast('记录已删除', 'danger');
+  });
+}
+
+/* ═══════════════════════════════════════
+   RENDER RECORD LISTS
+═══════════════════════════════════════ */
+const statusColor = {
+  '待确认':'badge-warn','已报价':'badge-blue','已成交':'badge-green',
+  '已发货':'badge-green','已完成':'badge-green','已取消':'badge-warn',
+  '待反馈':'badge-warn','反馈良好':'badge-green','已下单':'badge-green',
+  '暂不采购':'badge-warn','其他':'badge-blue',
+  '未到账':'badge-warn','已部分到账':'badge-blue','已全额到账':'badge-green','已开票未到账':'badge-warn'
+};
+
+function renderOrderList() {
+  const c = db.customers.find(x => x.id === currentCustId);
+  const el = document.getElementById('orderList');
+  if (!c || !c.orders || !c.orders.length) {
+    el.innerHTML = '<div class="record-empty">暂无订单记录，点击右上角新增</div>'; return;
+  }
+  el.innerHTML = c.orders.map((r, i) => {
+    const items = r.items || [];
+    const total = parseFloat(r.total) || 0;
+    const itemSummary = items.map(it =>
+      `${it.product||'（未命名）'}${it.brand?' ['+it.brand+']':''}${it.spec?' '+it.spec:''} ×${it.qty||'—'}`
+    ).join('、');
+    return `<div class="record-card">
+      <div class="rc-top">
+        <span class="rc-date">📦 ${fmt(r.date)}</span>
+        <div class="rc-actions">
+          <button class="rc-btn edit" onclick="openRecordModal('order',${i})">编辑</button>
+          <button class="rc-btn del"  onclick="deleteRecord('order',${i})">删除</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
+        ${r.status  ? `<span class="rc-tag ${statusColor[r.status]||'badge-blue'}">${esc(r.status)}</span>` : ''}
+        ${r.payment ? `<span class="rc-tag ${statusColor[r.payment]||'badge-warn'}">${esc(r.payment)}</span>` : ''}
+        ${r.invoiced ? `<span class="rc-tag ${r.invoiced==='已开票'?'badge-green':'badge-warn'}">${esc(r.invoiced)}</span>` : ''}
+        <span class="rc-tag badge-green" style="font-size:13px;font-weight:700;">¥ ${total.toFixed(2)}</span>
+      </div>
+      <div class="oi-summary"><b>${items.length} 个产品：</b>${esc(itemSummary)}</div>
+      ${r.invoiceNo || r.invoiceDate ? `<div class="rc-field" style="margin-top:2px;font-size:12px;color:var(--gray-600);">` +
+        (r.invoiceNo ? `<span>发票号：${esc(r.invoiceNo)}</span>` : '') +
+        (r.invoiceDate ? `<span style="margin-left:12px;">开票日期：${fmt(r.invoiceDate)}</span>` : '') +
+        `</div>` : ''}
+      ${items.length ? `<table class="oi-table" style="margin-top:6px;">
+        <thead><tr><th>货号</th><th>产品</th><th>品牌</th><th>规格</th><th>数量</th><th>单价</th><th>小计</th></tr></thead>
+        <tbody>${items.map(it => `<tr>
+          <td>${esc(it.catalog)||'—'}</td>
+          <td>${esc(it.product)||'—'}</td>
+          <td>${esc(it.brand)||'—'}</td>
+          <td>${esc(it.spec)||'—'}</td>
+          <td>${esc(it.qty)||'—'}</td>
+          <td>¥ ${esc(it.unitprice)||'—'}</td>
+          <td class="oi-subtotal">¥ ${(parseFloat(it.subtotal)||0).toFixed(2)}</td>
+        </tr>`).join('')}</tbody>
+      </table>` : ''}
+      ${r.invoice ? `<div class="rc-field" style="margin-top:6px;font-size:12px;"><span>开票抬头：</span>${esc(r.invoice)}</div>` : ''}
+      ${r.remark  ? `<div class="rc-field" style="margin-top:4px;color:var(--gray-500);font-size:12px;border-top:1px solid var(--gray-100);padding-top:6px;">${esc(r.remark)}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function renderSampleList() {
+  const c = db.customers.find(x => x.id === currentCustId);
+  const el = document.getElementById('sampleList');
+  if (!c || !c.samples || !c.samples.length) {
+    el.innerHTML = '<div class="record-empty">暂无试用装记录，点击右上角新增</div>'; return;
+  }
+  el.innerHTML = c.samples.map((r, i) => `
+    <div class="record-card">
+      <div class="rc-top">
+        <span class="rc-date">🧪 ${fmt(r.date)}</span>
+        <div class="rc-actions">
+          <button class="rc-btn edit" onclick="openRecordModal('sample',${i})">编辑</button>
+          <button class="rc-btn del"  onclick="deleteRecord('sample',${i})">删除</button>
+        </div>
+      </div>
+      ${r.result ? `<span class="rc-tag ${statusColor[r.result]||'badge-blue'}" style="margin-bottom:8px;display:inline-block;">${esc(r.result)}</span>` : ''}
+      <div class="rc-row2">
+        <div class="rc-field"><span>产品：</span>${esc(r.product)||'—'}</div>
+        ${r.brand ? `<div class="rc-field"><span>品牌：</span>${esc(r.brand)}</div>` : ''}
+        ${r.spec  ? `<div class="rc-field"><span>规格：</span>${esc(r.spec)}</div>` : ''}
+        ${r.qty   ? `<div class="rc-field"><span>数量：</span>${esc(r.qty)}</div>` : ''}
+      </div>
+      ${r.remark ? `<div class="rc-field" style="margin-top:6px;color:var(--gray-500);font-size:12px;border-top:1px solid var(--gray-100);padding-top:6px;">${esc(r.remark)}</div>` : ''}
+    </div>`).join('');
+}
+
+function renderVisitList() {
+  const c = db.customers.find(x => x.id === currentCustId);
+  const el = document.getElementById('visitList');
+  if (!c || !c.visits || !c.visits.length) {
+    el.innerHTML = '<div class="record-empty">暂无拜访记录，点击右上角新增</div>'; return;
+  }
+  el.innerHTML = c.visits.map((r, i) => `
+    <div class="record-card">
+      <div class="rc-top">
+        <span class="rc-date">🤝 ${fmt(r.date)}</span>
+        <div class="rc-actions">
+          <button class="rc-btn edit" onclick="openRecordModal('visit',${i})">编辑</button>
+          <button class="rc-btn del"  onclick="deleteRecord('visit',${i})">删除</button>
+        </div>
+      </div>
+      ${r.method  ? `<span class="rc-tag badge-blue">${esc(r.method)}</span>` : ''}
+      <div class="rc-field" style="margin-top:6px;"><span>内容：</span>${esc(r.content)||'—'}</div>
+      ${r.followup? `<div class="rc-field"><span>跟进：</span>${esc(r.followup)}</div>` : ''}
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════
+   DASHBOARD — global & per-customer
+═══════════════════════════════════════ */
+
+/* ── Dashboard Filter State ── */
+let _dashboardFilter = 'all';   // 'all' | 'month1' | 'month3' | 'month6' | 'year1' | 'custom'
+let _filterStart = null;        // custom range start (YYYY-MM-DD)
+let _filterEnd   = null;        // custom range end (YYYY-MM-DD)
+
+function getFilterRange() {
+  const today = new Date(); today.setHours(23,59,59,999);
+  const cp = new Date(today);
+  switch (_dashboardFilter) {
+    case 'month1': cp.setMonth(cp.getMonth() - 1);  break;
+    case 'month3': cp.setMonth(cp.getMonth() - 3);  break;
+    case 'month6': cp.setMonth(cp.getMonth() - 6);  break;
+    case 'year1':  cp.setFullYear(cp.getFullYear() - 1); break;
+    case 'custom': return { start: _filterStart, end: _filterEnd };
+    default: return null; // 'all' → no filter
+  }
+  return { start: cp.toISOString().slice(0,10), end: today.toISOString().slice(0,10) };
+}
+
+function setDashboardFilter(v) {
+  _dashboardFilter = v;
+  if (v !== 'custom') { _filterStart = null; _filterEnd = null; }
+  renderDashboard();
+}
+
+function applyCustomFilter() {
+  const s = document.getElementById('dfStart').value;
+  const e = document.getElementById('dfEnd').value;
+  if (!s || !e) { toast('请选择开始和结束日期', 'danger'); return; }
+  if (s > e) { toast('开始日期不能晚于结束日期', 'danger'); return; }
+  _dashboardFilter = 'custom';
+  _filterStart = s;
+  _filterEnd   = e;
+  renderDashboard();
+}
+
+function renderDashboard() {
+  const el = document.getElementById('dashboardGlobal');
+  if (!el) return;
+
+  // Collect all records across customers
+  const allOrders  = [];
+  const allSamples = [];
+  const allVisits  = [];
+  db.customers.forEach(c => {
+    (c.orders  || []).forEach(o => allOrders.push({ custName: c.name, custId: c.id, ...o }));
+    (c.samples || []).forEach(s => allSamples.push({ custName: c.name, custId: c.id, ...s }));
+    (c.visits  || []).forEach(v => allVisits.push({ custName: c.name, custId: c.id, ...v }));
+  });
+
+  // Apply date filter
+  const range = getFilterRange();
+  let filteredOrders  = allOrders;
+  let filteredSamples = allSamples;
+  let filteredVisits  = allVisits;
+  if (range) {
+    const inRange = d => { if (!d) return false; return d >= range.start && d <= range.end; };
+    filteredOrders  = allOrders.filter(o => inRange(o.date));
+    filteredSamples = allSamples.filter(s => inRange(s.date));
+    filteredVisits  = allVisits.filter(v => inRange(v.date));
+  }
+
+  // Sort by date desc
+  const sortByDate = (a,b) => (b.date||'').localeCompare(a.date||'');
+  filteredOrders.sort(sortByDate);
+  filteredSamples.sort(sortByDate);
+  filteredVisits.sort(sortByDate);
+
+  // Calculate order total
+  const orderTotal = filteredOrders.reduce((sum, o) => sum + (parseFloat(o.total)||0), 0);
+
+  // Recent 10 of each
+  const recentOrders  = filteredOrders.slice(0, 10);
+  const recentSamples = filteredSamples.slice(0, 10);
+  const recentVisits  = filteredVisits.slice(0, 10);
+
+  // Range label for display
+  let rangeLabel = '全部';
+  if (range) {
+    rangeLabel = _dashboardFilter === 'custom'
+      ? `${_filterStart} ~ ${_filterEnd}`
+      : `${range.start} ~ ${range.end}`;
+  }
+
+  // Build filter buttons HTML
+  const fbtns = [
+    { v:'all',    label:'全部' },
+    { v:'month1', label:'近一个月' },
+    { v:'month3', label:'近三个月' },
+    { v:'month6', label:'近半年' },
+    { v:'year1',  label:'近一年' },
+  ].map(b => `<button class="df-btn${_dashboardFilter===b.v?' active':''}" onclick="setDashboardFilter('${b.v}')">${b.label}</button>`).join('');
+
+  el.innerHTML = `
+    <div class="dboard-filter">
+      <span class="df-label">📅 时间范围：</span>
+      ${fbtns}
+      <div class="df-range">
+        <input type="date" id="dfStart" value="${_filterStart||''}" placeholder="起始">
+        <span>~</span>
+        <input type="date" id="dfEnd"   value="${_filterEnd||''}"   placeholder="截止">
+        <button class="df-btn" onclick="applyCustomFilter()">筛选</button>
+      </div>
+    </div>
+    <div class="dboard-stats">
+      <div class="ds-card">
+        <div class="ds-icon blue">👥</div>
+        <div><div class="ds-num">${db.customers.length}</div><div class="ds-label">客户总数</div></div>
+      </div>
+      <div class="ds-card">
+        <div class="ds-icon green">📦</div>
+        <div><div class="ds-num">${filteredOrders.length}</div><div class="ds-label">订单总数 · ¥ ${orderTotal.toFixed(0)}</div></div>
+      </div>
+      <div class="ds-card">
+        <div class="ds-icon warn">🧪</div>
+        <div><div class="ds-num">${filteredSamples.length}</div><div class="ds-label">试用装记录</div></div>
+      </div>
+      <div class="ds-card">
+        <div class="ds-icon red">🤝</div>
+        <div><div class="ds-num">${filteredVisits.length}</div><div class="ds-label">拜访记录</div></div>
+      </div>
+    </div>
+    <div class="dboard-grid">
+      <div class="dboard-section full">
+        <h4>📦 最近订单 <span style="font-weight:400;font-size:12px;color:var(--gray-400);">（${rangeLabel}）</span></h4>
+        ${recentOrders.length ? recentOrders.map(o => `
+          <div class="dboard-row" style="cursor:pointer" onclick="selectCustomer('${o.custId}');switchTab('orders');">
+            <div class="dr-left"><span class="dr-name">${esc(o.custName)}</span><span class="dr-sub">${(o.items||[]).map(it=>esc(it.product)||'—').join(' / ')}</span></div>
+            <div class="dr-right"><span class="dr-amount">¥ ${(parseFloat(o.total)||0).toFixed(2)}</span><br><span class="dr-date">${fmt(o.date)} · ${esc(o.status)||''}</span></div>
+          </div>`).join('') : '<div class="dboard-empty">该时段暂无订单</div>'}
+      </div>
+      <div class="dboard-section">
+        <h4>🧪 最近试用装</h4>
+        ${recentSamples.length ? recentSamples.map(s => `
+          <div class="dboard-row" style="cursor:pointer" onclick="selectCustomer('${s.custId}');switchTab('samples');">
+            <div class="dr-left"><span class="dr-name">${esc(s.custName)}</span><span class="dr-sub">${esc(s.product)||'—'} ${esc(s.brand)||''}</span></div>
+            <div class="dr-right"><span class="dr-date">${fmt(s.date)}</span><br><span class="rc-tag ${statusColor[s.result]||'badge-blue'}">${esc(s.result)||'—'}</span></div>
+          </div>`).join('') : '<div class="dboard-empty">该时段暂无试用记录</div>'}
+      </div>
+      <div class="dboard-section">
+        <h4>🤝 最近拜访</h4>
+        ${recentVisits.length ? recentVisits.map(v => `
+          <div class="dboard-row" style="cursor:pointer" onclick="selectCustomer('${v.custId}');switchTab('visits');">
+            <div class="dr-left"><span class="dr-name">${esc(v.custName)}</span><span class="dr-sub">${esc(v.method)||'—'}</span></div>
+            <div class="dr-right"><span class="dr-date">${fmt(v.date)}</span></div>
+          </div>`).join('') : '<div class="dboard-empty">该时段暂无拜访记录</div>'}
+      </div>
+    </div>`;
+}
+
+function renderCustDashboard() {
+  const el = document.getElementById('dashboardCust');
+  const c = db.customers.find(x => x.id === currentCustId);
+  if (!c) { el.innerHTML = ''; return; }
+
+  const orders  = c.orders  || [];
+  const samples = c.samples || [];
+  const visits  = c.visits  || [];
+
+  const orderTotal = orders.reduce((sum, o) => sum + (parseFloat(o.total)||0), 0);
+  const sortByDate = (a,b) => (b.date||'').localeCompare(a.date||'');
+
+  el.innerHTML = `
+    <div class="dboard-stats" style="grid-template-columns:repeat(3,1fr);">
+      <div class="ds-card">
+        <div class="ds-icon green">📦</div>
+        <div><div class="ds-num">${orders.length}</div><div class="ds-label">订单 · ¥ ${orderTotal.toFixed(0)}</div></div>
+      </div>
+      <div class="ds-card">
+        <div class="ds-icon warn">🧪</div>
+        <div><div class="ds-num">${samples.length}</div><div class="ds-label">试用装发放</div></div>
+      </div>
+      <div class="ds-card">
+        <div class="ds-icon red">🤝</div>
+        <div><div class="ds-num">${visits.length}</div><div class="ds-label">拜访记录</div></div>
+      </div>
+    </div>
+    <div class="dboard-grid">
+      <div class="dboard-section full">
+        <h4>📦 最近订单</h4>
+        ${orders.length ? orders.slice().sort(sortByDate).slice(0,10).map(o => `
+          <div class="dboard-row">
+            <div class="dr-left"><span class="dr-name">${(o.items||[]).map(it=>esc(it.product)||'—').join(' / ')}</span></div>
+            <div class="dr-right"><span class="dr-amount">¥ ${(parseFloat(o.total)||0).toFixed(2)}</span><br><span class="dr-date">${fmt(o.date)} · ${esc(o.status)||''}</span></div>
+          </div>`).join('') : '<div class="dboard-empty">暂无订单</div>'}
+      </div>
+      <div class="dboard-section">
+        <h4>🧪 试用装</h4>
+        ${samples.length ? samples.slice().sort(sortByDate).slice(0,10).map(s => `
+          <div class="dboard-row">
+            <div class="dr-left"><span class="dr-name">${esc(s.product)||'—'} ${esc(s.brand)||''} ${esc(s.spec)||''}</span></div>
+            <div class="dr-right"><span class="dr-date">${fmt(s.date)}</span><br><span class="rc-tag ${statusColor[s.result]||'badge-blue'}">${esc(s.result)||'—'}</span></div>
+          </div>`).join('') : '<div class="dboard-empty">暂无试用记录</div>'}
+      </div>
+      <div class="dboard-section">
+        <h4>🤝 拜访记录</h4>
+        ${visits.length ? visits.slice().sort(sortByDate).slice(0,10).map(v => `
+          <div class="dboard-row">
+            <div class="dr-left"><span class="dr-name">${esc(v.method)||'—'}</span><span class="dr-sub">${esc(v.content)||''}</span></div>
+            <div class="dr-right"><span class="dr-date">${fmt(v.date)}</span></div>
+          </div>`).join('') : '<div class="dboard-empty">暂无拜访记录</div>'}
+      </div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════
+   SEARCH
+═══════════════════════════════════════ */
+document.getElementById('searchInput').addEventListener('input', e => {
+  renderCustomerList(e.target.value);
+});
+
+/* ═══════════════════════════════════════
+   KEYBOARD SHORTCUTS
+═══════════════════════════════════════ */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+    document.getElementById('confirmOverlay').classList.remove('open');
+  }
+  // Ctrl/Cmd + S → save info
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    if (currentCustId) saveCustomerInfo();
+  }
+});
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+renderCustomerList();
+renderDashboard();
+
+/* ═══════════════════════════════════════
+   EXPORT — JSON 全量备份
+═══════════════════════════════════════ */
+function exportJSON() {
+  const payload = JSON.stringify(db, null, 2);
+  const blob = new Blob([payload], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  const d = new Date();
+  const stamp = d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate());
+  a.download = `佰洛生物CRM备份_${stamp}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('✓ 备份文件已下载');
+}
+function pad(n) { return String(n).padStart(2,'0'); }
+
+/* ═══════════════════════════════════════
+   EXPORT — CSV 客户列表（含统计）
+═══════════════════════════════════════ */
+function exportCSV() {
+  const BOM = '\uFEFF'; // Excel UTF-8 BOM
+  const headers = ['客户名称','所属单位','联系人','联系电话','开票抬头','联系地址','研究方向','可推荐产品','订单数','试用装数','拜访次数','录入日期'];
+  const rows = db.customers.map(c => {
+    const firstContact = (c.contacts && c.contacts.length) ? c.contacts[0] : {};
+    return [
+      c.name, c.unit, firstContact.name||'', firstContact.phone||'', c.invoice, c.address, c.research, c.products,
+      (c.orders||[]).length, (c.samples||[]).length, (c.visits||[]).length, c.createdAt
+    ].map(v => '"' + String(v||'').replace(/"/g,'""') + '"').join(',');
+  });
+  const csv = BOM + [headers.join(','), ...rows].join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  const d = new Date();
+  const stamp = d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate());
+  a.download = `佰洛生物客户列表_${stamp}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('✓ CSV 已下载，可用 Excel 打开');
+}
+
+/* ═══════════════════════════════════════
+   EXPORT — 订单明细 CSV（含发票信息、产品明细）
+═══════════════════════════════════════ */
+function exportOrdersCSV() {
+  const BOM = '\uFEFF';
+  const headers = ['客户名称','所属单位','订单日期','订单状态','到账情况','是否开票','发票号码','开票日期','开票抬头',
+                   '产品货号','产品名称','品牌','规格','数量','单价','小计','订单总金额','备注'];
+  const rows = [];
+  db.customers.forEach(c => {
+    (c.orders||[]).forEach(o => {
+      const items = o.items||[];
+      if (items.length === 0) {
+        // Order with no items: one row
+        rows.push([
+          c.name, c.unit, o.date, o.status||'', o.payment||'', o.invoiced||'',
+          o.invoiceNo||'', o.invoiceDate||'', o.invoice||'',
+          '', '', '', '', '', '', '', o.total||'0', o.remark||''
+        ]);
+      } else {
+        items.forEach(it => {
+          rows.push([
+            c.name, c.unit, o.date, o.status||'', o.payment||'', o.invoiced||'',
+            o.invoiceNo||'', o.invoiceDate||'', o.invoice||'',
+            it.catalog||'', it.product||'', it.brand||'', it.spec||'',
+            it.qty||'', it.unitprice||'', it.subtotal||'',
+            o.total||'0', o.remark||''
+          ]);
+        });
+      }
+    });
+  });
+  if (rows.length === 0) { toast('暂无订单数据可导出', 'danger'); return; }
+  const csv = BOM + [headers.join(','), ...rows.map(r => r.map(v => `"${String(v||'').replace(/"/g,'""')}"`).join(','))].join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  const d = new Date();
+  const stamp = d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate());
+  a.download = '佰洛生物订单明细_' + stamp + '.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('✓ 订单明细已导出 ' + rows.length + ' 行');
+}
+
+/* ═══════════════════════════════════════
+   IMPORT — 从 JSON 备份恢复
+═══════════════════════════════════════ */
+function importJSON(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      if (!parsed || !Array.isArray(parsed.customers)) {
+        toast('❌ 文件格式错误，不是有效的备份文件', 'danger'); return;
+      }
+      const count = parsed.customers.length;
+      confirm(
+        `导入 ${count} 位客户的数据？`,
+        '导入将覆盖当前所有客户数据，请确保已备份当前数据。',
+        () => {
+          db = parsed;
+          saveData(db);
+          currentCustId = null;
+          document.getElementById('detailContent').style.display = 'none';
+          document.getElementById('dashboardGlobal').classList.add('active');
+          renderCustomerList();
+          renderDashboard();
+          toast(`✓ 成功导入 ${count} 位客户数据`);
+        }
+      );
+    } catch {
+      toast('❌ 文件解析失败，请选择正确的 JSON 备份文件', 'danger');
+    }
+  };
+  reader.readAsText(file, 'utf-8');
+  // 重置 input，允许重复选同一文件
+  event.target.value = '';
+}
+</script>
+</body>
+</html>

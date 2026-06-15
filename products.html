@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全部产品 | 佰洛生物 — 高品质生物试剂与实验仪器</title>
+<style>
+  :root {
+    --primary: #0a5c8a;
+    --primary-light: #0d7ab5;
+    --primary-dark: #064368;
+    --accent: #00a896;
+    --accent-light: #00c4a7;
+    --bg: #f7f9fc;
+    --bg-card: #ffffff;
+    --text: #1a1a2e;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --border: #e2e8f0;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-hover: 0 6px 24px rgba(0,0,0,0.10);
+    --radius: 10px;
+    --radius-sm: 6px;
+    --max-width: 1200px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--max-width); margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 64px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo .icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px; font-weight: 700;
+  }
+  .nav-logo .name { font-size: 20px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; }
+  .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+  .nav-links > li > a {
+    display: flex; align-items: center; gap: 5px;
+    padding: 8px 14px; border-radius: var(--radius-sm);
+    font-size: 15px; color: var(--text-secondary); font-weight: 500;
+    transition: color 0.2s, background 0.2s; white-space: nowrap;
+  }
+  .nav-links > li > a:hover { color: var(--primary); background: #f0f4f8; }
+  .nav-links > li > a.active { color: var(--primary); font-weight: 700; }
+  .nav-cta {
+    background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
+    padding: 9px 22px; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s; letter-spacing: 0.5px; margin-left: 8px;
+  }
+  .nav-cta:hover { background: var(--primary-light); }
+
+  /* PAGE HEADER */
+  .page-header {
+    background: linear-gradient(160deg, #eef5fb, #e8f4f8);
+    text-align: center; padding: 52px 24px 44px;
+  }
+  .page-header .ph-tag {
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 8px;
+  }
+  .page-header h1 { font-size: 34px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; margin-bottom: 10px; }
+  .page-header .ph-desc { font-size: 16px; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+  /* QUICK NAV */
+  .quick-nav {
+    display: flex; justify-content: center; gap: 12px;
+    padding: 20px 24px; background: #fff; border-bottom: 1px solid var(--border);
+  }
+  .quick-nav a {
+    padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: 600;
+    transition: all 0.2s; border: 1px solid var(--border); color: var(--text-secondary);
+  }
+  .quick-nav a:hover { border-color: var(--primary); color: var(--primary); background: #f0f6fb; }
+
+  /* PRODUCT CAT */
+  .section { max-width: var(--max-width); margin: 0 auto; padding: 56px 24px; }
+  .product-cat { margin-bottom: 0; }
+  .product-cat-title {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+    padding-bottom: 14px; border-bottom: 2px solid var(--border);
+  }
+  .product-cat-title .dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .product-cat-title .dot.reagent { background: var(--primary); }
+  .product-cat-title .dot.instrument { background: var(--accent); }
+  .product-cat-title h3 { font-size: 22px; font-weight: 700; color: var(--primary-dark); letter-spacing: 0.5px; }
+  .product-cat-title span { font-size: 14px; color: var(--text-muted); margin-left: 4px; }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .product-item {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px 24px 24px; cursor: pointer; transition: box-shadow 0.25s, border-color 0.25s, transform 0.18s;
+    position: relative; box-shadow: var(--shadow);
+  }
+  .product-item:hover { box-shadow: var(--shadow-hover); border-color: var(--primary-light); transform: translateY(-2px); }
+  .product-item .pi-icon { font-size: 36px; margin-bottom: 12px; display: block; }
+  .product-item h4 { font-size: 17px; font-weight: 700; color: var(--primary-dark); margin-bottom: 8px; }
+  .product-item p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .product-item .pi-badge {
+    display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 600;
+    background: #fed7d7; color: #c53030; padding: 2px 8px; border-radius: 4px;
+  }
+  .product-item .pi-arrow {
+    position: absolute; top: 28px; right: 24px; font-size: 18px; color: var(--primary);
+    opacity: 0; transform: translateX(-6px); transition: opacity 0.2s, transform 0.2s;
+  }
+  .product-item:hover .pi-arrow { opacity: 1; transform: translateX(0); }
+  .pi-btn {
+    display: inline-block; margin-top: 14px;
+    background: var(--primary); color: #fff; border: none;
+    padding: 7px 18px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .pi-btn:hover { background: var(--primary-light); }
+
+  /* SECTION DIVIDER */
+  .section-divider {
+    max-width: var(--max-width); margin: 0 auto; padding: 0 24px;
+  }
+  .section-divider .divider-line {
+    height: 1px; background: var(--border);
+  }
+
+  /* INSTRUMENT GRID in products page — same as product-item style */
+  .instrument-section { background: linear-gradient(180deg, #f0f7f4 0%, var(--bg) 100%); padding: 56px 24px; }
+
+  /* PRODUCT DETAIL OVERLAY */
+  .pd-overlay {
+    position: fixed; top: 64px; left: 0; right: 0; bottom: 0; z-index: 300; background: var(--bg);
+    overflow-y: auto; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .pd-overlay.show { opacity: 1; pointer-events: auto; }
+  .pd-topbar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; gap: 16px;
+    padding: 14px 24px; background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+  }
+  .pd-topbar .pd-back {
+    display: flex; align-items: center; gap: 6px;
+    background: none; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 6px 14px; font-size: 14px; cursor: pointer; color: var(--text-secondary);
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .pd-topbar .pd-back:hover { background: #f0f4f8; }
+  .pd-topbar .pd-title { font-size: 18px; font-weight: 700; color: var(--primary-dark); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pd-topbar .pd-cta {
+    background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
+    padding: 8px 20px; font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .pd-topbar .pd-cta:hover { background: var(--primary-light); }
+
+  .pd-hero {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: 48px 24px 36px;
+    background: linear-gradient(160deg, #eef5fb, #e8f4f8);
+  }
+  .pd-hero .pdh-icon { font-size: 64px; margin-bottom: 16px; }
+  .pd-hero .pdh-cat {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .pd-hero h1 { font-size: 34px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; margin-bottom: 10px; }
+  .pd-hero .pdh-tagline { font-size: 16px; color: var(--text-secondary); max-width: 560px; }
+
+  .pd-body { max-width: 860px; margin: 0 auto; padding: 32px 24px 64px; }
+  .pd-section { margin-bottom: 36px; }
+  .pd-section:last-child { margin-bottom: 0; }
+  .pd-section .pds-label {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--accent); margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 2px solid #e0f7f3;
+  }
+  .pd-section .pds-text { font-size: 15px; color: var(--text-secondary); line-height: 1.85; }
+  .pd-features { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+  .pd-features li {
+    display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px;
+    background: var(--bg); border-radius: var(--radius-sm); border: 1px solid var(--border);
+    font-size: 14px; color: var(--text-secondary);
+  }
+  .pd-features li .pf-check { color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .pd-specs { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+  .pd-specs .ps-row { display: flex; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .pd-specs .ps-row:last-child { border-bottom: none; }
+  .pd-specs .ps-row .psk {
+    width: 180px; flex-shrink: 0; padding: 12px 16px;
+    background: #f7f9fc; color: var(--text-muted); font-weight: 500;
+  }
+  .pd-specs .ps-row .psv { flex: 1; padding: 12px 16px; color: var(--text); font-weight: 600; }
+
+  /* BACK TO TOP */
+  .back-top {
+    display: block; text-align: center; padding: 32px 24px; color: var(--primary);
+    font-weight: 600; font-size: 14px; transition: color 0.2s;
+  }
+  .back-top:hover { color: var(--accent); }
+
+  /* FOOTER */
+  .footer {
+    background: #0f1a2e; color: rgba(255,255,255,0.65); padding: 48px 24px 28px;
+    font-size: 14px;
+  }
+  .footer-inner { max-width: var(--max-width); margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+  .footer-col h4 { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 14px; letter-spacing: 0.5px; }
+  .footer-col p, .footer-col a { display: block; margin-bottom: 6px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+  .footer-col a:hover { color: var(--accent-light); }
+  .footer-bottom {
+    max-width: var(--max-width); margin: 36px auto 0; padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08); text-align: center; font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .page-header h1 { font-size: 26px; }
+    .pd-hero h1 { font-size: 24px; }
+    .pd-specs .ps-row .psk { width: 120px; }
+    .pd-features { grid-template-columns: 1fr; }
+    .product-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="icon">佰</div>
+      <span class="name">佰洛生物</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#hot-products">热门产品</a></li>
+      <li><a href="products.html" class="active">产品中心</a></li>
+      <li><a href="index.html#services">技术服务</a></li>
+      <li><a href="index.html#about">关于佰洛</a></li>
+      <li><a href="index.html#contact">联系我们</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">获取报价</a>
+  </div>
+</nav>
+
+<!-- ═══════════ PAGE HEADER ═══════════ -->
+<header class="page-header">
+  <div class="ph-tag">Product Center</div>
+  <h1>全部产品</h1>
+  <p class="ph-desc">严选高品质科研试剂、耗材与实验仪器，覆盖细胞培养、分子克隆、蛋白分析全流程</p>
+</header>
+
+<!-- ═══════════ QUICK NAV ═══════════ -->
+<div class="quick-nav">
+  <a href="#reagents">🧪 试剂与耗材</a>
+  <a href="#instruments">⚙️ 实验仪器</a>
+</div>
+
+<!-- ═══════════ REAGENTS ═══════════ -->
+<section class="section" id="reagents">
+  <div class="product-cat">
+    <div class="product-cat-title">
+      <div class="dot reagent"></div>
+      <h3>试剂与耗材</h3>
+      <span id="reagentCount"></span>
+    </div>
+    <div class="product-grid" id="reagentGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════════ DIVIDER ═══════════ -->
+<div class="section-divider">
+  <div class="divider-line"></div>
+</div>
+
+<!-- ═══════════ INSTRUMENTS ═══════════ -->
+<section class="instrument-section" id="instruments">
+  <div class="section">
+    <div class="product-cat">
+      <div class="product-cat-title">
+        <div class="dot instrument"></div>
+        <h3>实验仪器</h3>
+        <span id="instrumentCount"></span>
+      </div>
+      <div class="product-grid" id="instrumentGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PRODUCT DETAIL OVERLAY ═══════════ -->
+<div class="pd-overlay" id="pdOverlay">
+  <div class="pd-topbar">
+    <button class="pd-back" onclick="closeProductDetail()">← 返回产品列表</button>
+    <div class="pd-title" id="pdTitle"></div>
+    <a href="index.html#contact" class="pd-cta">获取报价</a>
+  </div>
+  <div id="pdContent"></div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>佰洛生物</h4>
+      <p>细胞与基因治疗全流程解决方案</p>
+      <p>&copy; 2026 Bailuo Biotech</p>
+    </div>
+    <div class="footer-col">
+      <h4>产品</h4>
+      <a href="#reagents">试剂与耗材</a>
+      <a href="#instruments">实验仪器</a>
+    </div>
+    <div class="footer-col">
+      <h4>导航</h4>
+      <a href="index.html">返回首页</a>
+      <a href="index.html#hot-products">热门产品</a>
+      <a href="index.html#services">技术服务</a>
+    </div>
+    <div class="footer-col">
+      <h4>联系方式</h4>
+      <p>邮箱：service@biologia.cn</p>
+      <p>电话：400-XXX-XXXX</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    佰洛生物科技 &copy; 2026 &nbsp;|&nbsp; 致力于推动中国细胞与基因治疗基础研究
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════
+   数据加载 — 从 data/products.json 异步加载
+═══════════════════════════════════════ */
+var allProducts = [];
+
+async function loadData() {
+  try {
+    var res = await fetch('data/products.json');
+    window.allProducts = await res.json();
+    renderProducts();
+    checkHashOnLoad();
+  } catch (e) {
+    console.error('产品数据加载失败:', e);
+  }
+}
+
+/* ═══════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════ */
+function esc(s) {
+  var d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+function getProductsByCat(cat) {
+  return allProducts.filter(function(p) { return p.cat === cat; });
+}
+function getProductById(id) {
+  return allProducts.find(function(p) { return p.id === id; });
+}
+
+/* ═══════════════════════════════════════
+   RENDER PRODUCTS
+═══════════════════════════════════════ */
+function renderProducts() {
+  var reagents = getProductsByCat('reagents');
+  var instruments = getProductsByCat('instruments');
+
+  /* 试剂 */
+  var rGrid = document.getElementById('reagentGrid');
+  var rCount = document.getElementById('reagentCount');
+  if (rGrid) {
+    rGrid.innerHTML = reagents.map(function(p) {
+      return '<div class="product-item" data-pid="' + esc(p.id) + '" onclick="openProductDetail(\'' + esc(p.id) + '\')">' +
+        '<span class="pi-arrow">→</span>' +
+        '<span class="pi-icon">' + esc(p.icon) + '</span>' +
+        '<h4>' + esc(p.name) + '</h4>' +
+        '<p>' + esc(p.summary) + '</p>' +
+        (p.hot ? '<span class="pi-badge">热门</span>' : '') +
+        '<button class="pi-btn" onclick="event.stopPropagation();openProductDetail(\'' + esc(p.id) + '\')">查看详情 →</button>' +
+      '</div>';
+    }).join('');
+  }
+  if (rCount) rCount.textContent = 'Reagents & Consumables (' + reagents.length + ')';
+
+  /* 仪器 */
+  var iGrid = document.getElementById('instrumentGrid');
+  var iCount = document.getElementById('instrumentCount');
+  if (iGrid) {
+    iGrid.innerHTML = instruments.map(function(p) {
+      return '<div class="product-item" data-pid="' + esc(p.id) + '" onclick="openProductDetail(\'' + esc(p.id) + '\')">' +
+        '<span class="pi-arrow">→</span>' +
+        '<span class="pi-icon">' + esc(p.icon) + '</span>' +
+        '<h4>' + esc(p.name) + '</h4>' +
+        '<p>' + esc(p.summary) + '</p>' +
+        (p.hot ? '<span class="pi-badge">热门</span>' : '') +
+        '<button class="pi-btn" onclick="event.stopPropagation();openProductDetail(\'' + esc(p.id) + '\')">查看详情 →</button>' +
+      '</div>';
+    }).join('');
+  }
+  if (iCount) iCount.textContent = 'Laboratory Instruments (' + instruments.length + ')';
+}
+
+/* ═══════════════════════════════════════
+   DETAIL OVERLAY
+═══════════════════════════════════════ */
+function openProductDetail(id) {
+  var item = getProductById(id);
+  if (!item) return;
+
+  var detail = item.detail || {};
+  document.getElementById('pdTitle').textContent = item.name;
+
+  var html = '';
+  html += '<div class="pd-hero">';
+  html += '<div class="pdh-icon">' + esc(item.icon) + '</div>';
+  html += '<div class="pdh-cat">' + esc(item.cat === 'reagents' ? '试剂与耗材' : '实验仪器') + '</div>';
+  html += '<h1>' + esc(item.name) + '</h1>';
+  html += '<div class="pdh-tagline">' + esc(item.summary) + '</div>';
+  html += '</div>';
+
+  html += '<div class="pd-body">';
+  html += '<div class="pd-section"><div class="pds-label">产品概述</div>';
+  html += '<div class="pds-text">' + esc(detail.intro || '') + '</div></div>';
+
+  html += '<div class="pd-section"><div class="pds-label">产品特点</div>';
+  if (detail.features && detail.features.length > 0) {
+    html += '<ul class="pd-features">';
+    detail.features.forEach(function(f) { html += '<li><span class="pf-check">✓</span><span>' + esc(f) + '</span></li>'; });
+    html += '</ul>';
+  }
+  html += '</div>';
+
+  html += '<div class="pd-section"><div class="pds-label">技术规格</div>';
+  if (detail.specs && detail.specs.length > 0) {
+    html += '<div class="pd-specs">';
+    detail.specs.forEach(function(s) {
+      html += '<div class="ps-row"><div class="psk">' + esc(s.key) + '</div><div class="psv">' + esc(s.val) + '</div></div>';
+    });
+    html += '</div>';
+  }
+  html += '</div>';
+
+  html += '<div class="pd-section"><div class="pds-label">应用领域</div>';
+  html += '<div class="pds-text">' + esc(detail.applications || '') + '</div></div>';
+
+  html += '<div class="pd-section"><div class="pds-label">订购信息</div>';
+  html += '<div class="pds-text">' + esc(detail.ordering || '') + '</div></div>';
+
+  html += '</div>';
+
+  document.getElementById('pdContent').innerHTML = html;
+  document.getElementById('pdOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+
+  if (history.pushState) {
+    history.pushState({ detailId: id }, '', '#' + id);
+  }
+}
+
+function closeProductDetail() {
+  document.getElementById('pdOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+  if (history.pushState) {
+    history.pushState(null, '', window.location.pathname + window.location.search);
+  }
+}
+
+/* ═══════════════════════════════════════
+   EVENT DELEGATION — 兜底点击
+═══════════════════════════════════════ */
+document.addEventListener('click', function(e) {
+  var target = e.target;
+  while (target && target !== document.body) {
+    if (target.hasAttribute && target.hasAttribute('onclick')) return;
+    var pid = target.getAttribute && target.getAttribute('data-pid');
+    if (pid) { openProductDetail(pid); return; }
+    target = target.parentNode;
+  }
+});
+
+/* ═══════════════════════════════════════
+   KEYBOARD
+═══════════════════════════════════════ */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('pdOverlay').classList.contains('show')) {
+    closeProductDetail();
+  }
+});
+
+window.addEventListener('popstate', function(e) {
+  if (e.state && e.state.detailId) {
+    var item = getProductById(e.state.detailId);
+    if (item) openProductDetail(e.state.detailId);
+  } else {
+    closeProductDetail();
+  }
+});
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+
+/* 页面加载时检查 hash */
+function checkHashOnLoad() {
+  var hash = window.location.hash;
+  if (hash === '#instruments') {
+    document.getElementById('instruments').scrollIntoView({ behavior: 'smooth' });
+  } else if (hash === '#reagents') {
+    document.getElementById('reagents').scrollIntoView({ behavior: 'smooth' });
+  } else if (hash) {
+    var pid = hash.replace('#', '');
+    var item = getProductById(pid);
+    if (item) { setTimeout(function() { openProductDetail(pid); }, 200); }
+  }
+}
+
+/* 启动数据加载 */
+loadData();
+</script>
+
+</body>
+</html>
