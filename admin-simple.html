@@ -57,6 +57,7 @@ function tryLogin() {
     console.log('PASSWORD MATCH! Login successful.');
     successEl.style.display = 'block';
     errEl.style.display = 'none';
+    sessionStorage.setItem('adminAuth','1');
     setTimeout(function(){
       // Redirect to actual admin
       window.location.href = 'admin.html';
