@@ -7,16 +7,17 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;background:#0f1117;color:#e4e7ed;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.login-box{background:#1a1d27;border:1px solid #2e3348;border-radius:16px;padding:48px 40px;width:400px;max-width:92vw;text-align:center}
+.login-box{background:#1a1d27;border:1px solid #2e3348;border-radius:16px;padding:48px 40px;width:400px;max-width:92vw;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.3)}
 .login-logo{font-size:28px;font-weight:800;margin-bottom:8px}
 .login-logo .icon{display:inline-block;background:linear-gradient(135deg,#0ea5e9,#10b981);color:#fff;width:44px;height:44px;line-height:44px;border-radius:12px;font-size:20px;margin-right:10px;vertical-align:-4px}
 .login-sub{color:#9ca3af;font-size:14px;margin-bottom:32px}
-.login-input{width:100%;padding:14px 16px;background:#0f1117;border:1px solid #2e3348;border-radius:8px;color:#e4e7ed;font-size:15px;outline:none;margin-bottom:16px}
+.login-input{width:100%;padding:14px 16px;background:#0f1117;border:1px solid #2e3348;border-radius:8px;color:#e4e7ed;font-size:15px;outline:none;margin-bottom:16px;transition:border-color .2s}
 .login-input:focus{border-color:#0ea5e9}
 .login-btn{width:100%;padding:14px;background:#0ea5e9;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer}
 .login-btn:hover{background:#38bdf8}
 .login-error{color:#ef4444;font-size:13px;margin-top:12px;display:none}
 .login-success{color:#10b981;font-size:15px;margin-top:16px;display:none;font-weight:700}
+.login-debug{color:#f59e0b;font-size:11px;margin-top:16px;text-align:left;background:rgba(245,158,11,.1);padding:10px 12px;border-radius:8px;white-space:pre-wrap;font-family:monospace;display:none;max-height:250px;overflow-y:auto;word-break:break-all}
 </style>
 </head>
 <body>
@@ -24,59 +25,93 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-
 <div class="login-box" id="loginBox">
   <div class="login-logo"><span class="icon">佰</span>佰洛生物后台管理</div>
   <p class="login-sub">请输入管理员密码</p>
-  <input type="password" id="pwdInput" class="login-input" placeholder="管理员密码" autofocus>
-  <button class="login-btn" id="loginBtn" onclick="tryLogin()">登 录</button>
+  <input type="password" id="pwdInput" class="login-input" placeholder="管理员密码" autofocus onkeydown="if(event.key==='Enter')tryLogin()">
+  <button class="login-btn" onclick="tryLogin()">登 录</button>
   <div class="login-error" id="loginError">密码错误，请重试</div>
   <div class="login-success" id="loginSuccess">登录成功！正在进入后台...</div>
+  <div class="login-debug" id="loginDebug"></div>
 </div>
 
 <script>
-console.log('=== Admin login script loaded ===');
-console.log('Testing: typeof tryLogin =', typeof tryLogin);
-console.log('Testing: loginBtn found =', !!document.getElementById('loginBtn'));
-console.log('Testing: pwdInput found =', !!document.getElementById('pwdInput'));
+var _debug = [];
+function _log(m) { _debug.push(new Date().toISOString().slice(11,19) + ' ' + m); console.log('[SIMPLE]', m); }
+
+_log('=== admin-simple loaded ===');
+_log('URL: ' + location.href);
+_log('Protocol: ' + location.protocol);
+_log('Hostname: ' + location.hostname);
+
+// Test sessionStorage
+try {
+  _log('sessionStorage available: ' + (typeof sessionStorage !== 'undefined' ? 'YES' : 'NO'));
+  var tk = '_stest_' + Math.random();
+  sessionStorage.setItem(tk, '1');
+  var tv = sessionStorage.getItem(tk);
+  sessionStorage.removeItem(tk);
+  _log('sessionStorage R/W test: ' + (tv === '1' ? 'PASS' : 'FAIL'));
+} catch(e) { _log('sessionStorage test ERROR: ' + e.message); }
 
 function tryLogin() {
-  console.log('tryLogin() called');
+  _log('=== tryLogin() called ===');
   var pwd = document.getElementById('pwdInput').value;
   var errEl = document.getElementById('loginError');
   var successEl = document.getElementById('loginSuccess');
+  var debugEl = document.getElementById('loginDebug');
   
-  console.log('Password entered, length:', pwd.length);
+  _log('Password length: ' + pwd.length);
   
   if (!pwd) {
-    console.log('Empty password');
+    _log('Empty password');
     errEl.style.display = 'block';
     errEl.textContent = '请输入密码';
     setTimeout(function(){ errEl.style.display = 'none'; }, 2000);
+    debugEl.style.display = 'block';
+    debugEl.textContent = _debug.join('\n');
     return;
   }
   
-  // Direct plaintext comparison - simplest possible check
   if (pwd === 'Bailuo@2026Admin') {
-    console.log('PASSWORD MATCH! Login successful.');
+    _log('PASSWORD MATCH');
     successEl.style.display = 'block';
     errEl.style.display = 'none';
-    sessionStorage.setItem('adminAuth','1');
+    
+    // SET sessionStorage
+    _log('Setting adminAuth in sessionStorage...');
+    sessionStorage.setItem('adminAuth', '1');
+    var checkVal = sessionStorage.getItem('adminAuth');
+    _log('Verify sessionStorage: "' + checkVal + '" (type: ' + typeof checkVal + ')');
+    _log('Match check: ' + (checkVal === '1'));
+    
+    // Additional debug
+    _log('sessionStorage length: ' + sessionStorage.length);
+    _log('Redirect target: admin.html');
+    _log('Full redirect URL: ' + location.protocol + '//' + location.host + '/admin.html');
+    
+    // Show debug
+    debugEl.style.display = 'block';
+    debugEl.textContent = _debug.join('\n');
+    
+    _log('Waiting 1.5s then redirecting...');
     setTimeout(function(){
-      // Redirect to actual admin
+      _log('Redirecting NOW to admin.html');
       window.location.href = 'admin.html';
-    }, 1000);
+    }, 1500);
   } else {
-    console.log('Password mismatch. Entered:', pwd.length, 'chars. Expected: Bailuo@2026Admin');
+    _log('PASSWORD MISMATCH');
+    _log('Expected length: 17 (Bailuo@2026Admin)');
+    _log('Got length: ' + pwd.length);
     errEl.style.display = 'block';
     errEl.textContent = '密码错误，请重试';
+    debugEl.style.display = 'block';
+    debugEl.textContent = _debug.join('\n');
     setTimeout(function(){ errEl.style.display = 'none'; }, 2500);
   }
 }
 
-// Enter key support
-document.getElementById('pwdInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    console.log('Enter key pressed on password input');
-    tryLogin();
-  }
-});
+// Show initial debug
+var dbg = document.getElementById('loginDebug');
+dbg.style.display = 'block';
+dbg.textContent = _debug.join('\n');
 </script>
 </body>
 </html>
