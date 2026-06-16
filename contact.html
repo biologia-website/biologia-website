@@ -218,7 +218,9 @@
 
     <!-- 右侧：留言表单 -->
     <div class="contact-form" id="contactFormWrap">
-      <form id="contactForm" onsubmit="handleContactSubmit(event)">
+      <form id="contactForm">
+        <!-- Formspree — 留言提交至 service@biologia.cn -->
+        <input type="hidden" name="_subject" value="佰洛生物官网留言">
         <div class="form-group">
           <label for="cfName">姓名 *</label>
           <input type="text" id="cfName" name="name" placeholder="您的姓名" required>
@@ -279,21 +281,56 @@
 </footer>
 
 <script>
-/* ═══════════════════════════════════════
-   联系我们 — 留言表单提交
-═══════════════════════════════════════ */
-function handleContactSubmit(e) {
-  e.preventDefault();
-  var btn = document.getElementById('cfSubmitBtn');
-  btn.disabled = true;
-  btn.textContent = '提交中…';
+/* ═══════════════════════════════════════════════════════════
+   联系我们 — 留言表单通过 Formspree 发送至 service@biologia.cn
+═══════════════════════════════════════════════════════════ */
+var FORMSPREE_ID = 'mnjyrvpn';
 
-  /* 模拟提交（接入 Formspree 等后端替换此处） */
-  setTimeout(function() {
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  }, 600);
-}
+(function() {
+  var form = document.getElementById('contactForm');
+  var btn  = document.getElementById('cfSubmitBtn');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    /* 获取表单数据 */
+    var data = {
+      name:    document.getElementById('cfName').value.trim(),
+      email:   document.getElementById('cfEmail').value.trim(),
+      org:     document.getElementById('cfOrg').value.trim(),
+      message: document.getElementById('cfMsg').value.trim()
+    };
+
+    /* 按钮状态 */
+    btn.disabled = true;
+    btn.textContent = '提交中…';
+
+    /* 通过 AJAX 发送到 Formspree，无页面跳转 */
+    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function(res) {
+      if (res.ok) {
+        /* 成功：隐藏表单，显示成功提示 */
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        /* Formspree 返回错误 */
+        btn.disabled = false;
+        btn.textContent = '提交留言';
+        alert('提交失败，请稍后重试或直接发送邮件至 service@biologia.cn');
+      }
+    })
+    .catch(function() {
+      /* 网络错误 */
+      btn.disabled = false;
+      btn.textContent = '提交留言';
+      alert('网络异常，请检查网络后重试，或直接发送邮件至 service@biologia.cn');
+    });
+  });
+})();
 </script>
 
 </body>
