@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鐧诲綍璇婃柇宸ュ叿</title>
+<style>
+:root {--bg:#0f1117;--surface:#1a1d27;--border:#2e3348;--text:#e4e7ed;--text2:#9ca3af;--primary:#0ea5e9;--accent:#10b981;--danger:#ef4444;--radius:8px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,PingFang SC,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;width:500px;max-width:100%;}
+h2{margin-bottom:8px;font-size:20px;}
+p.sub{color:var(--text2);font-size:13px;margin-bottom:20px;}
+input{width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:15px;outline:none;margin-bottom:12px;}
+input:focus{border-color:var(--primary);}
+.btn{width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius);font-size:15px;font-weight:600;cursor:pointer;margin-bottom:12px;}
+.btn2{width:100%;padding:12px;background:transparent;border:1px solid var(--border);color:var(--text2);border-radius:var(--radius);font-size:14px;cursor:pointer;}
+.result{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-top:16px;font-family:monospace;font-size:13px;word-break:break-all;min-height:40px;color:var(--text2);}
+.result.good{color:var(--accent);border-color:var(--accent);}
+.result.bad{color:var(--danger);border-color:var(--danger);}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>鐧诲綍璇婃柇宸ュ叿</h2>
+<p class="sub">杈撳叆瀵嗙爜锛屽姣?admin.html 涓殑 hash 鏄惁涓€鑷?/p>
+<input type="password" id="pwd" placeholder="杈撳叆瀵嗙爜" autofocus onkeydown="if(event.key==='Enter')check()">
+<button class="btn" onclick="check()">璁＄畻 SHA256 骞跺姣?/button>
+<button class="btn2" onclick="checkKnown()">瀵规瘮銆孊ailuo@2026Admin銆?/button>
+<div id="result" class="result">绛夊緟鎿嶄綔...</div>
+<div style="margin-top:8px;font-size:12px;color:var(--text2)">鐩爣 Hash: 681152fe59775bedbfe06a7378087321e7dfdb92e4d2fd295ac043a941e4771f</div>
+</div>
+
+<script>
+async function sha256(msg){
+  var buf = new TextEncoder().encode(msg);
+  var hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+var TARGET='681152fe59775bedbfe06a7378087321e7dfdb92e4d2fd295ac043a941e4771f';
+var r = document.getElementById('result');
+async function check(){
+  var pwd=document.getElementById('pwd').value;
+  if(!pwd){r.textContent='璇疯緭鍏ュ瘑鐮?;r.className='result bad';return;}
+  try{
+    var h=await sha256(pwd);
+    var match=(h===TARGET);
+    r.className=match?'result good':'result bad';
+    r.innerHTML='璁＄畻鐨?Hash:<br>'+h+'<br><br>'+(match?'鉁?鍖归厤鎴愬姛锛佸瘑鐮佹纭€?:'鉂?涓嶅尮閰嶏紒瀵嗙爜涓嶆纭€?);
+  }catch(e){
+    r.textContent='SHA256 璁＄畻澶辫触: '+e.message;
+    r.className='result bad';
+  }
+}
+async function checkKnown(){
+  try{
+    var h=await sha256('Bailuo@2026Admin');
+    var match=(h===TARGET);
+    r.className=match?'result good':'result bad';
+    r.innerHTML='Hash of "Bailuo@2026Admin":<br>'+h+'<br><br>'+(match?'鉁?涓庣洰鏍?Hash 涓€鑷淬€?:'鉂?涓嶄竴鑷达紒Hash 璁＄畻寮傚父銆?);
+  }catch(e){
+    r.textContent='澶辫触: '+e.message; r.className='result bad';
+  }
+}
+</script>
+</body>
+</html>
