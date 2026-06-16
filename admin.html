@@ -84,6 +84,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-
 .inline-tag{display:inline-block;padding:2px 8px;background:rgba(14,165,233,.15);color:var(--primary);border-radius:4px;font-size:12px;margin-right:6px;cursor:pointer}
 .inline-tag:hover{background:rgba(14,165,233,.3)}
 </style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <script>
 // ===== PAGE INIT DEBUG PANEL =====
 var _debug = [];
@@ -157,11 +158,34 @@ try {
   </div>
   <!-- Export Tab -->
   <div class="tab-content" id="tab-export">
-    <div class="section-header"><h2>数据导出</h2></div>
-    <button class="btn btn-primary" onclick="downloadJSON('products')">导出产品数据 (JSON)</button>
-    <button class="btn btn-outline" onclick="downloadJSON('services')" style="margin-left:8px">导出服务数据 (JSON)</button>
-    <button class="btn btn-outline" onclick="downloadJSON('config')" style="margin-left:8px">导出网站配置 (JSON)</button>
-    <button class="btn btn-accent" onclick="saveToGitHub()" style="margin-left:24px">保存并发布到网站</button>
+    <div class="section-header"><h2>数据导出 / 导入</h2></div>
+    <div style="margin-bottom:24px">
+      <h3 style="font-size:16px;margin-bottom:12px;color:var(--primary)">导出 JSON</h3>
+      <button class="btn btn-primary" onclick="downloadJSON('products')">导出产品数据 (JSON)</button>
+      <button class="btn btn-outline" onclick="downloadJSON('services')" style="margin-left:8px">导出服务数据 (JSON)</button>
+      <button class="btn btn-outline" onclick="downloadJSON('config')" style="margin-left:8px">导出网站配置 (JSON)</button>
+    </div>
+    <div style="margin-bottom:24px">
+      <h3 style="font-size:16px;margin-bottom:12px;color:var(--accent)">导出 Excel (.xlsx)</h3>
+      <button class="btn btn-accent" onclick="downloadExcel('products')">导出产品数据 (Excel)</button>
+      <button class="btn btn-outline" onclick="downloadExcel('services')" style="margin-left:8px">导出服务数据 (Excel)</button>
+      <button class="btn btn-outline" onclick="downloadExcel('config')" style="margin-left:8px">导出网站配置 (Excel)</button>
+    </div>
+    <div style="margin-bottom:24px;padding-top:20px;border-top:1px solid var(--border)">
+      <h3 style="font-size:16px;margin-bottom:12px;color:#f59e0b">导入数据</h3>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:12px">支持导入之前导出的 JSON 文件。新数据将<strong>替换</strong>当前对应类型的数据。</p>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <select id="importType" style="padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:13px">
+          <option value="products">导入产品数据</option>
+          <option value="services">导入服务数据</option>
+          <option value="config">导入网站配置</option>
+        </select>
+        <input type="file" id="importFile" accept=".json" style="padding:9px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:13px" onchange="handleImport(this)">
+        <button class="btn btn-primary" onclick="executeImport()">执行导入</button>
+      </div>
+      <div id="importPreview" style="margin-top:12px;display:none"></div>
+    </div>
+    <button class="btn btn-accent" onclick="saveToGitHub()" style="margin-top:16px">保存并发布到网站</button>
   </div>
 </div>
 
@@ -185,6 +209,7 @@ try {
     <div class="form-group"><label>分类</label><select id="prodCat"><option value="reagents">试剂与耗材</option><option value="instruments">实验仪器</option></select></div>
     <div class="form-group"><label>子分类 (仪器)</label><input id="prodSubcat" placeholder="如：基因检测"></div>
     <div class="form-group"><label>图标 (emoji)</label><input id="prodIcon" placeholder="🧫"></div>
+    <div class="form-group"><label>产品图片 URL</label><input id="prodImage" placeholder="images/product-name.png 或完整URL"><p style="font-size:11px;color:var(--text2);margin-top:2px">留空则不显示。建议放到仓库 images/ 目录，如 images/ipsc-kit.png</p></div>
     <div class="form-group"><label>是否热门</label><select id="prodHot"><option value="0">否</option><option value="1">是</option></select></div>
     <div class="form-group"><label>简介</label><input id="prodSummary"></div>
     <div class="form-group"><label>详细介绍 (支持 HTML)</label><textarea id="prodIntro" rows="4"></textarea></div>
@@ -368,6 +393,9 @@ function renderProducts() {
     if (p.subcat) html += '<span class="badge badge-cat">' + esc(p.subcat) + '</span>';
     if (p.hot) html += '<span class="badge badge-hot">热门</span>';
     html += '</div></div>';
+    if (p.image) {
+      html += '<div style="margin-bottom:10px"><img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" style="max-width:120px;max-height:80px;border-radius:6px;border:1px solid var(--border);object-fit:contain" onerror="this.style.display=\'none\'"></div>';
+    }
     html += '<div style="color:var(--text2);font-size:13px;margin-bottom:12px">' + esc(p.summary) + '</div>';
     html += '<div class="card-actions">';
     html += '<button class="btn btn-outline" onclick="editProduct(\'' + p.id + '\')">编辑</button>';
@@ -431,6 +459,7 @@ function editProduct(id) {
   document.getElementById('prodCat').value = p.cat || 'reagents';
   document.getElementById('prodSubcat').value = p.subcat || '';
   document.getElementById('prodIcon').value = p.icon || '';
+  document.getElementById('prodImage').value = p.image || '';
   document.getElementById('prodHot').value = p.hot ? '1' : '0';
   document.getElementById('prodSummary').value = p.summary || '';
   document.getElementById('prodIntro').value = (p.detail && p.detail.intro) || '';
@@ -448,6 +477,7 @@ function openProductModal() {
   document.getElementById('prodCat').value = 'reagents';
   document.getElementById('prodSubcat').value = '';
   document.getElementById('prodIcon').value = '';
+  document.getElementById('prodImage').value = '';
   document.getElementById('prodHot').value = '0';
   document.getElementById('prodSummary').value = '';
   document.getElementById('prodIntro').value = '';
@@ -464,6 +494,7 @@ function saveProduct() {
     cat: document.getElementById('prodCat').value,
     name: document.getElementById('prodName').value,
     icon: document.getElementById('prodIcon').value,
+    image: document.getElementById('prodImage').value.trim() || '',
     hot: document.getElementById('prodHot').value === '1',
     summary: document.getElementById('prodSummary').value,
     detail: {
@@ -730,6 +761,130 @@ function downloadJSON(type) {
   var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
   downloadBlob(blob, name);
   toast(name + ' 已下载', 'success');
+}
+
+function downloadExcel(type) {
+  try {
+    var data, name;
+    if (type === 'products') { data = flattenProducts(); name = 'biologia_products.xlsx'; }
+    else if (type === 'services') { data = flattenServices(); name = 'biologia_services.xlsx'; }
+    else { data = flattenSiteConfig(); name = 'biologia_site-config.xlsx'; }
+    if (!data || data.length === 0) { toast('无数据可导出', 'error'); return; }
+    if (typeof XLSX === 'undefined') { toast('SheetJS 加载中，请稍后再试', 'error'); return; }
+    var ws = XLSX.utils.json_to_sheet(data);
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, name);
+    toast(name + ' 已下载', 'success');
+  } catch(e) { toast('Excel导出失败：' + e.message, 'error'); }
+}
+
+function flattenProducts() {
+  var result = [];
+  for (var i = 0; i < productsData.length; i++) {
+    var p = productsData[i];
+    result.push({
+      'ID': p.id || '',
+      '名称': p.name || '',
+      '分类': p.cat || '',
+      '子分类': p.subcat || '',
+      '图标': p.icon || '',
+      '图片URL': p.image || '',
+      '是否热门': p.hot ? '是' : '否',
+      '简介': p.summary || '',
+      '详细介绍': (p.detail && p.detail.intro) || '',
+      '产品特点': (p.detail && p.detail.features) ? p.detail.features.join(' | ') : '',
+      '规格参数': (p.detail && p.detail.specs) ? p.detail.specs.map(function(s){return s.key+': '+s.val}).join(' | ') : '',
+      '适用场景': (p.detail && p.detail.applications) || '',
+      '订购信息': (p.detail && p.detail.ordering) || ''
+    });
+  }
+  return result;
+}
+
+function flattenServices() {
+  var result = [];
+  for (var i = 0; i < servicesData.length; i++) {
+    var s = servicesData[i];
+    result.push({
+      '编号': s.num || '',
+      '图标': s.icon || '',
+      '标签': s.tag || '',
+      '名称': s.name || '',
+      '简介': s.summary || '',
+      '服务流程': s.flow || '',
+      '详细介绍': (s.detail && s.detail.intro) || '',
+      '服务特点': (s.detail && s.detail.features) ? s.detail.features.join(' | ') : '',
+      '规格参数': (s.detail && s.detail.specs) ? s.detail.specs.map(function(sp){return sp.key+': '+sp.val}).join(' | ') : '',
+      '适用场景': (s.detail && s.detail.applications) || '',
+      '交付物': (s.detail && s.detail.deliverables) || ''
+    });
+  }
+  return result;
+}
+
+function flattenSiteConfig() {
+  return [
+    { '网站标题': siteConfigData.siteTitle || '', 'SEO标题': (siteConfigData.seo && siteConfigData.seo.title) || '', 'SEO描述': (siteConfigData.seo && siteConfigData.seo.description) || '', 'SEO关键词': (siteConfigData.seo && siteConfigData.seo.keywords) || '', 'OG标题': (siteConfigData.og && siteConfigData.og.title) || '', 'OG描述': (siteConfigData.og && siteConfigData.og.description) || '', 'OG图片': (siteConfigData.og && siteConfigData.og.image) || '' }
+  ];
+}
+
+// ===== IMPORT =====
+var importFileData = null;
+
+function handleImport(fileInput) {
+  if (!fileInput.files || !fileInput.files[0]) { importFileData = null; return; }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var json = JSON.parse(e.target.result);
+      importFileData = json;
+      var type = document.getElementById('importType').value;
+      var preview = document.getElementById('importPreview');
+      preview.style.display = 'block';
+      if (type === 'products' || type === 'services') {
+        var arr = Array.isArray(json) ? json : [];
+        preview.innerHTML = '<div class="card" style="margin-top:0;font-size:13px;color:var(--text2)">' +
+          '检测到 <strong>' + arr.length + '</strong> 条数据记录，JSON 格式有效。点击「执行导入」替换当前 ' +
+          (type === 'products' ? '产品' : '服务') + ' 数据。</div>';
+      } else {
+        preview.innerHTML = '<div class="card" style="margin-top:0;font-size:13px;color:var(--text2)">' +
+          '检测到网站配置数据，JSON 格式有效。点击「执行导入」替换当前配置。</div>';
+      }
+    } catch(e) {
+      importFileData = null;
+      document.getElementById('importPreview').style.display = 'block';
+      document.getElementById('importPreview').innerHTML = '<div style="color:var(--danger);font-size:13px">JSON 解析失败：' + e.message + '</div>';
+    }
+  };
+  reader.readAsText(fileInput.files[0]);
+}
+
+function executeImport() {
+  if (!importFileData) { toast('请先选择要导入的 JSON 文件', 'error'); return; }
+  var type = document.getElementById('importType').value;
+  if (!confirm('确定用导入的数据替换当前所有 ' + (type === 'products' ? '产品' : type === 'services' ? '服务' : '网站配置') + ' 数据？此操作不可撤销。')) return;
+  
+  if (type === 'products') {
+    if (!Array.isArray(importFileData)) { toast('产品数据格式错误：必须是数组', 'error'); return; }
+    productsData = importFileData;
+    renderProducts();
+    toast('已导入 ' + productsData.length + ' 条产品数据', 'success');
+  } else if (type === 'services') {
+    if (!Array.isArray(importFileData)) { toast('服务数据格式错误：必须是数组', 'error'); return; }
+    servicesData = importFileData;
+    renderServices();
+    toast('已导入 ' + servicesData.length + ' 条服务数据', 'success');
+  } else {
+    if (typeof importFileData !== 'object' || Array.isArray(importFileData)) { toast('网站配置格式错误：必须是对象', 'error'); return; }
+    siteConfigData = importFileData;
+    renderSEO();
+    toast('已导入网站配置', 'success');
+  }
+  
+  importFileData = null;
+  document.getElementById('importFile').value = '';
+  document.getElementById('importPreview').style.display = 'none';
 }
 
 function downloadBlob(blob, name) {
