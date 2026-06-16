@@ -393,7 +393,6 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 /* ============================================
    常量 & 全局状态
    ============================================ */
-const ADMIN_HASH = '681152fe59775bedbfe06a7378087321e7dfdb92e4d2fd295ac043a941e4771f'; // SHA256 of "Bailuo@2026Admin"
 /* GitHub Token — 首次使用时在设置页填入，保存在 localStorage */
 function getGHToken() { return localStorage.getItem('gh_token') || ''; }
 function setGHToken(t) { if(t) localStorage.setItem('gh_token',t); }
@@ -409,39 +408,24 @@ let editingServiceId = null;
 /* ============================================
    登录 / 退出
    ============================================ */
-async function sha256(msg) {
-  var buf = new TextEncoder().encode(msg);
-  var hash = await crypto.subtle.digest('SHA-256', buf);
-  return Array.from(new Uint8Array(hash)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
-}
-
-async function doLogin() {
+function doLogin() {
   var pwd = document.getElementById('pwdInput').value;
   var err = document.getElementById('loginError');
   if (!pwd) { err.style.display = 'block'; err.textContent = '请输入密码'; setTimeout(function(){err.style.display='none';err.textContent='密码错误，请重试'},2000); return; }
-  var ok = false;
-  // 方式1: 直接明文比对 (绕过 crypto.subtle 兼容性问题)
+  // 直接明文比对
   var savedPwd = localStorage.getItem('admin_pwd_plain');
-  if (savedPwd && pwd === savedPwd) { ok = true; }
-  else if (pwd === 'Bailuo@2026Admin') { ok = true; }
-  // 方式2: SHA256 比对 (后备)
-  if (!ok) {
-    try {
-      var hash = await sha256(pwd);
-      var savedHash = localStorage.getItem('admin_pwd_hash');
-      var validHash = savedHash || ADMIN_HASH;
-      if (hash === validHash) ok = true;
-    } catch(e) { console.warn('sha256 login fallback failed:', e); }
-  }
-  if (ok) {
-    sessionStorage.setItem('adminAuth','1');
-    document.getElementById('loginWrap').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    await loadAllData();
-  } else {
+  if (savedPwd && pwd === savedPwd) { /* ok */ }
+  else if (pwd === 'Bailuo@2026Admin') { /* ok */ }
+  else {
     err.style.display = 'block';
     setTimeout(function(){err.style.display='none'},2500);
+    return;
   }
+  // 登录成功
+  sessionStorage.setItem('adminAuth','1');
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  loadAllData();
 }
 
 function doLogout() {
@@ -457,7 +441,7 @@ function showSettings() {
   showModal('settingsModal');
 }
 
-async function saveSettings() {
+function saveSettings() {
   var newToken = document.getElementById('setGHToken').value.trim();
   var newPwd = document.getElementById('setNewPwd').value.trim();
   if (newToken && newToken !== '••••••••••••••••') {
@@ -465,8 +449,6 @@ async function saveSettings() {
     toast('GitHub Token 已保存', 'success');
   }
   if (newPwd) {
-    var newHash = await sha256(newPwd);
-    localStorage.setItem('admin_pwd_hash', newHash);
     localStorage.setItem('admin_pwd_plain', newPwd);
     toast('管理员密码已修改，下次登录生效', 'success');
   }
