@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佰洛生物 - 后台管理</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;background:#0f1117;color:#e4e7ed;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.login-box{background:#1a1d27;border:1px solid #2e3348;border-radius:16px;padding:48px 40px;width:400px;max-width:92vw;text-align:center}
+.login-logo{font-size:28px;font-weight:800;margin-bottom:8px}
+.login-logo .icon{display:inline-block;background:linear-gradient(135deg,#0ea5e9,#10b981);color:#fff;width:44px;height:44px;line-height:44px;border-radius:12px;font-size:20px;margin-right:10px;vertical-align:-4px}
+.login-sub{color:#9ca3af;font-size:14px;margin-bottom:32px}
+.login-input{width:100%;padding:14px 16px;background:#0f1117;border:1px solid #2e3348;border-radius:8px;color:#e4e7ed;font-size:15px;outline:none;margin-bottom:16px}
+.login-input:focus{border-color:#0ea5e9}
+.login-btn{width:100%;padding:14px;background:#0ea5e9;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer}
+.login-btn:hover{background:#38bdf8}
+.login-error{color:#ef4444;font-size:13px;margin-top:12px;display:none}
+.login-success{color:#10b981;font-size:15px;margin-top:16px;display:none;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="login-box" id="loginBox">
+  <div class="login-logo"><span class="icon">佰</span>佰洛生物后台管理</div>
+  <p class="login-sub">请输入管理员密码</p>
+  <input type="password" id="pwdInput" class="login-input" placeholder="管理员密码" autofocus>
+  <button class="login-btn" id="loginBtn" onclick="tryLogin()">登 录</button>
+  <div class="login-error" id="loginError">密码错误，请重试</div>
+  <div class="login-success" id="loginSuccess">登录成功！正在进入后台...</div>
+</div>
+
+<script>
+console.log('=== Admin login script loaded ===');
+console.log('Testing: typeof tryLogin =', typeof tryLogin);
+console.log('Testing: loginBtn found =', !!document.getElementById('loginBtn'));
+console.log('Testing: pwdInput found =', !!document.getElementById('pwdInput'));
+
+function tryLogin() {
+  console.log('tryLogin() called');
+  var pwd = document.getElementById('pwdInput').value;
+  var errEl = document.getElementById('loginError');
+  var successEl = document.getElementById('loginSuccess');
+  
+  console.log('Password entered, length:', pwd.length);
+  
+  if (!pwd) {
+    console.log('Empty password');
+    errEl.style.display = 'block';
+    errEl.textContent = '请输入密码';
+    setTimeout(function(){ errEl.style.display = 'none'; }, 2000);
+    return;
+  }
+  
+  // Direct plaintext comparison - simplest possible check
+  if (pwd === 'Bailuo@2026Admin') {
+    console.log('PASSWORD MATCH! Login successful.');
+    successEl.style.display = 'block';
+    errEl.style.display = 'none';
+    setTimeout(function(){
+      // Redirect to actual admin
+      window.location.href = 'admin.html';
+    }, 1000);
+  } else {
+    console.log('Password mismatch. Entered:', pwd.length, 'chars. Expected: Bailuo@2026Admin');
+    errEl.style.display = 'block';
+    errEl.textContent = '密码错误，请重试';
+    setTimeout(function(){ errEl.style.display = 'none'; }, 2500);
+  }
+}
+
+// Enter key support
+document.getElementById('pwdInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    console.log('Enter key pressed on password input');
+    tryLogin();
+  }
+});
+</script>
+</body>
+</html>
