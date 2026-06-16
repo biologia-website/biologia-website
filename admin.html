@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>佰洛生物 — 后台管理</title>
+<title>浣版礇鐢熺墿 鈥?鍚庡彴绠＄悊</title>
 <style>
-/* ═══════════════════════════════════════
-   ADMIN — 后台管理系统样式
-   极简科技深色主题
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   ADMIN 鈥?鍚庡彴绠＄悊绯荤粺鏍峰紡
+   鏋佺畝绉戞妧娣辫壊涓婚
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 :root {
   --bg: #0f1117; --surface: #1a1d27; --surface2: #242836;
   --border: #2e3348; --text: #e4e7ed; --text2: #9ca3af;
@@ -19,7 +19,7 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
 
-/* 登录页 */
+/* 鐧诲綍椤?*/
 .login-wrap { display:flex; align-items:center; justify-content:center; min-height:100vh; background:linear-gradient(135deg,#0f1117 0%,#1a1d27 50%,#0f172a 100%); }
 .login-box { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:48px 40px; width:400px; max-width:92vw; box-shadow:var(--shadow); text-align:center; }
 .login-logo { font-size:28px; font-weight:800; margin-bottom:8px; }
@@ -31,10 +31,10 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 .login-btn:hover { background:var(--primary-hover); }
 .login-error { color:var(--danger); font-size:13px; margin-top:12px; display:none; }
 
-/* 主界面 */
+/* 涓荤晫闈?*/
 .app { display:none; min-height:100vh; }
 
-/* 顶栏 */
+/* 椤舵爮 */
 .topbar { position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;gap:16px; }
 .topbar-brand { font-weight:700;font-size:17px;display:flex;align-items:center;gap:8px; }
 .topbar-brand .icon { background:linear-gradient(135deg,#0ea5e9,#10b981);color:#fff;width:30px;height:30px;line-height:30px;border-radius:8px;text-align:center;font-size:14px;flex-shrink:0; }
@@ -42,18 +42,18 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 .topbar-btn { padding:6px 16px;background:transparent;border:1px solid var(--border);color:var(--text2);border-radius:var(--radius-sm);font-size:13px;cursor:pointer;transition:.2s; }
 .topbar-btn:hover { border-color:var(--danger);color:var(--danger); }
 
-/* 标签导航 */
+/* 鏍囩瀵艰埅 */
 .tabs { display:flex;background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;overflow-x:auto; gap:4px; }
 .tab { padding:12px 20px;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;font-size:14px;font-weight:500;white-space:nowrap;transition:.2s; user-select:none; }
 .tab:hover { color:var(--text); }
 .tab.active { color:var(--primary); border-color:var(--primary); }
 
-/* 面板 */
+/* 闈㈡澘 */
 .panel { display:none; padding:24px; animation:fadeIn .25s ease; }
 .panel.active { display:block; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
 
-/* 工具栏 */
+/* 宸ュ叿鏍?*/
 .toolbar { display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center; }
 .toolbar .search { flex:1;min-width:180px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;outline:none; transition:border .2s; }
 .toolbar .search:focus { border-color:var(--primary); }
@@ -68,7 +68,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 .btn-outline { background:transparent;border:1px solid var(--border);color:var(--text2); }
 .btn-outline:hover { border-color:var(--primary);color:var(--primary); }
 
-/* 卡片网格 */
+/* 鍗＄墖缃戞牸 */
 .grid { display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); }
 .card { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:border-color .2s,box-shadow .2s; cursor:pointer; position:relative; }
 .card:hover { border-color:var(--primary);box-shadow:0 4px 16px rgba(14,165,233,.08); }
@@ -85,14 +85,14 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 .card-actions { display:flex;gap:6px;margin-top:12px;opacity:0;transition:opacity .2s; }
 .card:hover .card-actions { opacity:1; }
 
-/* 服务卡片特殊 */
+/* 鏈嶅姟鍗＄墖鐗规畩 */
 .svc-card { grid-column: span 1; }
 .svc-card .card-num { font-size:32px;font-weight:900;color:var(--primary);line-height:1; }
 .svc-card .card-num-wrap { display:flex;align-items:center;gap:12px; }
 .svc-card .card-num-wrap .card-info h3 { font-size:16px; }
 .svc-card .card-num-wrap .card-info p { font-size:12px;color:var(--text2); }
 
-/* SEO 表单 */
+/* SEO 琛ㄥ崟 */
 .seo-form { max-width:720px; }
 .form-group { margin-bottom:20px; }
 .form-label { display:block;font-size:13px;font-weight:600;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px; }
@@ -105,7 +105,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 .hl-num { font-size:28px;font-weight:900;color:var(--primary); }
 .hl-label { font-size:12px;color:var(--text2);margin-top:4px; }
 
-/* 弹窗 */
+/* 寮圭獥 */
 .modal-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;padding:20px; }
 .modal-overlay.show { display:flex; animation:fadeBg .2s ease; }
 @keyframes fadeBg { from{opacity:0} to{opacity:1} }
@@ -118,7 +118,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 .modal-body { padding:20px 24px 24px; }
 .modal-footer { display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid var(--border); }
 
-/* 动态表单字段 */
+/* 鍔ㄦ€佽〃鍗曞瓧娈?*/
 .field-list { display:flex;flex-direction:column;gap:10px; margin-bottom:16px; }
 .field-row { display:grid;grid-template-columns:120px 1fr 36px;gap:8px;align-items:center; }
 .field-row input { padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;outline:none; }
@@ -126,7 +126,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 .field-add { padding:8px 14px;background:transparent;border:1px dashed var(--border);color:var(--text2);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;transition:.2s; width:100%;}
 .field-add:hover { border-color:var(--primary);color:var(--primary); }
 
-/* 状态栏 */
+/* 鐘舵€佹爮 */
 .status-bar { position:fixed;bottom:0;left:0;right:0;background:var(--surface2);border-top:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;gap:16px;font-size:12px;color:var(--text2);z-index:150; z-index:150; }
 .status-dot { width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
@@ -141,7 +141,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 @keyframes slideIn { from{transform:translateX(60px);opacity:0} to{none} }
 @keyframes minimizeOut { to{transform:translateX(60px);opacity:0;pointer-events:none} }
 
-/* 导出区域 */
+/* 瀵煎嚭鍖哄煙 */
 .export-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px; }
 .export-card { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;transition:.2s; }
 .export-card:hover { border-color:var(--primary); transform:translateY(-2px); }
@@ -149,7 +149,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 .export-card h3 { font-size:15px;margin-bottom:6px; }
 .export-card p { font-size:12px;color:var(--text2); }
 
-/* 响应式 */
+/* 鍝嶅簲寮?*/
 @media(max-width:768px) {
   .grid { grid-template-columns:1fr; }
   .form-row,.hl-group { grid-template-columns:1fr; }
@@ -157,13 +157,13 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
   .field-row { grid-template-columns:1fr; }
 }
 
-/* 滚动条 */
+/* 婊氬姩鏉?*/
 ::-webkit-scrollbar { width:6px; height:6px; }
 ::-webkit-scrollbar-track { background:transparent; }
 ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
 ::-webkit-scrollbar-thumb:hover { background:var(--text2); }
 
-/* 加载遮罩 */
+/* 鍔犺浇閬僵 */
 .loading-mask { display:none;position:fixed;inset:0;background:rgba(15,17,23,.75);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:16px; }
 .loading-mask.show { display:flex; }
 .spinner { width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite; }
@@ -172,71 +172,71 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 </head>
 <body>
 
-<!-- ═══════════════ 登录页 ═══════════════ -->
+<!-- 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?鐧诲綍椤?鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?-->
 <div class="login-wrap" id="loginWrap">
   <div class="login-box">
-    <div class="login-logo"><span class="icon">佰</span>佰洛生物后台管理</div>
-    <p class="login-sub">请输入管理员密码进入控制面板</p>
-    <input type="password" id="pwdInput" class="login-input" placeholder="管理员密码" autofocus onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="login-btn" onclick="doLogin()">登 录</button>
-    <div class="login-error" id="loginError">密码错误，请重试</div>
+    <div class="login-logo"><span class="icon">浣?/span>浣版礇鐢熺墿鍚庡彴绠＄悊</div>
+    <p class="login-sub">璇疯緭鍏ョ鐞嗗憳瀵嗙爜杩涘叆鎺у埗闈㈡澘</p>
+    <input type="password" id="pwdInput" class="login-input" placeholder="绠＄悊鍛樺瘑鐮? autofocus onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">鐧?褰?/button>
+    <div class="login-error" id="loginError">瀵嗙爜閿欒锛岃閲嶈瘯</div>
   </div>
 </div>
 
-<!-- ═══════════════ 主应用 ═══════════════ -->
+<!-- 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?涓诲簲鐢?鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?-->
 <div class="app" id="app">
-  <!-- 顶栏 -->
+  <!-- 椤舵爮 -->
   <header class="topbar">
-    <div class="topbar-brand"><span class="icon">佰</span>佰洛生物 · 内容管理</div>
+    <div class="topbar-brand"><span class="icon">浣?/span>浣版礇鐢熺墿 路 鍐呭绠＄悊</div>
     <div class="topbar-spacer"></div>
-    <button class="topbar-btn" onclick="showSettings()">⚙ 设置</button>
-    <button class="topbar-btn" onclick="doLogout()">退出登录</button>
+    <button class="topbar-btn" onclick="showSettings()">鈿?璁剧疆</button>
+    <button class="topbar-btn" onclick="doLogout()">閫€鍑虹櫥褰?/button>
   </header>
 
-  <!-- 标签 -->
+  <!-- 鏍囩 -->
   <nav class="tabs">
-    <div class="tab active" onclick="switchTab('products',this)">产品管理</div>
-    <div class="tab" onclick="switchTab('services',this)">服务管理</div>
-    <div class="tab" onclick="switchTab('seo',this)">SEO 配置</div>
-    <div class="tab" onclick="switchTab('export',this)">数据导出</div>
+    <div class="tab active" onclick="switchTab('products',this)">浜у搧绠＄悊</div>
+    <div class="tab" onclick="switchTab('services',this)">鏈嶅姟绠＄悊</div>
+    <div class="tab" onclick="switchTab('seo',this)">SEO 閰嶇疆</div>
+    <div class="tab" onclick="switchTab('export',this)">鏁版嵁瀵煎嚭</div>
   </nav>
 
-  <!-- 产品管理 -->
+  <!-- 浜у搧绠＄悊 -->
   <section class="panel active" id="panel-products">
     <div class="toolbar">
-      <input type="text" class="search" id="prodSearch" placeholder="搜索产品名称..." oninput="renderProducts()">
+      <input type="text" class="search" id="prodSearch" placeholder="鎼滅储浜у搧鍚嶇О..." oninput="renderProducts()">
       <select class="filter" id="prodFilter" onchange="renderProducts()">
-        <option value="">全部分类</option>
-        <option value="hot">热门产品</option>
-        <option value="reagents">试剂与耗材</option>
-        <option value="instruments">实验仪器</option>
+        <option value="">鍏ㄩ儴鍒嗙被</option>
+        <option value="hot">鐑棬浜у搧</option>
+        <option value="reagents">璇曞墏涓庤€楁潗</option>
+        <option value="instruments">瀹為獙浠櫒</option>
       </select>
-      <button class="btn btn-primary" onclick="openProductModal()">+ 新增产品</button>
-      <button class="btn btn-accent" onclick="saveAllToGitHub()" title="将所有修改提交到 GitHub 并自动部署">发布到线上</button>
+      <button class="btn btn-primary" onclick="openProductModal()">+ 鏂板浜у搧</button>
+      <button class="btn btn-accent" onclick="saveAllToGitHub()" title="灏嗘墍鏈変慨鏀规彁浜ゅ埌 GitHub 骞惰嚜鍔ㄩ儴缃?>鍙戝竷鍒扮嚎涓?/button>
     </div>
     <div class="grid" id="productsGrid"></div>
   </section>
 
-  <!-- 服务管理 -->
+  <!-- 鏈嶅姟绠＄悊 -->
   <section class="panel" id="panel-services">
     <div class="toolbar">
-      <input type="text" class="search" id="svcSearch" placeholder="搜索服务..." oninput="renderServices()">
-      <button class="btn btn-primary" onclick="openServiceModal()">+ 新增服务</button>
-      <button class="btn btn-accent" onclick="saveAllToGitHub()">发布到线上</button>
+      <input type="text" class="search" id="svcSearch" placeholder="鎼滅储鏈嶅姟..." oninput="renderServices()">
+      <button class="btn btn-primary" onclick="openServiceModal()">+ 鏂板鏈嶅姟</button>
+      <button class="btn btn-accent" onclick="saveAllToGitHub()">鍙戝竷鍒扮嚎涓?/button>
     </div>
     <div class="grid" id="servicesGrid"></div>
   </section>
 
-  <!-- SEO 配置 -->
+  <!-- SEO 閰嶇疆 -->
   <section class="panel" id="panel-seo">
     <div class="toolbar">
-      <button class="btn btn-accent" onclick="saveAllToGitHub()">保存并发布</button>
+      <button class="btn btn-accent" onclick="saveAllToGitHub()">淇濆瓨骞跺彂甯?/button>
     </div>
     <div class="seo-form">
-      <h3 style="margin-bottom:20px;font-size:16px;">站点配置 & SEO 元数据</h3>
+      <h3 style="margin-bottom:20px;font-size:16px;">绔欑偣閰嶇疆 & SEO 鍏冩暟鎹?/h3>
       
       <div class="form-group">
-        <label class="form-label">网站标题（显示在浏览器标签）</label>
+        <label class="form-label">缃戠珯鏍囬锛堟樉绀哄湪娴忚鍣ㄦ爣绛撅級</label>
         <input type="text" class="form-input" id="cfgSiteTitle">
       </div>
       
@@ -258,7 +258,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 
       <hr style="border:none;border-top:1px solid var(--border);margin:28px 0">
 
-      <h3 style="margin-bottom:16px;font-size:16px;">社交分享 (Open Graph)</h3>
+      <h3 style="margin-bottom:16px;font-size:16px;">绀句氦鍒嗕韩 (Open Graph)</h3>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">OG Title</label>
@@ -276,125 +276,125 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 
       <hr style="border:none;border-top:1px solid var(--border);margin:28px 0">
 
-      <h3 style="margin-bottom:16px;font-size:16px;">关于佰洛 — 数据亮点</h3>
+      <h3 style="margin-bottom:16px;font-size:16px;">鍏充簬浣版礇 鈥?鏁版嵁浜偣</h3>
       <div class="hl-group" id="hlGroup"></div>
 
       <hr style="border:none;border-top:1px solid var(--border);margin:28px 0">
 
-      <h3 style="margin-bottom:16px;font-size:16px;">轮播图配置</h3>
+      <h3 style="margin-bottom:16px;font-size:16px;">杞挱鍥鹃厤缃?/h3>
       <div id="heroEditor"></div>
-      <button class="btn btn-outline" style="margin-top:10px" onclick="addHeroSlide()">+ 新增轮播图</button>
+      <button class="btn btn-outline" style="margin-top:10px" onclick="addHeroSlide()">+ 鏂板杞挱鍥?/button>
     </div>
   </section>
 
-  <!-- 数据导出 -->
+  <!-- 鏁版嵁瀵煎嚭 -->
   <section class="panel" id="panel-export">
     <div class="toolbar"></div>
     <div class="export-grid">
       <div class="export-card" onclick="downloadJSON('products')">
-        <div class="export-icon">📦</div>
-        <h3>导出产品数据</h3>
-        <p>JSON 格式下载</p>
+        <div class="export-icon">馃摝</div>
+        <h3>瀵煎嚭浜у搧鏁版嵁</h3>
+        <p>JSON 鏍煎紡涓嬭浇</p>
       </div>
       <div class="export-card" onclick="downloadJSON('services')">
-        <div class="export-icon">🔧</div>
-        <h3>导出服务数据</h3>
-        <p>JSON 格式下载</p>
+        <div class="export-icon">馃敡</div>
+        <h3>瀵煎嚭鏈嶅姟鏁版嵁</h3>
+        <p>JSON 鏍煎紡涓嬭浇</p>
       </div>
       <div class="export-card" onclick="downloadJSON('config')">
-        <div class="export-icon">⚙️</div>
-        <h3>导出站点配置</h3>
-        <p>JSON 格式下载</p>
+        <div class="export-icon">鈿欙笍</div>
+        <h3>瀵煎嚭绔欑偣閰嶇疆</h3>
+        <p>JSON 鏍煎紡涓嬭浇</p>
       </div>
       <div class="export-card" onclick="downloadExcel('products')">
-        <div class="export-icon">📊</div>
-        <h3>导出产品 Excel</h3>
-        <p>.xlsx 电子表格</p>
+        <div class="export-icon">馃搳</div>
+        <h3>瀵煎嚭浜у搧 Excel</h3>
+        <p>.xlsx 鐢靛瓙琛ㄦ牸</p>
       </div>
       <div class="export-card" onclick="downloadExcel('services')">
-        <div class="export-icon">📊</div>
-        <h3>导出服务 Excel</h3>
-        <p>.xlsx 电子表格</p>
+        <div class="export-icon">馃搳</div>
+        <h3>瀵煎嚭鏈嶅姟 Excel</h3>
+        <p>.xlsx 鐢靛瓙琛ㄦ牸</p>
       </div>
     </div>
   </section>
 
-  <!-- 状态栏 -->
+  <!-- 鐘舵€佹爮 -->
   <div class="status-bar" style="margin-bottom:0;">
     <span class="status-dot"></span>
-    <span class="status-msg" id="statusMsg">就绪</span>
-    <span id="lastSaved">—</span>
+    <span class="status-msg" id="statusMsg">灏辩华</span>
+    <span id="lastSaved">鈥?/span>
   </div>
 </div>
 
-<!-- 产品编辑弹窗 -->
+<!-- 浜у搧缂栬緫寮圭獥 -->
 <div class="modal-overlay" id="productModal">
   <div class="modal">
     <div class="modal-header">
-      <h2 id="prodModalTitle">编辑产品</h2>
+      <h2 id="prodModalTitle">缂栬緫浜у搧</h2>
       <button class="modal-close" onclick="closeModal('productModal')">&times;</button>
     </div>
     <div class="modal-body" id="productFormBody"></div>
     <div class="modal-footer">
-      <button class="btn btn-outline" onclick="closeModal('productModal')">取消</button>
-      <button class="btn btn-primary" onclick="saveProduct()">保存</button>
+      <button class="btn btn-outline" onclick="closeModal('productModal')">鍙栨秷</button>
+      <button class="btn btn-primary" onclick="saveProduct()">淇濆瓨</button>
     </div>
   </div>
 </div>
 
-<!-- 服务编辑弹窗 -->
+<!-- 鏈嶅姟缂栬緫寮圭獥 -->
 <div class="modal-overlay" id="serviceModal">
   <div class="modal">
     <div class="modal-header">
-      <h2 id="svcModalTitle">编辑服务</h2>
+      <h2 id="svcModalTitle">缂栬緫鏈嶅姟</h2>
       <button class="modal-close" onclick="closeModal('serviceModal')">&times;</button>
     </div>
     <div class="modal-body" id="serviceFormBody"></div>
     <div class="modal-footer">
-      <button class="btn btn-outline" onclick="closeModal('serviceModal')">取消</button>
-      <button class="btn btn-primary" onclick="saveService()">保存</button>
+      <button class="btn btn-outline" onclick="closeModal('serviceModal')">鍙栨秷</button>
+      <button class="btn btn-primary" onclick="saveService()">淇濆瓨</button>
     </div>
   </div>
 </div>
 
-<!-- 设置弹窗 -->
+<!-- 璁剧疆寮圭獥 -->
 <div class="modal-overlay" id="settingsModal">
   <div class="modal" style="width:480px">
     <div class="modal-header">
-      <h2>系统设置</h2>
+      <h2>绯荤粺璁剧疆</h2>
       <button class="modal-close" onclick="closeModal('settingsModal')">&times;</button>
     </div>
     <div class="modal-body">
       <div class="form-group">
         <label class="form-label">GitHub Personal Access Token</label>
         <input class="form-input" id="setGHToken" type="password" placeholder="ghp_..." value="">
-        <p style="color:var(--text2);font-size:12px;margin-top:4px">用于「发布到线上」功能，将数据提交到 GitHub 仓库。Token 仅保存在浏览器本地存储。</p>
+        <p style="color:var(--text2);font-size:12px;margin-top:4px">鐢ㄤ簬銆屽彂甯冨埌绾夸笂銆嶅姛鑳斤紝灏嗘暟鎹彁浜ゅ埌 GitHub 浠撳簱銆俆oken 浠呬繚瀛樺湪娴忚鍣ㄦ湰鍦板瓨鍌ㄣ€?/p>
       </div>
       <div class="form-group">
-        <label class="form-label">修改管理员密码</label>
-        <input class="form-input" id="setNewPwd" type="password" placeholder="留空则不修改">
+        <label class="form-label">淇敼绠＄悊鍛樺瘑鐮?/label>
+        <input class="form-input" id="setNewPwd" type="password" placeholder="鐣欑┖鍒欎笉淇敼">
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-outline" onclick="closeModal('settingsModal')">取消</button>
-      <button class="btn btn-primary" onclick="saveSettings()">保存设置</button>
+      <button class="btn btn-outline" onclick="closeModal('settingsModal')">鍙栨秷</button>
+      <button class="btn btn-primary" onclick="saveSettings()">淇濆瓨璁剧疆</button>
     </div>
   </div>
 </div>
 <div class="loading-mask" id="loadingMask">
   <div class="spinner"></div>
-  <div style="color:var(--text2);font-size:14px;">正在保存到 GitHub...</div>
+  <div style="color:var(--text2);font-size:14px;">姝ｅ湪淇濆瓨鍒?GitHub...</div>
 </div>
 
-<!-- Toast 容器 -->
+<!-- Toast 瀹瑰櫒 -->
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
-/* ═══════════════════════════════════════
-   常量 & 全局状态
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   甯搁噺 & 鍏ㄥ眬鐘舵€?
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 const ADMIN_HASH = '681152fe59775bedbfe06a7378087321e7dfdb92e4d2fd295ac043a941e4771f'; // SHA256 of "Bailuo@2026Admin"
-/* GitHub Token — 首次使用时在设置页填入，保存在 localStorage */
+/* GitHub Token 鈥?棣栨浣跨敤鏃跺湪璁剧疆椤靛～鍏ワ紝淇濆瓨鍦?localStorage */
 function getGHToken() { return localStorage.getItem('gh_token') || ''; }
 function setGHToken(t) { if(t) localStorage.setItem('gh_token',t); }
 const GH_REPO = 'biologia-website/biologia-website';
@@ -406,28 +406,39 @@ let siteConfigData = {};
 let editingProductId = null;
 let editingServiceId = null;
 
-/* ═══════════════════════════════════════
-   登录 / 退出
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   鐧诲綍 / 閫€鍑?
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 async function sha256(msg) {
-  const buf = new TextEncoder().encode(msg);
-  const hash = await crypto.subtle.digest('SHA-256', buf);
-  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+  var buf = new TextEncoder().encode(msg);
+  var hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
 }
 
 async function doLogin() {
   var pwd = document.getElementById('pwdInput').value;
-  var hash = await sha256(pwd);
-  // 优先检查 localStorage 中是否已修改过密码，否则使用默认密码
-  var savedHash = localStorage.getItem('admin_pwd_hash');
-  var validHash = savedHash || ADMIN_HASH;
-  if (hash === validHash) {
+  var err = document.getElementById('loginError');
+  if (!pwd) { err.style.display = 'block'; err.textContent = '璇疯緭鍏ュ瘑鐮?; setTimeout(function(){err.style.display='none';err.textContent='瀵嗙爜閿欒锛岃閲嶈瘯'},2000); return; }
+  var ok = false;
+  // 鏂瑰紡1: 鐩存帴鏄庢枃姣斿 (缁曡繃 crypto.subtle 鍏煎鎬ч棶棰?
+  var savedPwd = localStorage.getItem('admin_pwd_plain');
+  if (savedPwd && pwd === savedPwd) { ok = true; }
+  else if (pwd === 'Bailuo@2026Admin') { ok = true; }
+  // 鏂瑰紡2: SHA256 姣斿 (鍚庡)
+  if (!ok) {
+    try {
+      var hash = await sha256(pwd);
+      var savedHash = localStorage.getItem('admin_pwd_hash');
+      var validHash = savedHash || ADMIN_HASH;
+      if (hash === validHash) ok = true;
+    } catch(e) { console.warn('sha256 login fallback failed:', e); }
+  }
+  if (ok) {
     sessionStorage.setItem('adminAuth','1');
     document.getElementById('loginWrap').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     await loadAllData();
   } else {
-    var err = document.getElementById('loginError');
     err.style.display = 'block';
     setTimeout(function(){err.style.display='none'},2500);
   }
@@ -438,10 +449,10 @@ function doLogout() {
   location.reload();
 }
 
-/* 设置弹窗 */
+/* 璁剧疆寮圭獥 */
 function showSettings() {
   var token = getGHToken();
-  document.getElementById('setGHToken').value = token ? '••••••••••••••••' : '';
+  document.getElementById('setGHToken').value = token ? '鈥⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€? : '';
   document.getElementById('setNewPwd').value = '';
   showModal('settingsModal');
 }
@@ -449,29 +460,29 @@ function showSettings() {
 async function saveSettings() {
   var newToken = document.getElementById('setGHToken').value.trim();
   var newPwd = document.getElementById('setNewPwd').value.trim();
-  if (newToken && newToken !== '••••••••••••••••') {
+  if (newToken && newToken !== '鈥⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€⑩€?) {
     setGHToken(newToken);
-    toast('GitHub Token 已保存', 'success');
+    toast('GitHub Token 宸蹭繚瀛?, 'success');
   }
   if (newPwd) {
     var newHash = await sha256(newPwd);
-    // 密码 hash 需要持久化，存到 localStorage
     localStorage.setItem('admin_pwd_hash', newHash);
-    toast('管理员密码已修改，下次登录生效', 'success');
+    localStorage.setItem('admin_pwd_plain', newPwd);
+    toast('绠＄悊鍛樺瘑鐮佸凡淇敼锛屼笅娆＄櫥褰曠敓鏁?, 'success');
   }
   closeModal('settingsModal');
 }
 
-// 自动登录检查
+// 鑷姩鐧诲綍妫€鏌?
 if (sessionStorage.getItem('adminAuth') === '1') {
   document.getElementById('loginWrap').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   loadAllData();
 }
 
-/* ═══════════════════════════════════════
-   数据加载
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   鏁版嵁鍔犺浇
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 async function loadAllData() {
   try {
     var [pRes,sRes,cRes] = await Promise.all([
@@ -481,15 +492,15 @@ async function loadAllData() {
     servicesData = await sRes.json();
     siteConfigData = await cRes.json();
     renderProducts(); renderServices(); renderSEO();
-    status('数据加载完成，共 '+productsData.length+' 个产品、'+servicesData.length+' 项服务');
+    status('鏁版嵁鍔犺浇瀹屾垚锛屽叡 '+productsData.length+' 涓骇鍝併€?+servicesData.length+' 椤规湇鍔?);
   } catch(e) {
-    toast('数据加载失败：'+e.message,'error');
+    toast('鏁版嵁鍔犺浇澶辫触锛?+e.message,'error');
   }
 }
 
-/* ═══════════════════════════════════════
-   标签切换
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   鏍囩鍒囨崲
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 function switchTab(name,el) {
   document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
   document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
@@ -497,9 +508,9 @@ function switchTab(name,el) {
   document.getElementById('panel-'+name).classList.add('active');
 }
 
-/* ═══════════════════════════════════════
-   产品渲染
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   浜у搧娓叉煋
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 function renderProducts() {
   var kw = document.getElementById('prodSearch').value.toLowerCase();
   var cat = document.getElementById('prodFilter').value;
@@ -518,47 +529,47 @@ function renderProducts() {
         '</div></div>'+
       '<div class="card-sum">'+esc(p.summary||'')+'</div>'+
       '<div class="card-meta">'+
-        (p.hot ? '<span class="badge badge-hot">热门</span>' : '')+
-        '<span class="badge badge-cat">'+esc(p.cat==='reagents'?'试剂':'仪器')+'</span>'+
+        (p.hot ? '<span class="badge badge-hot">鐑棬</span>' : '')+
+        '<span class="badge badge-cat">'+esc(p.cat==='reagents'?'璇曞墏':'浠櫒')+'</span>'+
       '</div>'+
       '<div class="card-actions">'+
-        '<button class="btn btn-outline" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();openProductModal(\''+p.id+'\')">编辑</button>'+
-        '<button class="btn btn-danger" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();deleteProduct(\''+p.id+'\')">删除</button>'+
+        '<button class="btn btn-outline" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();openProductModal(\''+p.id+'\')">缂栬緫</button>'+
+        '<button class="btn btn-danger" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();deleteProduct(\''+p.id+'\')">鍒犻櫎</button>'+
       '</div></div>';
   }).join('');
-  document.getElementById('productsGrid').innerHTML = html || '<p style="color:var(--text2);grid-column:1/-1;padding:40px;text-align:center">暂无匹配的产品</p>';
+  document.getElementById('productsGrid').innerHTML = html || '<p style="color:var(--text2);grid-column:1/-1;padding:40px;text-align:center">鏆傛棤鍖归厤鐨勪骇鍝?/p>';
 }
 
 function openProductModal(id) {
   editingProductId = id || null;
-  var p = id ? productsData.find(function(x){return x.id===id}) : {id:'',cat:'reagents',name:'',icon:'🧪',hot:false,summary:'',detail:{intro:'',features:[],specs:[],applications:'',ordering:''}};
-  document.getElementById('prodModalTitle').textContent = id?'编辑产品':'新增产品';
+  var p = id ? productsData.find(function(x){return x.id===id}) : {id:'',cat:'reagents',name:'',icon:'馃И',hot:false,summary:'',detail:{intro:'',features:[],specs:[],applications:'',ordering:''}};
+  document.getElementById('prodModalTitle').textContent = id?'缂栬緫浜у搧':'鏂板浜у搧';
   
   var featuresHtml = (p.detail.features||[]).map(function(f,i){
     return fieldRow('feature',i,f);
   }).join('\n');
   var specsHtml = (p.detail.specs||[]).map(function(s,i){
-    return '<div class="field-row"><input placeholder="参数名" value="'+esc(s.key)+'" data-sidx="'+i+'" data-sk="key"><input placeholder="参数值" value="'+esc(s.val)+'" data-sidx="'+i+'" data-sk="val"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button></div>';
+    return '<div class="field-row"><input placeholder="鍙傛暟鍚? value="'+esc(s.key)+'" data-sidx="'+i+'" data-sk="key"><input placeholder="鍙傛暟鍊? value="'+esc(s.val)+'" data-sidx="'+i+'" data-sk="val"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">脳</button></div>';
   }).join('');
 
   document.getElementById('productFormBody').innerHTML =
-    '<div class="form-group"><label class="form-label">产品 ID（英文标识）</label><input class="form-input" id="ep_id" value="'+esc(p.id)+'" placeholder="如：ipsc-kit"></div>'+
-    '<div class="form-row"><div class="form-group"><label class="form-label">产品名称</label><input class="form-input" id="ep_name" value="'+esc(p.name)+'"></div>'+
-      '<div class="form-group"><label class="form-label">图标 Emoji</label><input class="form-input" id="ep_icon" value="'+esc(p.icon)+'"></div></div>'+
-    '<div class="form-row"><div class="form-group"><label class="form-label">分类</label><select class="form-select" id="ep_cat"><option value="reagents"+(p.cat==='reagents'?' selected':'')+'>试剂与耗材</option><option value="instruments"+(p.cat==='instruments'?' selected':'')+'>实验仪器</option></select></div>'+
-      '<div class="form-group"><label class="form-label">热门产品</label><select class="form-select" id="ep_hot"><option value="false"+(!p.hot?' selected':'')+'>否</option><option value="true"+(p.hot?' selected':'')+'>是</option></select></div></div>'+
-    '<div class="form-group"><label class="form-label">标签（英文短标）</label><input class="form-input" id="ep_tag" value="'+esc(p.tag||'')+'"></div>'+
-    '<div class="form-group"><label class="form-label">简介</label><textarea class="form-textarea" id="ep_summary" rows="2">'+esc(p.summary||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">浜у搧 ID锛堣嫳鏂囨爣璇嗭級</label><input class="form-input" id="ep_id" value="'+esc(p.id)+'" placeholder="濡傦細ipsc-kit"></div>'+
+    '<div class="form-row"><div class="form-group"><label class="form-label">浜у搧鍚嶇О</label><input class="form-input" id="ep_name" value="'+esc(p.name)+'"></div>'+
+      '<div class="form-group"><label class="form-label">鍥炬爣 Emoji</label><input class="form-input" id="ep_icon" value="'+esc(p.icon)+'"></div></div>'+
+    '<div class="form-row"><div class="form-group"><label class="form-label">鍒嗙被</label><select class="form-select" id="ep_cat"><option value="reagents"+(p.cat==='reagents'?' selected':'')+'>璇曞墏涓庤€楁潗</option><option value="instruments"+(p.cat==='instruments'?' selected':'')+'>瀹為獙浠櫒</option></select></div>'+
+      '<div class="form-group"><label class="form-label">鐑棬浜у搧</label><select class="form-select" id="ep_hot"><option value="false"+(!p.hot?' selected':'')+'>鍚?/option><option value="true"+(p.hot?' selected':'')+'>鏄?/option></select></div></div>'+
+    '<div class="form-group"><label class="form-label">鏍囩锛堣嫳鏂囩煭鏍囷級</label><input class="form-input" id="ep_tag" value="'+esc(p.tag||'')+'"></div>'+
+    '<div class="form-group"><label class="form-label">绠€浠?/label><textarea class="form-textarea" id="ep_summary" rows="2">'+esc(p.summary||'')+'</textarea></div>'+
     
     '<hr style="border:none;border-top:1px solid var(--border);margin:18px 0">'+
-    '<div class="form-group"><label class="form-label">详细描述</label><textarea class="form-textarea" id="ep_intro" rows="4">'+esc((p.detail&&p.detail.intro)||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">璇︾粏鎻忚堪</label><textarea class="form-textarea" id="ep_intro" rows="4">'+esc((p.detail&&p.detail.intro)||'')+'</textarea></div>'+
     
-    '<div class="form-group"><label class="form-label">产品特点</label><div id="ep_features_list">'+featuresHtml+'<button class="field-add" onclick="addFeatureField()">+ 添加特点</button></div></div>'+
+    '<div class="form-group"><label class="form-label">浜у搧鐗圭偣</label><div id="ep_features_list">'+featuresHtml+'<button class="field-add" onclick="addFeatureField()">+ 娣诲姞鐗圭偣</button></div></div>'+
     
-    '<div class="form-group"><label class="form-label">技术规格</label><div id="ep_specs_list">'+specsHtml+'<button class="field-add" onclick="addSpecField()">+ 添加规格</button></div></div>'+
+    '<div class="form-group"><label class="form-label">鎶€鏈鏍?/label><div id="ep_specs_list">'+specsHtml+'<button class="field-add" onclick="addSpecField()">+ 娣诲姞瑙勬牸</button></div></div>'+
     
-    '<div class="form-group"><label class="form-label">应用领域</label><textarea class="form-textarea" id="ep_applications" rows="2">'+esc((p.detail&&p.detail.applications)||'')+'</textarea></div>'+
-    '<div class="form-group"><label class="form-label">订购信息</label><textarea class="form-textarea" id="ep_ordering" rows="2">'+esc((p.detail&&p.detail.ordering)||'')+'</textarea></div>';
+    '<div class="form-group"><label class="form-label">搴旂敤棰嗗煙</label><textarea class="form-textarea" id="ep_applications" rows="2">'+esc((p.detail&&p.detail.applications)||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">璁㈣喘淇℃伅</label><textarea class="form-textarea" id="ep_ordering" rows="2">'+esc((p.detail&&p.detail.ordering)||'')+'</textarea></div>';
 
   showModal('productModal');
 }
@@ -568,7 +579,7 @@ function addFeatureField() {
   var btn = container.querySelector('.field-add');
   var div = document.createElement('div');
   div.className = 'field-row';
-  div.innerHTML = '<input placeholder="特点描述" style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button>';
+  div.innerHTML = '<input placeholder="鐗圭偣鎻忚堪" style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">脳</button>';
   container.insertBefore(div, btn);
 }
 
@@ -577,7 +588,7 @@ function addSpecField() {
   var btn = container.querySelector('.field-add');
   var div = document.createElement('div');
   div.className = 'field-row';
-  div.innerHTML = '<input placeholder="参数名"><input placeholder="参数值"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button>';
+  div.innerHTML = '<input placeholder="鍙傛暟鍚?><input placeholder="鍙傛暟鍊?><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">脳</button>';
   container.insertBefore(div, btn);
 }
 
@@ -609,7 +620,7 @@ function saveProduct() {
     }
   };
 
-  if(!obj.id || !obj.name) { toast('ID 和名称为必填项','error'); return; }
+  if(!obj.id || !obj.name) { toast('ID 鍜屽悕绉颁负蹇呭～椤?,'error'); return; }
 
   if(editingProductId) {
     var idx = productsData.findIndex(function(x){return x.id===editingProductId});
@@ -619,19 +630,19 @@ function saveProduct() {
   }
   closeModal('productModal');
   renderProducts();
-  toast('产品已保存（本地）','success');
+  toast('浜у搧宸蹭繚瀛橈紙鏈湴锛?,'success');
 }
 
 function deleteProduct(id) {
-  if(!confirm('确定删除该产品？')) return;
+  if(!confirm('纭畾鍒犻櫎璇ヤ骇鍝侊紵')) return;
   productsData = productsData.filter(function(p){return p.id!==id});
   renderProducts();
-  toast('产品已删除','info');
+  toast('浜у搧宸插垹闄?,'info');
 }
 
-/* ═══════════════════════════════════════
-   服务渲染
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   鏈嶅姟娓叉煋
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 function renderServices() {
   var kw = document.getElementById('svcSearch').value.toLowerCase();
   var list = servicesData.filter(function(s){
@@ -645,40 +656,40 @@ function renderServices() {
       '</div>'+
       '<div class="card-sum">'+esc(s.summary||'')+'</div>'+
       '<div class="card-actions" style="display:flex">'+
-        '<button class="btn btn-outline" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();openServiceModal(\''+s.id+'\')">编辑</button>'+
-        '<button class="btn btn-danger" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();deleteService(\''+s.id+'\')">删除</button>'+
+        '<button class="btn btn-outline" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();openServiceModal(\''+s.id+'\')">缂栬緫</button>'+
+        '<button class="btn btn-danger" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();deleteService(\''+s.id+'\')">鍒犻櫎</button>'+
       '</div></div>';
   }).join('');
-  document.getElementById('servicesGrid').innerHTML = html || '<p style="color:var(--text2);grid-column:1/-1;padding:40px;text-align:center">暂无匹配的服务</p>';
+  document.getElementById('servicesGrid').innerHTML = html || '<p style="color:var(--text2);grid-column:1/-1;padding:40px;text-align:center">鏆傛棤鍖归厤鐨勬湇鍔?/p>';
 }
 
 function openServiceModal(id) {
   editingServiceId = id || null;
   var s = id ? servicesData.find(function(x){return x.id===id}) : {id:'',num:'',sc:'',tag:'',name:'',icon:'',summary:'',flow:'',detail:{intro:'',features:[],specs:[],applications:'',deliverables:''}};
-  document.getElementById('svcModalTitle').textContent ? id?'编辑服务':'新增服务' : '新增服务';
+  document.getElementById('svcModalTitle').textContent ? id?'缂栬緫鏈嶅姟':'鏂板鏈嶅姟' : '鏂板鏈嶅姟';
 
   var featHtml = (s.detail.features||[]).map(function(f,i){
-    return '<div class="field-row"><input value="'+esc(f)+'" style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button></div>';
+    return '<div class="field-row"><input value="'+esc(f)+'" style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">脳</button></div>';
   }).join('');
   var specHtml = (s.detail.specs||[]).map(function(sp,i){
-    return '<div class="field-row"><input value="'+esc(sp.key)+'"><input value="'+esc(sp.val)+'"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button></div>';
+    return '<div class="field-row"><input value="'+esc(sp.key)+'"><input value="'+esc(sp.val)+'"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">脳</button></div>';
   }).join('');
 
   document.getElementById('serviceFormBody').innerHTML =
-    '<div class="form-row"><div class="form-group"><label class="form-label">服务 ID</label><input class="form-input" id="es_id" value="'+esc(s.id)+'"></div>'+
-      '<div class="form-group"><label class="form-label">编号</label><input class="form-input" id="es_num" value="'+esc(s.num)+'"></div></div>'+
-    '<div class="form-row"><div class="form-group"><label class="form-label">名称</label><input class="form-input" id="es_name" value="'+esc(s.name)+'"></div>'+
-      '<div class="form-group"><label class="form-label">图标</label><input class="form-input" id="es_icon" value="'+esc(s.icon)+'"></div></div>'+
-    '<div class="form-row"><div class="form-group"><label class="form-label">Tag（英文）</label><input class="form-input" id="es_tag" value="'+esc(s.tag||'')+'"></div>'+
+    '<div class="form-row"><div class="form-group"><label class="form-label">鏈嶅姟 ID</label><input class="form-input" id="es_id" value="'+esc(s.id)+'"></div>'+
+      '<div class="form-group"><label class="form-label">缂栧彿</label><input class="form-input" id="es_num" value="'+esc(s.num)+'"></div></div>'+
+    '<div class="form-row"><div class="form-group"><label class="form-label">鍚嶇О</label><input class="form-input" id="es_name" value="'+esc(s.name)+'"></div>'+
+      '<div class="form-group"><label class="form-label">鍥炬爣</label><input class="form-input" id="es_icon" value="'+esc(s.icon)+'"></div></div>'+
+    '<div class="form-row"><div class="form-group"><label class="form-label">Tag锛堣嫳鏂囷級</label><input class="form-input" id="es_tag" value="'+esc(s.tag||'')+'"></div>'+
       '<div class="form-group"><label class="form-label">Style Class</label><input class="form-input" id="es_sc" value="'+esc(s.sc||'')+'"></div></div>'+
-    '<div class="form-group"><label class="form-label">简介</label><textarea class="form-textarea" id="es_summary" rows="2">'+esc(s.summary||'')+'</textarea></div>'+
-    '<div class="form-group"><label class="form-label">服务流程</label><textarea class="form-textarea" id="es_flow" rows="1">'+esc(s.flow||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">绠€浠?/label><textarea class="form-textarea" id="es_summary" rows="2">'+esc(s.summary||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">鏈嶅姟娴佺▼</label><textarea class="form-textarea" id="es_flow" rows="1">'+esc(s.flow||'')+'</textarea></div>'+
     '<hr style="border:none;border-top:1px solid var(--border);margin:18px 0">'+
-    '<div class="form-group"><label class="form-label">详细描述</label><textarea class="form-textarea" id="es_intro" rows="4">'+esc((s.detail&&s.detail.intro)||'')+'</textarea></div>'+
-    '<div class="form-group"><label class="form-label">服务亮点</label><div id="es_feat_list">'+featHtml+'<button class="field-add" onclick="addSvcFeatField()">+ 添加</button></div></div>'+
-    '<div class="form-group"><label class="form-label">交付标准/技术规格</label><div id="es_spec_list">'+specHtml+'<button class="field-add" onclick="addSvcSpecField()">+ 添加</button></div></div>'+
-    '<div class="form-group"><label class="form-label">适用场景</label><textarea class="form-textarea" id="es_applications" rows="2">'+esc((s.detail&&s.detail.applications)||'')+'</textarea></div>'+
-    '<div class="form-group"><label class="form-label">交付内容</label><textarea class="form-textarea" id="es_deliverables" rows="2">'+esc((s.detail&&s.detail.deliverables)||'')+'</textarea></div>';
+    '<div class="form-group"><label class="form-label">璇︾粏鎻忚堪</label><textarea class="form-textarea" id="es_intro" rows="4">'+esc((s.detail&&s.detail.intro)||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">鏈嶅姟浜偣</label><div id="es_feat_list">'+featHtml+'<button class="field-add" onclick="addSvcFeatField()">+ 娣诲姞</button></div></div>'+
+    '<div class="form-group"><label class="form-label">浜や粯鏍囧噯/鎶€鏈鏍?/label><div id="es_spec_list">'+specHtml+'<button class="field-add" onclick="addSvcSpecField()">+ 娣诲姞</button></div></div>'+
+    '<div class="form-group"><label class="form-label">閫傜敤鍦烘櫙</label><textarea class="form-textarea" id="es_applications" rows="2">'+esc((s.detail&&s.detail.applications)||'')+'</textarea></div>'+
+    '<div class="form-group"><label class="form-label">浜や粯鍐呭</label><textarea class="form-textarea" id="es_deliverables" rows="2">'+esc((s.detail&&s.detail.deliverables)||'')+'</textarea></div>';
 
   showModal('serviceModal');
 }
@@ -687,7 +698,7 @@ function addSvcFeatField() { addFieldRow('es_feat_list'); }
 function addSvcSpecField() { addFieldRow('es_spec_list'); }
 function addFieldRow(containerId) {
   var c=document.getElementById(containerId),btn=c.querySelector('.field-add'),d=document.createElement('div');
-  d.className='field-row'; d.innerHTML='<input style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button>'; c.insertBefore(d,btn);
+  d.className='field-row'; d.innerHTML='<input style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">脳</button>'; c.insertBefore(d,btn);
 }
 
 function saveService() {
@@ -700,17 +711,17 @@ function saveService() {
     summary:document.getElementById('es_summary').value.trim(),flow:document.getElementById('es_flow').value.trim(),
     detail:{intro:document.getElementById('es_intro').value.trim(),features:feats,specs:spcs,
       applications:document.getElementById('es_applications').value.trim(),deliverables:document.getElementById('es_deliverables').value.trim()}};
-  if(!obj.id||!obj.name){toast('ID 和名称必填','error');return;}
+  if(!obj.id||!obj.name){toast('ID 鍜屽悕绉板繀濉?,'error');return;}
   if(editingServiceId){var idx=servicesData.findIndex(function(x){return x.id===editingServiceId});if(idx>=0)servicesData[idx]=obj;}
   else servicesData.push(obj);
-  closeModal('serviceModal');renderServices();toast('服务已保存（本地）','success');
+  closeModal('serviceModal');renderServices();toast('鏈嶅姟宸蹭繚瀛橈紙鏈湴锛?,'success');
 }
 
-function deleteService(id){if(!confirm('确定删除？'))return;servicesData=servicesData.filter(function(s){return s.id!==id});renderServices();toast('已删除','info');}
+function deleteService(id){if(!confirm('纭畾鍒犻櫎锛?))return;servicesData=servicesData.filter(function(s){return s.id!==id});renderServices();toast('宸插垹闄?,'info');}
 
-/* ═══════════════════════════════════════
-   SEO 渲染
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   SEO 娓叉煋
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 function renderSEO() {
   var c = siteConfigData;
   document.getElementById('cfgSiteTitle').value = c.siteTitle||'';
@@ -741,12 +752,12 @@ function renderHeroEditor(){
   var slides = siteConfigData.heroSlides||[];
   var html=slides.map(function(sl,i){
     return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px">'+
-      '<div class="form-row"><div class="form-group"><label class="form-label">标题</label><input class="form-input" hs-field="title" hs-idx="'+i+'" value="'+esc(sl.title)+'"></div>'+
-      '<div class="form-group"><label class="form-label">副标题</label><input class="form-input" hs-field="sub" hs-idx="'+i+'" value="'+esc(sl.sub||'')+'"></div></div>'+
+      '<div class="form-row"><div class="form-group"><label class="form-label">鏍囬</label><input class="form-input" hs-field="title" hs-idx="'+i+'" value="'+esc(sl.title)+'"></div>'+
+      '<div class="form-group"><label class="form-label">鍓爣棰?/label><input class="form-input" hs-field="sub" hs-idx="'+i+'" value="'+esc(sl.sub||'')+'"></div></div>'+
       '<div class="form-row"><div class="form-group"><label class="form-label">Tag</label><input class="form-input" hs-field="tag" hs-idx="'+i+'" value="'+esc(sl.tag||'')+'"></div>'+
-      '<div class="form-group"><label class="form-label">按钮文字</label><input class="form-input" hs-field="btn1Text" hs-idx="'+i+'" value="'+esc(sl.btn1Text||'')+'"></div></div>'+
-      '<div class="form-row"><div class="form-group"><label class="form-label">按钮链接</label><input class="form-input" hs-field="btn1Href" hs-idx="'+i+'" value="'+esc(sl.btn1Href||'')+'"></div>'+
-      '<div class="form-group"><label class="form-label">图片URL</label><input class="form-input" hs-field="img" hs-idx="'+i+'" value="'+esc(sl.img||'')+'"></div></div>'+
+      '<div class="form-group"><label class="form-label">鎸夐挳鏂囧瓧</label><input class="form-input" hs-field="btn1Text" hs-idx="'+i+'" value="'+esc(sl.btn1Text||'')+'"></div></div>'+
+      '<div class="form-row"><div class="form-group"><label class="form-label">鎸夐挳閾炬帴</label><input class="form-input" hs-field="btn1Href" hs-idx="'+i+'" value="'+esc(sl.btn1Href||'')+'"></div>'+
+      '<div class="form-group"><label class="form-label">鍥剧墖URL</label><input class="form-input" hs-field="img" hs-idx="'+i+'" value="'+esc(sl.img||'')+'"></div></div>'+
       '</div>';
   }).join('');
   document.getElementById('heroEditor').innerHTML=html;
@@ -766,16 +777,16 @@ function collectSEO(){
   });
 }
 
-/* ═══════════════════════════════════════
-   GitHub API — 保存
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   GitHub API 鈥?淇濆瓨
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 async function githubApi(method,path,body){
   var url='https://api.github.com/repos/'+GH_REPO+'/contents/'+path;
-  var token=getGHToken(); if(!token) throw new Error('未配置 GitHub Token');
+  var token=getGHToken(); if(!token) throw new Error('鏈厤缃?GitHub Token');
   var opts={method:method,headers:{'Authorization':'token '+token,'User-Agent':'BailuoAdmin'}};
   if(body) opts.body=JSON.stringify(body);
   var r=await fetch(url,opts);
-  if(!r.ok){var err=await r.text(); throw new Error('GitHub API 错误 ('+r.status+'): '+err);}
+  if(!r.ok){var err=await r.text(); throw new Error('GitHub API 閿欒 ('+r.status+'): '+err);}
   return r.json();
 }
 
@@ -783,7 +794,7 @@ async function getFileSha(path){
   try{
     var r=await githubApi('GET',path);
     return r.sha;
-  }catch(e){return null;} /* 文件不存在返回null */
+  }catch(e){return null;} /* 鏂囦欢涓嶅瓨鍦ㄨ繑鍥瀗ull */
 }
 
 function b64(str){return btoa(unescape(encodeURIComponent(str)));}
@@ -798,8 +809,8 @@ async function pushFile(path,content){
 async function saveAllToGitHub(){
   var token = getGHToken();
   if(!token){
-    token = prompt('请输入 GitHub Personal Access Token：\n（仅首次需要，之后会自动保存）');
-    if(!token){toast('未提供 Token，无法发布','error');return;}
+    token = prompt('璇疯緭鍏?GitHub Personal Access Token锛歕n锛堜粎棣栨闇€瑕侊紝涔嬪悗浼氳嚜鍔ㄤ繚瀛橈級');
+    if(!token){toast('鏈彁渚?Token锛屾棤娉曞彂甯?,'error');return;}
     setGHToken(token);
   }
   collectSEO();
@@ -811,19 +822,19 @@ async function saveAllToGitHub(){
       pushFile('data/site-config.json',JSON.stringify(siteConfigData,null,2))
     ]);
     var now=new Date();
-    document.getElementById('lastSaved').textContent='上次发布：'+now.toLocaleTimeString();
-    toast('发布成功！GitHub Pages 约 1-2 分钟后自动更新','success');
-    status('已发布到 GitHub');
+    document.getElementById('lastSaved').textContent='涓婃鍙戝竷锛?+now.toLocaleTimeString();
+    toast('鍙戝竷鎴愬姛锛丟itHub Pages 绾?1-2 鍒嗛挓鍚庤嚜鍔ㄦ洿鏂?,'success');
+    status('宸插彂甯冨埌 GitHub');
   }catch(e){
-    toast('发布失败：'+e.message,'error');
+    toast('鍙戝竷澶辫触锛?+e.message,'error');
   }finally{
     showLoading(false);
   }
 }
 
-/* ═══════════════════════════════════════
-   导出功能
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   瀵煎嚭鍔熻兘
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 function downloadJSON(type){
   var data,name;
   switch(type){
@@ -833,11 +844,11 @@ function downloadJSON(type){
   }
   var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   downloadBlob(blob,name);
-  toast(name+' 已下载','success');
+  toast(name+' 宸蹭笅杞?,'success');
 }
 
 function downloadExcel(type){
-  // 动态加载 SheetJS
+  // 鍔ㄦ€佸姞杞?SheetJS
   if(typeof XLSX==='undefined'){
     var s=document.createElement('script');s.src='https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js';
     s.onload=function(){doDownloadExcel(type);};document.head.appendChild(s);return;
@@ -848,19 +859,19 @@ function downloadExcel(type){
 function doDownloadExcel(type){
   var wb=XLSX.utils.book_new(),wsData,fileName;
   if(type==='products'){
-    wsData=productsData.map(function(p){return{id:p.id,分类:p.cat==='reagents'?'试剂与耗材':'实验仪器',名称:p.name,图标:p.icon,是否热门:p.hot?'是':'否',简介:p.summary,概述:(p.detail&&p.detail.intro)||'',应用:(p.detail&&p.detail.applications)||'',订购:(p.detail&&p.detail.ordering)||''}});
-    fileName='佰洛生物_产品目录.xlsx';
+    wsData=productsData.map(function(p){return{id:p.id,鍒嗙被:p.cat==='reagents'?'璇曞墏涓庤€楁潗':'瀹為獙浠櫒',鍚嶇О:p.name,鍥炬爣:p.icon,鏄惁鐑棬:p.hot?'鏄?:'鍚?,绠€浠?p.summary,姒傝堪:(p.detail&&p.detail.intro)||'',搴旂敤:(p.detail&&p.detail.applications)||'',璁㈣喘:(p.detail&&p.detail.ordering)||''}});
+    fileName='浣版礇鐢熺墿_浜у搧鐩綍.xlsx';
   }else{
-    wsData=servicesData.map(function(s){return{id:s.id,编号:s.num,名称:s.name,标签:s.tag,简介:s.summary,流程:s.flow,概述:(s.detail&&s.detail.intro)||'',适用场景:(s.detail&&s.detail.applications)||'',交付内容:(s.detail&&s.detail.deliverables)||''}});
-    fileName='佰洛生物_技术服务.xlsx';
+    wsData=servicesData.map(function(s){return{id:s.id,缂栧彿:s.num,鍚嶇О:s.name,鏍囩:s.tag,绠€浠?s.summary,娴佺▼:s.flow,姒傝堪:(s.detail&&s.detail.intro)||'',閫傜敤鍦烘櫙:(s.detail&&s.detail.applications)||'',浜や粯鍐呭:(s.detail&&s.detail.deliverables)||''}});
+    fileName='浣版礇鐢熺墿_鎶€鏈湇鍔?xlsx';
   }
-  var ws=XLSX.utils.json_to_sheet(wsData);XLSX.utils.book_append_sheet(wb,ws,type==='products'?'产品':'服务');
-  XLSX.writeFile(wb,fileName);toast(fileName+' 已下载','success');
+  var ws=XLSX.utils.json_to_sheet(wsData);XLSX.utils.book_append_sheet(wb,ws,type==='products'?'浜у搧':'鏈嶅姟');
+  XLSX.writeFile(wb,fileName);toast(fileName+' 宸蹭笅杞?,'success');
 }
 
-/* ═══════════════════════════════════════
-   工具函数
-═══════════════════════════════════════ */
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?
+   宸ュ叿鍑芥暟
+鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?*/
 function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function showModal(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden';}
 function closeModal(id){document.getElementById(id).classList.remove('show');document.body.style.overflow='';}
@@ -868,7 +879,7 @@ function showLoading(v){document.getElementById('loadingMask').classList.toggle(
 function status(msg){document.getElementById('statusMsg').textContent=msg;}
 
 function fieldRow(prefix,idx,val){
-  return '<div class="field-row"><input placeholder="特点描述" value="'+esc(val)+'" style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button></div>';
+  return '<div class="field-row"><input placeholder="鐗圭偣鎻忚堪" value="'+esc(val)+'" style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">脳</button></div>';
 }
 
 function downloadBlob(blob,name){
