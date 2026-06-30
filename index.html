@@ -369,13 +369,6 @@ var _hmt = _hmt || [];
   }
   .pd-specs .ps-row .psv { flex: 1; padding: 12px 16px; color: var(--text); font-weight: 600; }
 
-  .pd-placeholder-hint {
-    margin-top: 36px; padding: 16px 20px; border: 2px dashed var(--border);
-    border-radius: var(--radius-sm); text-align: center; font-size: 13px; color: var(--text-muted);
-    background: #fafbfc;
-  }
-  .pd-placeholder-hint strong { color: var(--primary); }
-
   /* 服务详情 Hero 颜色（每个服务一种） */
   .pd-hero.svc-1 { background: linear-gradient(160deg, #e3f0fa, #eef5fb); border-bottom: 3px solid var(--primary); }
   .pd-hero.svc-2 { background: linear-gradient(160deg, #e3ecfe, #eef3fb); border-bottom: 3px solid #2563eb; }
@@ -963,14 +956,6 @@ function openDetail(id) {
     }
     html += '</div>';
   }
-
-  /* 编辑提示 */
-  html += '<div class="pd-placeholder-hint">';
-  html += '💡 <strong>编辑此页面：</strong>在 <code>' + (isService ? 'allServices' : 'allProducts') + '</code> 数组中找到 <code>id: "' + esc(id) + '"</code> 的对象，修改 <code>detail</code> 字段即可更新所有内容。';
-  if (isService) {
-    html += '<br>服务详情额外字段：<code>flow</code>（服务流程）、<code>detail.deliverables</code>（交付内容）。';
-  }
-  html += '</div>';
 
   html += '</div>'; /* .pd-body */
 
