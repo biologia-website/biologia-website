@@ -25,7 +25,13 @@
         { "key": "运输方式", "val": "干冰运输" }
       ],
       "applications": "人源 iPSC 建系与疾病模型构建（PBMC / 成纤维细胞起始）；药物筛选与毒理学评价；再生医学与细胞治疗研究；发育生物学与基因功能研究",
-      "ordering": "厂商：宜明生物 | 货号：iPSC-RPM-RNA-LNP-V2 (6 Test) / V2M (2 Test) | 佰洛生物咨询邮箱：service@biologia.cn"
+      "ordering": "厂商：宜明生物 | 货号：iPSC-RPM-RNA-LNP-V2 (6 Test) / V2M (2 Test) | 佰洛生物咨询邮箱：service@biologia.cn",
+      "images": [
+        { "src": "images/ipsc-kit-front.png", "caption": "宜明生物 uBriGene iPSC 重编程 RNA-LNP 试剂盒 V2.0 产品包装正面" },
+        { "src": "images/ipsc-kit-back.png", "caption": "iPSC 重编程试剂盒规格参数 货号 效期 -80°C 储存" },
+        { "src": "images/ipsc-kit-product.png", "caption": "uBriGene iPSC 重编程 RNA-LNP 试剂盒 内含组分实拍" },
+        { "src": "images/ipsc-kit-timeline.png", "caption": "iPSC 重编程实验流程时间线 Day -6 至挑克隆 Day 16-20" }
+      ]
     }
   },
   {
@@ -53,7 +59,11 @@
         { "key": "储存条件", "val": "-20°C (长期) / 4°C (解冻后 4 周内使用)" }
       ],
       "applications": "哺乳动物细胞系培养（HEK293、CHO、Vero、HeLa 等）；干细胞培养（ES/iPSC，需配专用血清）；杂交瘤细胞培养及单抗生产；病毒包装及疫苗生产",
-      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 规格：500 mL / 100 mL | 佰洛生物咨询邮箱：service@biologia.cn"
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 规格：500 mL / 100 mL | 佰洛生物咨询邮箱：service@biologia.cn",
+      "images": [
+        { "src": "images/fbs-product.png", "caption": "KEL Biotech 胎牛血清 FBS 0.1μm 膜过滤 支原体检测 病毒筛查" },
+        { "src": "images/fbs-exo-depleted.png", "caption": "KEL 去外泌体胎牛血清 Exosome Depleted FBS KC005-03" }
+      ]
     }
   },
   {

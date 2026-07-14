@@ -1,0 +1,9 @@
+# robots.txt for biologia.cn
+User-agent: *
+Allow: /
+
+# 站点地图
+Sitemap: https://www.biologia.cn/sitemap.xml
+
+# 数据接口目录不对外索引
+Disallow: /data/
