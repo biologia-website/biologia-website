@@ -499,6 +499,20 @@ var _hmt = _hmt || [];
   /* ═══════════ ANIMATIONS ═══════════ */
   .fade-section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
   .fade-section.visible { opacity: 1; transform: translateY(0); }
+  /* 产品图片图集 */
+  .gallery-carousel{position:relative;border-radius:12px;overflow:hidden;background:#0f1117;border:1px solid var(--border,#2e3348)}
+  .gallery-track{display:flex;transition:transform .35s ease}
+  .gallery-slide{flex:0 0 100%;position:relative;background:#0f1117}
+  .gallery-slide img{display:block;width:100%;max-height:420px;object-fit:contain;background:#0f1117}
+  .gallery-caption{position:absolute;left:0;right:0;bottom:0;padding:8px 12px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-size:13px}
+  .gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:none;background:rgba(15,17,23,.6);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .gallery-nav.prev{left:10px}.gallery-nav.next{right:10px}
+  .gallery-nav:hover{background:rgba(14,165,233,.85)}
+  .gallery-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:8px}
+  .gallery-dot{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.4);cursor:pointer;padding:0}
+  .gallery-dot.active{background:#0ea5e9}
+  .gallery-carousel.single .gallery-nav,.gallery-carousel.single .gallery-dots{display:none}
+  .gallery-carousel.single .gallery-slide img{max-height:460px}
 </style>
 </head>
 <body>
@@ -667,6 +681,28 @@ function esc(s) {
   d.textContent = s;
   return d.innerHTML;
 }
+
+/* 产品图片图集渲染 */
+function buildGalleryHTML(detail){
+  var imgs = detail && detail.images;
+  if(!imgs || !imgs.length) return '';
+  var slides = imgs.map(function(im){
+    return '<div class="gallery-slide"><img src="'+esc(im.src)+'" alt="'+esc(im.caption||'')+'"><div class="gallery-caption">'+esc(im.caption||'')+'</div></div>';
+  }).join('');
+  var nav = imgs.length>1 ? '<button class="gallery-nav prev" onclick="galleryMove(-1)">‹</button><button class="gallery-nav next" onclick="galleryMove(1)">›</button>' : '';
+  var dots = imgs.length>1 ? '<div class="gallery-dots">'+imgs.map(function(_,i){return '<button class="gallery-dot'+(i===0?' active':'')+'" onclick="galleryGo('+i+')"></button>';}).join('')+'</div>' : '';
+  return '<div class="pd-section"><div class="pds-label">产品图片</div>'+
+    '<div class="gallery-carousel'+(imgs.length===1?' single':'')+'" id="pdGallery">'+
+    '<div class="gallery-track">'+slides+'</div>'+nav+dots+'</div></div>';
+}
+var galleryIdx = 0;
+function galleryGo(i){
+  var t=document.getElementById('pdGallery'); if(!t) return;
+  var track=t.querySelector('.gallery-track'); var n=track.children.length;
+  galleryIdx=(i%n+n)%n; track.style.transform='translateX('+(-galleryIdx*100)+'%)';
+  t.querySelectorAll('.gallery-dot').forEach(function(d,di){ d.classList.toggle('active',di===galleryIdx); });
+}
+function galleryMove(d){ var t=document.getElementById('pdGallery'); if(!t) return; var n=t.querySelector('.gallery-track').children.length; galleryGo(galleryIdx+d); }
 
 /* ═══════════════════════════════════════
    数据加载 — 从 data/*.json 异步加载
@@ -854,6 +890,7 @@ function renderHotProducts() {
 function openDetail(id) {
   var item = getItemById(id);
   if (!item) return;
+  galleryIdx = 0;
 
   var detail = item.detail || {};
   var isService = allServices.some(function(s) { return s.id === id; });
@@ -897,6 +934,8 @@ function openDetail(id) {
     html += '<div class="pds-text placeholder">（请在 ' + (isService ? 'allServices' : 'allProducts') + ' 数组中该项目的 detail.intro 字段编辑内容）</div>';
   }
   html += '</div>';
+
+  if (!isService) html += buildGalleryHTML(detail);
 
   /* 亮点/特点 */
   html += '<div class="pd-section">';

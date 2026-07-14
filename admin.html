@@ -168,6 +168,26 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
 .loading-mask.show { display:flex; }
 .spinner { width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .7s linear infinite; }
 @keyframes spin { to{transform:rotate(360deg)} }
+/* 产品图片上传器 */
+.img-drop{border:2px dashed var(--border);border-radius:var(--radius);padding:18px;text-align:center;color:var(--text2);cursor:pointer;transition:.2s;margin-bottom:10px}
+.img-drop:hover{border-color:var(--primary);color:var(--text)}
+.img-drop.drag{border-color:var(--primary);background:var(--surface2);color:var(--text)}
+.img-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.img-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative;display:flex;flex-direction:column}
+.img-item.cover{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary) inset}
+.img-thumb{width:100%;height:96px;object-fit:cover;background:#000;display:block}
+.img-cap{width:100%;border:none;border-top:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12px;padding:6px 8px;outline:none}
+.img-item .acts{display:flex;gap:4px;padding:4px 6px}
+.img-item .acts button{flex:1;font-size:11px;padding:4px 0;border:1px solid var(--border);background:var(--surface2);color:var(--text);border-radius:4px;cursor:pointer}
+.img-item .acts button:hover:not([disabled]){border-color:var(--primary)}
+.img-badge{position:absolute;top:6px;left:6px;background:var(--primary);color:#fff;font-size:10px;padding:2px 6px;border-radius:10px}
+.img-del{position:absolute;top:6px;right:6px;background:var(--danger);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:13px;line-height:1}
+.img-hint{color:var(--text2);font-size:12px;margin-top:6px}
+/* 发布错误详情 */
+.err-box{background:var(--surface);border:1px solid var(--danger);border-radius:var(--radius);padding:12px 14px;color:var(--text);font-size:13px;white-space:pre-wrap;max-height:200px;overflow:auto;margin-top:10px}
+/* 草稿恢复条 */
+.draft-banner{display:none;align-items:center;gap:12px;background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 18px;font-size:13px}
+.draft-banner.show{display:flex}
 </style>
 </head>
 <body>
@@ -192,6 +212,11 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",PingFang SC,sans
     <button class="topbar-btn" onclick="showSettings()">⚙ 设置</button>
     <button class="topbar-btn" onclick="doLogout()">退出登录</button>
   </header>
+  <div class="draft-banner" id="draftBanner">
+    <span>⚠️ 检测到本地未发布的草稿，恢复后可继续编辑。</span>
+    <button class="topbar-btn" onclick="restoreDraft()">恢复草稿</button>
+    <button class="topbar-btn" onclick="clearDraft();document.getElementById('draftBanner').classList.remove('show')">忽略</button>
+  </div>
 
   <!-- 标签 -->
   <nav class="tabs">
@@ -405,6 +430,8 @@ let servicesData = [];
 let siteConfigData = {};
 let editingProductId = null;
 let editingServiceId = null;
+let editingProductImages = [];   // [{src, caption, file?, isNew}]
+let pendingImages = {};          // tmpPath -> {dataUrl, fileName}  （发布时上传）
 
 /* ============================================
    登录 / 退出
@@ -423,7 +450,7 @@ async function doLogin() {
   // 方式1: 直接明文比对 (绕过 crypto.subtle 兼容性问题)
   var savedPwd = localStorage.getItem('admin_pwd_plain');
   if (savedPwd && pwd === savedPwd) { ok = true; }
-  else if (pwd === 'Bailuo@2026Admin') { ok = true; }
+  else if (pwd === "Bailuo@2026Admin") { ok = true; }
   // 方式2: SHA256 比对 (后备)
   if (!ok) {
     try {
@@ -431,7 +458,7 @@ async function doLogin() {
       var savedHash = localStorage.getItem('admin_pwd_hash');
       var validHash = savedHash || ADMIN_HASH;
       if (hash === validHash) ok = true;
-    } catch(e) { console.warn('sha256 login fallback failed:', e); }
+    } catch(e) { console.warn('sha256 login fallback failed: ', e); }
   }
   if (ok) {
     sessionStorage.setItem('adminAuth','1');
@@ -452,7 +479,7 @@ function doLogout() {
 /* 设置弹窗 */
 function showSettings() {
   var token = getGHToken();
-  document.getElementById('setGHToken').value = token ? '••••••••••••••••' : '';
+  document.getElementById('setGHToken').value = token ? "••••••••••••••••" : "";
   document.getElementById('setNewPwd').value = '';
   showModal('settingsModal');
 }
@@ -460,7 +487,7 @@ function showSettings() {
 async function saveSettings() {
   var newToken = document.getElementById('setGHToken').value.trim();
   var newPwd = document.getElementById('setNewPwd').value.trim();
-  if (newToken && newToken !== '••••••••••••••••') {
+  if (newToken && newToken !== "••••••••••••••••") {
     setGHToken(newToken);
     toast('GitHub Token 已保存', 'success');
   }
@@ -474,7 +501,7 @@ async function saveSettings() {
 }
 
 // 自动登录检查
-if (sessionStorage.getItem('adminAuth') === '1') {
+if (sessionStorage.getItem('adminAuth') === "1") {
   document.getElementById('loginWrap').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   loadAllData();
@@ -492,6 +519,7 @@ async function loadAllData() {
     servicesData = await sRes.json();
     siteConfigData = await cRes.json();
     renderProducts(); renderServices(); renderSEO();
+    maybeShowDraftBanner();
     status('数据加载完成，共 '+productsData.length+' 个产品、'+servicesData.length+' 项服务');
   } catch(e) {
     toast('数据加载失败：'+e.message,'error');
@@ -515,8 +543,8 @@ function renderProducts() {
   var kw = document.getElementById('prodSearch').value.toLowerCase();
   var cat = document.getElementById('prodFilter').value;
   var list = productsData.filter(function(p){
-    if(cat==='hot' && !p.hot) return false;
-    if(cat && cat!=='hot' && p.cat!==cat) return false;
+    if(cat=== "hot" && !p.hot) return false;
+    if(cat && cat!== "hot" && p.cat!==cat) return false;
     if(kw && p.name.toLowerCase().indexOf(kw)<0 && (!p.summary || p.summary.toLowerCase().indexOf(kw)<0)) return false;
     return true;
   });
@@ -525,12 +553,12 @@ function renderProducts() {
       '<div class="card-head">'+
         '<span class="card-icon">'+esc(p.icon)+'</span>'+
         '<div><div class="card-title">'+esc(p.name)+'</div>'+
-        (p.tag ? '<span class="card-tag">'+esc(p.tag)+'</span>' : '')+
+        (p.tag ? '<span class="card-tag">'+esc(p.tag)+'</span>' : "")+
         '</div></div>'+
       '<div class="card-sum">'+esc(p.summary||'')+'</div>'+
       '<div class="card-meta">'+
         (p.hot ? '<span class="badge badge-hot">热门</span>' : '')+
-        '<span class="badge badge-cat">'+esc(p.cat==='reagents'?'试剂':'仪器')+'</span>'+
+        '<span class="badge badge-cat">'+esc(p.cat=== "reagents"? "试剂": "仪器")+'</span>'+
       '</div>'+
       '<div class="card-actions">'+
         '<button class="btn btn-outline" style="font-size:12px;padding:5px 12px" onclick="event.stopPropagation();openProductModal(\''+p.id+'\')">编辑</button>'+
@@ -542,8 +570,8 @@ function renderProducts() {
 
 function openProductModal(id) {
   editingProductId = id || null;
-  var p = id ? productsData.find(function(x){return x.id===id}) : {id:'',cat:'reagents',name:'',icon:'🈴',hot:false,summary:'',detail:{intro:'',features:[],specs:[],applications:'',ordering:''}};
-  document.getElementById('prodModalTitle').textContent = id?'编辑产品':'新增产品';
+  var p = id ? productsData.find(function(x){return x.id===id}) : {id: "",cat: "reagents",name: "",icon: "🈴",hot:false,summary: "",detail:{intro: "",features:[],specs:[],applications: "",ordering: ""}};
+  document.getElementById('prodModalTitle').textContent = id? "编辑产品": "新增产品";
   
   var featuresHtml = (p.detail.features||[]).map(function(f,i){
     return fieldRow('feature',i,f);
@@ -556,8 +584,8 @@ function openProductModal(id) {
     '<div class="form-group"><label class="form-label">产品 ID（英文标识）</label><input class="form-input" id="ep_id" value="'+esc(p.id)+'" placeholder="如：ipsc-kit"></div>'+
     '<div class="form-row"><div class="form-group"><label class="form-label">产品名称</label><input class="form-input" id="ep_name" value="'+esc(p.name)+'"></div>'+
       '<div class="form-group"><label class="form-label">图标 Emoji</label><input class="form-input" id="ep_icon" value="'+esc(p.icon)+'"></div></div>'+
-    '<div class="form-row"><div class="form-group"><label class="form-label">分类</label><select class="form-select" id="ep_cat"><option value="reagents"+(p.cat==='reagents'?' selected':'')+'>试剂与耗材</option><option value="instruments"+(p.cat==='instruments'?' selected':'')+'>实验仪器</option></select></div>'+
-      '<div class="form-group"><label class="form-label">热门产品</label><select class="form-select" id="ep_hot"><option value="false"+(!p.hot?' selected':'')+'>否</option><option value="true"+(p.hot?' selected':'')+'>是</option></select></div></div>'+
+    '<div class="form-row"><div class="form-group"><label class="form-label">分类</label><select class="form-select" id="ep_cat"><option value="reagents"'+ (p.cat==="reagents"? " selected": "")+ '>试剂与耗材</option><option value="instruments"'+ (p.cat==="instruments"? " selected": "")+ '>实验仪器</option></select></div>'+
+      '<div class="form-group"><label class="form-label">热门产品</label><select class="form-select" id="ep_hot"><option value="false"'+ (!p.hot? " selected": "")+ '>否</option><option value="true"'+ (p.hot? " selected": "")+ '>是</option></select></div></div>'+
     '<div class="form-group"><label class="form-label">标签（英文短标）</label><input class="form-input" id="ep_tag" value="'+esc(p.tag||'')+'"></div>'+
     '<div class="form-group"><label class="form-label">简介</label><textarea class="form-textarea" id="ep_summary" rows="2">'+esc(p.summary||'')+'</textarea></div>'+
     
@@ -569,8 +597,10 @@ function openProductModal(id) {
     '<div class="form-group"><label class="form-label">技术规格</label><div id="ep_specs_list">'+specsHtml+'<button class="field-add" onclick="addSpecField()">+ 添加规格</button></div></div>'+
     
     '<div class="form-group"><label class="form-label">应用领域</label><textarea class="form-textarea" id="ep_applications" rows="2">'+esc((p.detail&&p.detail.applications)||'')+'</textarea></div>'+
-    '<div class="form-group"><label class="form-label">订购信息</label><textarea class="form-textarea" id="ep_ordering" rows="2">'+esc((p.detail&&p.detail.ordering)||'')+'</textarea></div>';
+    '<div class="form-group"><label class="form-label">订购信息</label><textarea class="form-textarea" id="ep_ordering" rows="2">'+esc((p.detail&&p.detail.ordering)||'')+'</textarea></div>'+
+    buildImageEditorHTML(p);
 
+  initImageEditor(p);
   showModal('productModal');
 }
 
@@ -592,6 +622,84 @@ function addSpecField() {
   container.insertBefore(div, btn);
 }
 
+/* ============================================
+   产品图片上传（自动压缩 + 复用 + 发布上传）
+   ============================================ */
+function buildImageEditorHTML(p){
+  return '<div class="form-group"><label class="form-label">产品图片（可多选，自动压缩到 800px）</label>'+
+    '<div class="img-drop" id="epImgDrop" onclick="document.getElementById(\'epImgInput\').click()">点击选择，或将图片拖拽到此处</div>'+
+    '<input type="file" id="epImgInput" accept="image/*" multiple style="display:none" onchange="onProductImagesSelected(this.files)">'+
+    '<div class="img-list" id="epImgList"></div>'+
+    '<p class="img-hint">第一张为封面；图片随「发布到线上」一起上传到网站，并在详情页轮播展示。</p></div>';
+}
+
+function initImageEditor(p){
+  editingProductImages = (p.detail && p.detail.images ? p.detail.images.map(function(im){return {src:im.src, caption:im.caption||'', isNew:false};}) : []);
+  renderProductImageList();
+  bindImgDrop();
+}
+
+function bindImgDrop(){
+  var drop=document.getElementById('epImgDrop');
+  if(!drop || drop._bound) return; drop._bound=true;
+  drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('drag');});
+  drop.addEventListener('dragleave',function(){drop.classList.remove('drag');});
+  drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('drag');if(e.dataTransfer&&e.dataTransfer.files)onProductImagesSelected(e.dataTransfer.files);});
+}
+
+function onProductImagesSelected(files){
+  var arr=Array.prototype.slice.call(files||[]);
+  var pending=[];
+  arr.forEach(function(f){
+    if(!f.type || f.type.indexOf('image/')!==0) return;
+    pending.push(resizeImageFile(f,800,0.85).then(function(dataUrl){
+      editingProductImages.push({src:dataUrl, caption: "", file:f.name, isNew:true});
+    }).catch(function(){ toast('图片处理失败：'+f.name,'error'); }));
+  });
+  Promise.all(pending).then(renderProductImageList);
+}
+
+function resizeImageFile(file,maxW,quality){
+  return new Promise(function(resolve,reject){
+    var reader=new FileReader();
+    reader.onerror=function(){reject(new Error('read'));};
+    reader.onload=function(){
+      var img=new Image();
+      img.onerror=function(){reject(new Error('decode'));};
+      img.onload=function(){
+        var w=img.width,h=img.height, scale=w>maxW?maxW/w:1;
+        var cw=Math.round(w*scale), ch=Math.round(h*scale);
+        var cv=document.createElement('canvas'); cv.width=cw; cv.height=ch;
+        var ctx=cv.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,cw,ch);
+        ctx.drawImage(img,0,0,cw,ch);
+        resolve(cv.toDataURL('image/jpeg',quality));
+      };
+      img.src=reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderProductImageList(){
+  var list=document.getElementById('epImgList'); if(!list) return;
+  if(editingProductImages.length===0){ list.innerHTML='<p class="img-hint" style="grid-column:1/-1">暂无图片</p>'; return; }
+  list.innerHTML=editingProductImages.map(function(im,idx){
+    var cover=idx===0;
+    return '<div class="img-item'+(cover? " cover": "")+'" data-idx="'+idx+'">'+
+      (cover? '<span class="img-badge">封面</span>': "")+
+      '<button class="img-del" onclick="removeProductImage('+idx+')" title="删除">&times;</button>'+
+      '<img class="img-thumb" src="'+esc(im.src)+'">'+
+      '<input class="img-cap" placeholder="图片说明（可选）" value="'+esc(im.caption||'')+'" onchange="editingProductImages['+idx+'].caption=this.value">'+
+      '<div class="acts">'+
+        (idx>0? '<button onclick="moveProductImage('+idx+',-1)">← 前移</button>': '<button disabled>← 前移</button>')+
+        (idx<editingProductImages.length-1? '<button onclick="moveProductImage('+idx+',1)">后移 →</button>': '<button disabled>后移 →</button>')+
+      '</div></div>';
+  }).join('');
+}
+
+function removeProductImage(idx){ editingProductImages.splice(idx,1); renderProductImageList(); }
+function moveProductImage(idx,dir){ var j=idx+dir; if(j<0||j>=editingProductImages.length) return; var t=editingProductImages[idx]; editingProductImages[idx]=editingProductImages[j]; editingProductImages[j]=t; renderProductImageList(); }
+
 function saveProduct() {
   var features = [];
   document.querySelectorAll('#ep_features_list .field-row').forEach(function(r){
@@ -603,12 +711,22 @@ function saveProduct() {
     if(inputs.length>=2 && inputs[0].value.trim()) specs.push({key:inputs[0].value.trim(), val:inputs[1].value.trim()});
   });
 
+  var pid = document.getElementById('ep_id').value.trim();
+  var images = editingProductImages.map(function(im,idx){
+    if(im.isNew){
+      var tmp='images/products/'+pid+'-NEW-'+idx+'.jpg';
+      pendingImages[tmp]={dataUrl:im.src, fileName:im.file||('img'+idx+'.jpg')};
+      return {src:tmp, caption:im.caption||''};
+    }
+    return {src:im.src, caption:im.caption||''};
+  });
+
   var obj = {
-    id: document.getElementById('ep_id').value.trim(),
+    id: pid,
     cat: document.getElementById('ep_cat').value,
     name: document.getElementById('ep_name').value.trim(),
     icon: document.getElementById('ep_icon').value.trim(),
-    hot: document.getElementById('ep_hot').value === 'true',
+    hot: document.getElementById('ep_hot').value === "true",
     tag: document.getElementById('ep_tag').value.trim(),
     summary: document.getElementById('ep_summary').value.trim(),
     detail: {
@@ -616,11 +734,13 @@ function saveProduct() {
       features: features,
       specs: specs,
       applications: document.getElementById('ep_applications').value.trim(),
-      ordering: document.getElementById('ep_ordering').value.trim()
+      ordering: document.getElementById('ep_ordering').value.trim(),
+      images: images
     }
   };
 
   if(!obj.id || !obj.name) { toast('ID 和名称为必填项','error'); return; }
+  if(!editingProductId && productsData.some(function(x){return x.id===obj.id;})) { toast('产品 ID 已存在，请换一个','error'); return; }
 
   if(editingProductId) {
     var idx = productsData.findIndex(function(x){return x.id===editingProductId});
@@ -630,6 +750,7 @@ function saveProduct() {
   }
   closeModal('productModal');
   renderProducts();
+  saveDraft();
   toast('产品已保存（本地）','success');
 }
 
@@ -637,6 +758,7 @@ function deleteProduct(id) {
   if(!confirm('确定删除该产品？')) return;
   productsData = productsData.filter(function(p){return p.id!==id});
   renderProducts();
+  saveDraft();
   toast('产品已删除','info');
 }
 
@@ -665,8 +787,8 @@ function renderServices() {
 
 function openServiceModal(id) {
   editingServiceId = id || null;
-  var s = id ? servicesData.find(function(x){return x.id===id}) : {id:'',num:'',sc:'',tag:'',name:'',icon:'',summary:'',flow:'',detail:{intro:'',features:[],specs:[],applications:'',deliverables:''}};
-  document.getElementById('svcModalTitle').textContent = id?'编辑服务':'新增服务';
+  var s = id ? servicesData.find(function(x){return x.id===id}) : {id: "",num: "",sc: "",tag: "",name: "",icon: "",summary: "",flow: "",detail:{intro: "",features:[],specs:[],applications: "",deliverables: ""}};
+  document.getElementById('svcModalTitle').textContent = id? "编辑服务": "新增服务";
 
   var featHtml = (s.detail.features||[]).map(function(f,i){
     return '<div class="field-row"><input value="'+esc(f)+'" style="grid-column:1/-1"><button class="btn btn-danger" style="padding:4px 8px;font-size:12px" onclick="this.parentElement.remove()">×</button></div>';
@@ -714,10 +836,10 @@ function saveService() {
   if(!obj.id||!obj.name){toast('ID 和名称必填','error');return;}
   if(editingServiceId){var idx=servicesData.findIndex(function(x){return x.id===editingServiceId});if(idx>=0)servicesData[idx]=obj;}
   else servicesData.push(obj);
-  closeModal('serviceModal');renderServices();toast('服务已保存（本地）','success');
+  closeModal('serviceModal');renderServices();saveDraft();toast('服务已保存（本地）','success');
 }
 
-function deleteService(id){if(!confirm('确定删除？'))return;servicesData=servicesData.filter(function(s){return s.id!==id});renderServices();toast('已删除','info');}
+function deleteService(id){if(!confirm('确定删除？'))return;servicesData=servicesData.filter(function(s){return s.id!==id});renderServices();saveDraft();toast('已删除','info');}
 
 /* ============================================
    SEO 渲染
@@ -744,7 +866,7 @@ function renderSEO() {
 
 function syncHL(i){
   if(!siteConfigData.aboutHighlights) siteConfigData.aboutHighlights=[];
-  while(siteConfigData.aboutHighlights.length<=i) siteConfigData.aboutHighlights.push({num:'',label:''});
+  while(siteConfigData.aboutHighlights.length<=i) siteConfigData.aboutHighlights.push({num: "",label: ""});
   siteConfigData.aboutHighlights[i]={num:document.getElementById('hlNum'+i).value,label:document.getElementById('hlLabel'+i).value};
 }
 
@@ -763,7 +885,7 @@ function renderHeroEditor(){
   document.getElementById('heroEditor').innerHTML=html;
 }
 
-function addHeroSlide(){if(!siteConfigData.heroSlides)siteConfigData.heroSlides=[];siteConfigData.heroSlides.push({title:'',sub:'',tag:'',btn1Text:'',btn1Href:'',img:''});renderHeroEditor();}
+function addHeroSlide(){if(!siteConfigData.heroSlides)siteConfigData.heroSlides=[];siteConfigData.heroSlides.push({title: "",sub: "",tag: "",btn1Text: "",btn1Href: "",img: ""});renderHeroEditor();}
 
 function collectSEO(){
   siteConfigData.siteTitle = document.getElementById('cfgSiteTitle').value.trim();
@@ -775,6 +897,7 @@ function collectSEO(){
     if(!siteConfigData.heroSlides[idx]) siteConfigData.heroSlides[idx]={};
     siteConfigData.heroSlides[idx][fld]=el.value.trim();
   });
+  saveDraft();
 }
 
 /* ============================================
@@ -783,7 +906,7 @@ function collectSEO(){
 async function githubApi(method,path,body){
   var url='https://api.github.com/repos/'+GH_REPO+'/contents/'+path;
   var token=getGHToken(); if(!token) throw new Error('未配置 GitHub Token');
-  var opts={method:method,headers:{'Authorization':'token '+token,'User-Agent':'BailuoAdmin'}};
+  var opts={method:method,headers:{'Authorization': "token "+token,'User-Agent': "BailuoAdmin"}};
   if(body) opts.body=JSON.stringify(body);
   var r=await fetch(url,opts);
   if(!r.ok){var err=await r.text(); throw new Error('GitHub API 错误 ('+r.status+'): '+err);}
@@ -792,7 +915,7 @@ async function githubApi(method,path,body){
 
 async function getFileSha(path){
   try{
-    var r=await githubApi('GET',path);
+    var r=await githubApi("GET",path);
     return r.sha;
   }catch(e){return null;} /* 文件不存在返回 null */
 }
@@ -801,9 +924,33 @@ function b64(str){return btoa(unescape(encodeURIComponent(str)));}
 
 async function pushFile(path,content){
   var sha=await getFileSha(path);
-  var body={message:'update: '+path,branch:GH_BRANCH,content:b64(content)};
+  var body={message: "update: "+path,branch:GH_BRANCH,content:b64(content)};
   if(sha) body.sha=sha;
-  return githubApi(sha?'PUT':'POST',path,body);
+  return githubApi(sha? "PUT": "POST",path,body);
+}
+
+/* 上传二进制图片：b64content 已是 base64（不含 data: 前缀） */
+async function pushRawFile(path, b64content){
+  var sha=await getFileSha(path);
+  var body={message: "add image: "+path,branch:GH_BRANCH,content:b64content};
+  if(sha) body.sha=sha;
+  return githubApi(sha? "PUT": "POST",path,body);
+}
+
+/* 发布站点静态文件（admin / index / products 自身），实现整站自发布 */
+async function pushSiteFile(name){
+  try{
+    var r=await fetch(name); if(!r.ok) return null;
+    var txt=await r.text();
+    return await pushFile(name,txt);
+  }catch(e){ return null; }
+}
+
+function showPublishError(msg){
+  var m=document.getElementById('loadingMask'); if(!m) return;
+  var box=document.getElementById('errBox');
+  if(!box){ box=document.createElement('div'); box.id='errBox'; box.className='err-box'; m.appendChild(box); }
+  box.textContent='发布失败：\n'+msg+'\n\n（请检查 Token 权限是否为 repo，或网络是否可访问 GitHub）';
 }
 
 async function saveAllToGitHub(){
@@ -816,16 +963,33 @@ async function saveAllToGitHub(){
   collectSEO();
   showLoading(true);
   try{
+    /* 1) 上传新增产品图片（仅 isNew 的），并把真实路径写回 productsData */
+    var upTasks=[];
+    productsData.forEach(function(p){
+      (p.detail&&p.detail.images||[]).forEach(function(im){
+        if(im.src && im.src.indexOf('-NEW-')>=0 && pendingImages[im.src]){
+          var info=pendingImages[im.src];
+          var b64=info.dataUrl.split(',')[1];
+          var real='images/products/'+p.id+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7)+'.jpg';
+          upTasks.push(pushRawFile(real,b64).then(function(){ im.src=real; }));
+        }
+      });
+    });
+    await Promise.all(upTasks);
+
+    /* 2) 推送数据（HTML 模板由 git 提交部署） */
     await Promise.all([
       pushFile('data/products.json',JSON.stringify(productsData,null,2)),
       pushFile('data/services.json',JSON.stringify(servicesData,null,2)),
-      pushFile('data/site-config.json',JSON.stringify(siteConfigData,null,2))
-    ]);
+      pushFile('data/site-config.json',JSON.stringify(siteConfigData,null,2)),    ]);
+    pendingImages={};
+    clearDraft();
     var now=new Date();
-    document.getElementById('lastSaved').textContent='上次发布：'+now.toLocaleTimeString();
+    var ls=document.getElementById('lastSaved'); if(ls) ls.textContent='上次发布：'+now.toLocaleTimeString();
     toast('发布成功！GitHub Pages 约 1-2 分钟后自动更新','success');
     status('已发布到 GitHub');
   }catch(e){
+    showPublishError(e.message);
     toast('发布失败：'+e.message,'error');
   }finally{
     showLoading(false);
@@ -842,14 +1006,14 @@ function downloadJSON(type){
     case 'services': data=servicesData;name='biologia_services.json';break;
     case 'config': data=siteConfigData;name='biologia_site-config.json';break;
   }
-  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var blob=new Blob([JSON.stringify(data,null,2)],{type: "application/json"});
   downloadBlob(blob,name);
   toast(name+' 已下载','success');
 }
 
 function downloadExcel(type){
   // 动态加载 SheetJS
-  if(typeof XLSX==='undefined'){
+  if(typeof XLSX=== "undefined"){
     var s=document.createElement('script');s.src='https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js';
     s.onload=function(){doDownloadExcel(type);};document.head.appendChild(s);return;
   }
@@ -858,14 +1022,14 @@ function downloadExcel(type){
 
 function doDownloadExcel(type){
   var wb=XLSX.utils.book_new(),wsData,fileName;
-  if(type==='products'){
-    wsData=productsData.map(function(p){return{id:p.id,'分类':p.cat==='reagents'?'试剂与耗材':'实验仪器','名称':p.name,'图标':p.icon,'是否热门':p.hot?'是':'否','简介':p.summary,'概览':(p.detail&&p.detail.intro)||'','应用':(p.detail&&p.detail.applications)||'','订购':(p.detail&&p.detail.ordering)||''}});
+  if(type=== "products"){
+    wsData=productsData.map(function(p){return{id:p.id,'分类':p.cat=== "reagents"? "试剂与耗材": "实验仪器",'名称':p.name,'图标':p.icon,'是否热门':p.hot? "是": "否",'简介':p.summary,'概览':(p.detail&&p.detail.intro)||'','应用':(p.detail&&p.detail.applications)||'','订购':(p.detail&&p.detail.ordering)||''}});
     fileName='佰洛生物_产品目录.xlsx';
   }else{
     wsData=servicesData.map(function(s){return{id:s.id,'编号':s.num,'名称':s.name,'标签':s.tag,'简介':s.summary,'流程':s.flow,'概览':(s.detail&&s.detail.intro)||'','适用场景':(s.detail&&s.detail.applications)||'','交付内容':(s.detail&&s.detail.deliverables)||''}});
     fileName='佰洛生物_技术服务.xlsx';
   }
-  var ws=XLSX.utils.json_to_sheet(wsData);XLSX.utils.book_append_sheet(wb,ws,type==='products'?'产品':'服务');
+  var ws=XLSX.utils.json_to_sheet(wsData);XLSX.utils.book_append_sheet(wb,ws,type=== "products"? "产品": "服务");
   XLSX.writeFile(wb,fileName);toast(fileName+' 已下载','success');
 }
 
@@ -890,6 +1054,35 @@ function toast(msg,type){
   var c=document.getElementById('toastContainer');
   var t=document.createElement('div');t.className='toast '+(type||'info');t.textContent=msg;c.appendChild(t);
   setTimeout(function(){t.remove()},3500);
+}
+
+/* ============================================
+   草稿自动保存 / 恢复（刷新或误关不丢数据）
+   ============================================ */
+function saveDraft(){
+  try{
+    localStorage.setItem('bailuo_draft', JSON.stringify({
+      products:productsData, services:servicesData, config:siteConfigData, ts:Date.now()
+    }));
+  }catch(e){}
+}
+function clearDraft(){ localStorage.removeItem('bailuo_draft'); }
+function restoreDraft(){
+  try{
+    var d=JSON.parse(localStorage.getItem('bailuo_draft')||'null'); if(!d) return;
+    if(Array.isArray(d.products)) productsData=d.products;
+    if(Array.isArray(d.services)) servicesData=d.services;
+    if(d.config) siteConfigData=d.config;
+    renderProducts(); renderServices(); renderSEO();
+    clearDraft();
+    toast('已恢复本地草稿','success');
+  }catch(e){ toast('草稿恢复失败','error'); }
+}
+function maybeShowDraftBanner(){
+  try{
+    var d=localStorage.getItem('bailuo_draft');
+    if(d){ document.getElementById('draftBanner').classList.add('show'); }
+  }catch(e){}
 }
 </script>
 </body>
