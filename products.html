@@ -220,18 +220,43 @@ var _hmt = _hmt || [];
 
   .pd-hero {
     display: flex; flex-direction: column; align-items: center; text-align: center;
-    padding: 48px 24px 36px;
-    background: linear-gradient(160deg, #eef5fb, #e8f4f8);
+    padding: 52px 28px 42px;
+    background: linear-gradient(135deg, #0a5c8a 0%, #064368 100%);
+    color: #fff;
   }
-  .pd-hero .pdh-icon { font-size: 64px; margin-bottom: 16px; }
+  .pd-hero .pdh-icon { font-size: 56px; margin-bottom: 14px; }
   .pd-hero .pdh-cat {
     font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 8px;
+    color: #7dd3fc; margin-bottom: 10px;
   }
-  .pd-hero h1 { font-size: 34px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; margin-bottom: 10px; }
-  .pd-hero .pdh-tagline { font-size: 16px; color: var(--text-secondary); max-width: 560px; }
+  .pd-hero h1 { font-size: 32px; font-weight: 700; color: #fff; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .pd-hero .pdh-tagline { font-size: 16px; color: rgba(255,255,255,0.82); max-width: 600px; line-height: 1.6; }
+  /* Hero 内联 CTA */
+  .pdh-cta-row {
+    display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap;
+  }
+  .pdh-cta-row .ph-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 22px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    text-decoration: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pdh-cta-row .ph-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
+  .ph-btn-primary { background: #fff; color: #0a5c8a; border: none; }
+  .ph-btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.55); }
 
-  .pd-body { max-width: 860px; margin: 0 auto; padding: 32px 24px 64px; }
+  /* 面包屑 */
+  .pd-breadcrumb {
+    max-width: 1100px; margin: 0 auto; padding: 14px 28px 0;
+    font-size: 13px; color: var(--text-muted);
+  }
+  .pd-breadcrumb a { color: var(--primary); text-decoration: none; }
+  .pd-breadcrumb a:hover { text-decoration: underline; }
+
+  /* 左右分栏内容区 */
+  .pd-body {
+    max-width: 1100px; margin: 0 auto; padding: 28px 28px 64px;
+    display: grid; grid-template-columns: 1fr 340px; gap: 28px; align-items: start;
+  }
   .pd-section { margin-bottom: 36px; }
   .pd-section:last-child { margin-bottom: 0; }
   .pd-section .pds-label {
@@ -255,6 +280,32 @@ var _hmt = _hmt || [];
     background: #f7f9fc; color: var(--text-muted); font-weight: 500;
   }
   .pd-specs .ps-row .psv { flex: 1; padding: 12px 16px; color: var(--text); font-weight: 600; }
+
+  /* 右侧栏 */
+  .pd-sidebar { display: flex; flex-direction: column; gap: 18px; }
+  .pd-sidebar-card {
+    background: #fff; border-radius: 14px; padding: 22px;
+    box-shadow: 0 2px 14px rgba(0,0,0,.06); border: 1px solid var(--border);
+  }
+  .pd-sidebar-card h3 { font-size: 16px; color: var(--primary-dark); margin-bottom: 12px; }
+  .pd-sidebar-card .pds-row { font-size: 13px; color: var(--text-secondary); margin: 7px 0; }
+  .pd-cta-card {
+    background: linear-gradient(135deg, #0a5c8a, #064368); border-radius: 14px;
+    padding: 26px 22px; text-align: center; color: #fff;
+  }
+  .pd-cta-card h3 { font-size: 17px; margin-bottom: 8px; color: #fff; }
+  .pd-cta-card p { font-size: 13px; opacity: 0.85; margin-bottom: 16px; line-height: 1.5; }
+  .pd-cta-card .pc-btn {
+    display: inline-block; padding: 10px 24px; background: #fff; color: #0a5c8a;
+    border-radius: 10px; font-weight: 600; font-size: 14px; text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .pd-cta-card .pc-btn:hover { transform: translateY(-1px); }
+
+  @media (max-width: 900px) {
+    .pd-body { grid-template-columns: 1fr; padding: 20px 18px 48px; }
+    .pd-sidebar { order: -1; }
+  }
 
   /* BACK TO TOP */
   .back-top {
@@ -514,14 +565,25 @@ function openProductDetail(id) {
   document.getElementById('pdTitle').textContent = item.name;
 
   var html = '';
+  /* 深色 Hero + CTA */
   html += '<div class="pd-hero">';
   html += '<div class="pdh-icon">' + esc(item.icon) + '</div>';
   html += '<div class="pdh-cat">' + esc(item.cat === 'reagents' ? '试剂与耗材' : '实验仪器') + '</div>';
   html += '<h1>' + esc(item.name) + '</h1>';
   html += '<div class="pdh-tagline">' + esc(item.summary) + '</div>';
+  html += '<div class="pdh-cta-row">';
+  html += '<a href="contact.html" class="ph-btn ph-btn-primary">📞 获取报价</a>';
+  html += '<a href="mailto:service@biologia.cn" class="ph-btn ph-btn-outline">📧 技术咨询</a>';
+  html += '</div>';
   html += '</div>';
 
+  /* 面包屑 */
+  html += '<div class="pd-breadcrumb"><a href="index.html">首页</a> › <a href="products.html">产品中心</a> › <span>' + esc(item.name) + '</span></div>';
+
+  /* 左右分栏内容区 */
   html += '<div class="pd-body">';
+  html += '<div class="pd-main">';
+
   html += '<div class="pd-section"><div class="pds-label">产品概述</div>';
   html += '<div class="pds-text">' + esc(detail.intro || '') + '</div></div>';
 
@@ -548,10 +610,27 @@ function openProductDetail(id) {
   html += '<div class="pd-section"><div class="pds-label">应用领域</div>';
   html += '<div class="pds-text">' + esc(detail.applications || '') + '</div></div>';
 
-  html += '<div class="pd-section"><div class="pds-label">订购信息</div>';
-  html += '<div class="pds-text">' + esc(detail.ordering || '') + '</div></div>';
+  html += '</div>'; /* .pd-main 结束 */
 
+  /* 右侧栏 */
+  html += '<aside class="pd-sidebar">';
+  if (detail.ordering) {
+    html += '<div class="pd-sidebar-card"><h3>订购信息</html>';
+    var orderParts = detail.ordering.split('|');
+    orderParts.forEach(function(part) {
+      var kv = part.indexOf('：') > -1 ? part.split('：') : part.indexOf(':') > -1 ? part.split(':') : [part, ''];
+      if (kv[0]) html += '<div class="pds-row"><b>' + esc(kv[0].trim()) + '</b>：' + esc(kv.slice(1).join('：')) + '</div>';
+    });
+    html += '</div>';
+  }
+  html += '<div class="pd-cta-card">';
+  html += '<h3>询价 / 订购</h3>';
+  html += '<p>佰洛生物为您提供专业技术支持与报价服务</p>';
+  html += '<a href="contact.html" class="pc-btn">联系我们</a>';
   html += '</div>';
+  html += '</aside>'; /* .pd-sidebar 结束 */
+
+  html += '</div>'; /* .pd-body 结束 */
 
   document.getElementById('pdContent').innerHTML = html;
   document.getElementById('pdOverlay').classList.add('show');
