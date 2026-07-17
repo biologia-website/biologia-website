@@ -254,8 +254,8 @@ var _hmt = _hmt || [];
 
   /* 左右分栏内容区 */
   .pd-body {
-    max-width: 1100px; margin: 0 auto; padding: 28px 28px 64px;
-    display: grid; grid-template-columns: 1fr 340px; gap: 28px; align-items: start;
+    max-width: 1200px; margin: 0 auto; padding: 32px 32px 64px;
+    display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: start;
   }
   .pd-section { margin-bottom: 36px; }
   .pd-section:last-child { margin-bottom: 0; }
@@ -282,13 +282,13 @@ var _hmt = _hmt || [];
   .pd-specs .ps-row .psv { flex: 1; padding: 12px 16px; color: var(--text); font-weight: 600; }
 
   /* 右侧栏 */
-  .pd-sidebar { display: flex; flex-direction: column; gap: 18px; }
+  .pd-sidebar { display: flex; flex-direction: column; gap: 22px; }
   .pd-sidebar-card {
-    background: #fff; border-radius: 14px; padding: 22px;
+    background: #fff; border-radius: 16px; padding: 26px;
     box-shadow: 0 2px 14px rgba(0,0,0,.06); border: 1px solid var(--border);
   }
-  .pd-sidebar-card h3 { font-size: 16px; color: var(--primary-dark); margin-bottom: 12px; }
-  .pd-sidebar-card .pds-row { font-size: 13px; color: var(--text-secondary); margin: 7px 0; }
+  .pd-sidebar-card h3 { font-size: 16px; color: var(--primary-dark); margin-bottom: 14px; }
+  .pd-sidebar-card .pds-row { font-size: 13.5px; color: var(--text-secondary); margin: 10px 0; line-height: 1.6; }
   .pd-cta-card {
     background: linear-gradient(135deg, #0a5c8a, #064368); border-radius: 14px;
     padding: 26px 22px; text-align: center; color: #fff;
@@ -306,6 +306,28 @@ var _hmt = _hmt || [];
     .pd-body { grid-template-columns: 1fr; padding: 20px 18px 48px; }
     .pd-sidebar { order: -1; }
   }
+
+  /* 热门产品推荐（右侧栏） */
+  .pd-sidebar-hot .pdsh-list { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+  .pdsh-item {
+    display: flex; align-items: center; gap: 12px; cursor: pointer;
+    padding: 10px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--bg); transition: border-color .2s, background .2s, transform .15s;
+  }
+  .pdsh-item:hover { border-color: var(--primary-light); background: #f0f6fb; transform: translateX(2px); }
+  .pdsh-icon {
+    font-size: 20px; flex-shrink: 0; width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; border-radius: 10px; border: 1px solid var(--border);
+  }
+  .pdsh-text { flex: 1; min-width: 0; }
+  .pdsh-name { display: block; font-size: 14px; font-weight: 700; color: var(--primary-dark); line-height: 1.3; }
+  .pdsh-sum {
+    display: block; font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-top: 2px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .pdsh-arrow { color: var(--primary); font-size: 16px; flex-shrink: 0; opacity: .5; transition: opacity .2s, transform .2s; }
+  .pdsh-item:hover .pdsh-arrow { opacity: 1; transform: translateX(2px); }
 
   /* BACK TO TOP */
   .back-top {
@@ -338,12 +360,12 @@ var _hmt = _hmt || [];
     .product-grid { grid-template-columns: 1fr; }
   }
   /* 产品图片图集 */
-  .gallery-carousel{position:relative;border-radius:12px;overflow:hidden;background:#0f1117;border:1px solid var(--border,#2e3348)}
+  .gallery-carousel{position:relative;border-radius:12px;overflow:hidden;background:#fff;border:1px solid #e6ebf0}
   .gallery-track{display:flex;transition:transform .35s ease}
-  .gallery-slide{flex:0 0 100%;position:relative;background:#0f1117}
-  .gallery-slide img{display:block;width:100%;max-height:420px;object-fit:contain;background:#0f1117}
+  .gallery-slide{flex:0 0 100%;position:relative;background:#fff}
+  .gallery-slide img{display:block;width:100%;max-height:420px;object-fit:contain;background:#fff;border-radius:10px}
   .gallery-caption{position:absolute;left:0;right:0;bottom:0;padding:8px 12px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-size:13px}
-  .gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:none;background:rgba(15,17,23,.6);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:none;background:rgba(0,0,0,.4);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
   .gallery-nav.prev{left:10px}.gallery-nav.next{right:10px}
   .gallery-nav:hover{background:rgba(14,165,233,.85)}
   .gallery-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:8px}
@@ -462,12 +484,15 @@ var _hmt = _hmt || [];
    数据加载 — 从 data/products.json 异步加载
 ═══════════════════════════════════════ */
 var allProducts = [];
+var pendingDetail = null;
 
 async function loadData() {
   try {
     var res = await fetch('data/products.json');
     window.allProducts = await res.json();
+    window.__productsLoaded = true;
     renderProducts();
+    if (pendingDetail) { var pid = pendingDetail; pendingDetail = null; openProductDetail(pid); }
     checkHashOnLoad();
   } catch (e) {
     console.error('产品数据加载失败:', e);
@@ -510,6 +535,22 @@ function galleryGo(i){
   t.querySelectorAll('.gallery-dot').forEach(function(d,di){ d.classList.toggle('active',di===galleryIdx); });
 }
 function galleryMove(d){ var t=document.getElementById('pdGallery'); if(!t) return; var n=t.querySelector('.gallery-track').children.length; galleryGo(galleryIdx+d); }
+
+/* 热门产品推荐块（右侧栏） */
+function buildHotProductsHTML(currentId) {
+  var hot = (window.allProducts || []).filter(function(p) { return p.hot && p.id !== currentId; });
+  if (!hot.length) return '';
+  var items = hot.map(function(p) {
+    return '<a class="pdsh-item" onclick="openProductDetail(\'' + esc(p.id) + '\')">' +
+      '<span class="pdsh-icon">' + esc(p.icon) + '</span>' +
+      '<span class="pdsh-text"><span class="pdsh-name">' + esc(p.name) + '</span>' +
+      '<span class="pdsh-sum">' + esc(p.summary) + '</span></span>' +
+      '<span class="pdsh-arrow">→</span>' +
+    '</a>';
+  }).join('');
+  return '<div class="pd-sidebar-card pd-sidebar-hot"><h3>热门产品</h3>' +
+    '<div class="pdsh-list">' + items + '</div></div>';
+}
 
 /* ═══════════════════════════════════════
    RENDER PRODUCTS
@@ -558,7 +599,10 @@ function renderProducts() {
 ═══════════════════════════════════════ */
 function openProductDetail(id) {
   var item = getProductById(id);
-  if (!item) return;
+  if (!item) {
+    if (!window.__productsLoaded) { pendingDetail = id; return; }
+    return;
+  }
   galleryIdx = 0;
 
   var detail = item.detail || {};
@@ -615,7 +659,7 @@ function openProductDetail(id) {
   /* 右侧栏 */
   html += '<aside class="pd-sidebar">';
   if (detail.ordering) {
-    html += '<div class="pd-sidebar-card"><h3>订购信息</html>';
+    html += '<div class="pd-sidebar-card"><h3>订购信息</h3>';
     var orderParts = detail.ordering.split('|');
     orderParts.forEach(function(part) {
       var kv = part.indexOf('：') > -1 ? part.split('：') : part.indexOf(':') > -1 ? part.split(':') : [part, ''];
@@ -628,6 +672,10 @@ function openProductDetail(id) {
   html += '<p>佰洛生物为您提供专业技术支持与报价服务</p>';
   html += '<a href="contact.html" class="pc-btn">联系我们</a>';
   html += '</div>';
+
+  /* 热门产品（右侧栏，询价卡片下方） */
+  html += buildHotProductsHTML(id);
+
   html += '</aside>'; /* .pd-sidebar 结束 */
 
   html += '</div>'; /* .pd-body 结束 */
