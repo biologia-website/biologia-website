@@ -7,3 +7,6 @@ Sitemap: https://www.biologia.cn/sitemap.xml
 
 # 数据接口目录不对外索引
 Disallow: /data/
+
+# 后台管理页面不对外索引
+Disallow: /manage-x7k2.html
