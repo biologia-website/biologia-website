@@ -50,7 +50,7 @@ def gallery_html(images):
     if len(images) > 1:
         nav = '<button class="gallery-nav prev" aria-label="上一张">‹</button><button class="gallery-nav next" aria-label="下一张">›</button>'
     return f'''
-    <section class="pd-sc">
+    <section class="section-card">
       <h2>产品图片</h2>
       <div class="gallery-carousel" id="gallery">
         <div class="gallery-track">{''.join(slides)}</div>
@@ -142,34 +142,56 @@ def page_shell(title, desc, canonical, jsonld_list, body, css_extra=""):
 <meta name="twitter:description" content="{e(desc)}">
 {ld}
 <style>
-:root{{--blue:#0a5c8a;--blue2:#064368;}}
+:root{{--blue:#0a5c8a;--blue2:#064368;--accent:#00a896;}}
 *{{box-sizing:border-box;margin:0;padding:0;}}
 body{{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:#1f2d3d;line-height:1.7;background:#f6f8fa;}}
 a{{color:var(--blue);text-decoration:none;}}
 header{{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;}}
 header .logo{{font-weight:700;font-size:18px;}}
 header nav a{{color:#dbeafe;margin-left:16px;font-size:14px;}}
-.wrap{{max-width:960px;margin:0 auto;padding:24px 18px 60px;}}
-.hero{{background:#fff;border-radius:14px;padding:28px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.05);}}
-.hero .tag{{display:inline-block;background:#e7f1f8;color:var(--blue);font-size:12px;padding:3px 10px;border-radius:20px;margin-bottom:10px;}}
-.hero h1{{font-size:26px;margin-bottom:8px;}}
-.hero .summary{{color:#51606f;}}
-.grid{{display:grid;grid-template-columns:1fr 300px;gap:20px;}}
-@media(max-width:760px){{.grid{{grid-template-columns:1fr;}}}}
-.pd-sc{{background:#fff;border-radius:14px;padding:22px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.05);}}
-.pd-sc h2{{font-size:18px;margin-bottom:12px;color:var(--blue2);border-left:4px solid var(--blue);padding-left:10px;}}
-.intro-text{{color:#333;}}
+.wrap{{max-width:1100px;margin:0 auto;padding:0 18px 60px;}}
+/* 面包屑 */
+.breadcrumb{{padding:14px 0;font-size:13px;color:#8a97a5;}}
+.breadcrumb a{{color:var(--blue);}}
+/* 深色 Hero 横幅（含内联CTA） */
+.product-hero{{background:linear-gradient(135deg,#0a5c8a 0%,#064368 100%);color:#fff;padding:44px 0 38px;}}
+.ph-inner{{display:flex;gap:32px;align-items:flex-start;}}
+.ph-icon{{width:72px;height:72px;border-radius:16px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:34px;flex-shrink:0;}}
+.ph-info{{flex:1;}}
+.ph-cat{{display:inline-block;background:rgba(255,255,255,.18);font-size:12px;padding:3px 10px;border-radius:20px;margin-bottom:10px;}}
+.ph-info h1{{font-size:28px;margin-bottom:8px;}}
+.ph-summary{{opacity:.9;font-size:15px;max-width:600px;line-height:1.7;}}
+.ph-cta{{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;}}
+.btn{{display:inline-flex;align-items:center;gap:6px;padding:11px 24px;border-radius:8px;font-size:15px;font-weight:600;transition:transform .15s,box-shadow .15s;cursor:pointer;border:none;}}
+.btn-primary{{background:#fff;color:var(--blue);}}
+.btn-primary:hover{{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2);}}
+.btn-outline{{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55);}}
+.btn-outline:hover{{border-color:#fff;}}
+/* 左右内容网格 */
+.content-grid{{display:grid;grid-template-columns:1fr 340px;gap:28px;padding-top:28px;}}
+@media(max-width:860px){{.content-grid{{grid-template-columns:1fr;}}.ph-inner{{flex-direction:column;gap:16px;}}}}
+.section-card{{background:#fff;border-radius:14px;padding:24px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,.05);}}
+.section-card h2{{font-size:18px;margin-bottom:14px;color:var(--blue2);border-left:4px solid var(--blue);padding-left:10px;}}
+.intro-text{{color:#333;font-size:15px;line-height:1.85;}}
+.intro-text strong{{color:#1f2d3d;}}
 .feature-list{{padding-left:20px;}}
 .feature-list li{{margin:6px 0;}}
 .spec-table{{width:100%;border-collapse:collapse;}}
-.spec-table td{{padding:9px 12px;border-bottom:1px solid #eef1f4;font-size:14px;}}
+.spec-table td{{padding:10px 14px;border-bottom:1px solid #eef1f4;font-size:14px;}}
 .spec-table td:first-child{{color:#6b7785;width:38%;background:#fafbfc;}}
-.app-text{{color:#333;}}
-.sidebar .card{{background:#fff;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.05);}}
-.sidebar .card h3{{font-size:15px;margin-bottom:10px;color:var(--blue2);}}
-.sidebar .row{{font-size:13px;margin:5px 0;color:#444;}}
-.cta{{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:14px;padding:20px;}}
-.cta a{{display:inline-block;margin-top:10px;background:#fff;color:var(--blue);padding:9px 18px;border-radius:8px;font-weight:600;}}
+.app-text{{color:#333;font-size:14px;line-height:1.8;}}
+/* 右侧栏 */
+.sidebar-card{{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,.05);}}
+.sidebar-card h3{{font-size:15px;color:var(--blue2);margin-bottom:12px;}}
+.info-row{{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f5fa;font-size:13px;}}
+.info-row:last-child{{border-bottom:none;}}
+.info-label{{color:#6b7785;}}
+.info-value{{color:#1f2d3d;font-weight:600;}}
+.cta-card{{background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;border-radius:14px;padding:28px;text-align:center;}}
+.cta-card h3{{font-size:18px;margin-bottom:8px;}}
+.cta-card p{{font-size:13px;opacity:.85;margin-bottom:18px;}}
+.cta-card .btn{{background:#fff;color:var(--blue);width:100%;justify-content:center;}}
+/* 图集 */
 .gallery-carousel{{position:relative;max-width:100%;overflow:hidden;}}
 .gallery-track{{display:flex;transition:transform .35s ease;}}
 .gallery-slide{{min-width:100%;}}
@@ -206,27 +228,70 @@ def build_product(p):
     rel_html = "".join(f'<a href="{SITE}/products/{x["id"]}.html">{e(x["name"])}</a>' for x in rel)
     features = "".join(f"<li>{e(f)}</li>" for f in d.get("features", []))
     specs = "".join(f'<tr><td>{e(s["key"])}</td><td>{e(s["val"])}</td></tr>' for s in d.get("specs", []))
-    ordering_rows = "".join(f'<div class="row"><b>{e(part.split("：")[0] if "：" in part else part.split(":")[0] if ":" in part else part)}</b>：{e(part.split("：",1)[1] if "：" in part else part.split(":",1)[1] if ":" in part else "")}</div>' for part in d.get("ordering", "").split("|"))
+    # 产品图标 emoji 映射（按关键词模糊匹配）
+    name_lower = p["name"].lower()
+    intro_text = d.get("intro", "")
+    if "ipsc" in name_lower or "重编程" in p["name"]: icon = "🧬"
+    elif "fbs" in name_lower or "血清" in p["name"]: icon = "🩸"
+    elif "培养基" in p["name"] or "media" in name_lower: icon = "🧪"
+    elif "抗体" in p["name"] or "ab" in name_lower or "流式" in p["name"]: icon = "🔬"
+    elif "染料" in p["name"] or "dye" in name_lower: icon = "🎨"
+    elif "因子" in name_lower or "growth" in name_lower: icon = "💉"
+    elif "酶" in p["name"] or "enzyme" in name_lower: icon = "⚗️"
+    elif "载体" in name_lower or "vector" in name_lower or "cart" in name_lower: icon = "🔷"
+    elif "病毒" in name_lower or "virus" in name_lower or "包装" in p["name"]: icon = "🦠"
+    else: icon = "📦"
+
+    # 订购信息行
+    ord_parts = d.get("ordering", "").split("|")
+    ord_rows = ""
+    for part in ord_parts:
+        part = part.strip()
+        if not part: continue
+        if "：" in part: label, val = part.split("：", 1)
+        elif ":" in part: label, val = part.split(":", 1)
+        else: label, val = part, ""
+        ord_rows += f'<div class="info-row"><span class="info-label">{e(label)}</span><span class="info-value">{e(val)}</span></div>'
+
     body = f'''
-<div class="hero">
-  <span class="tag">{e(cat)}</span>
-  <h1>{e(p["name"])}</h1>
-  <p class="summary">{e(p.get("summary",""))}</p>
+<!-- 面包屑 -->
+<div class="wrap">
+<div class="breadcrumb"><a href="{SITE}/">首页</a><span>›</span><a href="{SITE}/products.html">产品中心</a><span>›</span>{e(p["name"])}</div>
 </div>
-<div class="grid">
-  <div class="main">
-    <section class="pd-sc"><h2>产品概述</h2><div class="intro-text">{e(d.get("intro",""))}</div></section>
+
+<!-- Hero 横幅 -->
+<section class="product-hero">
+  <div class="wrap ph-inner">
+    <div class="ph-icon">{icon}</div>
+    <div class="ph-info">
+      <div class="ph-cat">{e(cat)}</div>
+      <h1>{e(p["name"])}</h1>
+      <p class="ph-summary">{e(p.get("summary",""))}</p>
+      <div class="ph-cta">
+        <a href="{SITE}/contact.html" class="btn btn-primary">📞 获取报价</a>
+        <a href="{SITE}/contact.html" class="btn btn-outline">📧 技术咨询</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 左右内容 -->
+<div class="wrap">
+<div class="content-grid">
+  <div class="content-main">
+    <section class="section-card"><h2>产品概述</h2><div class="intro-text">{e(intro_text)}</div></section>
     {gallery_html(d.get("images", []))}
-    <section class="pd-sc"><h2>产品特点</h2><ul class="feature-list">{features}</ul></section>
-    <section class="pd-sc"><h2>技术规格</h2><table class="spec-table">{specs}</table></section>
-    <section class="pd-sc"><h2>应用领域</h2><div class="app-text">{e(d.get("applications",""))}</div></section>
+    <section class="section-card"><h2>产品特点</h2><ul class="feature-list">{features}</ul></section>
+    <section class="section-card"><h2>技术规格</h2><table class="spec-table">{specs}</table></section>
+    <section class="section-card"><h2>应用领域</h2><div class="app-text">{e(d.get("applications",""))}</div></section>
   </div>
   <aside class="sidebar">
-    <div class="card"><h3>订购信息</h3>{ordering_rows}</div>
-    <div class="cta"><h3 style="color:#fff;margin-bottom:6px;">询价 / 订购</h3><div style="font-size:13px;opacity:.9;">佰洛生物为您提供专业技术支持与报价</div><a href="{SITE}/contact.html">联系我们</a></div>
+    <div class="sidebar-card"><h3>订购信息</h3>{ord_rows}</div>
+    <div class="cta-card"><h3>询价 / 订购</h3><p>佰洛生物为您提供专业技术支持与报价</p><a href="{SITE}/contact.html" class="btn">联系我们</a></div>
   </aside>
 </div>
-<section class="pd-sc"><h2>相关产品</h2><div class="related">{rel_html}</div></section>
+<section class="section-card"><h2>相关产品</h2><div class="related">{rel_html}</div></section>
+</div>
 '''
     return page_shell(
         p["name"] + " | 佰洛生物",
@@ -244,25 +309,54 @@ def build_service(s):
     specs = "".join(f'<tr><td>{e(sp["key"])}</td><td>{e(sp["val"])}</td></tr>' for sp in d.get("specs", []))
     flow = e(d.get("flow", ""))
     delivers = e(d.get("deliverables", ""))
+    # 服务图标 emoji
+    sid = s["id"]
+    if "ipsc" in sid: svc_icon = "🧬"
+    elif "bli" in sid: svc_icon = "🔬"
+    elif "virus" in sid: svc_icon = "🦠"
+    elif "antibody" in sid: svc_icon = "💉"
+    elif "crispr" in sid: svc_icon = "⚗️"
+    elif "cart" in sid: svc_icon = "🔷"
+    else: svc_icon = "⚙️"
+
     body = f'''
-<div class="hero">
-  <span class="tag">{e(SC_CN.get(s.get("sc"),""))} · {e(s.get("tag",""))}</span>
-  <h1>{e(s["name"])}</h1>
-  <p class="summary">{e(s.get("summary",""))}</p>
+<!-- 面包屑 -->
+<div class="wrap">
+<div class="breadcrumb"><a href="{SITE}/">首页</a><span>›</span><a href="{SITE}/index.html#services">技术服务</a><span>›</span>{e(s["name"])}</div>
 </div>
-<div class="grid">
-  <div class="main">
-    <section class="pd-sc"><h2>服务介绍</h2><div class="intro-text">{d.get("intro","").strip()}</div></section>
-    <section class="pd-sc"><h2>服务流程</h2><div class="app-text">{flow}</div></section>
-    <section class="pd-sc"><h2>服务特点</h2><ul class="feature-list">{features}</ul></section>
-    <section class="pd-sc"><h2>技术参数</h2><table class="spec-table">{specs}</table></section>
-    <section class="pd-sc"><h2>交付物</h2><div class="app-text">{delivers}</div></section>
+
+<!-- Hero 横幅 -->
+<section class="product-hero">
+  <div class="wrap ph-inner">
+    <div class="ph-icon">{svc_icon}</div>
+    <div class="ph-info">
+      <div class="ph-cat">{e(SC_CN.get(s.get("sc"),""))} · {e(s.get("tag",""))}</div>
+      <h1>{e(s["name"])}</h1>
+      <p class="ph-summary">{e(s.get("summary",""))}</p>
+      <div class="ph-cta">
+        <a href="{SITE}/contact.html" class="btn btn-primary">📞 咨询报价</a>
+        <a href="{SITE}/contact.html" class="btn btn-outline">📧 技术交流</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 左右内容 -->
+<div class="wrap">
+<div class="content-grid">
+  <div class="content-main">
+    <section class="section-card"><h2>服务介绍</h2><div class="intro-text">{d.get("intro","").strip()}</div></section>
+    <section class="section-card"><h2>服务流程</h2><div class="app-text">{flow}</div></section>
+    <section class="section-card"><h2>服务特点</h2><ul class="feature-list">{features}</ul></section>
+    <section class="section-card"><h2>技术参数</h2><table class="spec-table">{specs}</table></section>
+    <section class="section-card"><h2>交付物</h2><div class="app-text">{delivers}</div></section>
   </div>
   <aside class="sidebar">
-    <div class="cta"><h3 style="color:#fff;margin-bottom:6px;">咨询该服务</h3><div style="font-size:13px;opacity:.9;">佰洛生物技术团队为您提供定制方案</div><a href="{SITE}/contact.html">联系我们</a></div>
+    <div class="cta-card"><h3>咨询该服务</h3><p>佰洛生物技术团队为您提供定制方案</p><a href="{SITE}/contact.html" class="btn">联系我们</a></div>
   </aside>
 </div>
-<section class="pd-sc"><h2>相关服务</h2><div class="related">{rel_html}</div></section>
+<section class="section-card"><h2>相关服务</h2><div class="related">{rel_html}</div></section>
+</div>
 '''
     return page_shell(
         s["name"] + " | 佰洛生物技术服务",

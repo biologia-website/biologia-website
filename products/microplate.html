@@ -17,34 +17,56 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "酶标仪", "description": "佰洛生物多功能酶标仪支持全波长光吸收（200–1000 nm）、荧光强度及化学发光三种检测模式，兼容 6-384 孔板。内置振荡、温控功能，96 孔板全波长扫描 < 6 秒，适用于 ELISA、细胞活力（MTT/CCK-8）、荧光定量等常规实验。", "brand": {"@type": "Brand", "name": "佰洛生物"}, "category": "实验仪器", "offers": {"@type": "Offer", "priceCurrency": "CNY", "availability": "https://schema.org/InStock", "url": "https://www.biologia.cn/products/microplate.html", "seller": {"@type": "Organization", "name": "佰洛生物"}}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://www.biologia.cn/"}, {"@type": "ListItem", "position": 2, "name": "产品中心", "item": "https://www.biologia.cn/products.html"}, {"@type": "ListItem", "position": 3, "name": "酶标仪", "item": "https://www.biologia.cn/products/microplate.html"}]}</script>
 <style>
-:root{--blue:#0a5c8a;--blue2:#064368;}
+:root{--blue:#0a5c8a;--blue2:#064368;--accent:#00a896;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:#1f2d3d;line-height:1.7;background:#f6f8fa;}
 a{color:var(--blue);text-decoration:none;}
 header{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;}
 header .logo{font-weight:700;font-size:18px;}
 header nav a{color:#dbeafe;margin-left:16px;font-size:14px;}
-.wrap{max-width:960px;margin:0 auto;padding:24px 18px 60px;}
-.hero{background:#fff;border-radius:14px;padding:28px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.05);}
-.hero .tag{display:inline-block;background:#e7f1f8;color:var(--blue);font-size:12px;padding:3px 10px;border-radius:20px;margin-bottom:10px;}
-.hero h1{font-size:26px;margin-bottom:8px;}
-.hero .summary{color:#51606f;}
-.grid{display:grid;grid-template-columns:1fr 300px;gap:20px;}
-@media(max-width:760px){.grid{grid-template-columns:1fr;}}
-.pd-sc{background:#fff;border-radius:14px;padding:22px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.05);}
-.pd-sc h2{font-size:18px;margin-bottom:12px;color:var(--blue2);border-left:4px solid var(--blue);padding-left:10px;}
-.intro-text{color:#333;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px 60px;}
+/* 面包屑 */
+.breadcrumb{padding:14px 0;font-size:13px;color:#8a97a5;}
+.breadcrumb a{color:var(--blue);}
+/* 深色 Hero 横幅（含内联CTA） */
+.product-hero{background:linear-gradient(135deg,#0a5c8a 0%,#064368 100%);color:#fff;padding:44px 0 38px;}
+.ph-inner{display:flex;gap:32px;align-items:flex-start;}
+.ph-icon{width:72px;height:72px;border-radius:16px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:34px;flex-shrink:0;}
+.ph-info{flex:1;}
+.ph-cat{display:inline-block;background:rgba(255,255,255,.18);font-size:12px;padding:3px 10px;border-radius:20px;margin-bottom:10px;}
+.ph-info h1{font-size:28px;margin-bottom:8px;}
+.ph-summary{opacity:.9;font-size:15px;max-width:600px;line-height:1.7;}
+.ph-cta{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:11px 24px;border-radius:8px;font-size:15px;font-weight:600;transition:transform .15s,box-shadow .15s;cursor:pointer;border:none;}
+.btn-primary{background:#fff;color:var(--blue);}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2);}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55);}
+.btn-outline:hover{border-color:#fff;}
+/* 左右内容网格 */
+.content-grid{display:grid;grid-template-columns:1fr 340px;gap:28px;padding-top:28px;}
+@media(max-width:860px){.content-grid{grid-template-columns:1fr;}.ph-inner{flex-direction:column;gap:16px;}}
+.section-card{background:#fff;border-radius:14px;padding:24px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,.05);}
+.section-card h2{font-size:18px;margin-bottom:14px;color:var(--blue2);border-left:4px solid var(--blue);padding-left:10px;}
+.intro-text{color:#333;font-size:15px;line-height:1.85;}
+.intro-text strong{color:#1f2d3d;}
 .feature-list{padding-left:20px;}
 .feature-list li{margin:6px 0;}
 .spec-table{width:100%;border-collapse:collapse;}
-.spec-table td{padding:9px 12px;border-bottom:1px solid #eef1f4;font-size:14px;}
+.spec-table td{padding:10px 14px;border-bottom:1px solid #eef1f4;font-size:14px;}
 .spec-table td:first-child{color:#6b7785;width:38%;background:#fafbfc;}
-.app-text{color:#333;}
-.sidebar .card{background:#fff;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.05);}
-.sidebar .card h3{font-size:15px;margin-bottom:10px;color:var(--blue2);}
-.sidebar .row{font-size:13px;margin:5px 0;color:#444;}
-.cta{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:14px;padding:20px;}
-.cta a{display:inline-block;margin-top:10px;background:#fff;color:var(--blue);padding:9px 18px;border-radius:8px;font-weight:600;}
+.app-text{color:#333;font-size:14px;line-height:1.8;}
+/* 右侧栏 */
+.sidebar-card{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,.05);}
+.sidebar-card h3{font-size:15px;color:var(--blue2);margin-bottom:12px;}
+.info-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f5fa;font-size:13px;}
+.info-row:last-child{border-bottom:none;}
+.info-label{color:#6b7785;}
+.info-value{color:#1f2d3d;font-weight:600;}
+.cta-card{background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;border-radius:14px;padding:28px;text-align:center;}
+.cta-card h3{font-size:18px;margin-bottom:8px;}
+.cta-card p{font-size:13px;opacity:.85;margin-bottom:18px;}
+.cta-card .btn{background:#fff;color:var(--blue);width:100%;justify-content:center;}
+/* 图集 */
 .gallery-carousel{position:relative;max-width:100%;overflow:hidden;}
 .gallery-track{display:flex;transition:transform .35s ease;}
 .gallery-slide{min-width:100%;}
@@ -68,25 +90,44 @@ footer{text-align:center;color:#8a97a5;font-size:13px;padding:30px;}
 </header>
 <div class="wrap">
 
-<div class="hero">
-  <span class="tag">实验仪器</span>
-  <h1>酶标仪</h1>
-  <p class="summary">全波长光吸收 / 荧光 / 化学发光多功能酶标仪，兼容 6-384 孔板，适合 ELISA、细胞活力等实验。</p>
+<!-- 面包屑 -->
+<div class="wrap">
+<div class="breadcrumb"><a href="https://www.biologia.cn/">首页</a><span>›</span><a href="https://www.biologia.cn/products.html">产品中心</a><span>›</span>酶标仪</div>
 </div>
-<div class="grid">
-  <div class="main">
-    <section class="pd-sc"><h2>产品概述</h2><div class="intro-text">佰洛生物多功能酶标仪支持全波长光吸收（200–1000 nm）、荧光强度及化学发光三种检测模式，兼容 6-384 孔板。内置振荡、温控功能，96 孔板全波长扫描 &lt; 6 秒，适用于 ELISA、细胞活力（MTT/CCK-8）、荧光定量等常规实验。</div></section>
+
+<!-- Hero 横幅 -->
+<section class="product-hero">
+  <div class="wrap ph-inner">
+    <div class="ph-icon">⚗️</div>
+    <div class="ph-info">
+      <div class="ph-cat">实验仪器</div>
+      <h1>酶标仪</h1>
+      <p class="ph-summary">全波长光吸收 / 荧光 / 化学发光多功能酶标仪，兼容 6-384 孔板，适合 ELISA、细胞活力等实验。</p>
+      <div class="ph-cta">
+        <a href="https://www.biologia.cn/contact.html" class="btn btn-primary">📞 获取报价</a>
+        <a href="https://www.biologia.cn/contact.html" class="btn btn-outline">📧 技术咨询</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 左右内容 -->
+<div class="wrap">
+<div class="content-grid">
+  <div class="content-main">
+    <section class="section-card"><h2>产品概述</h2><div class="intro-text">佰洛生物多功能酶标仪支持全波长光吸收（200–1000 nm）、荧光强度及化学发光三种检测模式，兼容 6-384 孔板。内置振荡、温控功能，96 孔板全波长扫描 &lt; 6 秒，适用于 ELISA、细胞活力（MTT/CCK-8）、荧光定量等常规实验。</div></section>
     
-    <section class="pd-sc"><h2>产品特点</h2><ul class="feature-list"><li>三合一检测：光吸收 + 荧光 + 化学发光</li><li>全波长扫描：200–1000 nm，无需滤光片</li><li>高通量：96孔 &lt; 6s，384孔 &lt; 15s</li><li>温控振荡：内置 37°C 温控 + 线性/轨道振荡</li></ul></section>
-    <section class="pd-sc"><h2>技术规格</h2><table class="spec-table"><tr><td>波长</td><td>200–1000 nm 全波长</td></tr><tr><td>检测模式</td><td>吸收光 / 荧光 / 发光</td></tr><tr><td>读板速度</td><td>96孔 &lt; 6s</td></tr></table></section>
-    <section class="pd-sc"><h2>应用领域</h2><div class="app-text">ELISA 定量检测；细胞活力/毒性检测（MTT, CCK-8, LDH）；蛋白定量（BCA, Bradford）；荧光标记物定量</div></section>
+    <section class="section-card"><h2>产品特点</h2><ul class="feature-list"><li>三合一检测：光吸收 + 荧光 + 化学发光</li><li>全波长扫描：200–1000 nm，无需滤光片</li><li>高通量：96孔 &lt; 6s，384孔 &lt; 15s</li><li>温控振荡：内置 37°C 温控 + 线性/轨道振荡</li></ul></section>
+    <section class="section-card"><h2>技术规格</h2><table class="spec-table"><tr><td>波长</td><td>200–1000 nm 全波长</td></tr><tr><td>检测模式</td><td>吸收光 / 荧光 / 发光</td></tr><tr><td>读板速度</td><td>96孔 &lt; 6s</td></tr></table></section>
+    <section class="section-card"><h2>应用领域</h2><div class="app-text">ELISA 定量检测；细胞活力/毒性检测（MTT, CCK-8, LDH）；蛋白定量（BCA, Bradford）；荧光标记物定量</div></section>
   </div>
   <aside class="sidebar">
-    <div class="card"><h3>订购信息</h3><div class="row"><b>货号</b>：BL-PLAT-XXX  </div><div class="row"><b>  咨询邮箱</b>：service@biologia.cn</div></div>
-    <div class="cta"><h3 style="color:#fff;margin-bottom:6px;">询价 / 订购</h3><div style="font-size:13px;opacity:.9;">佰洛生物为您提供专业技术支持与报价</div><a href="https://www.biologia.cn/contact.html">联系我们</a></div>
+    <div class="sidebar-card"><h3>订购信息</h3><div class="info-row"><span class="info-label">货号</span><span class="info-value">BL-PLAT-XXX</span></div><div class="info-row"><span class="info-label">咨询邮箱</span><span class="info-value">service@biologia.cn</span></div></div>
+    <div class="cta-card"><h3>询价 / 订购</h3><p>佰洛生物为您提供专业技术支持与报价</p><a href="https://www.biologia.cn/contact.html" class="btn">联系我们</a></div>
   </aside>
 </div>
-<section class="pd-sc"><h2>相关产品</h2><div class="related"><a href="https://www.biologia.cn/products/pcr.html">梯度PCR仪</a><a href="https://www.biologia.cn/products/electro.html">电泳仪</a><a href="https://www.biologia.cn/products/centrifuge.html">离心机</a><a href="https://www.biologia.cn/products/purifier.html">蛋白纯化仪</a></div></section>
+<section class="section-card"><h2>相关产品</h2><div class="related"><a href="https://www.biologia.cn/products/pcr.html">梯度PCR仪</a><a href="https://www.biologia.cn/products/electro.html">电泳仪</a><a href="https://www.biologia.cn/products/centrifuge.html">离心机</a><a href="https://www.biologia.cn/products/purifier.html">蛋白纯化仪</a></div></section>
+</div>
 
 </div>
 <footer>© 2026 佰洛生物（BioLia） · 干细胞 / iPSC / 细胞培养产品与技术服务 · service@biologia.cn</footer>
