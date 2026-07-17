@@ -222,6 +222,22 @@ var _hmt = _hmt || [];
   .section h2 { font-size: 32px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; margin-bottom: 10px; }
   .section .desc { font-size: 16px; color: var(--text-muted); max-width: 580px; margin: 0 auto; }
 
+  /* ═══════════ NEWS ═══════════ */
+  .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+  .news-card { display: flex; flex-direction: column; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 24px; text-decoration: none; transition: all .25s; box-shadow: var(--shadow); }
+  .news-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); border-color: var(--primary-light); }
+  .news-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .news-cat { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 11px; border-radius: 4px; background: #e6f2f9; color: var(--primary); }
+  .news-cat.industry { background: #e3f0fa; color: var(--primary); }
+  .news-cat.tech { background: #fef6e3; color: #d97706; }
+  .news-date { font-size: 13px; color: var(--text-muted); }
+  .news-card h3 { font-size: 18px; font-weight: 700; color: var(--primary-dark); line-height: 1.5; margin-bottom: 10px; }
+  .news-card .news-sum { font-size: 14px; color: var(--text-muted); line-height: 1.7; flex: 1; }
+  .news-more { margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--primary); }
+  .news-footer-link { text-align: center; margin-top: 36px; }
+  .news-footer-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .news-footer-link a:hover { color: var(--primary-light); }
+
   /* ═══════════ HOT PRODUCTS ═══════════ */
   .hot-section {
     background: linear-gradient(180deg, #f0f6fb 0%, var(--bg) 100%);
@@ -520,6 +536,7 @@ var _hmt = _hmt || [];
     .pd-specs .ps-row .psk { width: 120px; }
     .pd-features { grid-template-columns: 1fr; }
     .hot-grid { grid-template-columns: 1fr; }
+    .news-grid { grid-template-columns: 1fr; }
   }
 
   /* ═══════════ ANIMATIONS ═══════════ */
@@ -575,6 +592,7 @@ var _hmt = _hmt || [];
           <a href="#" onclick="openDetail('svc-cart');return false">CAR-T 载体构建</a>
         </div>
       </li>
+      <li><a href="news.html">新闻资讯</a></li>
       <li><a href="#about">关于佰洛</a></li>
       <li><a href="contact.html">联系我们</a></li>
     </ul>
@@ -647,6 +665,17 @@ var _hmt = _hmt || [];
   </div>
 </section>
 
+<!-- ═══════════ NEWS ═══════════ -->
+<section class="section fade-section" id="news">
+  <div class="section-header">
+    <div class="section-tag">News &amp; Insights</div>
+    <h2>新闻资讯</h2>
+    <p class="desc">文献案例、行业动态与技术干货，与科研工作者同步细胞生物学与蛋白研究领域的前沿进展</p>
+  </div>
+  <div class="news-grid" id="newsGrid"></div>
+  <div class="news-footer-link"><a href="news.html">查看全部资讯 →</a></div>
+</section>
+
 <!-- ═══════════ CTA ═══════════ -->
 <section class="cta-band fade-section" id="contact">
   <h2>开启您的科研项目</h2>
@@ -677,6 +706,7 @@ var _hmt = _hmt || [];
       <a href="#hot-products">热门产品</a>
       <a href="products.html#reagents">试剂与耗材</a>
       <a href="products.html#instruments">实验仪器</a>
+      <a href="news.html">新闻资讯</a>
     </div>
     <div class="footer-col">
       <h4>服务</h4>
@@ -740,14 +770,16 @@ var siteConfig = {};
 
 async function loadData() {
   try {
-    var [productsRes, servicesRes, configRes] = await Promise.all([
+    var [productsRes, servicesRes, configRes, newsRes] = await Promise.all([
       fetch('data/products.json'),
       fetch('data/services.json'),
-      fetch('data/site-config.json')
+      fetch('data/site-config.json'),
+      fetch('data/news.json')
     ]);
     window.allProducts = await productsRes.json();
     window.allServices = await servicesRes.json();
     window.siteConfig = await configRes.json();
+    window.allNews = await newsRes.json();
 
     /* 从 siteConfig 读取轮播数据 */
     window.heroSlides = window.siteConfig.heroSlides || [];
@@ -759,6 +791,7 @@ async function loadData() {
     renderHeroSlides();
     renderHotProducts();
     renderServices();
+    renderNews();
     initObservers();
 
     /* 启动轮播 */
@@ -905,6 +938,31 @@ function renderHotProducts() {
       '<div class="hc-desc">' + esc(p.summary) + '</div>' +
       '<button class="hc-btn" onclick="event.stopPropagation();openProductDetail(\'' + esc(p.id) + '\')">查看详情 →</button>' +
     '</div>';
+  }).join('');
+}
+
+/* ═══════════════════════════════════════
+   RENDER — 新闻资讯
+═══════════════════════════════════════ */
+function renderNews() {
+  var el = document.getElementById('newsGrid');
+  if (!el) return;
+  if (!window.allNews || window.allNews.length === 0) { el.innerHTML = ''; return; }
+  var list = window.allNews.slice().sort(function(a, b) {
+    return (b.date || '').localeCompare(a.date || '');
+  }).slice(0, 3);
+  el.innerHTML = list.map(function(n) {
+    var cat = n.category || '资讯';
+    var cls = cat === '行业资讯' ? ' industry' : (cat === '技术干货' ? ' tech' : '');
+    return '<a class="news-card" href="news/' + esc(n.id) + '.html">' +
+      '<div class="news-meta">' +
+        '<span class="news-cat' + cls + '">' + esc(cat) + '</span>' +
+        '<span class="news-date">' + esc(n.date || '') + '</span>' +
+      '</div>' +
+      '<h3>' + esc(n.title) + '</h3>' +
+      '<p class="news-sum">' + esc(n.summary || '') + '</p>' +
+      '<span class="news-more">阅读全文 →</span>' +
+    '</a>';
   }).join('');
 }
 

@@ -28,6 +28,13 @@
 - CRISPR 基因编辑（KO ≥ 60%，KI 10–30%）: https://www.biologia.cn/services/crispr-editing.html
 - CAR-T 载体构建（二/三/四代）: https://www.biologia.cn/services/cart-vector.html
 
+## 新闻资讯
+- 新闻资讯总览（文献案例 / 行业动态 / 技术干货）: https://www.biologia.cn/news.html
+- mRNA-LNP 重编程技术助力 iPSC 建系效率突破: https://www.biologia.cn/news/mrna-lnp-ipsc-efficiency-2026.html
+- 去外泌体胎牛血清在细胞外囊泡研究中的应用: https://www.biologia.cn/news/exosome-depleted-fbs-ev-study.html
+- 2026 细胞治疗产业链：国产高端培养基替代加速: https://www.biologia.cn/news/domestic-media-substitution-2026.html
+- BLI 生物膜干涉技术在抗体亲和力筛选中的实操要点: https://www.biologia.cn/news/bli-antibody-screening-tips.html
+
 ## 联系
 - 邮箱: service@biologia.cn
 - 业务: 干细胞建系、细胞培养试剂、蛋白纯化、基因编辑、病毒包装、抗体定制
