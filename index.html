@@ -660,6 +660,16 @@ var _hmt = _hmt || [];
   </div>
 </section>
 
+<!-- ═══════════ ALL PRODUCTS ═══════════ -->
+<section class="section fade-section" id="all-products">
+  <div class="section-header">
+    <div class="section-tag">All Products</div>
+    <h2>全部产品</h2>
+    <p class="desc">佰洛生物全线产品目录，点击任意产品查看完整规格、技术参数与应用方案</p>
+  </div>
+  <div class="product-grid" id="allProductsGrid"></div>
+</section>
+
 <!-- ═══════════ SERVICES ═══════════ -->
 <section class="section fade-section" id="services">
   <div class="section-header">
@@ -830,6 +840,7 @@ async function loadData() {
     /* 渲染页面 */
     renderHeroSlides();
     renderHotProducts();
+    renderAllProducts();
     renderServices();
     renderNews();
     initObservers();
@@ -977,6 +988,26 @@ function renderHotProducts() {
       '<h3>' + esc(p.name) + '</h3>' +
       '<div class="hc-desc">' + esc(p.summary) + '</div>' +
       '<button class="hc-btn" onclick="event.stopPropagation();openProductDetail(\'' + esc(p.id) + '\')">查看详情 →</button>' +
+    '</div>';
+  }).join('');
+}
+
+/* ═══════════════════════════════════════
+   RENDER — 全部产品（首页完整目录，所有产品均可点击）
+═══════════════════════════════════════ */
+function renderAllProducts() {
+  var el = document.getElementById('allProductsGrid');
+  if (!el) return;
+  var list = window.allProducts || [];
+  if (list.length === 0) { el.innerHTML = ''; return; }
+  el.innerHTML = list.map(function(p) {
+    return '<div class="product-item" data-pid="' + esc(p.id) + '" onclick="openProductDetail(\'' + esc(p.id) + '\')">' +
+      '<span class="pi-arrow">→</span>' +
+      '<span class="pi-icon">' + esc(p.icon) + '</span>' +
+      '<h4>' + esc(p.name) + '</h4>' +
+      '<p>' + esc(p.summary) + '</p>' +
+      (p.hot ? '<span class="pi-badge">热门</span>' : '') +
+      '<button class="pi-btn" onclick="event.stopPropagation();openProductDetail(\'' + esc(p.id) + '\')">查看详情 →</button>' +
     '</div>';
   }).join('');
 }
