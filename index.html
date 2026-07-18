@@ -384,7 +384,47 @@ var _hmt = _hmt || [];
   .pd-hero h1 { font-size: 34px; font-weight: 700; color: var(--primary-dark); letter-spacing: 1px; margin-bottom: 10px; }
   .pd-hero .pdh-tagline { font-size: 16px; color: var(--text-secondary); max-width: 560px; }
 
-  .pd-body { max-width: 860px; margin: 0 auto; padding: 32px 24px 64px; }
+  /* 详情页左右分栏 + 右侧栏（与产品中心页一致） */
+  .pd-body { max-width: 1200px; margin: 0 auto; padding: 28px 32px 64px;
+    display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: start; }
+  .pd-main { min-width: 0; }
+  .pd-sidebar { display: flex; flex-direction: column; gap: 22px; }
+  .pd-sidebar-card {
+    background: #fff; border-radius: 16px; padding: 26px;
+    box-shadow: 0 2px 14px rgba(0,0,0,.06); border: 1px solid var(--border);
+  }
+  .pd-sidebar-card h3 { font-size: 16px; color: var(--primary-dark); margin-bottom: 14px; }
+  .pd-sidebar-card .pds-row { font-size: 13.5px; color: var(--text-secondary); margin: 10px 0; line-height: 1.6; }
+  .pd-cta-card {
+    background: linear-gradient(135deg, #0a5c8a, #064368); border-radius: 14px;
+    padding: 26px 22px; text-align: center; color: #fff;
+  }
+  .pd-cta-card h3 { font-size: 17px; margin-bottom: 8px; color: #fff; }
+  .pd-cta-card p { font-size: 13px; opacity: 0.85; margin-bottom: 16px; line-height: 1.5; }
+  .pd-cta-card .pc-btn {
+    display: inline-block; padding: 10px 24px; background: #fff; color: #0a5c8a;
+    border-radius: 10px; font-weight: 600; font-size: 14px; text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .pd-cta-card .pc-btn:hover { transform: translateY(-1px); }
+  .pd-sidebar-hot .pdsh-list { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+  .pdsh-item { display: flex; align-items: center; gap: 12px; cursor: pointer;
+    padding: 10px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--bg); transition: border-color .2s, background .2s, transform .15s; }
+  .pdsh-item:hover { border-color: var(--primary-light); background: #f0f6fb; transform: translateX(2px); }
+  .pdsh-icon { font-size: 20px; flex-shrink: 0; width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; border-radius: 10px; border: 1px solid var(--border); }
+  .pdsh-text { flex: 1; min-width: 0; }
+  .pdsh-name { display: block; font-size: 14px; font-weight: 700; color: var(--primary-dark); line-height: 1.3; }
+  .pdsh-sum { display: block; font-size: 12px; color: var(--text-muted); line-height: 1.4; margin-top: 2px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pdsh-arrow { color: var(--primary); font-size: 16px; flex-shrink: 0; opacity: .5; transition: opacity .2s, transform .2s; }
+  .pdsh-item:hover .pdsh-arrow { opacity: 1; transform: translateX(2px); }
+  @media (max-width: 900px) {
+    .pd-body { grid-template-columns: 1fr; padding: 20px 18px 48px; }
+    .pd-sidebar { order: -1; }
+  }
   .pd-section { margin-bottom: 36px; }
   .pd-section:last-child { margin-bottom: 0; }
   .pd-section .pds-label {
@@ -645,7 +685,7 @@ var _hmt = _hmt || [];
         目前，佰洛生物已与多家行业领先的上游厂商建立深度合作关系——细胞培养系列产品（胎牛血清、基础培养基、辅助试剂等）、iPSC 重编程试剂盒（基于 mRNA-LNP 技术的非整合型重编程方案）以及层析填料与蛋白纯化微球产品，覆盖亲和、离子交换、疏水及分子筛全系列纯化需求。
       </p>
       <p>
-        佰洛生物秉持<strong>"以科研之心，筑服务之基"</strong>的理念。我们不生产产品，但我们比生产者更懂科研用户——每一款代理产品均经过严格的供应商资质审核与实验室验证，确保性能与参数经得起科研检验。从产品选型咨询到实验方案推荐，再到售后技术支持，我们提供全流程的贴心服务，让科研工作者专注于实验本身。
+        佰洛生物秉持<strong>"以科研之心，筑服务之基"</strong>的理念。每一款产品均经过严格的资质审核与实验室验证，确保性能与参数经得起科研检验。我们精选国内外优质品牌产品，同时也在积极布局自有品牌研发——让科研工作者不仅能用上可靠、稳定、高性价比的试剂与耗材，更能获得真正贴合本土实验需求的解决方案。从产品选型咨询到实验方案推荐，再到售后技术支持，我们提供全流程的贴心服务，让科研工作者专注于实验本身。
       </p>
     </div>
     <div class="about-highlights">
@@ -1008,6 +1048,7 @@ function openDetail(id) {
 
   /* Body */
   html += '<div class="pd-body">';
+  html += '<div class="pd-main">';
 
   /* 概述 */
   html += '<div class="pd-section">';
@@ -1080,7 +1121,19 @@ function openDetail(id) {
     html += '</div>';
   }
 
-  html += '</div>'; /* .pd-body */
+  html += '</div>'; /* .pd-main 结束 */
+
+  /* 右侧栏：询价 / 订购 + 热门产品（与产品中心页一致） */
+  html += '<aside class="pd-sidebar">';
+  html += '<div class="pd-cta-card">';
+  html += '<h3>询价 / 订购</h3>';
+  html += '<p>佰洛生物为您提供专业技术支持与报价服务</p>';
+  html += '<a href="contact.html" class="pc-btn">联系我们</a>';
+  html += '</div>';
+  html += buildHotProductsHTML(id);
+  html += '</aside>';
+
+  html += '</div>'; /* .pd-body 结束 */
 
   document.getElementById('pdContent').innerHTML = html;
   document.getElementById('pdOverlay').classList.add('show');
@@ -1094,6 +1147,22 @@ function openDetail(id) {
 
 /* 向后兼容 */
 function openProductDetail(id) { openDetail(id); }
+
+/* 热门产品推荐块（右侧栏，与产品中心页一致） */
+function buildHotProductsHTML(currentId) {
+  var hot = (window.allProducts || []).filter(function(p) { return p.hot && p.id !== currentId; });
+  if (!hot.length) return '';
+  var items = hot.map(function(p) {
+    return '<a class="pdsh-item" onclick="openProductDetail(\'' + esc(p.id) + '\')">' +
+      '<span class="pdsh-icon">' + esc(p.icon) + '</span>' +
+      '<span class="pdsh-text"><span class="pdsh-name">' + esc(p.name) + '</span>' +
+      '<span class="pdsh-sum">' + esc(p.summary) + '</span></span>' +
+      '<span class="pdsh-arrow">→</span>' +
+    '</a>';
+  }).join('');
+  return '<div class="pd-sidebar-card pd-sidebar-hot"><h3>热门产品</h3>' +
+    '<div class="pdsh-list">' + items + '</div></div>';
+}
 
 function closeProductDetail() {
   document.getElementById('pdOverlay').classList.remove('show');
