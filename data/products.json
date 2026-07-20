@@ -688,18 +688,18 @@
     "hot": true,
     "summary": "KEL Biotech™ 流式抗体，覆盖 MSC / 免疫细胞 20+ 靶点，8+ 种荧光标记可选，支持标记定制。",
     "detail": {
-      "intro": "佰洛生物流式抗体（CD 系列）源自 KEL Biotech™ 平台，覆盖间充质干细胞（MSC）标志物 CD73 / CD90 / CD105、T/NK 细胞标志物 CD3 / CD4 / CD8 / CD19 / CD56、髓系标志物 CD14 / CD11b、造血干/祖细胞标志物 CD34、白细胞共同抗原 CD45、树突状细胞标志物 CD206 等主流 CD 靶点。提供 FITC、PE、APC、PerCP、PE-Cy7、APC-Cy7、PerCP-cy5.5、KELAF™ 647 及 Brilliant Violet 510 多种荧光标记，配套克隆均经流式验证，适用于免疫表型分析、细胞分选与多色流式 panel 组建。作为 KEL Biotech 杭州本地团队，我们提供本地库存、技术咨询与快速交付。",
+      "intro": "佰洛生物流式抗体（CD 系列）源自 KEL Biotech™ 平台，覆盖间充质干细胞（MSC）标志物 CD73 / CD90 / CD105、T/NK 细胞标志物 CD3 / CD4 / CD8 / CD19 / CD56、髓系标志物 CD14 / CD11b、造血干/祖细胞标志物 CD34、白细胞共同抗原 CD45、树突状细胞标志物 CD206 等主流 CD 靶点。提供 FITC、PE、APC、PerCP、PE-Cy7、APC-Cy7、PerCP-cy5.5、KELAF™ 647 及 Brilliant Violet 510 多种荧光标记，配套克隆均经流式验证，适用于免疫表型分析、细胞分选与多色流式 panel 组建。我们提供本地库存、技术咨询与快速交付。",
       "features": [
         "靶点齐全：覆盖 MSC 三标、T/NK、髓系、造血干/祖细胞等主流 CD 标志物",
         "多色可选：8+ 种荧光标记，支持多色流式 panel 灵活搭配",
         "克隆验证：传统单抗与重组抗体（Recombinant）齐备，批间一致性高",
-        "本地服务：KEL Biotech 杭州本地分公司，现货供应、技术响应快",
+        "本地服务：现货供应、技术响应快",
         "应用广泛：免疫分型、细胞分选、肿瘤免疫、干细胞与免疫治疗研究"
       ],
       "specs": [
         {
           "key": "品牌/厂商",
-          "val": "KEL Biotech™（佰洛生物为 KEL 杭州本地分公司）"
+          "val": "KEL Biotech™"
         },
         {
           "key": "靶点覆盖",
