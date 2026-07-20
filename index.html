@@ -272,7 +272,8 @@ var _hmt = _hmt || [];
     color: var(--accent); margin-bottom: 6px;
   }
   .hot-card h3 { font-size: 18px; font-weight: 700; color: var(--primary-dark); margin-bottom: 8px; }
-  .hot-card .hc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .hot-card .hc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .hot-card .hc-cta { display: none; }
   .hot-card .hc-cta .arr { font-size: 14px; }
 
@@ -332,7 +333,8 @@ var _hmt = _hmt || [];
   .product-item:hover { box-shadow: var(--shadow); border-color: var(--primary-light); transform: translateY(-2px); }
   .product-item .pi-icon { font-size: 24px; margin-bottom: 8px; display: block; }
   .product-item h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; padding-right: 24px; }
-  .product-item p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .product-item p { font-size: 13px; color: var(--text-muted); line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .product-item .pi-badge {
     display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 600;
     background: #fed7d7; color: #c53030; padding: 2px 8px; border-radius: 4px;
@@ -1011,7 +1013,7 @@ function renderServices() {
 function renderHotProducts() {
   var el = document.getElementById('hotGrid');
   if (!el) return;
-  var hots = getHotProducts();
+  var hots = getHotProducts().slice(0, 8);
   if (hots.length === 0) { el.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:32px;">暂无热门产品</p>'; return; }
   el.innerHTML = hots.map(function(p) {
     var catLabel = p.cat === 'reagents' ? '试剂与耗材' : '实验仪器';
