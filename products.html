@@ -281,6 +281,20 @@ var _hmt = _hmt || [];
   }
   .pd-specs .ps-row .psv { flex: 1; padding: 12px 16px; color: var(--text); font-weight: 600; }
 
+  /* 产品目录表格（流式抗体 CD 系列） */
+  .pd-catalog { max-height: 460px; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+  .pd-catalog .pc-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .pd-catalog .pc-table th {
+    position: sticky; top: 0; background: var(--primary-dark); color: #fff;
+    text-align: left; padding: 11px 14px; font-weight: 600; white-space: nowrap; z-index: 1;
+  }
+  .pd-catalog .pc-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--text); white-space: nowrap; }
+  .pd-catalog .pc-table tbody tr:nth-child(even) { background: #f7f9fc; }
+  .pd-catalog .pc-table tbody tr:hover { background: #eef5fb; }
+  .pd-catalog .pc-fluor { font-weight: 600; color: var(--primary); }
+  .pd-catalog .pc-cat { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text-muted); }
+  .pd-catalog .pc-tgt { font-weight: 600; }
+
   /* 右侧栏 */
   .pd-sidebar { display: flex; flex-direction: column; gap: 22px; }
   .pd-sidebar-card {
@@ -536,6 +550,26 @@ function galleryGo(i){
 }
 function galleryMove(d){ var t=document.getElementById('pdGallery'); if(!t) return; var n=t.querySelector('.gallery-track').children.length; galleryGo(galleryIdx+d); }
 
+/* 流式抗体产品目录表格 */
+function buildCatalogHTML(detail){
+  var cat = detail && detail.catalog;
+  if(!cat || !cat.length) return '';
+  var rows = cat.map(function(r){
+    return '<tr>' +
+      '<td class="pc-tgt">' + esc(r.target || '') + '</td>' +
+      '<td>' + esc(r.reactivity || '') + '</td>' +
+      '<td>' + esc(r.clone || '—') + '</td>' +
+      '<td class="pc-fluor">' + esc(r.fluor || '') + '</td>' +
+      '<td>' + esc(r.size || '—') + '</td>' +
+      '<td class="pc-cat">' + esc(r.cat || '') + '</td>' +
+    '</tr>';
+  }).join('');
+  return '<div class="pd-section"><div class="pds-label">产品目录（流式抗体 · CD 系列）</div>' +
+    '<div class="pd-catalog"><table class="pc-table">' +
+    '<thead><tr><th>靶点</th><th>反应种属</th><th>克隆号</th><th>荧光标记</th><th>规格</th><th>货号</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table></div></div>';
+}
+
 /* 热门产品推荐块（右侧栏） */
 function buildHotProductsHTML(currentId) {
   var hot = (window.allProducts || []).filter(function(p) { return p.hot && p.id !== currentId; });
@@ -556,7 +590,7 @@ function buildHotProductsHTML(currentId) {
    RENDER PRODUCTS
 ═══════════════════════════════════════ */
 function renderProducts() {
-  var reagents = getProductsByCat('reagents');
+  var reagents = allProducts.filter(function(p) { return p.cat === 'reagents' || p.cat === 'antibody'; });
   var instruments = getProductsByCat('instruments');
 
   /* 试剂 */
@@ -612,7 +646,7 @@ function openProductDetail(id) {
   /* 深色 Hero + CTA */
   html += '<div class="pd-hero">';
   html += '<div class="pdh-icon">' + esc(item.icon) + '</div>';
-  html += '<div class="pdh-cat">' + esc(item.cat === 'reagents' ? '试剂与耗材' : '实验仪器') + '</div>';
+  html += '<div class="pdh-cat">' + esc(item.cat === 'antibody' ? '抗体与流式试剂' : (item.cat === 'reagents' ? '试剂与耗材' : '实验仪器')) + '</div>';
   html += '<h1>' + esc(item.name) + '</h1>';
   html += '<div class="pdh-tagline">' + esc(item.summary) + '</div>';
   html += '<div class="pdh-cta-row">';
@@ -650,6 +684,9 @@ function openProductDetail(id) {
     html += '</div>';
   }
   html += '</div>';
+
+  /* 产品目录（流式抗体 CD 系列） */
+  html += buildCatalogHTML(detail);
 
   html += '<div class="pd-section"><div class="pds-label">应用领域</div>';
   html += '<div class="pds-text">' + esc(detail.applications || '') + '</div></div>';

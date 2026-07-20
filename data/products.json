@@ -16,21 +16,54 @@
         "配方纯净：无有害化学物质残留，安全性更高"
       ],
       "specs": [
-        { "key": "品牌/厂商", "val": "宜明生物 (uBriGene)" },
-        { "key": "技术原理", "val": "mRNA-LNP 脂质纳米颗粒递送" },
-        { "key": "重编程效率", "val": "PBMC: 0.3%–0.5%（300–500 克隆/10万细胞）" },
-        { "key": "版本", "val": "Version 2.0（效率较 1.0 提升 50–100x）" },
-        { "key": "规格", "val": "2 Test / 6 Test" },
-        { "key": "储存条件", "val": "-80°C 长期（1年）/ 4°C 解冻后 1–2 周" },
-        { "key": "运输方式", "val": "干冰运输" }
+        {
+          "key": "品牌/厂商",
+          "val": "宜明生物 (uBriGene)"
+        },
+        {
+          "key": "技术原理",
+          "val": "mRNA-LNP 脂质纳米颗粒递送"
+        },
+        {
+          "key": "重编程效率",
+          "val": "PBMC: 0.3%–0.5%（300–500 克隆/10万细胞）"
+        },
+        {
+          "key": "版本",
+          "val": "Version 2.0（效率较 1.0 提升 50–100x）"
+        },
+        {
+          "key": "规格",
+          "val": "2 Test / 6 Test"
+        },
+        {
+          "key": "储存条件",
+          "val": "-80°C 长期（1年）/ 4°C 解冻后 1–2 周"
+        },
+        {
+          "key": "运输方式",
+          "val": "干冰运输"
+        }
       ],
       "applications": "人源 iPSC 建系与疾病模型构建（PBMC / 成纤维细胞起始）；药物筛选与毒理学评价；再生医学与细胞治疗研究；发育生物学与基因功能研究",
       "ordering": "厂商：宜明生物 | 货号：iPSC-RPM-RNA-LNP-V2 (6 Test) / V2M (2 Test) | 佰洛生物咨询邮箱：service@biologia.cn",
       "images": [
-        { "src": "images/ipsc-kit-front.png", "caption": "宜明生物 uBriGene iPSC 重编程 RNA-LNP 试剂盒 V2.0 产品包装正面" },
-        { "src": "images/ipsc-kit-back.png", "caption": "iPSC 重编程试剂盒规格参数 货号 效期 -80°C 储存" },
-        { "src": "images/ipsc-kit-product.png", "caption": "uBriGene iPSC 重编程 RNA-LNP 试剂盒 内含组分实拍" },
-        { "src": "images/ipsc-kit-timeline.png", "caption": "iPSC 重编程实验流程时间线 Day -6 至挑克隆 Day 16-20" }
+        {
+          "src": "images/ipsc-kit-front.png",
+          "caption": "宜明生物 uBriGene iPSC 重编程 RNA-LNP 试剂盒 V2.0 产品包装正面"
+        },
+        {
+          "src": "images/ipsc-kit-back.png",
+          "caption": "iPSC 重编程试剂盒规格参数 货号 效期 -80°C 储存"
+        },
+        {
+          "src": "images/ipsc-kit-product.png",
+          "caption": "uBriGene iPSC 重编程 RNA-LNP 试剂盒 内含组分实拍"
+        },
+        {
+          "src": "images/ipsc-kit-timeline.png",
+          "caption": "iPSC 重编程实验流程时间线 Day -6 至挑克隆 Day 16-20"
+        }
       ]
     }
   },
@@ -51,18 +84,42 @@
         "细胞验证：经 HEK293、CHO、Vero 等多细胞系培养验证"
       ],
       "specs": [
-        { "key": "品牌", "val": "KEL Biotech（上海聚顶生物）" },
-        { "key": "主要规格", "val": "KC001-01 特级 / KC010-01 优级" },
-        { "key": "特殊类型", "val": "ES 专用 / 透析 / 碳吸附 / 去外泌体 / Tet 阴性" },
-        { "key": "包装", "val": "500 mL / 100 mL" },
-        { "key": "内毒素", "val": "≤ 5 EU/mL" },
-        { "key": "储存条件", "val": "-20°C (长期) / 4°C (解冻后 4 周内使用)" }
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "主要规格",
+          "val": "KC001-01 特级 / KC010-01 优级"
+        },
+        {
+          "key": "特殊类型",
+          "val": "ES 专用 / 透析 / 碳吸附 / 去外泌体 / Tet 阴性"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 100 mL"
+        },
+        {
+          "key": "内毒素",
+          "val": "≤ 5 EU/mL"
+        },
+        {
+          "key": "储存条件",
+          "val": "-20°C (长期) / 4°C (解冻后 4 周内使用)"
+        }
       ],
       "applications": "哺乳动物细胞系培养（HEK293、CHO、Vero、HeLa 等）；干细胞培养（ES/iPSC，需配专用血清）；杂交瘤细胞培养及单抗生产；病毒包装及疫苗生产",
       "ordering": "品牌：KEL Biotech（上海聚顶生物）| 规格：500 mL / 100 mL | 佰洛生物咨询邮箱：service@biologia.cn",
       "images": [
-        { "src": "images/fbs-product.png", "caption": "KEL Biotech 胎牛血清 FBS 0.1μm 膜过滤 支原体检测 病毒筛查" },
-        { "src": "images/fbs-exo-depleted.png", "caption": "KEL 去外泌体胎牛血清 Exosome Depleted FBS KC005-03" }
+        {
+          "src": "images/fbs-product.png",
+          "caption": "KEL Biotech 胎牛血清 FBS 0.1μm 膜过滤 支原体检测 病毒筛查"
+        },
+        {
+          "src": "images/fbs-exo-depleted.png",
+          "caption": "KEL 去外泌体胎牛血清 Exosome Depleted FBS KC005-03"
+        }
       ]
     }
   },
@@ -77,17 +134,32 @@
       "intro": "上海聚顶生物（KEL Biotech）细胞培养基产品线，涵盖 DMEM 高糖（含丙酮酸钠/谷氨酰胺）、RPMI-1640（含 HEPES/谷氨酰胺）、IMDM、DMEM/F12、McCoy's 5A、Ham's F-12 等主流基础培养基，以及 PBS、DPBS、EBSS 等平衡盐溶液。所有培养基均经严格无菌检测、pH 检测及细胞培养性能验证合格后放行。",
       "features": [
         "品牌保障：KEL Biotech 自主品牌",
-        "品类齐全：DMEM / RPMI-1640 / IMDM / DMEM/F12 / McCoy\u2019s 5A 等",
+        "品类齐全：DMEM / RPMI-1640 / IMDM / DMEM/F12 / McCoy’s 5A 等",
         "即开即用：500 mL 瓶装液体培养基，无需配制",
         "严格质控：无菌、pH、渗透压三重检验",
         "配套完善：双抗（100×）、三抗、胰酶等辅助试剂可一站配齐"
       ],
       "specs": [
-        { "key": "品牌", "val": "KEL Biotech（上海聚顶生物）" },
-        { "key": "主要品类", "val": "DMEM 高糖 (KC302) / RPMI-1640 (KC1325) / IMDM (KC304)" },
-        { "key": "包装", "val": "500 mL / 瓶" },
-        { "key": "pH", "val": "7.2–7.4" },
-        { "key": "储存条件", "val": "2–8°C, 避光保存" }
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "主要品类",
+          "val": "DMEM 高糖 (KC302) / RPMI-1640 (KC1325) / IMDM (KC304)"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 瓶"
+        },
+        {
+          "key": "pH",
+          "val": "7.2–7.4"
+        },
+        {
+          "key": "储存条件",
+          "val": "2–8°C, 避光保存"
+        }
       ],
       "applications": "常规哺乳动物细胞系维持与扩增；原代细胞分离与短期培养；病毒包装与重组蛋白表达；杂交瘤细胞培养",
       "ordering": "品牌：KEL Biotech（上海聚顶生物）| 规格：500 mL / 瓶 | 佰洛生物咨询邮箱：service@biologia.cn"
@@ -110,13 +182,34 @@
         "适用性广：琼脂糖凝胶 / 聚丙烯酰胺凝胶电泳前后染色均可用"
       ],
       "specs": [
-        { "key": "品牌", "val": "KEL Biotech（上海聚顶生物）" },
-        { "key": "产品名称", "val": "Safe-Red™ Gel (10,000× in Water)" },
-        { "key": "货号/规格", "val": "K183-100ul (0.1 mL / 40T) / K183 (0.5 mL / 200T)" },
-        { "key": "储存条件", "val": "室温保存，避光" },
-        { "key": "激发波长", "val": "~302 nm（紫外）/ ~470 nm（蓝光）" },
-        { "key": "检测下限", "val": "~100 pg DNA / band" },
-        { "key": "稀释比例", "val": "前染法 10,000:1（每 50 mL 胶液加 5 μL）" }
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "产品名称",
+          "val": "Safe-Red™ Gel (10,000× in Water)"
+        },
+        {
+          "key": "货号/规格",
+          "val": "K183-100ul (0.1 mL / 40T) / K183 (0.5 mL / 200T)"
+        },
+        {
+          "key": "储存条件",
+          "val": "室温保存，避光"
+        },
+        {
+          "key": "激发波长",
+          "val": "~302 nm（紫外）/ ~470 nm（蓝光）"
+        },
+        {
+          "key": "检测下限",
+          "val": "~100 pg DNA / band"
+        },
+        {
+          "key": "稀释比例",
+          "val": "前染法 10,000:1（每 50 mL 胶液加 5 μL）"
+        }
       ],
       "applications": "琼脂糖凝胶 DNA/RNA 电泳染色（推荐紫外成像）；聚丙烯酰胺凝胶核酸染色；PCR 产物与酶切产物检测；质粒 & 基因组 DNA 定量分析；克隆/连接/测序等下游应用兼容",
       "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：K183-100ul (0.1mL/40T) / K183 (0.5mL/200T) | 咨询邮箱：service@biologia.cn"
@@ -138,11 +231,26 @@
         "种属广：人、小鼠、大鼠等多物种交叉反应验证"
       ],
       "specs": [
-        { "key": "靶标数", "val": "300+" },
-        { "key": "克隆", "val": "经典文献验证克隆" },
-        { "key": "荧光标记", "val": "FITC / PE / APC / PerCP / BV421 / PE/Cy7 等" },
-        { "key": "规格", "val": "25 tests / 100 tests" },
-        { "key": "储存条件", "val": "2–8°C, 避光" }
+        {
+          "key": "靶标数",
+          "val": "300+"
+        },
+        {
+          "key": "克隆",
+          "val": "经典文献验证克隆"
+        },
+        {
+          "key": "荧光标记",
+          "val": "FITC / PE / APC / PerCP / BV421 / PE/Cy7 等"
+        },
+        {
+          "key": "规格",
+          "val": "25 tests / 100 tests"
+        },
+        {
+          "key": "储存条件",
+          "val": "2–8°C, 避光"
+        }
       ],
       "applications": "免疫细胞亚群分型（T/B/NK/DC/Mono）；胞内 & 核内因子染色（ICS）；细胞增殖（Ki-67）& 凋亡（Annexin V）；磷酸化蛋白流式检测（Phosflow）",
       "ordering": "货号：见具体靶标  |  规格：25 / 100 tests  |  咨询邮箱：service@biologia.cn"
@@ -165,12 +273,30 @@
         "配套完善：提供层析空柱及全自动蛋白纯化整体方案"
       ],
       "specs": [
-        { "key": "品牌", "val": "为度生物 (VDO Biotech)" },
-        { "key": "亲和层析", "val": "Protein A/G、Ni-NTA、Ni-TED 琼脂糖" },
-        { "key": "离子交换", "val": "SP / Q 强阴/阳离子交换" },
-        { "key": "凝胶过滤", "val": "分子筛/体积排阻系列" },
-        { "key": "疏水层析", "val": "Phenyl / Butyl 系列" },
-        { "key": "磁珠产品", "val": "Protein A/G / Ni-NTA / Ni-TED 琼脂糖磁珠" }
+        {
+          "key": "品牌",
+          "val": "为度生物 (VDO Biotech)"
+        },
+        {
+          "key": "亲和层析",
+          "val": "Protein A/G、Ni-NTA、Ni-TED 琼脂糖"
+        },
+        {
+          "key": "离子交换",
+          "val": "SP / Q 强阴/阳离子交换"
+        },
+        {
+          "key": "凝胶过滤",
+          "val": "分子筛/体积排阻系列"
+        },
+        {
+          "key": "疏水层析",
+          "val": "Phenyl / Butyl 系列"
+        },
+        {
+          "key": "磁珠产品",
+          "val": "Protein A/G / Ni-NTA / Ni-TED 琼脂糖磁珠"
+        }
       ],
       "applications": "单抗/双抗/Fc 融合蛋白亲和纯化；His-tag/GST-tag 重组蛋白纯化；基于电荷/疏水性差异的精细分离；蛋白聚集体去除与缓冲液置换；抗体筛选与免疫沉淀（磁珠法）",
       "ordering": "品牌：为度生物 (VDO Biotech) | 规格：预装柱 & 散装填料 & 磁性微球 | 佰洛生物咨询邮箱：service@biologia.cn"
@@ -193,15 +319,42 @@
         "纯净无污染：无 DNase / RNase，无热原"
       ],
       "specs": [
-        { "key": "品牌", "val": "KEL Biotech（上海聚顶生物）" },
-        { "key": "膜材质", "val": "聚醚砜（PES）低吸附超滤膜" },
-        { "key": "MWCO 系列", "val": "3K / 10K / 30K / 50K / 100K" },
-        { "key": "样品处理量", "val": "4 mL / 15 mL" },
-        { "key": "最大离心力", "val": "≤ 5,000 ×g" },
-        { "key": "离心时间", "val": "~15 min（视样品体积与目标浓缩倍数）" },
-        { "key": "适用样本", "val": "蛋白、DNA、RNA 等生物大分子" },
-        { "key": "主要货号(4mL)", "val": "UTPES040005N(3K) / UTPES040010N(10K) / UTPES040030N(30K) / UTPES040050N(50K) / UTPES040100N(100K)" },
-        { "key": "主要货号(15mL)", "val": "UFP0050096(3K) / UFP0100096(10K) / UFP0300096(30K) / UFP0500096(50K) / UFP1000096(100K)" }
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "膜材质",
+          "val": "聚醚砜（PES）低吸附超滤膜"
+        },
+        {
+          "key": "MWCO 系列",
+          "val": "3K / 10K / 30K / 50K / 100K"
+        },
+        {
+          "key": "样品处理量",
+          "val": "4 mL / 15 mL"
+        },
+        {
+          "key": "最大离心力",
+          "val": "≤ 5,000 ×g"
+        },
+        {
+          "key": "离心时间",
+          "val": "~15 min（视样品体积与目标浓缩倍数）"
+        },
+        {
+          "key": "适用样本",
+          "val": "蛋白、DNA、RNA 等生物大分子"
+        },
+        {
+          "key": "主要货号(4mL)",
+          "val": "UTPES040005N(3K) / UTPES040010N(10K) / UTPES040030N(30K) / UTPES040050N(50K) / UTPES040100N(100K)"
+        },
+        {
+          "key": "主要货号(15mL)",
+          "val": "UFP0050096(3K) / UFP0100096(10K) / UFP0300096(30K) / UFP0500096(50K) / UFP1000096(100K)"
+        }
       ],
       "applications": "蛋白质/抗体样品浓缩；缓冲液置换与脱盐；标记反应后去除游离标记物；细胞培养上清液浓缩；核酸样品富集纯化",
       "ordering": "品牌：KEL Biotech（上海聚顶生物）| 规格：4 mL / 15 mL | MWCO：3K/10K/30K/50K/100K | 咨询邮箱：service@biologia.cn"
@@ -224,16 +377,46 @@
         "多规格：柱体积 0.5 mL / 2 mL / 5 mL / 10 mL，上样量覆盖 50 μL – 3000 μL"
       ],
       "specs": [
-        { "key": "品牌", "val": "KEL Biotech（上海聚顶生物）" },
-        { "key": "产品系列", "val": "KELFast™ 7K / KELFast™ 40K" },
-        { "key": "基质", "val": "葡聚糖凝胶过滤介质（粒径 57–80 μm）" },
-        { "key": "排阻极限", "val": "~5 kDa（7K）/ ~40 kDa（40K）" },
-        { "key": "7K 系列", "val": "0.5mL(90-0701-50) / 2mL(90-0702-50) / 5mL(90-0703-50) / 10mL(90-0704-50)" },
-        { "key": "40K 系列", "val": "0.5mL(90-0801-50) / 2mL(90-0802-50) / 5mL(90-0803-50) / 10mL(90-0804-50)" },
-        { "key": "包装", "val": "50 支/包" },
-        { "key": "工作 pH 范围", "val": "2 – 13" },
-        { "key": "工作温度", "val": "4 – 30°C" },
-        { "key": "离心条件", "val": "1000 ×g，3 min" }
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "产品系列",
+          "val": "KELFast™ 7K / KELFast™ 40K"
+        },
+        {
+          "key": "基质",
+          "val": "葡聚糖凝胶过滤介质（粒径 57–80 μm）"
+        },
+        {
+          "key": "排阻极限",
+          "val": "~5 kDa（7K）/ ~40 kDa（40K）"
+        },
+        {
+          "key": "7K 系列",
+          "val": "0.5mL(90-0701-50) / 2mL(90-0702-50) / 5mL(90-0703-50) / 10mL(90-0704-50)"
+        },
+        {
+          "key": "40K 系列",
+          "val": "0.5mL(90-0801-50) / 2mL(90-0802-50) / 5mL(90-0803-50) / 10mL(90-0804-50)"
+        },
+        {
+          "key": "包装",
+          "val": "50 支/包"
+        },
+        {
+          "key": "工作 pH 范围",
+          "val": "2 – 13"
+        },
+        {
+          "key": "工作温度",
+          "val": "4 – 30°C"
+        },
+        {
+          "key": "离心条件",
+          "val": "1000 ×g，3 min"
+        }
       ],
       "applications": "蛋白纯化后脱盐与缓冲液置换；抗体/酶标记反应后去除游离标记物；样品前处理（除盐、换液）；核酸样品脱盐纯化",
       "ordering": "品牌：KEL Biotech（上海聚顶生物）| 规格：见上方参数表 | 包装：50 支/包 | 咨询邮箱：service@biologia.cn"
@@ -256,11 +439,26 @@
         "多通道检测：2/4/5 通道可选，适配常见荧光染料"
       ],
       "specs": [
-        { "key": "温控精度", "val": "±0.1°C" },
-        { "key": "升降温速率", "val": "最高 5°C/s" },
-        { "key": "模块", "val": "96孔 / 384孔 / 8联排" },
-        { "key": "检测通道", "val": "2 / 4 / 5 通道可选" },
-        { "key": "适用染料", "val": "SYBR Green, TaqMan, FRET 等" }
+        {
+          "key": "温控精度",
+          "val": "±0.1°C"
+        },
+        {
+          "key": "升降温速率",
+          "val": "最高 5°C/s"
+        },
+        {
+          "key": "模块",
+          "val": "96孔 / 384孔 / 8联排"
+        },
+        {
+          "key": "检测通道",
+          "val": "2 / 4 / 5 通道可选"
+        },
+        {
+          "key": "适用染料",
+          "val": "SYBR Green, TaqMan, FRET 等"
+        }
       ],
       "applications": "基因表达定量分析（qPCR）；基因分型与 SNP 检测；病原体核酸检测；甲基化特异性 PCR",
       "ordering": "货号：BL-PCR-XXX  |  咨询邮箱：service@biologia.cn"
@@ -283,9 +481,18 @@
         "安全设计：开盖断电保护"
       ],
       "specs": [
-        { "key": "输出范围", "val": "5–300V / 1–400mA" },
-        { "key": "定时", "val": "1 min – 99 h 59 min" },
-        { "key": "胶槽规格", "val": "7×7 cm / 15×10 cm / 20×20 cm" }
+        {
+          "key": "输出范围",
+          "val": "5–300V / 1–400mA"
+        },
+        {
+          "key": "定时",
+          "val": "1 min – 99 h 59 min"
+        },
+        {
+          "key": "胶槽规格",
+          "val": "7×7 cm / 15×10 cm / 20×20 cm"
+        }
       ],
       "applications": "DNA 琼脂糖凝胶电泳；SDS-PAGE 蛋白电泳；Native PAGE 非变性电泳；Western Blot 转膜前电泳",
       "ordering": "货号：BL-ELEC-XXX  |  咨询邮箱：service@biologia.cn"
@@ -308,10 +515,22 @@
         "低噪运行：≤ 58 dB(A)，适合实验室环境"
       ],
       "specs": [
-        { "key": "最高转速", "val": "30,000 rpm" },
-        { "key": "最大 RCF", "val": "65,000 ×g" },
-        { "key": "温控", "val": "-20°C ~ 40°C" },
-        { "key": "转子", "val": "角转子 / 水平转子 / 微量转子" }
+        {
+          "key": "最高转速",
+          "val": "30,000 rpm"
+        },
+        {
+          "key": "最大 RCF",
+          "val": "65,000 ×g"
+        },
+        {
+          "key": "温控",
+          "val": "-20°C ~ 40°C"
+        },
+        {
+          "key": "转子",
+          "val": "角转子 / 水平转子 / 微量转子"
+        }
       ],
       "applications": "细胞 & 细菌收集；蛋白沉淀 & 分离；核酸提取（酚/氯仿法）；亚细胞器分离（线粒体、微粒体等）",
       "ordering": "货号：BL-CENT-XXX  |  咨询邮箱：service@biologia.cn"
@@ -334,10 +553,22 @@
         "灵活适配：兼容各品牌层析柱（1 mL – 50 mL）"
       ],
       "specs": [
-        { "key": "流速", "val": "0.01–150 mL/min" },
-        { "key": "UV 检测", "val": "280 nm / 260 nm / 214 nm" },
-        { "key": "系统压力", "val": "≤ 5 MPa" },
-        { "key": "阀门", "val": "自动进样阀 + 多位选择阀" }
+        {
+          "key": "流速",
+          "val": "0.01–150 mL/min"
+        },
+        {
+          "key": "UV 检测",
+          "val": "280 nm / 260 nm / 214 nm"
+        },
+        {
+          "key": "系统压力",
+          "val": "≤ 5 MPa"
+        },
+        {
+          "key": "阀门",
+          "val": "自动进样阀 + 多位选择阀"
+        }
       ],
       "applications": "单抗/双抗 Protein A/G 亲和纯化；His-tag/GST-tag 重组蛋白纯化；离子交换 & 疏水精细纯化；分子筛去聚体 & 缓冲液置换",
       "ordering": "货号：BL-PURI-XXX  |  咨询邮箱：service@biologia.cn"
@@ -360,10 +591,22 @@
         "轻量化：人体工学握把，减少重复性劳损"
       ],
       "specs": [
-        { "key": "量程", "val": "0.1 μL – 10 mL" },
-        { "key": "类型", "val": "单道 / 8道 / 12道 / 电动" },
-        { "key": "精度", "val": "≤ ±0.5% (标称量程)" },
-        { "key": "灭菌", "val": "整支 121°C 高温高压" }
+        {
+          "key": "量程",
+          "val": "0.1 μL – 10 mL"
+        },
+        {
+          "key": "类型",
+          "val": "单道 / 8道 / 12道 / 电动"
+        },
+        {
+          "key": "精度",
+          "val": "≤ ±0.5% (标称量程)"
+        },
+        {
+          "key": "灭菌",
+          "val": "整支 121°C 高温高压"
+        }
       ],
       "applications": "PCR/qPCR 反应体系配制；细胞培养液分装 & 换液；ELISA & 多孔板加样；NGS 文库构建精确移液",
       "ordering": "货号：BL-PIPE-XXX  |  咨询邮箱：service@biologia.cn"
@@ -386,9 +629,18 @@
         "化学发光：适用于 ECL 底物 Western Blot 成像"
       ],
       "specs": [
-        { "key": "分辨率", "val": "500万 / 830万像素" },
-        { "key": "光源", "val": "302nm UV / 470nm蓝光 / 白光" },
-        { "key": "软件", "val": "自动曝光 / 定量分析" }
+        {
+          "key": "分辨率",
+          "val": "500万 / 830万像素"
+        },
+        {
+          "key": "光源",
+          "val": "302nm UV / 470nm蓝光 / 白光"
+        },
+        {
+          "key": "软件",
+          "val": "自动曝光 / 定量分析"
+        }
       ],
       "applications": "核酸凝胶（EB/SYBR/佰洛染料）成像与分析；考马斯亮蓝/银染 SDS-PAGE 凝胶成像；化学发光 Western Blot 成像；菌落计数与平板成像",
       "ordering": "货号：BL-IMAG-XXX  |  咨询邮箱：service@biologia.cn"
@@ -411,12 +663,2133 @@
         "温控振荡：内置 37°C 温控 + 线性/轨道振荡"
       ],
       "specs": [
-        { "key": "波长", "val": "200–1000 nm 全波长" },
-        { "key": "检测模式", "val": "吸收光 / 荧光 / 发光" },
-        { "key": "读板速度", "val": "96孔 < 6s" }
+        {
+          "key": "波长",
+          "val": "200–1000 nm 全波长"
+        },
+        {
+          "key": "检测模式",
+          "val": "吸收光 / 荧光 / 发光"
+        },
+        {
+          "key": "读板速度",
+          "val": "96孔 < 6s"
+        }
       ],
       "applications": "ELISA 定量检测；细胞活力/毒性检测（MTT, CCK-8, LDH）；蛋白定量（BCA, Bradford）；荧光标记物定量",
       "ordering": "货号：BL-PLAT-XXX  |  咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "flow-antibody",
+    "cat": "antibody",
+    "name": "流式抗体（CD 系列）",
+    "icon": "🧪",
+    "hot": true,
+    "summary": "KEL Biotech™ 流式抗体，覆盖 MSC 三标（CD73/CD90/CD105）与 CD3/CD4/CD8/CD19/CD34/CD45/CD56/CD14/CD11b/CD206 等免疫与干细胞标志物，8+ 种荧光标记可选，传统与重组克隆齐备。",
+    "detail": {
+      "intro": "佰洛生物流式抗体（CD 系列）源自 KEL Biotech™ 平台，覆盖间充质干细胞（MSC）标志物 CD73 / CD90 / CD105、T/NK 细胞标志物 CD3 / CD4 / CD8 / CD19 / CD56、髓系标志物 CD14 / CD11b、造血干/祖细胞标志物 CD34、白细胞共同抗原 CD45、树突状细胞标志物 CD206 等主流 CD 靶点。提供 FITC、PE、APC、PerCP、PE-Cy7、APC-Cy7、PerCP-cy5.5、KELAF™ 647 及 Brilliant Violet 510 多种荧光标记，配套克隆均经流式验证，适用于免疫表型分析、细胞分选与多色流式 panel 组建。作为 KEL Biotech 杭州本地团队，我们提供本地库存、技术咨询与快速交付。",
+      "features": [
+        "靶点齐全：覆盖 MSC 三标、T/NK、髓系、造血干/祖细胞等主流 CD 标志物",
+        "多色可选：8+ 种荧光标记，支持多色流式 panel 灵活搭配",
+        "克隆验证：传统单抗与重组抗体（Recombinant）齐备，批间一致性高",
+        "本地服务：KEL Biotech 杭州本地分公司，现货供应、技术响应快",
+        "应用广泛：免疫分型、细胞分选、肿瘤免疫、干细胞与免疫治疗研究"
+      ],
+      "specs": [
+        {
+          "key": "品牌/厂商",
+          "val": "KEL Biotech™（佰洛生物为 KEL 杭州本地分公司）"
+        },
+        {
+          "key": "靶点覆盖",
+          "val": "CD3/4/8/14/19/29/34/44/45/56/73/90/105/106/166/206 等（Human / Mouse / Mouse+Human）"
+        },
+        {
+          "key": "荧光标记",
+          "val": "FITC / PE / APC / PerCP / PE-Cy7 / APC-Cy7 / PerCP-cy5.5 / KELAF™ 647 / Brilliant Violet 510"
+        },
+        {
+          "key": "规格",
+          "val": "25Tests / 100Tests（部分靶点含 50µg / 100µg / 500µg）"
+        },
+        {
+          "key": "克隆类型",
+          "val": "传统单抗 + 重组抗体（Recombinant）"
+        },
+        {
+          "key": "缓冲液",
+          "val": "典型 PBS + 0.09% NaN₃ + 0.2% BSA（以各货号 CoA 为准）"
+        },
+        {
+          "key": "储存条件",
+          "val": "2–8°C 避光保存，切勿冻存"
+        },
+        {
+          "key": "运输方式",
+          "val": "蓝冰 / 冰袋运输"
+        }
+      ],
+      "catalog": [
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0003-41"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0003-42"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0003-41"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0003-42"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "PerCP-cy5.5",
+          "size": "100Tests",
+          "cat": "G-0003-42"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0003-41"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0003-42"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0003-41"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0003-42"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0003-41"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0003-42"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0003-41"
+        },
+        {
+          "target": "human CD105",
+          "reactivity": "Human",
+          "clone": "[L243]",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0003-42"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0010-41"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0010-42"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0010-41"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0010-42"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0010-41"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0010-42"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0010-41"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0010-42"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0010-41"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0010-42"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0010-41"
+        },
+        {
+          "target": "human CD106",
+          "reactivity": "Human",
+          "clone": "STA",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0010-42"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0007-41"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0007-42"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0007-41"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0007-42"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0007-41"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0007-42"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0007-41"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0007-42"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0007-41"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0007-42"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0007-41"
+        },
+        {
+          "target": "human CD14",
+          "reactivity": "Human",
+          "clone": "M5E2",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0007-42"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0018-41"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0018-42"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0018-41"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0018-42"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "PerCP-cy5.5",
+          "size": "25Tests",
+          "cat": "G-0018-41"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "PerCP-cy5.5",
+          "size": "100Tests",
+          "cat": "G-0018-42"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0018-41"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0018-42"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0018-41"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0018-42"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0018-41"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0018-42"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0018-41"
+        },
+        {
+          "target": "human CD16",
+          "reactivity": "Human",
+          "clone": "B73.1",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0018-42"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0011-41"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0011-42"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0011-41"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0011-42"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0011-41"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0011-42"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0011-41"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0011-42"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0011-41"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0011-42"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0011-41"
+        },
+        {
+          "target": "human CD166",
+          "reactivity": "Human",
+          "clone": "A17193B",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0011-42"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0009-41"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0009-42"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0009-41"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0009-42"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0009-41"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0009-42"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0009-41"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0009-42"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0009-41"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0009-42"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0009-41"
+        },
+        {
+          "target": "human CD19",
+          "reactivity": "Human",
+          "clone": "HIB19",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0009-42"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "KELAF™ 647",
+          "size": "25Tests",
+          "cat": "H-0022-41"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "KELAF™ 647",
+          "size": "100Tests",
+          "cat": "H-0022-42"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0022-41"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0022-42"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0022-41"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0022-42"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "PerCP-cy5.5",
+          "size": "25Tests",
+          "cat": "G-0022-41"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "PerCP-cy5.5",
+          "size": "100Tests",
+          "cat": "G-0022-42"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0022-41"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0022-42"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0022-41"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0022-42"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0022-41"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0022-42"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0022-41"
+        },
+        {
+          "target": "human CD206",
+          "reactivity": "Human",
+          "clone": "15-2",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0022-42"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0012-41"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0012-42"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0012-41"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0012-42"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0012-41"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0012-42"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0012-41"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0012-42"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0012-41"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0012-42"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0012-41"
+        },
+        {
+          "target": "human CD29",
+          "reactivity": "Human",
+          "clone": "TS2/16",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0012-42"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "KELAF™ 647",
+          "size": "25Tests",
+          "cat": "H-0020-41"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "KELAF™ 647",
+          "size": "100Tests",
+          "cat": "H-0020-42"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0020-41"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0020-42"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0020-41"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0020-42"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "PerCP-cy5.5",
+          "size": "25Tests",
+          "cat": "G-0020-41"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "PerCP-cy5.5",
+          "size": "100Tests",
+          "cat": "G-0020-42"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0020-41"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0020-42"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0020-41"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0020-42"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0020-41"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0020-42"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0020-41"
+        },
+        {
+          "target": "human CD3",
+          "reactivity": "Human",
+          "clone": "HIT3a",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0020-42"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0004-41"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0004-42"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0004-41"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0004-42"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0004-41"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0004-42"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0004-41"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0004-42"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0004-41"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0004-42"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0004-41"
+        },
+        {
+          "target": "human CD34",
+          "reactivity": "Human",
+          "clone": "581",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0004-42"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "KELAF™ 647",
+          "size": "25Tests",
+          "cat": "H-0021-41"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "KELAF™ 647",
+          "size": "100Tests",
+          "cat": "H-0021-42"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0021-41"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0021-42"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0021-41"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0021-42"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "PerCP-cy5.5",
+          "size": "25Tests",
+          "cat": "G-0021-41"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "PerCP-cy5.5",
+          "size": "100Tests",
+          "cat": "G-0021-42"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0021-41"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0021-42"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0021-41"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0021-42"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0021-41"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0021-42"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0021-41"
+        },
+        {
+          "target": "human CD4",
+          "reactivity": "Human",
+          "clone": "SK3",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0021-42"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "KELAF™647",
+          "size": "25Tests",
+          "cat": "H-0005-41"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "KELAF™647",
+          "size": "100Tests",
+          "cat": "H-0005-42"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0005-41"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0005-42"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0005-42"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0005-41"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0005-42"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0005-41"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0005-42"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "APC",
+          "size": "500Tests",
+          "cat": "C-0005-44"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0005-41"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0005-42"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0005-41"
+        },
+        {
+          "target": "human CD45",
+          "reactivity": "Human",
+          "clone": "HI30",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0005-42"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0019-41"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0019-42"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0019-41"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0019-42"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "PerCP-cy5.5",
+          "size": "25Tests",
+          "cat": "G-0019-41"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "PerCP-cy5.5",
+          "size": "100Tests",
+          "cat": "G-0019-42"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0019-41"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0019-42"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0019-41"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0019-42"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0019-41"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0019-42"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0019-41"
+        },
+        {
+          "target": "human CD56",
+          "reactivity": "Human",
+          "clone": "QA17A16",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0019-42"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0001-41"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0001-42"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0001-41"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0001-42"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0001-41"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0001-42"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0001-41"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0001-42"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0001-41"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0001-42"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0001-41"
+        },
+        {
+          "target": "human CD73",
+          "reactivity": "Human",
+          "clone": "AD2",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0001-42"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0014-41"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0014-42"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0014-41"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0014-42"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0014-41"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0014-42"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0014-41"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0014-42"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0014-41"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0014-42"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0014-41"
+        },
+        {
+          "target": "human CD8a",
+          "reactivity": "Human",
+          "clone": "HIT8a",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0014-42"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0002-41"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0002-42"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0002-41"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0002-42"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0002-41"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0002-42"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0002-41"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0002-42"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0002-41"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0002-42"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0002-41"
+        },
+        {
+          "target": "human CD90 (Thy1)",
+          "reactivity": "Human",
+          "clone": "5E10",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0002-42"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "PE-Cy7",
+          "size": "25Tests",
+          "cat": "E-0006-41"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "PE-Cy7",
+          "size": "100Tests",
+          "cat": "E-0006-42"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "APC-Cy7",
+          "size": "25Tests",
+          "cat": "F-0006-41"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "APC-Cy7",
+          "size": "100Tests",
+          "cat": "F-0006-42"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "PerCP",
+          "size": "25Tests",
+          "cat": "D-0006-41"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "PerCP",
+          "size": "100Tests",
+          "cat": "D-0006-42"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "APC",
+          "size": "25Tests",
+          "cat": "C-0006-41"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "APC",
+          "size": "100Tests",
+          "cat": "C-0006-42"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0006-41"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "B-0006-42"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0006-41"
+        },
+        {
+          "target": "human HLA-DR",
+          "reactivity": "Human",
+          "clone": "L243",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0006-42"
+        },
+        {
+          "target": "mouse CD4",
+          "reactivity": "Mouse",
+          "clone": "RM4-4",
+          "fluor": "PE-Cy7",
+          "size": "100ug",
+          "cat": "E-0016-82"
+        },
+        {
+          "target": "mouse CD4",
+          "reactivity": "Mouse",
+          "clone": "RM4-4",
+          "fluor": "FITC",
+          "size": "50ug",
+          "cat": "A-0016-81"
+        },
+        {
+          "target": "mouse CD4",
+          "reactivity": "Mouse",
+          "clone": "RM4-4",
+          "fluor": "FITC",
+          "size": "100ug",
+          "cat": "A-0016-82"
+        },
+        {
+          "target": "mouse CD45",
+          "reactivity": "Mouse",
+          "clone": "QA17A26",
+          "fluor": "APC-Cy7",
+          "size": "25ug",
+          "cat": "F-0015-80"
+        },
+        {
+          "target": "mouse CD45",
+          "reactivity": "Mouse",
+          "clone": "QA17A26",
+          "fluor": "APC-Cy7",
+          "size": "50ug",
+          "cat": "F-0015-81"
+        },
+        {
+          "target": "mouse CD45",
+          "reactivity": "Mouse",
+          "clone": "QA17A26",
+          "fluor": "APC-Cy7",
+          "size": "100ug",
+          "cat": "F-0015-82"
+        },
+        {
+          "target": "mouse CD45",
+          "reactivity": "Mouse",
+          "clone": "QA17A26",
+          "fluor": "FITC",
+          "size": "25ug",
+          "cat": "A-0015-80"
+        },
+        {
+          "target": "mouse CD45",
+          "reactivity": "Mouse",
+          "clone": "QA17A26",
+          "fluor": "FITC",
+          "size": "50ug",
+          "cat": "A-0015-81"
+        },
+        {
+          "target": "mouse CD45",
+          "reactivity": "Mouse",
+          "clone": "QA17A26",
+          "fluor": "FITC",
+          "size": "100ug",
+          "cat": "A-0015-82"
+        },
+        {
+          "target": "mouse CD8a",
+          "reactivity": "Mouse",
+          "clone": "",
+          "fluor": "Brilliant Violet 510",
+          "size": "",
+          "cat": "G-0017-81"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "PE-Cy7",
+          "size": "25ug",
+          "cat": "E-0008-80"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "PE-Cy7",
+          "size": "100ug",
+          "cat": "E-0008-82"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "APC-Cy7",
+          "size": "25ug",
+          "cat": "F-0008-80"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "APC-Cy7",
+          "size": "100ug",
+          "cat": "F-0008-82"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "PerCP",
+          "size": "25ug",
+          "cat": "D-0008-80"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "PerCP",
+          "size": "100ug",
+          "cat": "D-0008-82"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "APC",
+          "size": "25ug",
+          "cat": "C-0008-80"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "APC",
+          "size": "100ug",
+          "cat": "C-0008-82"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "PE",
+          "size": "50ug",
+          "cat": "B-0008-81"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "PE",
+          "size": "200ug",
+          "cat": "B-0008-83"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "FITC",
+          "size": "50ug",
+          "cat": "A-0008-81"
+        },
+        {
+          "target": "mouse/human CD11b",
+          "reactivity": "Mouse / Human",
+          "clone": "M1/70",
+          "fluor": "FITC",
+          "size": "500ug",
+          "cat": "A-0008-85"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "PE-Cy7",
+          "size": "25ug",
+          "cat": "E-0013-41"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "PE-Cy7",
+          "size": "100ug",
+          "cat": "A-0013-42"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "APC-Cy7",
+          "size": "25ug",
+          "cat": "F-0013-41"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "APC-Cy7",
+          "size": "100ug",
+          "cat": "A-0013-42"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "PerCP",
+          "size": "25ug",
+          "cat": "D-0013-41"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "PerCP",
+          "size": "100ug",
+          "cat": "A-0013-42"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "APC",
+          "size": "25ug",
+          "cat": "C-0013-41"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "APC",
+          "size": "100ug",
+          "cat": "A-0013-42"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "PE",
+          "size": "25Tests",
+          "cat": "B-0013-41"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "PE",
+          "size": "100Tests",
+          "cat": "A-0013-42"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "FITC",
+          "size": "25Tests",
+          "cat": "A-0013-41"
+        },
+        {
+          "target": "mouse/human CD44",
+          "reactivity": "Mouse / Human",
+          "clone": "IM7",
+          "fluor": "FITC",
+          "size": "100Tests",
+          "cat": "A-0013-42"
+        }
+      ],
+      "applications": "免疫细胞分型与计数（T/NK/B/髓系）；间充质干细胞（MSC）鉴定与表型分析；造血干/祖细胞（CD34+）分选；肿瘤免疫与免疫治疗研究；流式细胞术多色 panel 组建；细胞分选（FACS）前标记",
+      "ordering": "货号详见下方「产品目录」表格 | 询价/订购邮箱：service@biologia.cn | 品牌：KEL Biotech™"
     }
   }
 ]
