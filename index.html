@@ -648,10 +648,10 @@ var _hmt = _hmt || [];
         <div class="dropdown">
           <a href="#hot-products">🔥 热门产品</a>
           <div class="dd-divider"></div>
-          <a href="products.html#reagents">试剂与耗材</a>
+          <a href="products.html?cat=consumables">实验耗材</a>
           <a href="products.html#instruments">实验仪器</a>
           <div class="dd-divider"></div>
-          <a href="products.html">查看全部产品</a>
+          <a href="products.html">进入产品中心</a>
         </div>
       </li>
       <!-- 技术服务 下拉 -->
@@ -789,7 +789,7 @@ var _hmt = _hmt || [];
     <div class="footer-col">
       <h4>产品</h4>
       <a href="#hot-products">热门产品</a>
-      <a href="products.html#reagents">试剂与耗材</a>
+      <a href="products.html?cat=consumables">实验耗材</a>
       <a href="products.html#instruments">实验仪器</a>
       <a href="news.html">新闻资讯</a>
     </div>
@@ -1051,11 +1051,14 @@ function renderHotProducts() {
    RENDER — 按品类浏览（首页：精选 + 品类导航，不再平铺全部产品）
 ═══════════════════════════════════════ */
 var CAT_META = {
-  reagents:    { label: '试剂与耗材',     icon: '🧪' },
-  serum:       { label: '血清',           icon: '🩸' },
-  media:       { label: '细胞培养基',     icon: '🧫' },
-  instruments: { label: '实验仪器',       icon: '⚙️' },
-  antibody:    { label: '抗体与流式试剂', icon: '🔬' }
+  'stem-cell':  { label: '干细胞相关',     icon: '🧬' },
+  serum:        { label: '血清',           icon: '🩸' },
+  media:        { label: '细胞培养基',     icon: '🧫' },
+  consumables:  { label: '实验耗材',       icon: '🧰' },
+  molecular:    { label: '分子试剂',       icon: '🧪' },
+  instruments:  { label: '实验仪器',       icon: '⚙️' },
+  antibody:     { label: '抗体与流式试剂', icon: '🔬' },
+  other:        { label: '其它产品',       icon: '📦' }
 };
 function catLabelOf(c) {
   var m = CAT_META[c];
@@ -1073,8 +1076,7 @@ function renderCategories() {
     var m = CAT_META[c];
     return '<a class="ctile" href="products.html?cat=' + c + '">' +
       '<span class="ct-icon">' + m.icon + '</span>' +
-      '<span class="ct-meta"><span class="ct-name">' + esc(m.label) + '</span>' +
-      '<span class="ct-count">' + groups[c].length + ' 款产品</span></span>' +
+      '<span class="ct-meta"><span class="ct-name">' + esc(m.label) + '</span></span>' +
       '<span class="ct-arrow">→</span></a>';
   }).join('');
   el.innerHTML = html || '<p style="text-align:center;color:var(--text-muted);padding:32px;">暂无产品分类</p>';

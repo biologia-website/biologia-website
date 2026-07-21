@@ -1,7 +1,7 @@
 [
   {
     "id": "ipsc-kit",
-    "cat": "reagents",
+    "cat": "stem-cell",
     "name": "iPSC 重编程试剂盒",
     "icon": "🧫",
     "hot": true,
@@ -18,7 +18,7 @@
       "specs": [
         {
           "key": "品牌/厂商",
-          "val": "宜明生物 (uBriGene)"
+          "val": "宜明生物 (uBriGene)（代理）"
         },
         {
           "key": "技术原理",
@@ -46,7 +46,7 @@
         }
       ],
       "applications": "人源 iPSC 建系与疾病模型构建（PBMC / 成纤维细胞起始）；药物筛选与毒理学评价；再生医学与细胞治疗研究；发育生物学与基因功能研究",
-      "ordering": "厂商：宜明生物 | 货号：iPSC-RPM-RNA-LNP-V2 (6 Test) / V2M (2 Test) | 佰洛生物咨询邮箱：service@biologia.cn",
+      "ordering": "品牌：宜明生物 (uBriGene)（代理）| 货号：iPSC-RPM-RNA-LNP-V2 (6 Test) / V2M (2 Test) | 佰洛生物咨询邮箱：service@biologia.cn",
       "images": [
         {
           "src": "images/ipsc-kit-front.png",
@@ -65,6 +65,98 @@
           "caption": "iPSC 重编程实验流程时间线 Day -6 至挑克隆 Day 16-20"
         }
       ]
+    }
+  },
+  {
+    "id": "dora-ys8",
+    "cat": "stem-cell",
+    "name": "YS8 多能干细胞培养基",
+    "icon": "🧬",
+    "hot": false,
+    "summary": "Doracell YS8 多能干细胞（PSC）培养基，无动物源、化学成分明确，无需饲养层，支持隔日 / Weekend-Free 换液，兼容 Matrigel®、VTN-N 等基质。",
+    "detail": {
+      "intro": "上海多瑞赛生物（Doracell）YS8 多能干细胞培养基是一种无动物源成分、化学成分明确的多能干细胞（PSC）培养基，专为人诱导多能干细胞（hiPSC）及胚胎干细胞（hESC）设计，无需饲养层。其突破性热稳定配方支持隔日补液及 Weekend-Free 培养方案，在维持细胞干性与遗传稳定性的同时显著简化操作流程。采用 49:1 基础培养基-添加物双组分体系（490 mL + 10 mL），可无缝兼容 Matrigel®、VTN-N 等基质材料，与 E8、mTeSR™ Plus 等常用体系无缝切换。",
+      "features": [
+        "卓越干性维持：有效维持细胞状态、干性表达与遗传信息稳定性",
+        "灵活培养方案：热稳定组分支持隔天及 Weekend-Free 换液",
+        "广泛包被兼容：兼容 Matrigel、玻连蛋白（VTN-N）等常用包被体系",
+        "体系无缝切换：可与 E8 / E8 Flex、mTeSR™ / mTeSR™ Plus 体系切换",
+        "更适合 hPSC 常规培养及分化过程"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "Doracell / 多瑞赛生物（代理）"
+        },
+        {
+          "key": "产品",
+          "val": "YS8 多能干细胞培养基套装"
+        },
+        {
+          "key": "货号",
+          "val": "DR1001050（500 mL 套装）/ DR1001025（250 mL 套装）"
+        },
+        {
+          "key": "组分",
+          "val": "YS8 基础培养基 490 mL + YS8 添加剂 10 mL"
+        },
+        {
+          "key": "储存条件",
+          "val": "基础培养基 2–8°C 避光；添加剂 -15~−30°C 避光"
+        },
+        {
+          "key": "保质期",
+          "val": "18 个月"
+        }
+      ],
+      "applications": "人源 iPSC / ESC 建系与维持；PSC 常规扩增与传代；多能干细胞向三胚层分化研究；类器官与疾病模型构建",
+      "ordering": "品牌：Doracell / 多瑞赛生物（代理）| 货号：DR1001050 / DR1001025 | 佰洛生物咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "dora-ys20r",
+    "cat": "stem-cell",
+    "name": "YS20R 多能干细胞培养基",
+    "icon": "🧬",
+    "hot": false,
+    "summary": "Doracell YS20R 人多能干细胞培养基，9:1 基础-添加物双组分，GMP 级生产，支持 2D / 3D 培养与 Weekend-Free 方案，与 E8 / mTeSR 体系无缝切换。",
+    "detail": {
+      "intro": "上海多瑞赛生物（Doracell）YS20R 多能干细胞培养基是一种专为人诱导多能干细胞（hiPSC）及胚胎干细胞（ESC）设计的人多能干细胞（hPSC）培养基，无需饲养层，支持 2D 和 3D 培养体系扩增。采用 9:1 基础培养基-添加物双组分体系（450 mL + 50 mL），可无缝兼容 Matrigel®、VTN-N 等基质材料，与 E8、mTeSR™ Plus 等常用培养体系无缝切换。突破性热稳定配方支持隔日换液及 Weekend-Free 培养方案。",
+      "features": [
+        "GMP 级工艺：批次间一致性高，适合科研向工业级过渡",
+        "热稳定配方：使用稳定性更高组分，支持 Weekend-Free 培养",
+        "兼容多包被：普适多种 PSC 包被体系",
+        "体系无缝切换：可与 E8 / E8 Flex、mTeSR™ / mTeSR™ Plus 切换",
+        "维持干性与遗传稳定性：连续培养 15 代干性标志物高表达、核型正常"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "Doracell / 多瑞赛生物（代理）"
+        },
+        {
+          "key": "产品",
+          "val": "YS20R 多能干细胞培养基套装"
+        },
+        {
+          "key": "货号",
+          "val": "DR1002050（500 mL 套装）"
+        },
+        {
+          "key": "组分",
+          "val": "YS20R 基础培养基 450 mL + YS20R 添加剂 50 mL"
+        },
+        {
+          "key": "储存条件",
+          "val": "基础培养基 2–8°C 避光；添加剂 -15~−30°C 避光"
+        },
+        {
+          "key": "保质期",
+          "val": "18 个月"
+        }
+      ],
+      "applications": "人源 iPSC / ESC 大规模扩增；PSC 2D / 3D 培养；细胞治疗与工业化生产级别 PSC 培养；多能干细胞库建库",
+      "ordering": "品牌：Doracell / 多瑞赛生物（代理）| 货号：DR1002050 | 佰洛生物咨询邮箱：service@biologia.cn"
     }
   },
   {
@@ -634,7 +726,7 @@
   },
   {
     "id": "dna-dye",
-    "cat": "reagents",
+    "cat": "molecular",
     "name": "Safe-Red™ Gel 核酸染料",
     "icon": "💠",
     "hot": false,
@@ -683,49 +775,8 @@
     }
   },
   {
-    "id": "flow-ab",
-    "cat": "reagents",
-    "name": "流式抗体",
-    "icon": "🔬",
-    "hot": false,
-    "summary": "覆盖 CD 系列、细胞因子、转录因子等 300+ 靶标，多种荧光标记（FITC / PE / APC / PerCP 等）。",
-    "detail": {
-      "intro": "佰洛生物提供超过 300 种流式细胞术抗体，覆盖免疫分型（CD 系列）、细胞因子（IFN-γ, IL-4, IL-17A 等）、转录因子（FoxP3, T-bet, GATA3 等）及磷酸化蛋白等靶标。多种荧光标记可选，包括 FITC、PE、APC、PerCP/Cy5.5、PE/Cy7、APC/Cy7、BV421、BV510 等，满足多色流式配色的灵活需求。",
-      "features": [
-        "靶标丰富：300+ 种流式抗体，持续扩展中",
-        "荧光多样：覆盖常规及串联染料 10+ 种荧光标记",
-        "批次稳定：每批次均通过滴定验证最佳使用浓度",
-        "种属广：人、小鼠、大鼠等多物种交叉反应验证"
-      ],
-      "specs": [
-        {
-          "key": "靶标数",
-          "val": "300+"
-        },
-        {
-          "key": "克隆",
-          "val": "经典文献验证克隆"
-        },
-        {
-          "key": "荧光标记",
-          "val": "FITC / PE / APC / PerCP / BV421 / PE/Cy7 等"
-        },
-        {
-          "key": "规格",
-          "val": "25 tests / 100 tests"
-        },
-        {
-          "key": "储存条件",
-          "val": "2–8°C, 避光"
-        }
-      ],
-      "applications": "免疫细胞亚群分型（T/B/NK/DC/Mono）；胞内 & 核内因子染色（ICS）；细胞增殖（Ki-67）& 凋亡（Annexin V）；磷酸化蛋白流式检测（Phosflow）",
-      "ordering": "货号：见具体靶标  |  规格：25 / 100 tests  |  咨询邮箱：service@biologia.cn"
-    }
-  },
-  {
     "id": "chromatography",
-    "cat": "reagents",
+    "cat": "other",
     "name": "层析填料",
     "icon": "🪨",
     "hot": true,
@@ -771,7 +822,7 @@
   },
   {
     "id": "ultrafilter",
-    "cat": "reagents",
+    "cat": "consumables",
     "name": "KEL Biotech™ 超滤管",
     "icon": "🔽",
     "hot": false,
@@ -829,7 +880,7 @@
   },
   {
     "id": "desalt-column",
-    "cat": "reagents",
+    "cat": "consumables",
     "name": "KELFast™ 离心脱盐柱",
     "icon": "🧴",
     "hot": true,
@@ -3257,6 +3308,92 @@
       ],
       "applications": "免疫细胞分型与计数（T/NK/B/髓系）；间充质干细胞（MSC）鉴定与表型分析；造血干/祖细胞（CD34+）分选；肿瘤免疫与免疫治疗研究；流式细胞术多色 panel 组建；细胞分选（FACS）前标记",
       "ordering": "货号详见下方「产品目录」表格 | 询价/订购邮箱：service@biologia.cn | 品牌：KEL Biotech™"
+    }
+  },
+  {
+    "id": "fbs-hi",
+    "cat": "serum",
+    "name": "热灭活胎牛血清 (Heat Inactivated FBS)",
+    "icon": "🩸",
+    "hot": false,
+    "summary": "KEL Biotech 热灭活胎牛血清 KC007，56°C 30 min 热灭活处理、补体失活，适用于免疫学及补体敏感细胞实验。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）热灭活胎牛血清（Heat Inactivated FBS, KC007）经 56°C、30 min 水浴热灭活处理，使血清中补体成分失活，适用于补体参与会干扰实验结果的场景（如免疫学检测、补体敏感细胞培养、支原体共培养等）。血源可追溯，每批次附 COA。",
+      "features": [
+        "补体失活：56°C 30 min 热灭活，降低补体介导的非特异性反应",
+        "质控稳定：内毒素 ≤ 5 EU/mL，批次一致性好",
+        "血源可溯：每批次附原产地证明与 COA",
+        "即用型：500 mL 瓶装液体，解冻即使用"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC007-01"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 100 mL"
+        },
+        {
+          "key": "处理",
+          "val": "56°C 30 min 热灭活"
+        },
+        {
+          "key": "内毒素",
+          "val": "≤ 5 EU/mL"
+        },
+        {
+          "key": "储存条件",
+          "val": "-20°C / 4°C 解冻后 4 周内使用"
+        }
+      ],
+      "applications": "免疫学检测（补体敏感实验）；补体敏感细胞系培养；支原体共培养研究；需降低补体干扰的精细培养",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC007-01 | 规格：500 mL / 100 mL | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "fbs-ule",
+    "cat": "serum",
+    "name": "超低内毒素胎牛血清 (Ultra Low Endotoxin FBS)",
+    "icon": "🩸",
+    "hot": false,
+    "summary": "KEL Biotech 超低内毒素胎牛血清 KC020，内毒素 ≤ 1 EU/mL，适用于对内毒素极度敏感的高灵敏度检测与因子研究。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）超低内毒素胎牛血清（Ultra Low Endotoxin FBS, KC020）经特殊工艺去除内毒素，将内毒素水平降至 ≤ 1 EU/mL，适用于对内毒素背景极度敏感的实验，如内毒素诱导因子研究、高灵敏度细胞检测、原代细胞及脆弱细胞培养。血源可追溯，每批次附 COA 与内毒素检测报告。",
+      "features": [
+        "超低内毒素：≤ 1 EU/mL，显著低于常规胎牛血清",
+        "背景干净：降低内毒素对细胞与检测的干扰",
+        "质控严格：支原体阴性，批次一致性好",
+        "血源可溯：每批次附 COA 与内毒素报告"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC020"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 100 mL"
+        },
+        {
+          "key": "内毒素",
+          "val": "≤ 1 EU/mL"
+        },
+        {
+          "key": "储存条件",
+          "val": "-20°C / 4°C 解冻后 4 周内使用"
+        }
+      ],
+      "applications": "内毒素诱导因子 / 信号通路研究；高灵敏度细胞检测；原代与脆弱细胞培养；需极低内毒素背景的精细实验",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC020 | 规格：500 mL / 100 mL | 咨询邮箱：service@biologia.cn"
     }
   }
 ]
