@@ -68,20 +68,20 @@
     }
   },
   {
-    "id": "fbs",
-    "cat": "reagents",
-    "name": "胎牛血清 (FBS)",
+    "id": "fbs-certified",
+    "cat": "serum",
+    "name": "特级胎牛血清 (Certified FBS)",
     "icon": "🩸",
     "hot": true,
-    "summary": "KEL Biotech 品牌胎牛血清，特级/优级/透析型/碳吸附型/ES 专用等多规格可选，内毒素 ≤ 5 EU/mL。",
+    "summary": "KEL Biotech 特级胎牛血清 KC001，三重 0.1 μm 除菌过滤，内毒素 ≤ 5 EU/mL，多细胞系培养验证。",
     "detail": {
-      "intro": "上海聚顶生物（KEL Biotech）胎牛血清（FBS）产品线，提供特级胎牛血清、优级胎牛血清、胚胎干细胞专用、透析型、碳吸附型、去外泌体型及四环素阴性等多种特殊处理血清。血源经严格筛选，连续三重 0.1 μm 无菌过滤，内毒素 ≤ 5 EU/mL，每批次均经过多细胞系培养验证。",
+      "intro": "上海聚顶生物（KEL Biotech）特级胎牛血清（Certified FBS, KC001）采自合规血源，经连续三重 0.1 μm 无菌过滤，每批次附原产地证明与质检报告（COA）。内毒素 ≤ 5 EU/mL、血红蛋白 ≤ 20 mg/dL，经 HEK293、CHO、Vero 等多种细胞系培养验证，适用于对血清质量要求较高的常规细胞培养与蛋白/病毒生产。",
       "features": [
-        "品牌保障：KEL Biotech 自主品牌，上海聚顶研发品控",
-        "品类齐全：特级/优级/ES 专用/透析/碳吸附/去外泌体/四环素阴性",
-        "血源可溯：每批次附原产地证明及质检报告（COA）",
+        "合规血源：每批次附原产地证明与 COA 质检报告",
         "严格质控：内毒素 ≤ 5 EU/mL，血红蛋白 ≤ 20 mg/dL",
-        "细胞验证：经 HEK293、CHO、Vero 等多细胞系培养验证"
+        "三重过滤：连续 0.1 μm 无菌过滤，支原体/病毒双重筛查",
+        "细胞验证：经 HEK293 / CHO / Vero 等多细胞系验证",
+        "品牌保障：KEL Biotech 自主品牌，上海聚顶研发品控"
       ],
       "specs": [
         {
@@ -89,12 +89,8 @@
           "val": "KEL Biotech（上海聚顶生物）"
         },
         {
-          "key": "主要规格",
-          "val": "KC001-01 特级 / KC010-01 优级"
-        },
-        {
-          "key": "特殊类型",
-          "val": "ES 专用 / 透析 / 碳吸附 / 去外泌体 / Tet 阴性"
+          "key": "货号",
+          "val": "KC001-01"
         },
         {
           "key": "包装",
@@ -106,38 +102,31 @@
         },
         {
           "key": "储存条件",
-          "val": "-20°C (长期) / 4°C (解冻后 4 周内使用)"
-        }
-      ],
-      "applications": "哺乳动物细胞系培养（HEK293、CHO、Vero、HeLa 等）；干细胞培养（ES/iPSC，需配专用血清）；杂交瘤细胞培养及单抗生产；病毒包装及疫苗生产",
-      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 规格：500 mL / 100 mL | 佰洛生物咨询邮箱：service@biologia.cn",
-      "images": [
-        {
-          "src": "images/fbs-product.png",
-          "caption": "KEL Biotech 胎牛血清 FBS 0.1μm 膜过滤 支原体检测 病毒筛查"
+          "val": "-20°C 长期 / 4°C 解冻后 4 周内使用"
         },
         {
-          "src": "images/fbs-exo-depleted.png",
-          "caption": "KEL 去外泌体胎牛血清 Exosome Depleted FBS KC005-03"
+          "key": "运输方式",
+          "val": "干冰或冰袋运输"
         }
-      ]
+      ],
+      "applications": "哺乳动物细胞系培养（HEK293、CHO、Vero、HeLa 等）；病毒包装及疫苗生产；重组蛋白表达；原代细胞短期培养",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC001-01 | 规格：500 mL / 100 mL | 佰洛生物咨询邮箱：service@biologia.cn"
     }
   },
   {
-    "id": "cell-media",
-    "cat": "reagents",
-    "name": "细胞培养基",
-    "icon": "🧪",
+    "id": "fbs-pura",
+    "cat": "serum",
+    "name": "优级胎牛血清 (Pura FBS)",
+    "icon": "🩸",
     "hot": false,
-    "summary": "KEL Biotech 品牌，DMEM 高糖、RPMI-1640、IMDM、DMEM/F12 等全系列基础培养基，严格无菌质控。",
+    "summary": "KEL Biotech 优级胎牛血清 KC010，性价比之选，适用于常规细胞系维持与扩增。",
     "detail": {
-      "intro": "上海聚顶生物（KEL Biotech）细胞培养基产品线，涵盖 DMEM 高糖（含丙酮酸钠/谷氨酰胺）、RPMI-1640（含 HEPES/谷氨酰胺）、IMDM、DMEM/F12、McCoy's 5A、Ham's F-12 等主流基础培养基，以及 PBS、DPBS、EBSS 等平衡盐溶液。所有培养基均经严格无菌检测、pH 检测及细胞培养性能验证合格后放行。",
+      "intro": "上海聚顶生物（KEL Biotech）优级胎牛血清（Pura FBS, KC010）在严格质控体系下生产，经 0.1 μm 过滤除菌，内毒素 ≤ 10 EU/mL，适用于对成本敏感、通量较大的常规细胞培养场景。血源可追溯，每批次附 COA。",
       "features": [
-        "品牌保障：KEL Biotech 自主品牌",
-        "品类齐全：DMEM / RPMI-1640 / IMDM / DMEM/F12 / McCoy’s 5A 等",
-        "即开即用：500 mL 瓶装液体培养基，无需配制",
-        "严格质控：无菌、pH、渗透压三重检验",
-        "配套完善：双抗（100×）、三抗、胰酶等辅助试剂可一站配齐"
+        "高性价比：适合高通量常规培养",
+        "质控稳定：内毒素 ≤ 10 EU/mL，批次一致性好",
+        "血源可溯：每批次附原产地证明与 COA",
+        "即用型：500 mL 瓶装液体，解冻即使用"
       ],
       "specs": [
         {
@@ -145,8 +134,241 @@
           "val": "KEL Biotech（上海聚顶生物）"
         },
         {
-          "key": "主要品类",
-          "val": "DMEM 高糖 (KC302) / RPMI-1640 (KC1325) / IMDM (KC304)"
+          "key": "货号",
+          "val": "KC010-01"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 100 mL"
+        },
+        {
+          "key": "内毒素",
+          "val": "≤ 10 EU/mL"
+        },
+        {
+          "key": "储存条件",
+          "val": "-20°C / 4°C 解冻后 4 周内使用"
+        },
+        {
+          "key": "运输方式",
+          "val": "冰袋运输"
+        }
+      ],
+      "applications": "常规哺乳动物细胞系维持与扩增；杂交瘤细胞培养；稳定细胞株筛选；教学与科研常规培养",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC010-01 | 规格：500 mL / 100 mL | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "fbs-msc",
+    "cat": "serum",
+    "name": "间充质干细胞专用胎牛血清",
+    "icon": "🩸",
+    "hot": false,
+    "summary": "KEL Biotech 间充质干细胞（MSC）专用胎牛血清 KC556，经 MSC 贴壁/成骨成脂分化验证。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）间充质干细胞专用胎牛血清（Qualified for human MSC, KC556）针对 hMSC 培养优化，经人源 MSC 原代贴壁、增殖及成骨/成脂三系分化验证，支持 MSC 稳定扩培与干性维持。每批次附 MSC 适用性检测报告。",
+      "features": [
+        "MSC 专用：经 hMSC 贴壁、增殖与三系分化验证",
+        "干性维持：支持 MSC 稳定扩培、降低分化偏移",
+        "质控严格：内毒素 ≤ 5 EU/mL，支原体阴性",
+        "批次报告：附 MSC 适用性检测 COA"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC556"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 100 mL"
+        },
+        {
+          "key": "内毒素",
+          "val": "≤ 5 EU/mL"
+        },
+        {
+          "key": "适用",
+          "val": "人源 MSC 原代及传代"
+        },
+        {
+          "key": "储存条件",
+          "val": "-20°C / 4°C 解冻后 4 周内使用"
+        }
+      ],
+      "applications": "人源间充质干细胞（MSC）原代分离与扩增；MSC 成药与细胞治疗研究；干细胞库建库；骨/软骨/脂肪分化研究",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC556 | 规格：500 mL / 100 mL | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "fbs-es",
+    "cat": "serum",
+    "name": "胚胎干细胞专用胎牛血清",
+    "icon": "🩸",
+    "hot": false,
+    "summary": "KEL Biotech 胚胎干细胞（ES）专用胎牛血清 KC002，经 mESC / hESC 未分化扩增验证。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）胚胎干细胞专用胎牛血清（for Embryonic Stem Cells, KC002）针对 ES / iPSC 培养优化，经小鼠及人胚胎干细胞未分化状态扩增验证，支持高密度克隆形成与干性维持。每批次附 ESC 适用性报告。",
+      "features": [
+        "ES 专用：经 mESC / hESC 未分化扩增验证",
+        "克隆支持：支持高密度 ES 克隆形成",
+        "干性维持：降低自发分化风险",
+        "批次报告：附 ESC 适用性 COA"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC002"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 100 mL"
+        },
+        {
+          "key": "内毒素",
+          "val": "≤ 5 EU/mL"
+        },
+        {
+          "key": "适用",
+          "val": "ES / iPSC 培养"
+        },
+        {
+          "key": "储存条件",
+          "val": "-20°C / 4°C 解冻后 4 周内使用"
+        }
+      ],
+      "applications": "小鼠 / 人胚胎干细胞（ESC）培养；iPSC 建系与维持；类胚胎发育研究；基因编辑干细胞株构建",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC002 | 规格：500 mL / 100 mL | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "fbs-dialyzed",
+    "cat": "serum",
+    "name": "透析胎牛血清 (Dialyzed FBS)",
+    "icon": "🩸",
+    "hot": false,
+    "summary": "KEL Biotech 透析胎牛血清 KC004，去除小分子代谢物与激素，适用于同位素标记 / 信号通路研究。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）透析胎牛血清（Dialyzed FBS, KC004）通过截留分子量 10–12 kDa 的透析膜去除血清中小分子（激素、细胞因子、氨基酸、离子等），保留大分子蛋白与生长因子。适用于需严格控制小分子背景的实验，如同位素标记示踪、激素/药物刺激信号研究。",
+      "features": [
+        "小分子去除：透析去除 < 12 kDa 小分子物质",
+        "背景干净：降低激素/代谢物对实验干扰",
+        "保留活性：大分子蛋白与生长因子完整保留",
+        "专业适用：同位素标记、信号通路研究首选"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC004"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 100 mL"
+        },
+        {
+          "key": "透析截留",
+          "val": "10–12 kDa"
+        },
+        {
+          "key": "内毒素",
+          "val": "≤ 5 EU/mL"
+        },
+        {
+          "key": "储存条件",
+          "val": "-20°C / 4°C 解冻后 4 周内使用"
+        }
+      ],
+      "applications": "同位素 / 放射性标记示踪实验；激素与生长因子刺激信号研究；细胞周期与代谢研究；需低背景的精细培养",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC004 | 规格：500 mL / 100 mL | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "fbs-charcoal",
+    "cat": "serum",
+    "name": "碳吸附胎牛血清 (Charcoal Stripped FBS)",
+    "icon": "🩸",
+    "hot": false,
+    "summary": "KEL Biotech 碳吸附胎牛血清 KC003，去除内源性激素与生长因子，适用于内分泌 / 受体研究。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）碳吸附胎牛血清（Charcoal Stripped FBS, KC003）经活性炭处理去除血清中内源性类固醇激素、甲状腺激素及部分生长因子，提供极低激素背景的培养环境。适用于性激素受体、类固醇代谢及内分泌相关研究。",
+      "features": [
+        "激素去除：活性炭处理去除内源性类固醇激素",
+        "背景极低：降低激素对受体实验干扰",
+        "生长因子削减：部分生长因子同步去除",
+        "专业适用：内分泌与受体研究首选"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC003"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 100 mL"
+        },
+        {
+          "key": "处理",
+          "val": "活性炭吸附"
+        },
+        {
+          "key": "内毒素",
+          "val": "≤ 5 EU/mL"
+        },
+        {
+          "key": "储存条件",
+          "val": "-20°C / 4°C 解冻后 4 周内使用"
+        }
+      ],
+      "applications": "性激素受体（ER / AR）功能研究；类固醇激素代谢与信号；内分泌相关细胞实验；需排除内源激素背景的培养",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC003 | 规格：500 mL / 100 mL | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "media-dmem-hg",
+    "cat": "media",
+    "name": "DMEM 高糖培养基",
+    "icon": "🧪",
+    "hot": true,
+    "summary": "KEL Biotech DMEM 高糖培养基（含谷氨酰胺、含丙酮酸钠）KC302-01，贴壁细胞经典基础培养基。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）DMEM 高糖培养基（KC302-01，含 L-谷氨酰胺、含丙酮酸钠，葡萄糖 4.5 g/L）是哺乳动物贴壁细胞培养最经典的基础培养基，适用于 HEK293、CHO、HeLa、3T3 等多种细胞系。液体瓶装，无菌过滤，即开即用。",
+      "features": [
+        "经典配方：葡萄糖 4.5 g/L，含谷氨酰胺与丙酮酸钠",
+        "即开即用：500 mL 液体瓶装，免配制",
+        "严格质控：无菌、pH、渗透压三重检验",
+        "广谱适用：覆盖绝大多数贴壁细胞系"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC302-01"
+        },
+        {
+          "key": "类型",
+          "val": "DMEM 高糖（4.5 g/L 葡萄糖）"
+        },
+        {
+          "key": "添加",
+          "val": "谷氨酰胺 + 丙酮酸钠"
         },
         {
           "key": "包装",
@@ -158,11 +380,256 @@
         },
         {
           "key": "储存条件",
-          "val": "2–8°C, 避光保存"
+          "val": "2–8°C，避光保存"
         }
       ],
-      "applications": "常规哺乳动物细胞系维持与扩增；原代细胞分离与短期培养；病毒包装与重组蛋白表达；杂交瘤细胞培养",
-      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 规格：500 mL / 瓶 | 佰洛生物咨询邮箱：service@biologia.cn"
+      "applications": "HEK293 / CHO / HeLa / 3T3 等贴壁细胞系维持；重组蛋白与病毒包装；转染与瞬时表达；细胞毒性与增殖检测",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC302-01 | 规格：500 mL / 瓶 | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "media-rpmi",
+    "cat": "media",
+    "name": "RPMI-1640 培养基",
+    "icon": "🧪",
+    "hot": false,
+    "summary": "KEL Biotech RPMI-1640 培养基 KC1325，悬浮细胞经典基础培养基，适用于淋巴细胞与造血干细胞。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）RPMI-1640 培养基（KC1325，含 L-谷氨酰胺）是悬浮细胞培养的经典选择，广泛应用于淋巴细胞、骨髓瘤、白血病细胞及多种造血来源细胞的维持与扩增。液体瓶装，即开即用。",
+      "features": [
+        "悬浮友好：经典悬浮细胞基础培养基",
+        "含谷氨酰胺：减少额外添加步骤",
+        "即开即用：500 mL 液体瓶装",
+        "质控严格：无菌、pH、渗透压检验"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC1325"
+        },
+        {
+          "key": "类型",
+          "val": "RPMI-1640"
+        },
+        {
+          "key": "添加",
+          "val": "谷氨酰胺"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 瓶"
+        },
+        {
+          "key": "pH",
+          "val": "7.2–7.4"
+        },
+        {
+          "key": "储存条件",
+          "val": "2–8°C，避光保存"
+        }
+      ],
+      "applications": "淋巴细胞（T / B / NK）培养；骨髓瘤 / 白血病细胞系；造血干细胞扩增；免疫学与肿瘤细胞实验",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC1325 | 规格：500 mL / 瓶 | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "media-imdm",
+    "cat": "media",
+    "name": "IMDM 培养基",
+    "icon": "🧪",
+    "hot": false,
+    "summary": "KEL Biotech IMDM 培养基 KC304-01，营养强化型，适用于高密度悬浮与杂交瘤细胞。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）IMDM 培养基（Iscove's Modified Dulbecco's Medium, KC304-01，含 L-谷氨酰胺）在 DMEM 基础上强化营养成分，添加硒、转铁蛋白及 Additional 维生素，适合高密度悬浮培养、杂交瘤细胞与快速增殖细胞。液体瓶装，即开即用。",
+      "features": [
+        "营养强化：添加硒、转铁蛋白等补充成分",
+        "高密度友好：适合悬浮与快速增殖细胞",
+        "含谷氨酰胺：即开即用",
+        "质控严格：无菌、pH、渗透压检验"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC304-01"
+        },
+        {
+          "key": "类型",
+          "val": "IMDM"
+        },
+        {
+          "key": "添加",
+          "val": "谷氨酰胺"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 瓶"
+        },
+        {
+          "key": "pH",
+          "val": "7.2–7.4"
+        },
+        {
+          "key": "储存条件",
+          "val": "2–8°C，避光保存"
+        }
+      ],
+      "applications": "杂交瘤细胞与单抗生产；高密度悬浮培养；快速增殖细胞系；造血细胞扩增",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC304-01 | 规格：500 mL / 瓶 | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "media-dmemf12",
+    "cat": "media",
+    "name": "DMEM/F12 培养基",
+    "icon": "🧪",
+    "hot": false,
+    "summary": "KEL Biotech DMEM/F12 (1:1) 培养基 KC308-01，营养更丰富，适用于原代细胞与克隆形成。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）DMEM/F12（1:1）培养基（KC308-01，含 L-谷氨酰胺、含 15 mM HEPES）结合了 DMEM 与 Ham's F-12 的优点，营养更丰富、缓冲更强，适用于原代细胞、上皮细胞及低密度克隆形成。液体瓶装，即开即用。",
+      "features": [
+        "复方营养：DMEM + F-12 1:1 复合",
+        "含 HEPES：增强 pH 缓冲能力",
+        "原代友好：适合原代与低密度培养",
+        "即开即用：500 mL 液体瓶装"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC308-01"
+        },
+        {
+          "key": "类型",
+          "val": "DMEM/F12 (1:1)"
+        },
+        {
+          "key": "添加",
+          "val": "谷氨酰胺 + 15 mM HEPES"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 瓶"
+        },
+        {
+          "key": "pH",
+          "val": "7.2–7.4"
+        },
+        {
+          "key": "储存条件",
+          "val": "2–8°C，避光保存"
+        }
+      ],
+      "applications": "原代细胞与上皮细胞培养；低密度克隆形成；干细胞与祖细胞维持；神经细胞与精细培养",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC308-01 | 规格：500 mL / 瓶 | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "media-alpha-mem",
+    "cat": "media",
+    "name": "α-MEM 培养基",
+    "icon": "🧪",
+    "hot": false,
+    "summary": "KEL Biotech α-MEM 培养基 KC1300-01（含 L-谷氨酰胺），适用于多种原代与传代细胞。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）α-MEM 培养基（Alpha Modification of MEM, KC1300-01，含 L-谷氨酰胺）在 MEM 基础上进一步补充核苷酸与维生素，营养更全面，适用于多种原代细胞、胚胎来源细胞及传代细胞系。液体瓶装，即开即用。",
+      "features": [
+        "营养全面：补充核苷酸与多种维生素",
+        "原代友好：适合原代与胚胎来源细胞",
+        "含谷氨酰胺：即开即用",
+        "质控严格：无菌、pH、渗透压检验"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KC1300-01"
+        },
+        {
+          "key": "类型",
+          "val": "α-MEM"
+        },
+        {
+          "key": "添加",
+          "val": "谷氨酰胺"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 瓶"
+        },
+        {
+          "key": "pH",
+          "val": "7.2–7.4"
+        },
+        {
+          "key": "储存条件",
+          "val": "2–8°C，避光保存"
+        }
+      ],
+      "applications": "原代细胞与胚胎来源细胞培养；成纤维细胞与内皮细胞；传代细胞系维持；组织工程种子细胞",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC1300-01 | 规格：500 mL / 瓶 | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "media-msc-sfm",
+    "cat": "media",
+    "name": "KEL MSC 无血清培养基",
+    "icon": "🧬",
+    "hot": false,
+    "summary": "KEL Biotech 间充质干细胞无血清培养基 KCM118-01，无动物源成分，支持 MSC 无血清稳定扩培。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）间充质干细胞无血清培养基（KCM118-01）为化学成分限定、无动物源成分（Animal-Origin-Free）的 MSC 专用培养基，无需额外添加胎牛血清即可支持人源 MSC 的高效贴壁与稳定扩增，降低批次差异与外源污染风险，适用于细胞治疗级别 MSC 生产。",
+      "features": [
+        "无血清：化学成分限定，无动物源成分",
+        "MSC 专用：支持 hMSC 高效贴壁与稳定扩增",
+        "降低风险：减少批次差异与外源污染",
+        "治疗级友好：适用于细胞治疗级别 MSC"
+      ],
+      "specs": [
+        {
+          "key": "品牌",
+          "val": "KEL Biotech（上海聚顶生物）"
+        },
+        {
+          "key": "货号",
+          "val": "KCM118-01"
+        },
+        {
+          "key": "类型",
+          "val": "MSC 无血清（SFM）"
+        },
+        {
+          "key": "成分",
+          "val": "化学成分限定 / AOF"
+        },
+        {
+          "key": "包装",
+          "val": "500 mL / 瓶"
+        },
+        {
+          "key": "储存条件",
+          "val": "2–8°C，避光保存"
+        },
+        {
+          "key": "运输方式",
+          "val": "冰袋运输"
+        }
+      ],
+      "applications": "人源间充质干细胞（MSC）无血清扩增；细胞治疗与再生医学 MSC 生产；MSC 库建库与质控；骨科 / 免疫调节研究",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KCM118-01 | 规格：500 mL / 瓶 | 咨询邮箱：service@biologia.cn"
     }
   },
   {

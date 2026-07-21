@@ -612,6 +612,24 @@ var _hmt = _hmt || [];
   .gallery-dot.active{background:#0ea5e9}
   .gallery-carousel.single .gallery-nav,.gallery-carousel.single .gallery-dots{display:none}
   .gallery-carousel.single .gallery-slide img{max-height:460px}
+
+  /* ═══════════ CATEGORY GRID — 首页「按品类浏览」 ═══════════ */
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .ctile {
+    display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 22px 24px; box-shadow: var(--shadow); cursor: pointer;
+    transition: box-shadow 0.25s, border-color 0.25s, transform 0.18s;
+  }
+  .ctile:hover { box-shadow: var(--shadow-hover); border-color: var(--primary-light); transform: translateY(-2px); }
+  .ctile .ct-icon { font-size: 28px; width: 52px; height: 52px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; background: #eef5fb; border-radius: 12px; }
+  .ctile .ct-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .ctile .ct-name { font-size: 17px; font-weight: 700; color: var(--primary-dark); }
+  .ctile .ct-count { font-size: 13px; color: var(--text-muted); }
+  .ctile .ct-arrow { margin-left: auto; font-size: 20px; color: var(--primary); opacity: .5; transition: opacity .2s, transform .2s; }
+  .ctile:hover .ct-arrow { opacity: 1; transform: translateX(3px); }
+  .cat-more { text-align: center; margin-top: 28px; }
 </style>
 </head>
 <body>
@@ -676,14 +694,15 @@ var _hmt = _hmt || [];
   </div>
 </section>
 
-<!-- ═══════════ ALL PRODUCTS ═══════════ -->
-<section class="section fade-section" id="all-products">
+<!-- ═══════════ BROWSE BY CATEGORY ═══════════ -->
+<section class="section fade-section" id="browse-products">
   <div class="section-header">
-    <div class="section-tag">All Products</div>
-    <h2>全部产品</h2>
-    <p class="desc">佰洛生物全线产品目录，点击任意产品查看完整规格、技术参数与应用方案</p>
+    <div class="section-tag">Browse by Category</div>
+    <h2>按品类浏览</h2>
+    <p class="desc">选择下方品类入口，进入产品中心查看该品类全部产品与详细筛选</p>
   </div>
-  <div class="product-grid" id="allProductsGrid"></div>
+  <div class="cat-grid" id="catGrid"></div>
+  <div class="cat-more"><a class="btn-outline" href="products.html">查看完整产品目录 →</a></div>
 </section>
 
 <!-- ═══════════ SERVICES ═══════════ -->
@@ -876,7 +895,7 @@ async function loadData() {
     /* 渲染页面 */
     renderHeroSlides();
     renderHotProducts();
-    renderAllProducts();
+    renderCategories();
     renderServices();
     renderNews();
     initObservers();
@@ -1016,7 +1035,7 @@ function renderHotProducts() {
   var hots = getHotProducts().slice(0, 8);
   if (hots.length === 0) { el.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:32px;">暂无热门产品</p>'; return; }
   el.innerHTML = hots.map(function(p) {
-    var catLabel = p.cat === 'reagents' ? '试剂与耗材' : '实验仪器';
+    var catLabel = catLabelOf(p.cat);
     return '<div class="hot-card" data-pid="' + esc(p.id) + '" onclick="openProductDetail(\'' + esc(p.id) + '\')">' +
       '<div class="hot-badge">热门</div>' +
       '<span class="hc-icon">' + esc(p.icon) + '</span>' +
@@ -1029,23 +1048,36 @@ function renderHotProducts() {
 }
 
 /* ═══════════════════════════════════════
-   RENDER — 全部产品（首页完整目录，所有产品均可点击）
+   RENDER — 按品类浏览（首页：精选 + 品类导航，不再平铺全部产品）
 ═══════════════════════════════════════ */
-function renderAllProducts() {
-  var el = document.getElementById('allProductsGrid');
+var CAT_META = {
+  reagents:    { label: '试剂与耗材',     icon: '🧪' },
+  serum:       { label: '血清',           icon: '🩸' },
+  media:       { label: '细胞培养基',     icon: '🧫' },
+  instruments: { label: '实验仪器',       icon: '⚙️' },
+  antibody:    { label: '抗体与流式试剂', icon: '🔬' }
+};
+function catLabelOf(c) {
+  var m = CAT_META[c];
+  return m ? m.label : c;
+}
+function renderCategories() {
+  var el = document.getElementById('catGrid');
   if (!el) return;
   var list = window.allProducts || [];
-  if (list.length === 0) { el.innerHTML = ''; return; }
-  el.innerHTML = list.map(function(p) {
-    return '<div class="product-item" data-pid="' + esc(p.id) + '" onclick="openProductDetail(\'' + esc(p.id) + '\')">' +
-      '<span class="pi-arrow">→</span>' +
-      '<span class="pi-icon">' + esc(p.icon) + '</span>' +
-      '<h4>' + esc(p.name) + '</h4>' +
-      '<p>' + esc(p.summary) + '</p>' +
-      (p.hot ? '<span class="pi-badge">热门</span>' : '') +
-      '<button class="pi-btn" onclick="event.stopPropagation();openProductDetail(\'' + esc(p.id) + '\')">查看详情 →</button>' +
-    '</div>';
+  var groups = {};
+  list.forEach(function(p) { (groups[p.cat] = groups[p.cat] || []).push(p); });
+  var html = Object.keys(CAT_META).filter(function(c) {
+    return groups[c] && groups[c].length;
+  }).map(function(c) {
+    var m = CAT_META[c];
+    return '<a class="ctile" href="products.html?cat=' + c + '">' +
+      '<span class="ct-icon">' + m.icon + '</span>' +
+      '<span class="ct-meta"><span class="ct-name">' + esc(m.label) + '</span>' +
+      '<span class="ct-count">' + groups[c].length + ' 款产品</span></span>' +
+      '<span class="ct-arrow">→</span></a>';
   }).join('');
+  el.innerHTML = html || '<p style="text-align:center;color:var(--text-muted);padding:32px;">暂无产品分类</p>';
 }
 
 /* ═══════════════════════════════════════
@@ -1095,7 +1127,7 @@ function openDetail(id) {
   if (!isService) {
     html += '<div class="pd-hero">';
     html += '<div class="pdh-icon">' + esc(item.icon) + '</div>';
-    html += '<div class="pdh-cat">' + esc(item.cat === 'antibody' ? '抗体与流式试剂' : (item.cat === 'reagents' ? '试剂与耗材' : '实验仪器')) + '</div>';
+    html += '<div class="pdh-cat">' + esc(catLabelOf(item.cat)) + '</div>';
     html += '<h1>' + esc(item.name) + '</h1>';
     html += '<div class="pdh-tagline">' + esc(item.summary) + '</div>';
     html += '</div>';
