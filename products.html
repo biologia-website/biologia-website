@@ -166,6 +166,14 @@ var _hmt = _hmt || [];
     display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 600;
     background: #fed7d7; color: #c53030; padding: 2px 8px; border-radius: 4px;
   }
+  .product-item .pi-badge.pi-agent {
+    background: #dbeafe; color: #1d4ed8; margin-left: 6px;
+  }
+  .pdh-agent {
+    display: inline-block; margin-bottom: 12px; font-size: 12px; font-weight: 600;
+    background: rgba(255,255,255,0.16); color: #fff; padding: 4px 12px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.4);
+  }
   .product-item .pi-arrow {
     position: absolute; top: 28px; right: 24px; font-size: 18px; color: var(--primary);
     opacity: 0; transform: translateX(-6px); transition: opacity 0.2s, transform 0.2s;
@@ -754,6 +762,7 @@ function renderCardView() {
       '<span class="pi-arrow">→</span><span class="pi-icon">' + esc(p.icon) + '</span>' +
       '<h4>' + esc(p.name) + '</h4><p>' + esc(p.summary) + '</p>' +
       (p.hot ? '<span class="pi-badge">热门</span>' : '') +
+      (p.agent ? '<span class="pi-badge pi-agent">代理</span>' : '') +
       '<button class="pi-btn" onclick="event.stopPropagation();openProductDetail(\'' + esc(p.id) + '\')">查看详情 →</button></div>';
   }).join('') + '</div>';
   renderPager(pages, total);
@@ -814,6 +823,7 @@ function openProductDetail(id) {
   html += '<div class="pdh-icon">' + esc(item.icon) + '</div>';
   html += '<div class="pdh-cat">' + esc(catLabelOf(item.cat)) + '</div>';
   html += '<h1>' + esc(item.name) + '</h1>';
+  html += (item.agent ? '<span class="pdh-agent">🤝 代理产品</span>' : '');
   html += '<div class="pdh-tagline">' + esc(item.summary) + '</div>';
   html += '<div class="pdh-cta-row">';
   html += '<a href="contact.html" class="ph-btn ph-btn-primary">📞 获取报价</a>';

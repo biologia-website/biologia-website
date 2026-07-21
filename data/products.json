@@ -2,6 +2,7 @@
   {
     "id": "ipsc-kit",
     "cat": "stem-cell",
+    "agent": true,
     "name": "iPSC 重编程试剂盒",
     "icon": "🧫",
     "hot": true,
@@ -70,6 +71,7 @@
   {
     "id": "dora-ys8",
     "cat": "stem-cell",
+    "agent": true,
     "name": "YS8 多能干细胞培养基",
     "icon": "🧬",
     "hot": false,
@@ -116,6 +118,7 @@
   {
     "id": "dora-ys20r",
     "cat": "stem-cell",
+    "agent": true,
     "name": "YS20R 多能干细胞培养基",
     "icon": "🧬",
     "hot": false,

@@ -271,6 +271,11 @@ var _hmt = _hmt || [];
     font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
     color: var(--accent); margin-bottom: 6px;
   }
+  .hot-card .hc-cat .hc-agent {
+    display: inline-block; vertical-align: middle; margin-left: 4px; padding: 1px 8px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: none;
+    color: #1d4ed8; background: #dbeafe; border-radius: 10px;
+  }
   .hot-card h3 { font-size: 18px; font-weight: 700; color: var(--primary-dark); margin-bottom: 8px; }
   .hot-card .hc-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -1039,7 +1044,7 @@ function renderHotProducts() {
     return '<div class="hot-card" data-pid="' + esc(p.id) + '" onclick="openProductDetail(\'' + esc(p.id) + '\')">' +
       '<div class="hot-badge">热门</div>' +
       '<span class="hc-icon">' + esc(p.icon) + '</span>' +
-      '<div class="hc-cat">' + esc(catLabel) + '</div>' +
+      '<div class="hc-cat">' + esc(catLabel) + (p.agent ? ' <span class="hc-agent">代理</span>' : '') + '</div>' +
       '<h3>' + esc(p.name) + '</h3>' +
       '<div class="hc-desc">' + esc(p.summary) + '</div>' +
       '<button class="hc-btn" onclick="event.stopPropagation();openProductDetail(\'' + esc(p.id) + '\')">查看详情 →</button>' +
