@@ -2,7 +2,6 @@
   {
     "id": "ipsc-kit",
     "cat": "stem-cell",
-    "agent": true,
     "name": "iPSC 重编程试剂盒",
     "icon": "🧫",
     "hot": true,
@@ -19,7 +18,7 @@
       "specs": [
         {
           "key": "品牌/厂商",
-          "val": "uBriGene（代理）"
+          "val": "uBriGene"
         },
         {
           "key": "技术原理",
@@ -47,7 +46,7 @@
         }
       ],
       "applications": "人源 iPSC 建系与疾病模型构建（PBMC / 成纤维细胞起始）；药物筛选与毒理学评价；再生医学与细胞治疗研究；发育生物学与基因功能研究",
-      "ordering": "品牌：uBriGene（代理）| 货号：iPSC-RPM-RNA-LNP-V2 (6 Test) / V2M (2 Test) | 佰洛生物咨询邮箱：service@biologia.cn",
+      "ordering": "品牌：uBriGene | 货号：iPSC-RPM-RNA-LNP-V2 (6 Test) / V2M (2 Test) | 佰洛生物咨询邮箱：service@biologia.cn",
       "images": [
         {
           "src": "images/ipsc-kit-front.png",
