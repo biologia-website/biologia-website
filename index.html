@@ -21,7 +21,7 @@
   "alternateName": "BioLia",
   "url": "https://www.biologia.cn/",
   "logo": "https://www.biologia.cn/images/ipsc-kit-front.png",
-  "description": "佰洛生物专注干细胞、iPSC、细胞培养产品与技术服务，代理宜明生物、KEL Biotech、为度生物等品牌。",
+  "description": "佰洛生物专注干细胞、iPSC、细胞培养产品与技术服务，代理 KEL Biotech、uBriGene、VDO Biotech 等优质品牌。",
   "email": "service@biologia.cn",
   "address": {"@type": "PostalAddress", "addressCountry": "CN"}
 }
@@ -654,6 +654,7 @@ var _hmt = _hmt || [];
           <a href="#hot-products">🔥 热门产品</a>
           <div class="dd-divider"></div>
           <a href="products.html?cat=consumables">实验耗材</a>
+          <a href="products.html?cat=bio-reagent">生物试剂</a>
           <a href="products.html#instruments">实验仪器</a>
           <div class="dd-divider"></div>
           <a href="products.html">进入产品中心</a>
@@ -795,6 +796,7 @@ var _hmt = _hmt || [];
       <h4>产品</h4>
       <a href="#hot-products">热门产品</a>
       <a href="products.html?cat=consumables">实验耗材</a>
+      <a href="products.html?cat=bio-reagent">生物试剂</a>
       <a href="products.html#instruments">实验仪器</a>
       <a href="news.html">新闻资讯</a>
     </div>
@@ -1057,6 +1059,7 @@ function renderHotProducts() {
 ═══════════════════════════════════════ */
 var CAT_META = {
   'stem-cell':  { label: '干细胞相关',     icon: '🧬' },
+  'bio-reagent':{ label: '生物试剂',       icon: '⚗️' },
   serum:        { label: '血清',           icon: '🩸' },
   media:        { label: '细胞培养基',     icon: '🧫' },
   consumables:  { label: '实验耗材',       icon: '🧰' },
@@ -1075,6 +1078,7 @@ function renderCategories() {
   var list = window.allProducts || [];
   var groups = {};
   list.forEach(function(p) { (groups[p.cat] = groups[p.cat] || []).push(p); });
+  groups['bio-reagent'] = list.filter(function(p) { return p.cat !== 'instruments' && p.cat !== 'consumables'; });
   var html = Object.keys(CAT_META).filter(function(c) {
     return groups[c] && groups[c].length;
   }).map(function(c) {

@@ -6,12 +6,12 @@
     "tag": "STEM CELL",
     "name": "iPSC 重编程外包",
     "icon": "🧫",
-    "summary": "宜明生物 Ubri-iPSC® circRNA-LNP 非整合重编程方案，支持 PBMC / 成纤维细胞高效重编程，提供克隆挑取、扩增建系、多能性鉴定全流程交付。",
+    "summary": "uBriGene Ubri-iPSC® circRNA-LNP 非整合重编程方案，支持 PBMC / 成纤维细胞高效重编程，提供克隆挑取、扩增建系、多能性鉴定全流程交付。",
     "flow": "咨询 → 样本寄送 → PBMC 分离/成纤维细胞培养 → circRNA-LNP 重编程 → 克隆挑取 → 扩增建系 → 多能性鉴定 → 交付",
     "detail": {
-      "intro": "佰洛生物 iPSC 重编程外包服务代理<strong>宜明生物（uBriGene）Ubri-iPSC® 重编程平台</strong>，采用专利 <strong>circRNA-LNP（环状RNA-脂质纳米颗粒）</strong>核心体系，实现非整合、非病毒载体的高效体细胞重编程。circRNA 具有共价闭合环状结构，表达更稳定持久，免疫原性更低，降解产物为天然核苷酸无残留，自主“无痕”环化技术实现外源序列零残留。支持 PBMC（外周血单个核细胞）和成纤维细胞两种起始来源，覆盖从体细胞到高质量 iPSC 的全流程建系。",
+      "intro": "佰洛生物 iPSC 重编程外包服务代理<strong>uBriGeneUbri-iPSC® 重编程平台</strong>，采用专利 <strong>circRNA-LNP（环状RNA-脂质纳米颗粒）</strong>核心体系，实现非整合、非病毒载体的高效体细胞重编程。circRNA 具有共价闭合环状结构，表达更稳定持久，免疫原性更低，降解产物为天然核苷酸无残留，自主“无痕”环化技术实现外源序列零残留。支持 PBMC（外周血单个核细胞）和成纤维细胞两种起始来源，覆盖从体细胞到高质量 iPSC 的全流程建系。",
       "features": [
-        "circRNA-LNP 核心技术：宜明生物 Ubri-iPSC® 平台，非质粒、非病毒载体系统",
+        "circRNA-LNP 核心技术：uBriGene Ubri-iPSC® 平台，非质粒、非病毒载体系统",
         "高效重编程：PBMC 每 10 万细胞 → 300–500 个 iPSC 克隆（效率 0.3%–0.5%）；成纤维细胞每 1000 个 → 50–100 个克隆（效率 5%–10%）",
         "安全洁净：无基因组整合风险，circRNA 低免疫原性，降解产物天然无残留",
         "多向分化验证：iPSC 可定向分化为心肌细胞、胰岛细胞、造血干细胞、肝脏类器官等",
@@ -21,7 +21,7 @@
       "specs": [
         {
           "key": "技术平台",
-          "val": "宜明生物 Ubri-iPSC® circRNA-LNP"
+          "val": "uBriGene Ubri-iPSC® circRNA-LNP"
         },
         {
           "key": "重编程效率（PBMC）",
