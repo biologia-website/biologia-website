@@ -1080,7 +1080,7 @@ function renderCategories() {
   list.forEach(function(p) { (groups[p.cat] = groups[p.cat] || []).push(p); });
   groups['bio-reagent'] = list.filter(function(p) { return p.cat !== 'instruments' && p.cat !== 'consumables'; });
   var html = Object.keys(CAT_META).filter(function(c) {
-    return groups[c] && groups[c].length;
+    return c !== 'bio-reagent' && groups[c] && groups[c].length;
   }).map(function(c) {
     var m = CAT_META[c];
     return '<a class="ctile" href="products.html?cat=' + c + '">' +
