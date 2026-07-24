@@ -502,11 +502,10 @@ var _hmt = _hmt || [];
       <a href="products.html?cat=serum">血清</a>
       <a href="products.html?cat=media">细胞培养基</a>
       <a href="products.html?cat=consumables">实验耗材</a>
-      <a href="products.html?cat=bio-reagent">生物试剂</a>
       <a href="products.html?cat=molecular">分子试剂</a>
       <a href="products.html?cat=instruments">实验仪器</a>
       <a href="products.html?cat=antibody">抗体与流式试剂</a>
-      <a href="products.html?cat=other">其它产品</a>
+      <a href="products.html?cat=other">细胞辅助试剂</a>
     </div>
     <div class="footer-col">
       <h4>导航</h4>
@@ -632,21 +631,19 @@ function buildHotProductsHTML(currentId) {
 ═══════════════════════════════════════ */
 var CATS = [
   { id: 'stem-cell',  label: '干细胞相关' },
-  { id: 'bio-reagent',label: '生物试剂' },
   { id: 'serum',      label: '血清' },
   { id: 'media',      label: '细胞培养基' },
   { id: 'consumables',label: '实验耗材' },
   { id: 'molecular',  label: '分子试剂' },
   { id: 'instruments',label: '实验仪器' },
   { id: 'antibody',   label: '抗体与流式试剂' },
-  { id: 'other',      label: '其它产品' }
+  { id: 'other',      label: '细胞辅助试剂' }
 ];
 var view = { cat: 'stem-cell', q: '', page: 1, pageSz: 24, fTarget: new Set(), fFluor: new Set() };
 
 function catMeta(id) { return CATS.find(function(c) { return c.id === id; }) || { label: id }; }
 function catProducts(id) {
   if (id === 'all') return allProducts.slice();
-  if (id === 'bio-reagent') return allProducts.filter(function(p) { return p.cat !== 'instruments' && p.cat !== 'consumables'; });
   return allProducts.filter(function(p) { return p.cat === id; });
 }
 

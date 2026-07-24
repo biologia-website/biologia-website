@@ -657,13 +657,12 @@ var _hmt = _hmt || [];
         <div class="dropdown">
           <a href="#hot-products">🔥 热门产品</a>
           <div class="dd-divider"></div>
-          <div class="dd-group">试剂耗材</div>
           <a href="products.html?cat=stem-cell">干细胞相关</a>
           <a href="products.html?cat=serum">血清</a>
           <a href="products.html?cat=media">细胞培养基</a>
           <a href="products.html?cat=molecular">分子试剂</a>
           <a href="products.html?cat=antibody">抗体与流式试剂</a>
-          <a href="products.html?cat=other">其它产品</a>
+          <a href="products.html?cat=other">细胞辅助试剂</a>
           <div class="dd-divider"></div>
           <a href="products.html?cat=consumables">实验耗材</a>
           <div class="dd-divider"></div>
@@ -808,7 +807,6 @@ var _hmt = _hmt || [];
       <h4>产品</h4>
       <a href="#hot-products">热门产品</a>
       <a href="products.html?cat=consumables">实验耗材</a>
-      <a href="products.html?cat=bio-reagent">生物试剂</a>
       <a href="products.html#instruments">实验仪器</a>
       <a href="news.html">新闻资讯</a>
     </div>
@@ -1071,14 +1069,13 @@ function renderHotProducts() {
 ═══════════════════════════════════════ */
 var CAT_META = {
   'stem-cell':  { label: '干细胞相关',     icon: '🧬' },
-  'bio-reagent':{ label: '生物试剂',       icon: '⚗️' },
   serum:        { label: '血清',           icon: '🩸' },
   media:        { label: '细胞培养基',     icon: '🧫' },
   consumables:  { label: '实验耗材',       icon: '🧰' },
   molecular:    { label: '分子试剂',       icon: '🧪' },
   instruments:  { label: '实验仪器',       icon: '⚙️' },
   antibody:     { label: '抗体与流式试剂', icon: '🔬' },
-  other:        { label: '其它产品',       icon: '📦' }
+  other:        { label: '细胞辅助试剂',     icon: '📦' }
 };
 function catLabelOf(c) {
   var m = CAT_META[c];
@@ -1090,9 +1087,8 @@ function renderCategories() {
   var list = window.allProducts || [];
   var groups = {};
   list.forEach(function(p) { (groups[p.cat] = groups[p.cat] || []).push(p); });
-  groups['bio-reagent'] = list.filter(function(p) { return p.cat !== 'instruments' && p.cat !== 'consumables'; });
   var html = Object.keys(CAT_META).filter(function(c) {
-    return c !== 'bio-reagent' && groups[c] && groups[c].length;
+    return groups[c] && groups[c].length;
   }).map(function(c) {
     var m = CAT_META[c];
     return '<a class="ctile" href="products.html?cat=' + c + '">' +
