@@ -122,6 +122,10 @@ var _hmt = _hmt || [];
   }
   .nav-links .dropdown a:hover { background: #f0f4f8; color: var(--primary); }
   .nav-links .dropdown .dd-divider { height: 1px; background: var(--border); margin: 4px 12px; }
+  .nav-links .dropdown .dd-group {
+    display: block; padding: 8px 20px 4px; font-size: 12px; font-weight: 700;
+    color: var(--primary-dark); letter-spacing: 0.5px; text-transform: uppercase;
+  }
   .nav-cta {
     background: var(--primary); color: #fff; border: none; border-radius: var(--radius-sm);
     padding: 9px 22px; font-size: 14px; font-weight: 600; cursor: pointer;
@@ -653,9 +657,17 @@ var _hmt = _hmt || [];
         <div class="dropdown">
           <a href="#hot-products">🔥 热门产品</a>
           <div class="dd-divider"></div>
+          <div class="dd-group">试剂耗材</div>
+          <a href="products.html?cat=stem-cell">干细胞相关</a>
+          <a href="products.html?cat=serum">血清</a>
+          <a href="products.html?cat=media">细胞培养基</a>
+          <a href="products.html?cat=molecular">分子试剂</a>
+          <a href="products.html?cat=antibody">抗体与流式试剂</a>
+          <a href="products.html?cat=other">其它产品</a>
+          <div class="dd-divider"></div>
           <a href="products.html?cat=consumables">实验耗材</a>
-          <a href="products.html?cat=bio-reagent">生物试剂</a>
-          <a href="products.html#instruments">实验仪器</a>
+          <div class="dd-divider"></div>
+          <a href="products.html?cat=instruments">实验仪器</a>
           <div class="dd-divider"></div>
           <a href="products.html">进入产品中心</a>
         </div>
