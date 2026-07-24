@@ -438,7 +438,7 @@
     "cat": "media",
     "name": "DMEM 高糖培养基",
     "icon": "🧪",
-    "hot": true,
+    "hot": false,
     "summary": "KEL Biotech DMEM 高糖培养基（含谷氨酰胺、含丙酮酸钠）KC302-01，贴壁细胞经典基础培养基。",
     "detail": {
       "intro": "上海聚顶生物（KEL Biotech）DMEM 高糖培养基（KC302-01，含 L-谷氨酰胺、含丙酮酸钠，葡萄糖 4.5 g/L）是哺乳动物贴壁细胞培养最经典的基础培养基，适用于 HEK293、CHO、HeLa、3T3 等多种细胞系。液体瓶装，无菌过滤，即开即用。",
@@ -949,7 +949,7 @@
     "subcat": "基因检测",
     "name": "梯度PCR仪",
     "icon": "🧬",
-    "hot": true,
+    "hot": false,
     "summary": "梯度 / 荧光定量 qPCR 仪，银质模块控温，兼容 96 / 384 孔板及 8 联排管。",
     "detail": {
       "intro": "佰洛生物 PCR 仪系列涵盖普通梯度 PCR 仪与实时荧光定量 qPCR 仪，采用银质模块控温技术，温控精度 ±0.1°C，升降温速率最高 5°C/s。兼容 96 孔板、384 孔板及 8 联排管，满足从常规 PCR 到高通量 qPCR 的多样化实验需求。",
@@ -3397,6 +3397,38 @@
       ],
       "applications": "内毒素诱导因子 / 信号通路研究；高灵敏度细胞检测；原代与脆弱细胞培养；需极低内毒素背景的精细实验",
       "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC020 | 规格：500 mL / 100 mL | 咨询邮箱：service@biologia.cn"
+    }
+  },
+  {
+    "id": "cd3-cd28-beads",
+    "cat": "other",
+    "name": "CD3/CD28 T细胞分选磁珠",
+    "icon": "🧲",
+    "hot": true,
+    "summary": "KEL Biotech KELBeads™ Human T-Activator CD3/CD28（KC1734），4.5 μm 磁珠表面共价偶联抗人 CD3/CD28 抗体，用于 PBMC 中 CD3⁺ T 细胞分选、活化与扩增，适用于 CAR-T 等 T 细胞治疗。",
+    "detail": {
+      "intro": "上海聚顶生物（KEL Biotech）KELBeads™ Human T-Activator CD3/CD28（货号 KC1734-001 / KC1734-05）用于人源 T 细胞的分离及体外扩增，可应用于 CAR-T 及其他 T 细胞培养技术。产品由粒径 4.5 μm 的磁珠构成，磁珠表面共价偶联抗人 CD3 和抗人 CD28 抗体，为 T 细胞的分离与扩增提供简便方法：先从 PBMC 中分选、富集 CD3⁺ T 细胞，再由 CD3/CD28 双信号提供活化与共刺激，在 10–13 天培养周期内可实现约 800 倍扩增。",
+      "features": [
+        "双信号激活：磁珠共价偶联抗人 CD3 与抗人 CD28 抗体，同步提供初级信号与共刺激信号",
+        "高效分选：从 PBMC 中快速分选、富集 CD3⁺ T 细胞",
+        "高扩增能力：10–13 天培养周期内 T 细胞约 800 倍扩增",
+        "低内毒素：内毒素 < 1 EU/mL，适配细胞治疗级应用",
+        "即用型配方：PBS 含人血清白蛋白（HSA），pH 7.4"
+      ],
+      "specs": [
+        { "key": "品牌", "val": "KEL Biotech（上海聚顶生物）" },
+        { "key": "货号", "val": "KC1734-001（1 mL）/ KC1734-05（10 mL）" },
+        { "key": "反应种属", "val": "人源" },
+        { "key": "磁珠粒径", "val": "4.5 μm" },
+        { "key": "磁珠浓度", "val": "1×10⁸ 磁珠/mL" },
+        { "key": "内毒素", "val": "< 1 EU/mL" },
+        { "key": "配方", "val": "磷酸盐缓冲液（PBS），含人血清白蛋白（HSA），pH 7.4" },
+        { "key": "稳定性", "val": "24 个月" },
+        { "key": "储存条件", "val": "2–8℃，禁止冷冻" },
+        { "key": "处理能力（1 mL）", "val": "分离可处理 3.3×10⁸ 个 CD3⁺ T 细胞；激活可激活 1×10⁹ 个富集 CD3⁺ T 细胞" }
+      ],
+      "applications": "从 PBMC 中分选、富集 CD3⁺ T 细胞；体外 T 细胞活化与扩增；CAR-T 及其他 T 细胞免疫治疗技术研发；肿瘤免疫治疗与免疫学研究",
+      "ordering": "品牌：KEL Biotech（上海聚顶生物）| 货号：KC1734-001（1 mL）/ KC1734-05（10 mL）| 佰洛生物咨询邮箱：service@biologia.cn"
     }
   }
 ]

@@ -1037,7 +1037,7 @@ function renderServices() {
 function renderHotProducts() {
   var el = document.getElementById('hotGrid');
   if (!el) return;
-  var hots = getHotProducts().slice(0, 8);
+  var hots = getHotProducts().slice(0, 6);
   if (hots.length === 0) { el.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:32px;">暂无热门产品</p>'; return; }
   el.innerHTML = hots.map(function(p) {
     var catLabel = catLabelOf(p.cat);
