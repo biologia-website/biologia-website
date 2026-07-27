@@ -6,10 +6,13 @@
   sitemap.xml
 所有页面含 JSON-LD(Product/Service + ImageObject + Breadcrumb) + canonical + OG/Twitter。
 """
-import os, json, html
+import os, json, html, glob
+from datetime import date
 
 REPO = os.path.dirname(os.path.abspath(__file__))
+
 SITE = "https://www.biologia.cn"
+OG_DEFAULT = SITE + "/images/og-cover.png"
 DATA = os.path.join(REPO, "data")
 PROD = json.load(open(os.path.join(DATA, "products.json"), encoding="utf-8"))
 SERV = json.load(open(os.path.join(DATA, "services.json"), encoding="utf-8"))
@@ -122,7 +125,7 @@ def service_jsonld(s):
     }
     return [ld, bc]
 
-def page_shell(title, desc, canonical, jsonld_list, body, css_extra=""):
+def page_shell(title, desc, canonical, jsonld_list, body, image=OG_DEFAULT, css_extra=""):
     ld = "\n".join('<script type="application/ld+json">' + json.dumps(x, ensure_ascii=False) + "</script>" for x in jsonld_list)
     return f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -137,7 +140,9 @@ def page_shell(title, desc, canonical, jsonld_list, body, css_extra=""):
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{e(canonical)}">
 <meta property="og:site_name" content="佰洛生物">
+<meta property="og:image" content="{e(image)}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{e(image)}">
 <meta name="twitter:title" content="{e(title)}">
 <meta name="twitter:description" content="{e(desc)}">
 {ld}
@@ -222,6 +227,8 @@ footer{{text-align:center;color:#8a97a5;font-size:13px;padding:30px;}}
 
 def build_product(p):
     d = p.get("detail", {})
+    imgs = d.get("images", [])
+    pimg = (SITE + "/" + imgs[0]["src"]) if imgs else OG_DEFAULT
     cat = CAT_CN.get(p.get("cat"), "")
     rel = [x for x in PROD if x["id"] != p["id"] and x.get("cat") == p.get("cat")]
     rel = (rel + [x for x in PROD if x["id"] != p["id"]])[:4]
@@ -298,7 +305,8 @@ def build_product(p):
         p.get("summary", ""),
         SITE + "/products/" + p["id"] + ".html",
         product_jsonld(p),
-        body
+        body,
+        image=pimg
     )
 
 def build_service(s):
@@ -367,6 +375,7 @@ def build_service(s):
     )
 
 def build_sitemap():
+    today = date.today().isoformat()
     urls = []
     def add(loc, pri, freq, imgs=None):
         img_xml = ""
@@ -376,12 +385,13 @@ def build_sitemap():
                             f'<image:caption>{e(im.get("caption",""))}</image:caption></image:image>\n')
         urls.append(f'''  <url>
     <loc>{loc}</loc>
-    <lastmod>2026-07-14</lastmod>
+    <lastmod>{today}</lastmod>
     <changefreq>{freq}</changefreq>
     <priority>{pri}</priority>
 {img_xml}  </url>''')
     add(SITE + "/", "1.0", "weekly")
     add(SITE + "/products.html", "0.9", "weekly")
+    add(SITE + "/news.html", "0.7", "monthly")
     add(SITE + "/contact.html", "0.7", "monthly")
     add(SITE + "/faq.html", "0.7", "monthly")
     for p in PROD:
@@ -389,6 +399,10 @@ def build_sitemap():
         add(SITE + "/products/" + p["id"] + ".html", "0.8", "monthly", imgs)
     for s in SERV:
         add(SITE + "/services/" + SVC_SLUG.get(s["id"], s["id"]) + ".html", "0.8", "monthly")
+    # 新闻资讯（含文章页），提升行业内容的收录与 GEO 可引用性
+    for nf in sorted(glob.glob(os.path.join(REPO, "news", "*.html"))):
+        name = os.path.basename(nf)
+        add(SITE + "/news/" + name, "0.6", "monthly")
     return '''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
